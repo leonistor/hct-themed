@@ -4,8 +4,8 @@
   "type": "module",
   "private": true,
   "workspaces": [
-    "admin",
-    "web"
+    "admin/**",
+    "web/**"
   ],
   "scripts": {
     "dev:web": "cd web && bun run dev",

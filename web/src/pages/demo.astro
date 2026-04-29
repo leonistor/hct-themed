@@ -1,0 +1,40 @@
+---
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import Base from "@/layouts/Base.astro";
+
+import { getPayload } from "payload";
+import { config } from "admin";
+
+console.debug(process.env.PAYLOAD_SECRET);
+
+const payload = await getPayload({ config });
+
+const medias = await payload.find({ collection: "media" });
+---
+
+<Base  title="Dev page" disableTagline={true}>
+  <section class="py-8 md:py-16">
+    <div class="container">
+      <div class="flex flex-col items-center gap-y-10">
+        <h1 class="text-h2-md md:text-h1 text-center">Dev page</h1>
+
+        <div class="flex flex-wrap gap-3">
+        {
+          medias.docs.map((m) =>
+            m.url ? (
+              <OptimizedImage
+                src={"http://localhost:3000" + m.url}
+                alt={m.filename || ""}
+                inferSize={true},
+                width={300}
+                height={300}
+              />
+            ) : null,
+          )
+        }
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Base>

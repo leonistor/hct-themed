@@ -31,6 +31,9 @@ export default defineConfig({
   server: { host: "0.0.0.0" },
   output: "static",
   security: { checkOrigin: false },
+  image: {
+    domains: ["localhost"],
+  },
   i18n: {
     locales: enabledLanguages,
     defaultLocale: defaultLanguage,
