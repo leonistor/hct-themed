@@ -25,6 +25,10 @@ export default defineConfig({
   site: config.site.baseUrl ? config.site.baseUrl : "http://examplesite.com",
   trailingSlash: config.site.trailingSlash ? "always" : "never",
   fonts,
+  devToolbar: { enabled: false },
+  server: { host: "0.0.0.0" },
+  output: "server",
+  security: { checkOrigin: false },
   i18n: {
     locales: enabledLanguages,
     defaultLocale: defaultLanguage,
@@ -76,8 +80,21 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    clearScreen: false,
     build: {
       chunkSizeWarningLimit: 700,
     },
+    // server: {
+    //   watch: {
+    //     ignored: ["pocket/**", "*.txt", "TODO.md", "import_data/*"],
+    //   },
+    //   proxy: {
+    //     "/pocket": {
+    //       target: "http://localhost:8090",
+    //       changeOrigin: true,
+    //       rewrite: (path) => path.replace(/^\/pocket/, ""),
+    //     },
+    //   },
+    // },
   },
 });
