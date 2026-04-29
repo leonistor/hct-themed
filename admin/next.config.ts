@@ -24,7 +24,8 @@ const nextConfig: NextConfig = {
     return webpackConfig
   },
   turbopack: {
-    root: path.resolve(dirname),
+    // root: path.resolve(dirname),
+    root: path.join(__dirname, '..', '..'),
   },
 }
 

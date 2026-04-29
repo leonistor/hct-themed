@@ -28,6 +28,7 @@
     "@preline/select": "^4.1.2",
     "@preline/tabs": "^4.1.2",
     "@preline/tooltip": "^4.1.2",
+    "@wyattjoh/astro-bun-adapter": "^2.0.1",
     "aos": "^2.3.4",
     "date-fns": "^4.1.0",
     "lucide": "^0.577.0",

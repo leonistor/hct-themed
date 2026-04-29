@@ -10,6 +10,7 @@ import { enabledLanguages } from "./src/lib/utils/i18nUtils.ts";
 import remarkParseContent from "./src/lib/utils/remarkParseContent.ts";
 import { generateAstroFontsConfig } from "./src/lib/utils/AstroFont.ts";
 import config from "./.astro/config.generated.json" with { type: "json" };
+import bun from "@wyattjoh/astro-bun-adapter";
 
 const fonts = generateAstroFontsConfig(fontsJson);
 
@@ -26,8 +27,9 @@ export default defineConfig({
   trailingSlash: config.site.trailingSlash ? "always" : "never",
   fonts,
   devToolbar: { enabled: false },
+  adapter: bun(),
   server: { host: "0.0.0.0" },
-  output: "server",
+  output: "static",
   security: { checkOrigin: false },
   i18n: {
     locales: enabledLanguages,
