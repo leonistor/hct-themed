@@ -1,0 +1,395 @@
+{
+  "main": [
+    {
+      "enable": true,
+      "name": "Menu Méga",
+      "hasMegaMenu": true,
+      "testimonial": {
+        "enable": true,
+        "image": "/images/customer-image.png",
+        "content": "La planification stratégique de Looka nous a aidés à rationaliser nos opérations et à débloquer de nouvelles opportunités de marché. Nous avons constaté une augmentation remarquable de 25 % du chiffre d'affaires au cours de l'année écoulée."
+      },
+      "services": {
+        "enable": true,
+        "name": "SERVICES"
+      },
+      "menus": [
+        {
+          "name": "PAGES RÉGULIÈRES",
+          "enable": true,
+          "children": [
+            {
+              "name": "",
+              "enable": true,
+              "children": [
+                {
+                  "enable": true,
+                  "name": "Services",
+                  "url": "/services/"
+                },
+                {
+                  "enable": true,
+                  "name": "Service Unique",
+                  "url": "/services/service-01/"
+                },
+                {
+                  "enable": true,
+                  "name": "Étude de Cas Unique",
+                  "url": "/case-studies/case-studies-01/"
+                },
+                {
+                  "enable": true,
+                  "name": "Carrière",
+                  "url": "/career/"
+                },
+                {
+                  "enable": true,
+                  "name": "Offre d’Emploi",
+                  "url": "/career/job-01/"
+                }
+              ]
+            },
+            {
+              "name": "",
+              "enable": true,
+              "children": [
+                {
+                  "enable": true,
+                  "name": "À propos",
+                  "url": "/about/"
+                },
+                {
+                  "enable": true,
+                  "name": "FAQ",
+                  "url": "/faq"
+                },
+                {
+                  "enable": true,
+                  "name": "Équipe",
+                  "url": "/team"
+                },
+                {
+                  "enable": true,
+                  "name": "Tarification",
+                  "url": "/pricing/",
+                  "badge": {
+                    "enable": true,
+                    "label": "NOUVEAU",
+                    "color": "primary",
+                    "_color_comment": "color expected value - primary, info, success, danger",
+                    "type": "text"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "BLOG",
+          "enable": true,
+          "children": [
+            {
+              "name": "LISTE",
+              "enable": true,
+              "children": [
+                {
+                  "enable": true,
+                  "name": "Classique",
+                  "url": "/blog/"
+                },
+                {
+                  "enable": true,
+                  "name": "Moderne",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "name": "ARTICLE UNIQUE",
+              "enable": true,
+              "children": [
+                {
+                  "enable": true,
+                  "name": "Minimal",
+                  "url": ""
+                },
+                {
+                  "enable": true,
+                  "name": "Moderne",
+                  "url": "/blog/post-1/"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PORTFOLIO",
+          "enable": true,
+          "children": [
+            {
+              "name": "LISTE",
+              "enable": true,
+              "children": [
+                {
+                  "enable": true,
+                  "name": "Classique & Maçonnerie",
+                  "url": ""
+                },
+                {
+                  "enable": true,
+                  "name": "Superposition & Maçonnerie",
+                  "url": ""
+                }
+              ]
+            },
+            {
+              "name": "PROJET UNIQUE",
+              "enable": true,
+              "children": [
+                {
+                  "enable": true,
+                  "name": "Moderne",
+                  "url": ""
+                },
+                {
+                  "enable": true,
+                  "name": "Moderne avec Barre Latérale",
+                  "url": "/case-studies/case-studies-01/"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pages",
+      "enable": true,
+      "hasChildren": true,
+      "children": [
+        {
+          "enable": true,
+          "name": "Accueil",
+          "url": "/"
+        },
+        {
+          "enable": true,
+          "name": "À propos",
+          "url": "/about/"
+        },
+        {
+          "enable": true,
+          "name": "Services",
+          "hasChildren": true,
+          "children": [
+            {
+              "enable": true,
+              "name": "Services",
+              "url": "/services/"
+            },
+            {
+              "enable": true,
+              "name": "Service Unique",
+              "url": "/services/service-01/"
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Études de Cas",
+          "hasChildren": true,
+          "children": [
+            {
+              "enable": true,
+              "name": "Classique",
+              "url": "/case-studies/classic/"
+            },
+            {
+              "enable": true,
+              "name": "Classique Maçonnerie",
+              "url": "/case-studies/classic-masonry/"
+            },
+            {
+              "enable": true,
+              "name": "Superposition",
+              "url": "/case-studies/overlay/"
+            },
+            {
+              "enable": true,
+              "name": "Superposition Maçonnerie",
+              "url": "/case-studies/"
+            },
+            {
+              "enable": true,
+              "name": "Unique",
+              "url": "/case-studies/case-studies-01/"
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Carrière",
+          "hasChildren": true,
+          "children": [
+            {
+              "enable": true,
+              "name": "Carrière",
+              "url": "/career/"
+            },
+            {
+              "enable": true,
+              "name": "Offre d’Emploi",
+              "url": "/career/job-01/"
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Blog",
+          "hasChildren": true,
+          "children": [
+            {
+              "enable": true,
+              "name": "Classique",
+              "url": "/blog/"
+            },
+            {
+              "enable": true,
+              "name": "Moderne",
+              "url": "/blog/modern/"
+            },
+            {
+              "enable": true,
+              "name": "Article Minimal",
+              "url": "/blog/single-minimal/"
+            },
+            {
+              "enable": true,
+              "name": "Article Moderne",
+              "url": "/blog/post-1/"
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Équipe",
+          "url": "/team"
+        },
+        {
+          "enable": true,
+          "name": "Tarification",
+          "url": "/pricing/",
+          "badge": {
+            "enable": true,
+            "label": "NOUVEAU",
+            "color": "primary",
+            "colorComment": "color expected value - primary, info, success, danger",
+            "type": "text"
+          }
+        },
+        {
+          "enable": true,
+          "name": "FAQ",
+          "url": "/faq"
+        }
+      ]
+    },
+    {
+      "enable": true,
+      "name": "Composants",
+      "url": "/elements/",
+      "badge": {
+        "enable": true,
+        "label": "NOUVEAU",
+        "color": "primary",
+        "_color_comment": "color expected value - primary, info, success, danger",
+        "type": "text"
+      }
+    },
+    {
+      "enable": true,
+      "name": "Contact",
+      "url": "/contact/",
+      "badge": {
+        "enable": true,
+        "label": "NOUVEAU",
+        "color": "danger",
+        "_color_comment": "color expected value - primary, info, success, danger",
+        "type": "dot"
+      }
+    }
+  ],
+  "footerMenu": [
+    {
+      "enable": true,
+      "name": "Termes et Conditions",
+      "url": "/terms-conditions/"
+    },
+    {
+      "enable": true,
+      "name": "Confidentialité et Politique",
+      "url": "/privacy-policy/"
+    }
+  ],
+  "footerMenuQuickLink": [
+    {
+      "enable": true,
+      "name": "À propos de nous",
+      "url": "/about/"
+    },
+    {
+      "enable": true,
+      "name": "Contactez-nous",
+      "url": "/contact/"
+    },
+    {
+      "enable": true,
+      "name": "Tarification",
+      "url": "/pricing/"
+    },
+    {
+      "enable": true,
+      "name": "Témoignages",
+      "url": "/"
+    },
+    {
+      "enable": true,
+      "name": "Membres de l’équipe",
+      "url": "/team/"
+    },
+    {
+      "enable": true,
+      "name": "Nos Services",
+      "url": "/services/"
+    }
+  ],
+  "footerMenuResources": [
+    {
+      "enable": true,
+      "name": "Blog",
+      "url": "/blog/"
+    },
+    {
+      "enable": true,
+      "name": "FAQ",
+      "url": "/faq/"
+    },
+    {
+      "enable": true,
+      "name": "Études de Cas",
+      "url": "/case-studies/"
+    }
+  ],
+  "footerMenuLegal": [
+    {
+      "enable": true,
+      "name": "Termes et Conditions",
+      "url": "/terms-conditions/"
+    },
+    {
+      "enable": true,
+      "name": "Politique de Confidentialité",
+      "url": "/privacy-policy/"
+    }
+  ]
+}

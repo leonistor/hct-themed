@@ -1,0 +1,24 @@
+[
+  {
+    "name": "DM Sans",
+    "weights": [400, 500, 600, 700],
+    "styles": ["normal"],
+    "preload": false,
+    "display": "swap",
+    "cssVariable": "--font-primary",
+    "provider": "google",
+    "subsets": ["latin"],
+    "fallbacks": ["sans-serif"]
+  },
+  {
+    "name": "Syne",
+    "weights": [700],
+    "styles": ["normal"],
+    "preload": false,
+    "display": "swap",
+    "cssVariable": "--font-secondary",
+    "provider": "google",
+    "subsets": ["latin"],
+    "fallbacks": ["sans-serif"]
+  }
+]

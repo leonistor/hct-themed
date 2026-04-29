@@ -1,0 +1,90 @@
+{
+  "name": "looka-astro",
+  "type": "module",
+  "version": "4.0.0",
+  "author": "getastrothemes",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "npm run toml:watch -- --watch & astro dev",
+    "build": "npm run toml:watch && astro build && npm run remove-draft-from-sitemap",
+    "preview": "astro build && npm run remove-draft-from-sitemap && astro preview",
+    "astro-check": "astro check",
+    "toml:watch": "node scripts/toml-watcher.mjs",
+    "generate-favicons": "node ./scripts/generate-favicons.mjs",
+    "remove-multilingual": "node ./scripts/remove-multilingual.mjs",
+    "remove-draft-from-sitemap": "node ./scripts/remove-draft-from-sitemap.mjs",
+    "format": "prettier -w ./src",
+    "test": "cross-env TS_NODE_PROJECT=\"./tsconfig.jest.json\" jest --watch"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.7.6",
+    "@preline/accordion": "^4.1.2",
+    "@preline/collapse": "^4.1.2",
+    "@preline/dropdown": "^4.1.2",
+    "@preline/overlay": "^4.1.2",
+    "@preline/select": "^4.1.2",
+    "@preline/tabs": "^4.1.2",
+    "@preline/tooltip": "^4.1.2",
+    "aos": "^2.3.4",
+    "date-fns": "^4.1.0",
+    "lucide": "^0.577.0",
+    "marked": "^17.0.4",
+    "motion": "^12.38.0",
+    "plyr": "^3.8.4",
+    "preline": "^4.1.2",
+    "smoothscroll-for-websites": "^1.5.1",
+    "swiper": "12.1.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/mdx": "5.0.2",
+    "@astrojs/sitemap": "3.7.1",
+    "@realfavicongenerator/generate-favicon": "^0.6.3",
+    "@realfavicongenerator/image-adapter-node": "^0.6.3",
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/jest": "^30.0.0",
+    "astro": "^6.0.6",
+    "astro-auto-import": "^0.5.1",
+    "astro-font": "^1.1.0",
+    "cross-env": "^10.1.0",
+    "gray-matter": "^4.0.3",
+    "ignore": "^7.0.5",
+    "jest": "^30.3.0",
+    "linkedom": "^0.18.12",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "prettier-plugin-toml": "^2.0.6",
+    "prop-types": "^15.8.1",
+    "rehype-external-links": "^3.0.0",
+    "remark-toc": "^9.0.0",
+    "sharp": "^0.34.5",
+    "slugify": "^1.6.8",
+    "tailwindcss": "^4.2.2",
+    "toml": "^3.0.0",
+    "ts-jest": "^29.4.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "unist-util-visit": "^5.1.0",
+    "xml2js": "^0.6.2"
+  },
+  "resolutions": {
+    "sharp": "^0.33.2",
+    "@taplo/lib": "0.4.0-alpha.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "glob": "^13.0.6",
+      "inflight": "^1.0.7"
+    }
+  },
+  "trustedDependencies": [
+    "core-js",
+    "unrs-resolver"
+  ]
+}

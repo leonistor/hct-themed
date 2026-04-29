@@ -1,0 +1,8 @@
+# Targets roughly 95% of active users globally
+> 0.2%
+last 2 versions
+not dead
+# Modern Astro features often struggle below Safari 12
+Safari >= 13
+# Ensures your CSS doesn't break on older Chrome/Edge
+Chrome >= 79
