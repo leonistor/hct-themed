@@ -1,10 +1,10 @@
 import type { CollectionConfig } from 'payload'
 
-export const Partners: CollectionConfig = {
-  slug: 'partners',
+export const Categories: CollectionConfig = {
+  slug: 'categories',
   labels: {
-    singular: 'Partner',
-    plural: 'Partners',
+    singular: 'Category',
+    plural: 'Categories',
   },
   access: { read: () => true },
   enableQueryPresets: true,
@@ -14,17 +14,13 @@ export const Partners: CollectionConfig = {
     { name: 'name', type: 'text', required: true },
     { name: 'published', type: 'checkbox', defaultValue: false },
     { name: 'description', type: 'textarea', required: false },
-    { name: 'url', type: 'text', required: false },
+    { name: 'partners', type: 'relationship', relationTo: 'partners', hasMany: true },
     {
-      name: 'logo',
+      name: 'illustration',
       type: 'relationship',
       relationTo: 'media',
       hasMany: false,
-      admin: {
-        allowCreate: false,
-        allowEdit: false,
-        appearance: 'drawer',
-      },
+      admin: { appearance: 'drawer' },
     },
   ],
   admin: {

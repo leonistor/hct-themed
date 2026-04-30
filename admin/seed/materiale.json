@@ -1,0 +1,114 @@
+[
+  {
+    "denumire": "Metale",
+    "denumire_en": "Metal recycling",
+    "descriere": "Reciclarea metalelor",
+    "id": "ski0droit8gacp5",
+    "imagine": "materiale_metale_az8i13u5w2.jpg",
+    "slug": "metale"
+  },
+  {
+    "denumire": "Mixte",
+    "denumire_en": "Mixed metals",
+    "descriere": "Metale mixte",
+    "id": "p6sre17iny3iji9",
+    "imagine": "materiale_mixte_d53p078to6.jpg",
+    "slug": "mixte"
+  },
+  {
+    "denumire": "Aluminiu",
+    "denumire_en": "Aluminium Recycling",
+    "descriere": "Reciclarea aluminiului",
+    "id": "naktzraft55gu5f",
+    "imagine": "materiale_aluminiu_yctwewjyrj.jpg",
+    "slug": "aluminiu"
+  },
+  {
+    "denumire": "Cabluri",
+    "denumire_en": "Cable Recycling",
+    "descriere": "Reciclarea cablurilor",
+    "id": "j7sheqansu33luh",
+    "imagine": "materiale_cabluri_35dogmwz6h.jpg",
+    "slug": "cabluri"
+  },
+  {
+    "denumire": "Rafinare",
+    "denumire_en": "Refining",
+    "descriere": "Rafinare",
+    "id": "nd03us7sxbov0bs",
+    "imagine": "materiale_rafinare_l3pnyb5yb9.jpg",
+    "slug": "rafinare"
+  },
+  {
+    "denumire": "Vehicule",
+    "denumire_en": "End-of-life Vehicles Recycling",
+    "descriere": "Reciclarea vehiculelor scoase din uz",
+    "id": "lm4skapasgmlqf0",
+    "imagine": "materiale_vehicule_q8hn046k0o.jpg",
+    "slug": "vehicule"
+  },
+  {
+    "denumire": "Motoare auto",
+    "denumire_en": "Car engines",
+    "descriere": "Motoare auto",
+    "id": "ir714ntx5dmwrla",
+    "imagine": "materiale_motoare_auto_3i41ep1ogu.jpg",
+    "slug": "motoare-auto"
+  },
+  {
+    "denumire": "Motoare electrice",
+    "denumire_en": "Electric motor recycling",
+    "descriere": "Reciclarea motoarelor electrice",
+    "id": "1gfbq0jjm7eojmt",
+    "imagine": "materiale_motoare_electrice_lg7btgbkcc.jpg",
+    "slug": "motoare-electrice"
+  },
+  {
+    "denumire": "DEEE",
+    "denumire_en": "WEEE Recycling",
+    "descriere": "Reciclarea DEEE (Deșeuri de Echipamente Electrice și Electronice)",
+    "id": "alyrvkzimr1hsjo",
+    "imagine": "materiale_deee_nyx6op9agq.jpg",
+    "slug": "deee"
+  },
+  {
+    "denumire": "Hidrapulper ",
+    "denumire_en": "Paper mill pulper",
+    "descriere": "Recuperarea deșeurilor de hidrapulper de la fabricile de hârtie",
+    "id": "oe2qsztuyq0i80z",
+    "imagine": "materiale_hidrapulper_85n5efzm28.jpg",
+    "slug": "hidrapulper"
+  },
+  {
+    "denumire": "Frigidere",
+    "denumire_en": "Refrigerator Recycling",
+    "descriere": "Reciclarea frigiderelor",
+    "id": "dhphct3rzn7qhjl",
+    "imagine": "materiale_frigidere_dlskcqe0mq.jpg",
+    "slug": "frigidere"
+  },
+  {
+    "denumire": "Deșeuri urbane",
+    "denumire_en": "Solid Urban Waste",
+    "descriere": "Deșeuri solide urbane",
+    "id": "p4rmeg143rrs31b",
+    "imagine": "materiale_deseuri_urbane_osr1njmlt3.jpg",
+    "slug": "deseuri-urbane"
+  },
+  {
+    "denumire": "Conserve",
+    "denumire_en": "Tins",
+    "descriere": "Conserve metalice / Cutii de conserve",
+    "id": "sb3slorwb0ur2b6",
+    "imagine": "materiale_conserve_3y11vks7hz.jpg",
+    "slug": "conserve"
+  },
+  {
+    "denumire": "Zgură",
+    "denumire_en": "Slag processing",
+    "descriere": "Prelucrarea zgurii",
+    "id": "6jq7g4krx24b02w",
+    "imagine": "materiale_zgura_63k2fonllj.jpg",
+    "slug": "zgura"
+  }
+]

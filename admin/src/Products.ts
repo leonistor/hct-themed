@@ -1,10 +1,10 @@
 import type { CollectionConfig } from 'payload'
 
-export const Partners: CollectionConfig = {
-  slug: 'partners',
+export const Products: CollectionConfig = {
+  slug: 'products',
   labels: {
-    singular: 'Partner',
-    plural: 'Partners',
+    singular: 'Product',
+    plural: 'Products',
   },
   access: { read: () => true },
   enableQueryPresets: true,

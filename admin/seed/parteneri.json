@@ -1,0 +1,83 @@
+[
+  {
+    "cod": "panizzolo",
+    "descriere": "Producător de linii de reciclare la cheie.",
+    "id": "frf17w1jkp5ocx0",
+    "logo": "logo_panizzolo_f0diw1yg44_j3zs059tz8.png",
+    "nume": "Panizzolo",
+    "publicat": true,
+    "url": "https://www.panizzolo.com/en/"
+  },
+  {
+    "cod": "tecnoecology",
+    "descriere": "Soluții inovatoare pentru prelucrarea cablurilor.",
+    "id": "ya35y4leh2xzzu4",
+    "logo": "logo_tecnoecology_jb6jtm791p_o2kja8u3s2.png",
+    "nume": "Tecnoecology",
+    "publicat": true,
+    "url": "https://tecnoecology.com/en/"
+  },
+  {
+    "cod": "mistra",
+    "descriere": "Foarfeci manuale și automate.",
+    "id": "6ak3g9v1ctbz0er",
+    "logo": "logo_mistra_hyhaq2x1cy_sawi6hq7q5.png",
+    "nume": "Mistra",
+    "publicat": true,
+    "url": "https://mistra.cz/"
+  },
+  {
+    "cod": "holmatro",
+    "descriere": "Peste 55 de ani de experiență în scule și sisteme hidraulice de înaltă presiune, foarfeci și tăietoare industriale.",
+    "id": "vh9emkqdstxknnc",
+    "logo": "logo_holmatro_p5w9v8iadh_f9fxl439ud.png",
+    "nume": "Holmatro",
+    "publicat": true,
+    "url": "https://www.holmatro.com/en/rescue/cutting-spreading/cutters"
+  },
+  {
+    "cod": "bronneberg",
+    "descriere": "Soluții dedicate pentru toate tipurile de materiale: metale, electronice, hârtie, etc.",
+    "id": "gxr7wo0ogs49k8f",
+    "logo": "logo_bronneberg_w6cmq1mvoy_fk9lm2nqup.png",
+    "nume": "Bronneberg",
+    "publicat": true,
+    "url": "https://www.bronneberg-recycling.co.uk/"
+  },
+  {
+    "cod": "irismec",
+    "descriere": "Soluții și utilaje pentru reciclarea componentelor auto.",
+    "id": "amed8gxj9q7rf9x",
+    "logo": "logo_iris_id2bkyry7d_jx7y3qyd3g.png",
+    "nume": "Iris Mec",
+    "publicat": true,
+    "url": "https://www.iris-mec.com/"
+  },
+  {
+    "cod": "husmann",
+    "descriere": "Compactoare și stații de transfer.",
+    "id": "3cmw253forl3mxf",
+    "logo": "logo_husmann_i57gpkaohl_o1t2k3zjd0.png",
+    "nume": "Husmann",
+    "publicat": true,
+    "url": "https://husmann-umwelt-technik.de/?lang=en"
+  },
+  {
+    "cod": "wolf",
+    "descriere": "Tocătoare robuste pentru multiple domenii de utilizare.",
+    "id": "d5e9p2repfup9z3",
+    "logo": "logo_wolf_ih3cbmdvyq.png",
+    "nume": "Wolf Shredders",
+    "publicat": false,
+    "url": "https://www.wolfshredders.com/"
+  },
+  {
+    "cod": "pressebull",
+    "descriere": "Prese pentru tratarea fierului vechi.",
+    "id": "myjr992vhw49cki",
+    "logo": "logo_pressebull_k1a6mbr4vm.png",
+    "nume": "Presse Bull",
+    "publicat": false,
+    "url": "https://www.pressebull.it/"
+  }
+]

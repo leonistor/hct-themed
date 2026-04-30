@@ -1,0 +1,32 @@
+[
+  {
+    "id": "chhkkn995a6xzp5",
+    "imagine": "categ_taiere_y0bh74zvrr.jpg",
+    "nume": "Tăiere și dezmembrare",
+    "slug": "taiere-si-dezmembrare"
+  },
+  {
+    "id": "9bvdcf43ptj27nl",
+    "imagine": "categ_prese_8dds649ybt.jpg",
+    "nume": "Prese de balotat și compactoare",
+    "slug": "prese-de-balotat-si-compactoare"
+  },
+  {
+    "id": "5xhpof0ixy6fs1z",
+    "imagine": "categ_tocare_c25lgx9y8b.jpg",
+    "nume": "Tocare, mărunțire și granulare",
+    "slug": "tocare-maruntire-si-granulare"
+  },
+  {
+    "id": "d2rr4jjo2fbaucc",
+    "imagine": "categ_vehicule_8vu3jjs5sb.jpg",
+    "nume": "Dezmembrare vehicule și motoare",
+    "slug": "dezmembrare-vehicule-si-motoare"
+  },
+  {
+    "id": "574ztqrmiteixdo",
+    "imagine": "categ_sortare_7varlbrukq.jpg",
+    "nume": "Sisteme de sortare",
+    "slug": "sisteme-de-sortare"
+  }
+]
