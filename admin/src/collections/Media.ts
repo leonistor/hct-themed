@@ -27,5 +27,25 @@ export const Media: CollectionConfig = {
   ],
   upload: {
     staticDir: '../web/src/assets/payload',
+    displayPreview: true,
+    adminThumbnail: 'thumbnail',
+    imageSizes: [
+      {
+        name: 'square',
+        width: 300,
+        height: 300,
+        fit: 'cover',
+      },
+      {
+        name: 'thumbnail',
+        width: 100,
+        height: 100,
+        fit: 'cover',
+      },
+    ],
+  },
+  admin: {
+    useAsTitle: 'caption',
+    group: 'Media',
   },
 }
