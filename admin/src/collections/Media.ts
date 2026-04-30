@@ -3,6 +3,7 @@ import type { CollectionConfig } from 'payload'
 export const Media: CollectionConfig = {
   slug: 'media',
   access: { read: () => true },
+  enableQueryPresets: true,
   fields: [
     {
       name: 'caption',
@@ -16,8 +17,6 @@ export const Media: CollectionConfig = {
         { label: 'Draft', value: 'draft' },
         { label: 'Illustration', value: 'illustration' },
         { label: 'Blog', value: 'blog' },
-        { label: 'Video', value: 'video' },
-        { label: 'Product', value: 'product' },
         { label: 'Partners', value: 'partners' },
         { label: 'Customers', value: 'customers' },
         { label: 'Projects', value: 'projects' },
