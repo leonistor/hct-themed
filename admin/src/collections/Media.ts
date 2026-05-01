@@ -6,10 +6,7 @@ export const Media: CollectionConfig = {
   access: { read: () => true },
   enableQueryPresets: true,
   fields: [
-    {
-      name: 'caption',
-      type: 'text',
-    },
+    { name: 'caption', type: 'text' },
     {
       name: 'kind',
       type: 'radio',
@@ -32,5 +29,11 @@ export const Media: CollectionConfig = {
     adminThumbnail: 'thumbnail',
     imageSizes: default_image_sizes,
   },
-  admin: { group: 'Content' },
+  admin: {
+    group: 'Content',
+    groupBy: true,
+    pagination: {
+      defaultLimit: 50,
+    },
+  },
 }

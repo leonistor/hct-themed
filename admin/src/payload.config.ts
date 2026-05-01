@@ -30,6 +30,9 @@ export default buildConfig({
             prefillOnly: false,
           }
         : false,
+    components: {
+      beforeDashboard: ['src/components/Admin#MyClientComponent'],
+    },
   },
   collections: [Users, Media, Partners, Categories, Clients, Materials, ProductImages],
   editor: lexicalEditor(),
