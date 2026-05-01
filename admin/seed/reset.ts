@@ -12,4 +12,5 @@ if (answer.toLowerCase() !== 'y') exit(0)
 
 await payload.delete({ collection: 'partners', where: {} })
 await payload.delete({ collection: 'media', where: {} })
+await payload.delete({ collection: 'customers', where: {} })
 exit(0)

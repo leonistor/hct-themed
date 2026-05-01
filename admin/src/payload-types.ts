@@ -71,7 +71,7 @@ export interface Config {
     media: Media;
     partners: Partner;
     categories: Category;
-    clients: Client;
+    customers: Customer;
     materials: Material;
     'product-images': ProductImage;
     'payload-kv': PayloadKv;
@@ -86,7 +86,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     partners: PartnersSelect<false> | PartnersSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
-    clients: ClientsSelect<false> | ClientsSelect<true>;
+    customers: CustomersSelect<false> | CustomersSelect<true>;
     materials: MaterialsSelect<false> | MaterialsSelect<true>;
     'product-images': ProductImagesSelect<false> | ProductImagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -250,9 +250,9 @@ export interface Category {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "clients".
+ * via the `definition` "customers".
  */
-export interface Client {
+export interface Customer {
   id: number;
   _order?: string | null;
   code: string;
@@ -386,8 +386,8 @@ export interface PayloadLockedDocument {
         value: number | Category;
       } | null)
     | ({
-        relationTo: 'clients';
-        value: number | Client;
+        relationTo: 'customers';
+        value: number | Customer;
       } | null)
     | ({
         relationTo: 'materials';
@@ -480,7 +480,7 @@ export interface PayloadQueryPreset {
     | boolean
     | null;
   groupBy?: string | null;
-  relatedCollection: 'media' | 'partners' | 'categories' | 'clients' | 'materials' | 'product-images';
+  relatedCollection: 'media' | 'partners' | 'categories' | 'customers' | 'materials' | 'product-images';
   /**
    * This is a temporary field used to determine if updating the preset would remove the user's access to it. When `true`, this record will be deleted after running the preset's `validate` function.
    */
@@ -615,9 +615,9 @@ export interface CategoriesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "clients_select".
+ * via the `definition` "customers_select".
  */
-export interface ClientsSelect<T extends boolean = true> {
+export interface CustomersSelect<T extends boolean = true> {
   _order?: T;
   code?: T;
   name?: T;

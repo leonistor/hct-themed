@@ -9,7 +9,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Partners } from './collections/Partners'
 import { Categories } from './collections/Categories'
-import { Clients } from './collections/Clients'
+import { Customers } from './collections/Customers'
 import { Materials } from './collections/Materials'
 import { ProductImages } from './collections/ProductImages'
 
@@ -34,7 +34,7 @@ export default buildConfig({
       beforeDashboard: ['src/components/Admin#Overview'],
     },
   },
-  collections: [Users, Media, Partners, Categories, Clients, Materials, ProductImages],
+  collections: [Users, Media, Partners, Categories, Customers, Materials, ProductImages],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '22db8265bed0b27620bba651',
   typescript: {

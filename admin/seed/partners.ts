@@ -20,7 +20,7 @@ export async function seed_partners() {
   }
 
   for (const partner of imp_partners) {
-    const { cod, descriere, logo, nume, url } = partner
+    const { cod, descriere, logo, nume, url, publicat } = partner
     const imageFilePath = path.resolve(__dirname, `./imgs/partners/${logo}`)
 
     try {
@@ -47,6 +47,7 @@ export async function seed_partners() {
           logo: uploadedImage,
           name: nume,
           url: url,
+          published: publicat,
         },
       })
 
