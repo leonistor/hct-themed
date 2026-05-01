@@ -276,9 +276,8 @@ export interface Material {
   _order?: string | null;
   code: string;
   name: string;
-  name_ro: string;
+  name_en: string;
   description?: string | null;
-  description_ro?: string | null;
   illustration?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
@@ -639,9 +638,8 @@ export interface MaterialsSelect<T extends boolean = true> {
   _order?: T;
   code?: T;
   name?: T;
-  name_ro?: T;
+  name_en?: T;
   description?: T;
-  description_ro?: T;
   illustration?: T;
   updatedAt?: T;
   createdAt?: T;

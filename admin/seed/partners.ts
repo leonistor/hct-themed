@@ -58,7 +58,7 @@ export async function seed_partners() {
     }
   }
 
-  payload.logger.info('Seeding completed successfully')
+  payload.logger.info('Seeding partners completed successfully')
 
   return
 }

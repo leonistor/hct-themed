@@ -59,7 +59,7 @@ export async function seed_customers() {
     }
   }
 
-  payload.logger.info('Seeding completed successfully')
+  payload.logger.info('Seeding customers completed successfully')
 
   return
 }

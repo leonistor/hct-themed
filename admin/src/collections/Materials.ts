@@ -12,9 +12,8 @@ export const Materials: CollectionConfig = {
   fields: [
     { name: 'code', type: 'text', required: true },
     { name: 'name', type: 'text', required: true },
-    { name: 'name_ro', type: 'text', required: true },
+    { name: 'name_en', type: 'text', required: true },
     { name: 'description', type: 'textarea', required: false },
-    { name: 'description_ro', type: 'textarea', required: false },
     {
       name: 'illustration',
       type: 'relationship',
@@ -24,7 +23,7 @@ export const Materials: CollectionConfig = {
     },
   ],
   admin: {
-    useAsTitle: 'name_ro',
+    useAsTitle: 'name',
     group: 'Catalog',
   },
 }
