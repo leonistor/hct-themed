@@ -31,7 +31,8 @@ export const Partners: CollectionConfig = {
     useAsTitle: 'name',
     group: 'Catalog',
     pagination: {
-      defaultLimit: 50,
+      defaultLimit: 20,
+      limits: [20, 50, 100],
     },
   },
 }

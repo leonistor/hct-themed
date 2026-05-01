@@ -31,7 +31,7 @@ export default buildConfig({
           }
         : false,
     components: {
-      beforeDashboard: ['src/components/Admin#MyClientComponent'],
+      beforeDashboard: ['src/components/Admin#Overview'],
     },
   },
   collections: [Users, Media, Partners, Categories, Clients, Materials, ProductImages],
@@ -44,6 +44,8 @@ export default buildConfig({
     client: {
       url: process.env.DATABASE_URL || 'file:../db/payload.db',
     },
+    wal: true,
+    transactionOptions: {},
   }),
   sharp,
   plugins: [],
