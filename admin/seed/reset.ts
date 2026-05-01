@@ -12,3 +12,4 @@ if (answer.toLowerCase() !== 'y') exit(0)
 
 await payload.delete({ collection: 'partners', where: {} })
 await payload.delete({ collection: 'media', where: {} })
+exit(0)

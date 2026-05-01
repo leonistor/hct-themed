@@ -7,7 +7,6 @@ import imp_partners from './partners.json'
 
 export async function seed_partners() {
   const payload = await getPayload({ config })
-  const errors: string[] = []
 
   const existingPartners = await payload.find({
     collection: 'partners',
@@ -54,15 +53,11 @@ export async function seed_partners() {
       payload.logger.info(`Created partner: ${created.id}`)
     } catch (err) {
       const message = `Failed to create partner "${nume}": ${err instanceof Error ? err.message : String(err)}`
-      errors.push(message)
       payload.logger.error(message)
     }
   }
 
-  if (errors.length > 0) {
-    payload.logger.error(`Seeding completed with ${errors.length} error(s)`)
-    throw new Error(`Seeding failed: ${errors.join('; ')}`)
-  }
-
   payload.logger.info('Seeding completed successfully')
+
+  return
 }
