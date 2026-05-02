@@ -12,7 +12,6 @@ export const Categories: CollectionConfig = {
   fields: [
     { name: 'code', type: 'text', required: true },
     { name: 'name', type: 'text', required: true },
-    { name: 'published', type: 'checkbox', defaultValue: false },
     { name: 'description', type: 'textarea', required: false },
     { name: 'partners', type: 'relationship', relationTo: 'partners', hasMany: true },
     {

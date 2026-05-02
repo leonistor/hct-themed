@@ -241,7 +241,6 @@ export interface Category {
   _order?: string | null;
   code: string;
   name: string;
-  published?: boolean | null;
   description?: string | null;
   partners?: (number | Partner)[] | null;
   illustration?: (number | null) | Media;
@@ -289,7 +288,6 @@ export interface Material {
 export interface ProductImage {
   id: number;
   caption?: string | null;
-  kind: 'draft' | 'illustration' | 'blog' | 'partners' | 'customers' | 'projects';
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -605,7 +603,6 @@ export interface CategoriesSelect<T extends boolean = true> {
   _order?: T;
   code?: T;
   name?: T;
-  published?: T;
   description?: T;
   partners?: T;
   illustration?: T;
@@ -650,7 +647,6 @@ export interface MaterialsSelect<T extends boolean = true> {
  */
 export interface ProductImagesSelect<T extends boolean = true> {
   caption?: T;
-  kind?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;

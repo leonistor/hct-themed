@@ -10,21 +10,6 @@ export const ProductImages: CollectionConfig = {
       name: 'caption',
       type: 'text',
     },
-    {
-      name: 'kind',
-      type: 'radio',
-      required: true,
-      options: [
-        { label: 'Draft', value: 'draft' },
-        { label: 'Illustration', value: 'illustration' },
-        { label: 'Blog', value: 'blog' },
-        { label: 'Partners', value: 'partners' },
-        { label: 'Customers', value: 'customers' },
-        { label: 'Projects', value: 'projects' },
-      ],
-      defaultValue: 'draft',
-      admin: { layout: 'horizontal' },
-    },
   ],
   upload: {
     staticDir: '../web/src/assets/payload/products',
