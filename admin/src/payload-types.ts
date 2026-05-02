@@ -75,6 +75,8 @@ export interface Config {
     materials: Material;
     products: Product;
     'product-images': ProductImage;
+    projects: Project;
+    pages: Page;
     'payload-kv': PayloadKv;
     'payload-folders': FolderInterface;
     'payload-locked-documents': PayloadLockedDocument;
@@ -96,6 +98,8 @@ export interface Config {
     materials: MaterialsSelect<false> | MaterialsSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     'product-images': ProductImagesSelect<false> | ProductImagesSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -425,6 +429,35 @@ export interface Customer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: number;
+  _order?: string | null;
+  code: string;
+  name: string;
+  published?: boolean | null;
+  description?: string | null;
+  page?: string | null;
+  illustration?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  slug: string;
+  title: string;
+  content?: string | null;
+  published?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -478,6 +511,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'product-images';
         value: number | ProductImage;
+      } | null)
+    | ({
+        relationTo: 'projects';
+        value: number | Project;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
       } | null)
     | ({
         relationTo: 'payload-folders';
@@ -566,7 +607,16 @@ export interface PayloadQueryPreset {
     | boolean
     | null;
   groupBy?: string | null;
-  relatedCollection: 'media' | 'partners' | 'categories' | 'customers' | 'materials' | 'products' | 'product-images';
+  relatedCollection:
+    | 'media'
+    | 'partners'
+    | 'categories'
+    | 'customers'
+    | 'materials'
+    | 'products'
+    | 'product-images'
+    | 'projects'
+    | 'pages';
   /**
    * This is a temporary field used to determine if updating the preset would remove the user's access to it. When `true`, this record will be deleted after running the preset's `validate` function.
    */
@@ -836,6 +886,33 @@ export interface ProductImagesSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  _order?: T;
+  code?: T;
+  name?: T;
+  published?: T;
+  description?: T;
+  page?: T;
+  illustration?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  slug?: T;
+  title?: T;
+  content?: T;
+  published?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

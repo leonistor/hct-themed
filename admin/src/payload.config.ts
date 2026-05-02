@@ -13,6 +13,8 @@ import { Customers } from './collections/Customers'
 import { Materials } from './collections/Materials'
 import { ProductImages } from './collections/ProductImages'
 import { Products } from './collections/Products'
+import { Projects } from './collections/Projects'
+import { Pages } from './collections/Pages'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -35,7 +37,18 @@ export default buildConfig({
       beforeDashboard: ['src/components/Admin#Overview'],
     },
   },
-  collections: [Users, Media, Partners, Categories, Customers, Materials, Products, ProductImages],
+  collections: [
+    Users,
+    Media,
+    Partners,
+    Categories,
+    Customers,
+    Materials,
+    Products,
+    ProductImages,
+    Projects,
+    Pages,
+  ],
   folders: {
     browseByFolder: true,
   },

@@ -37,7 +37,7 @@ export const Customers: CollectionConfig = {
   ],
   admin: {
     useAsTitle: 'name',
-    group: 'Catalog',
+    group: 'Content',
     pagination: default_pagination,
   },
 }
