@@ -290,6 +290,9 @@ export interface Material {
 export interface Product {
   id: number;
   _order?: string | null;
+  /**
+   * partner-code--name-with-space-to-dash
+   */
   code: string;
   name: string;
   name_en?: string | null;
