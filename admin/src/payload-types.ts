@@ -73,6 +73,7 @@ export interface Config {
     categories: Category;
     customers: Customer;
     materials: Material;
+    products: Product;
     'product-images': ProductImage;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -88,6 +89,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     customers: CustomersSelect<false> | CustomersSelect<true>;
     materials: MaterialsSelect<false> | MaterialsSelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
     'product-images': ProductImagesSelect<false> | ProductImagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -283,6 +285,38 @@ export interface Material {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: number;
+  _order?: string | null;
+  code: string;
+  name: string;
+  name_en: string;
+  description?: string | null;
+  link?: string | null;
+  url?: string | null;
+  published?: boolean | null;
+  variants?:
+    | {
+        code: string;
+        name: string;
+        description?: string | null;
+        link?: string | null;
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  partners?: (number | null) | Partner;
+  category?: (number | null) | Category;
+  materials?: (number | Material)[] | null;
+  main_image?: (number | null) | Media;
+  images?: (number | Media)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "product-images".
  */
 export interface ProductImage {
@@ -391,6 +425,10 @@ export interface PayloadLockedDocument {
         value: number | Material;
       } | null)
     | ({
+        relationTo: 'products';
+        value: number | Product;
+      } | null)
+    | ({
         relationTo: 'product-images';
         value: number | ProductImage;
       } | null);
@@ -477,7 +515,7 @@ export interface PayloadQueryPreset {
     | boolean
     | null;
   groupBy?: string | null;
-  relatedCollection: 'media' | 'partners' | 'categories' | 'customers' | 'materials' | 'product-images';
+  relatedCollection: 'media' | 'partners' | 'categories' | 'customers' | 'materials' | 'products' | 'product-images';
   /**
    * This is a temporary field used to determine if updating the preset would remove the user's access to it. When `true`, this record will be deleted after running the preset's `validate` function.
    */
@@ -638,6 +676,37 @@ export interface MaterialsSelect<T extends boolean = true> {
   name_en?: T;
   description?: T;
   illustration?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products_select".
+ */
+export interface ProductsSelect<T extends boolean = true> {
+  _order?: T;
+  code?: T;
+  name?: T;
+  name_en?: T;
+  description?: T;
+  link?: T;
+  url?: T;
+  published?: T;
+  variants?:
+    | T
+    | {
+        code?: T;
+        name?: T;
+        description?: T;
+        link?: T;
+        url?: T;
+        id?: T;
+      };
+  partners?: T;
+  category?: T;
+  materials?: T;
+  main_image?: T;
+  images?: T;
   updatedAt?: T;
   createdAt?: T;
 }

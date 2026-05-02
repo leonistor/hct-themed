@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { default_pagination } from './common'
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -13,7 +14,7 @@ export const Products: CollectionConfig = {
     { name: 'code', type: 'text', required: true },
     { name: 'name', type: 'text', required: true },
     { name: 'name_en', type: 'text', required: true },
-    { name: 'description', type: 'textarea', required: false },
+    { name: 'description', type: 'textarea' },
     { name: 'link', type: 'text' },
     { name: 'url', type: 'text' },
     { name: 'published', type: 'checkbox', defaultValue: false },
@@ -24,6 +25,7 @@ export const Products: CollectionConfig = {
       fields: [
         { name: 'code', type: 'text', required: true },
         { name: 'name', type: 'text', required: true },
+        { name: 'description', type: 'textarea' },
         { name: 'link', type: 'text' },
         { name: 'url', type: 'text' },
       ],
@@ -35,7 +37,6 @@ export const Products: CollectionConfig = {
       type: 'relationship',
       relationTo: 'materials',
       hasMany: true,
-      required: false,
     },
     {
       name: 'main_image',
@@ -55,5 +56,6 @@ export const Products: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     group: 'Content',
+    pagination: default_pagination,
   },
 }

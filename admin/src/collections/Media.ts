@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
-import { default_image_sizes } from './image_sizes'
+import { default_image_sizes } from './common'
+import { default_pagination } from './common'
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -32,8 +33,6 @@ export const Media: CollectionConfig = {
   admin: {
     group: 'Content',
     groupBy: true,
-    pagination: {
-      defaultLimit: 50,
-    },
+    pagination: default_pagination,
   },
 }

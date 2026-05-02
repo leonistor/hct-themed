@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { default_pagination } from './common'
 
 export const Partners: CollectionConfig = {
   slug: 'partners',
@@ -30,9 +31,6 @@ export const Partners: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     group: 'Catalog',
-    pagination: {
-      defaultLimit: 20,
-      limits: [20, 50, 100],
-    },
+    pagination: default_pagination,
   },
 }

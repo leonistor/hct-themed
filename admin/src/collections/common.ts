@@ -5,3 +5,8 @@ export const default_image_sizes = [
   { name: 'large', height: 400 },
   { name: 'xlarge', height: 800 },
 ]
+
+export const default_pagination = {
+  defaultLimit: 20,
+  limits: [20, 50, 100],
+}

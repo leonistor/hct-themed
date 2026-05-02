@@ -12,6 +12,7 @@ import { Categories } from './collections/Categories'
 import { Customers } from './collections/Customers'
 import { Materials } from './collections/Materials'
 import { ProductImages } from './collections/ProductImages'
+import { Products } from './collections/Products'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -34,7 +35,7 @@ export default buildConfig({
       beforeDashboard: ['src/components/Admin#Overview'],
     },
   },
-  collections: [Users, Media, Partners, Categories, Customers, Materials, ProductImages],
+  collections: [Users, Media, Partners, Categories, Customers, Materials, Products, ProductImages],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '22db8265bed0b27620bba651',
   typescript: {

@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { default_pagination } from './common'
 
 export const Customers: CollectionConfig = {
   slug: 'customers',
@@ -29,5 +30,6 @@ export const Customers: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     group: 'Catalog',
+    pagination: default_pagination,
   },
 }

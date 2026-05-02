@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { default_image_sizes } from './image_sizes'
+import { default_image_sizes, default_pagination } from './common'
 
 export const ProductImages: CollectionConfig = {
   slug: 'product-images',
@@ -17,5 +17,8 @@ export const ProductImages: CollectionConfig = {
     adminThumbnail: 'thumbnail',
     imageSizes: default_image_sizes,
   },
-  admin: { group: 'Content' },
+  admin: {
+    group: 'Content',
+    pagination: default_pagination,
+  },
 }
