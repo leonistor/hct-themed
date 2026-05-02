@@ -13,10 +13,10 @@ export const Products: CollectionConfig = {
   fields: [
     { name: 'code', type: 'text', required: true },
     { name: 'name', type: 'text', required: true },
-    { name: 'name_en', type: 'text', required: true },
-    { name: 'description', type: 'textarea' },
-    { name: 'link', type: 'text' },
-    { name: 'url', type: 'text' },
+    { name: 'name_en', type: 'text', admin: { disableListColumn: true } },
+    { name: 'description', type: 'textarea', admin: { disableListColumn: true } },
+    { name: 'link', type: 'text', admin: { disableListColumn: true } },
+    { name: 'url', type: 'text', admin: { disableListColumn: true } },
     { name: 'published', type: 'checkbox', defaultValue: false },
     {
       name: 'variants',
@@ -29,14 +29,16 @@ export const Products: CollectionConfig = {
         { name: 'link', type: 'text' },
         { name: 'url', type: 'text' },
       ],
+      admin: { disableListColumn: true },
     },
-    { name: 'partners', type: 'relationship', relationTo: 'partners', hasMany: false },
+    { name: 'partner', type: 'relationship', relationTo: 'partners', hasMany: false },
     { name: 'category', type: 'relationship', relationTo: 'categories', hasMany: false },
     {
       name: 'materials',
       type: 'relationship',
       relationTo: 'materials',
       hasMany: true,
+      admin: { disableListColumn: true },
     },
     {
       name: 'main_image',
@@ -50,7 +52,7 @@ export const Products: CollectionConfig = {
       type: 'relationship',
       relationTo: 'media',
       hasMany: true,
-      admin: { appearance: 'drawer' },
+      admin: { appearance: 'drawer', disableListColumn: true },
     },
   ],
   admin: {

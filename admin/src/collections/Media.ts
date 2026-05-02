@@ -33,6 +33,7 @@ export const Media: CollectionConfig = {
   admin: {
     group: 'Content',
     groupBy: true,
+
     pagination: default_pagination,
   },
 }

@@ -277,7 +277,7 @@ export interface Material {
   _order?: string | null;
   code: string;
   name: string;
-  name_en: string;
+  name_en?: string | null;
   description?: string | null;
   illustration?: (number | null) | Media;
   updatedAt: string;
@@ -292,7 +292,7 @@ export interface Product {
   _order?: string | null;
   code: string;
   name: string;
-  name_en: string;
+  name_en?: string | null;
   description?: string | null;
   link?: string | null;
   url?: string | null;
@@ -307,7 +307,7 @@ export interface Product {
         id?: string | null;
       }[]
     | null;
-  partners?: (number | null) | Partner;
+  partner?: (number | null) | Partner;
   category?: (number | null) | Category;
   materials?: (number | Material)[] | null;
   main_image?: (number | null) | Media;
@@ -702,7 +702,7 @@ export interface ProductsSelect<T extends boolean = true> {
         url?: T;
         id?: T;
       };
-  partners?: T;
+  partner?: T;
   category?: T;
   materials?: T;
   main_image?: T;

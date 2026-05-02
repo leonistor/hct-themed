@@ -12,8 +12,14 @@ export const Categories: CollectionConfig = {
   fields: [
     { name: 'code', type: 'text', required: true },
     { name: 'name', type: 'text', required: true },
-    { name: 'description', type: 'textarea', required: false },
-    { name: 'partners', type: 'relationship', relationTo: 'partners', hasMany: true },
+    { name: 'description', type: 'textarea', admin: { disableListColumn: true } },
+    {
+      name: 'partners',
+      type: 'relationship',
+      relationTo: 'partners',
+      hasMany: true,
+      admin: { disableListColumn: true },
+    },
     {
       name: 'illustration',
       type: 'relationship',

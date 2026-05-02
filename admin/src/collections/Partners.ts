@@ -13,7 +13,7 @@ export const Partners: CollectionConfig = {
   fields: [
     { name: 'code', type: 'text', required: true },
     { name: 'name', type: 'text', required: true },
-    { name: 'published', type: 'checkbox', defaultValue: false },
+    { name: 'published', type: 'checkbox', defaultValue: false, admin: { position: 'sidebar' } },
     { name: 'description', type: 'textarea', required: false },
     { name: 'url', type: 'text', required: false },
     {
@@ -24,7 +24,8 @@ export const Partners: CollectionConfig = {
       admin: {
         allowCreate: false,
         allowEdit: false,
-        appearance: 'drawer',
+        appearance: 'select',
+        position: 'sidebar',
       },
     },
   ],
