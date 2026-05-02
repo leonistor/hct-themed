@@ -56,7 +56,11 @@ export const Products: CollectionConfig = {
           ],
         },
       ],
-      admin: { disableListColumn: true },
+      admin: {
+        disableListColumn: true,
+        initCollapsed: true,
+        components: { RowLabel: 'src/components/VariantLabel#VariantLabel' },
+      },
     },
     {
       name: 'partner',

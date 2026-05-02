@@ -1,4 +1,5 @@
 import { Published as Published_1e9b05f860e65291a0a186b7b75bf24f } from 'src/components/Custom'
+import { VariantLabel as VariantLabel_debd71a8b47b0ca52bb833a72c729cd8 } from 'src/components/VariantLabel'
 import { QueryPresetsAccessCell as QueryPresetsAccessCell_2b8867833a34864a02ddf429b0728a40 } from '@payloadcms/next/client'
 import { QueryPresetsWhereCell as QueryPresetsWhereCell_2b8867833a34864a02ddf429b0728a40 } from '@payloadcms/next/client'
 import { QueryPresetsWhereField as QueryPresetsWhereField_2b8867833a34864a02ddf429b0728a40 } from '@payloadcms/next/client'
@@ -12,6 +13,7 @@ import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } f
 /** @type import('payload').ImportMap */
 export const importMap = {
   "src/components/Custom#Published": Published_1e9b05f860e65291a0a186b7b75bf24f,
+  "src/components/VariantLabel#VariantLabel": VariantLabel_debd71a8b47b0ca52bb833a72c729cd8,
   "@payloadcms/next/client#QueryPresetsAccessCell": QueryPresetsAccessCell_2b8867833a34864a02ddf429b0728a40,
   "@payloadcms/next/client#QueryPresetsWhereCell": QueryPresetsWhereCell_2b8867833a34864a02ddf429b0728a40,
   "@payloadcms/next/client#QueryPresetsWhereField": QueryPresetsWhereField_2b8867833a34864a02ddf429b0728a40,
