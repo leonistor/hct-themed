@@ -1,6 +1,7 @@
 import { FolderTableCell as FolderTableCell_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 import { FolderField as FolderField_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 import { Published as Published_1e9b05f860e65291a0a186b7b75bf24f } from 'src/components/Custom'
+import { ImageCell as ImageCell_1e9b05f860e65291a0a186b7b75bf24f } from 'src/components/Custom'
 import { VariantLabel as VariantLabel_debd71a8b47b0ca52bb833a72c729cd8 } from 'src/components/VariantLabel'
 import { FolderTypeField as FolderTypeField_2b8867833a34864a02ddf429b0728a40 } from '@payloadcms/next/client'
 import { QueryPresetsAccessCell as QueryPresetsAccessCell_2b8867833a34864a02ddf429b0728a40 } from '@payloadcms/next/client'
@@ -18,6 +19,7 @@ export const importMap = {
   "@payloadcms/next/rsc#FolderTableCell": FolderTableCell_f9c02e79a4aed9a3924487c0cd4cafb1,
   "@payloadcms/next/rsc#FolderField": FolderField_f9c02e79a4aed9a3924487c0cd4cafb1,
   "src/components/Custom#Published": Published_1e9b05f860e65291a0a186b7b75bf24f,
+  "src/components/Custom#ImageCell": ImageCell_1e9b05f860e65291a0a186b7b75bf24f,
   "src/components/VariantLabel#VariantLabel": VariantLabel_debd71a8b47b0ca52bb833a72c729cd8,
   "@payloadcms/next/client#FolderTypeField": FolderTypeField_2b8867833a34864a02ddf429b0728a40,
   "@payloadcms/next/client#QueryPresetsAccessCell": QueryPresetsAccessCell_2b8867833a34864a02ddf429b0728a40,

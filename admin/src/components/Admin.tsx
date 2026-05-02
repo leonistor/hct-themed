@@ -19,6 +19,14 @@ export async function Overview({ payload }: { payload: Payload }) {
   const customers_published = customers_counts.published
   const customers_unpublished = customers_counts.unpublished
 
+  const products_counts = await getPublishedUnpublished('products')
+  const products_published = products_counts.published
+  const products_unpublished = products_counts.unpublished
+
+  const projects_counts = await getPublishedUnpublished('projects')
+  const projects_published = projects_counts.published
+  const projects_unpublished = projects_counts.unpublished
+
   return (
     <div className="overview">
       <OverviewButton
@@ -30,6 +38,16 @@ export async function Overview({ payload }: { payload: Payload }) {
         name="customers"
         count_published={customers_published.totalDocs}
         count_unpublished={customers_unpublished.totalDocs}
+      />
+      <OverviewButton
+        name="products"
+        count_published={products_published.totalDocs}
+        count_unpublished={products_unpublished.totalDocs}
+      />
+      <OverviewButton
+        name="projects"
+        count_published={projects_published.totalDocs}
+        count_unpublished={projects_unpublished.totalDocs}
       />
     </div>
   )
@@ -47,7 +65,14 @@ function OverviewButton({
   return (
     <Button el="link" to="/collections" buttonStyle="pill">
       {capitalizeFirstLetter(name)}: {count_published}
-      {count_unpublished ? ` + ${count_unpublished}` : ''}
+      {count_unpublished ? (
+        <span>
+          {' '}
+          + {count_unpublished} {count_unpublished === 1 ? 'draft' : 'drafts'}
+        </span>
+      ) : (
+        ''
+      )}
     </Button>
   )
 }

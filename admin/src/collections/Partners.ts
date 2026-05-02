@@ -34,6 +34,8 @@ export const Partners: CollectionConfig = {
         allowEdit: false,
         appearance: 'select',
         position: 'sidebar',
+        isSortable: false,
+        components: { Cell: 'src/components/Custom#ImageCell' },
       },
     },
   ],
