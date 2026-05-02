@@ -17,7 +17,15 @@ export const Products: CollectionConfig = {
     { name: 'description', type: 'textarea', admin: { disableListColumn: true } },
     { name: 'page', type: 'text', admin: { disableListColumn: true } },
     { name: 'url', type: 'text', admin: { disableListColumn: true } },
-    { name: 'published', type: 'checkbox', defaultValue: false },
+    {
+      name: 'published',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        components: { Cell: 'src/components/Custom#Published' },
+      },
+    },
     {
       name: 'variants',
       type: 'array',

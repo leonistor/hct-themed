@@ -19,7 +19,7 @@ export const Partners: CollectionConfig = {
       defaultValue: false,
       admin: {
         position: 'sidebar',
-        components: { Cell: 'src/components/Published#Published' },
+        components: { Cell: 'src/components/Custom#Published' },
       },
     },
     { name: 'description', type: 'textarea', required: false },

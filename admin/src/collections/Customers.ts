@@ -13,7 +13,15 @@ export const Customers: CollectionConfig = {
   fields: [
     { name: 'code', type: 'text', required: true, admin: { disableListColumn: true } },
     { name: 'name', type: 'text', required: true },
-    { name: 'published', type: 'checkbox', defaultValue: false },
+    {
+      name: 'published',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        components: { Cell: 'src/components/Custom#Published' },
+      },
+    },
     { name: 'description', type: 'textarea', admin: { disableListColumn: true } },
     { name: 'url', type: 'text', required: false },
     { name: 'location', type: 'text', defaultValue: 'Romania' },
