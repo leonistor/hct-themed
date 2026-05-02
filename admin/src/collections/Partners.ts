@@ -13,7 +13,15 @@ export const Partners: CollectionConfig = {
   fields: [
     { name: 'code', type: 'text', required: true },
     { name: 'name', type: 'text', required: true },
-    { name: 'published', type: 'checkbox', defaultValue: false, admin: { position: 'sidebar' } },
+    {
+      name: 'published',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        components: { Cell: 'src/components/Published#Published' },
+      },
+    },
     { name: 'description', type: 'textarea', required: false },
     { name: 'url', type: 'text', required: false },
     {
