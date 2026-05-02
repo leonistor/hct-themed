@@ -15,7 +15,7 @@ export const Products: CollectionConfig = {
     { name: 'name', type: 'text', required: true },
     { name: 'name_en', type: 'text', admin: { disableListColumn: true } },
     { name: 'description', type: 'textarea', admin: { disableListColumn: true } },
-    { name: 'link', type: 'text', admin: { disableListColumn: true } },
+    { name: 'page', type: 'text', admin: { disableListColumn: true } },
     { name: 'url', type: 'text', admin: { disableListColumn: true } },
     { name: 'published', type: 'checkbox', defaultValue: false },
     {
@@ -23,11 +23,25 @@ export const Products: CollectionConfig = {
       type: 'array',
       required: false,
       fields: [
-        { name: 'code', type: 'text', required: true },
-        { name: 'name', type: 'text', required: true },
-        { name: 'description', type: 'textarea' },
-        { name: 'link', type: 'text' },
-        { name: 'url', type: 'text' },
+        {
+          type: 'row',
+          fields: [
+            { name: 'code', type: 'text', required: true, admin: { width: '20%' } },
+            { name: 'feature', type: 'text', admin: { width: '20%' } },
+            { name: 'name', type: 'text', required: true, admin: { width: '60%' } },
+          ],
+        },
+        {
+          type: 'row',
+          fields: [{ name: 'description', type: 'textarea', admin: { rows: 3 } }],
+        },
+        {
+          type: 'row',
+          fields: [
+            { name: 'page', type: 'text' },
+            { name: 'url', type: 'text' },
+          ],
+        },
       ],
       admin: { disableListColumn: true },
     },
@@ -43,14 +57,14 @@ export const Products: CollectionConfig = {
     {
       name: 'main_image',
       type: 'relationship',
-      relationTo: 'media',
+      relationTo: 'product-images',
       hasMany: false,
       admin: { appearance: 'drawer' },
     },
     {
       name: 'images',
       type: 'relationship',
-      relationTo: 'media',
+      relationTo: 'product-images',
       hasMany: true,
       admin: { appearance: 'drawer', disableListColumn: true },
     },

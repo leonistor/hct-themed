@@ -294,15 +294,16 @@ export interface Product {
   name: string;
   name_en?: string | null;
   description?: string | null;
-  link?: string | null;
+  page?: string | null;
   url?: string | null;
   published?: boolean | null;
   variants?:
     | {
         code: string;
+        feature?: string | null;
         name: string;
         description?: string | null;
-        link?: string | null;
+        page?: string | null;
         url?: string | null;
         id?: string | null;
       }[]
@@ -310,8 +311,8 @@ export interface Product {
   partner?: (number | null) | Partner;
   category?: (number | null) | Category;
   materials?: (number | Material)[] | null;
-  main_image?: (number | null) | Media;
-  images?: (number | Media)[] | null;
+  main_image?: (number | null) | ProductImage;
+  images?: (number | ProductImage)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -689,16 +690,17 @@ export interface ProductsSelect<T extends boolean = true> {
   name?: T;
   name_en?: T;
   description?: T;
-  link?: T;
+  page?: T;
   url?: T;
   published?: T;
   variants?:
     | T
     | {
         code?: T;
+        feature?: T;
         name?: T;
         description?: T;
-        link?: T;
+        page?: T;
         url?: T;
         id?: T;
       };
