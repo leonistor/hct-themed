@@ -76,12 +76,17 @@ export interface Config {
     products: Product;
     'product-images': ProductImage;
     'payload-kv': PayloadKv;
+    'payload-folders': FolderInterface;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
     'payload-query-presets': PayloadQueryPreset;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    'payload-folders': {
+      documentsAndFolders: 'payload-folders' | 'media' | 'products' | 'product-images';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -92,6 +97,7 @@ export interface Config {
     products: ProductsSelect<false> | ProductsSelect<true>;
     'product-images': ProductImagesSelect<false> | ProductImagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -164,6 +170,7 @@ export interface Media {
   id: number;
   caption?: string | null;
   kind: 'draft' | 'illustration' | 'blog' | 'partners' | 'customers' | 'projects';
+  folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -220,66 +227,35 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "partners".
+ * via the `definition` "payload-folders".
  */
-export interface Partner {
+export interface FolderInterface {
   id: number;
-  _order?: string | null;
-  code: string;
   name: string;
-  published?: boolean | null;
-  description?: string | null;
-  url?: string | null;
-  logo?: (number | null) | Media;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: number;
-  _order?: string | null;
-  code: string;
-  name: string;
-  description?: string | null;
-  partners?: (number | Partner)[] | null;
-  illustration?: (number | null) | Media;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "customers".
- */
-export interface Customer {
-  id: number;
-  _order?: string | null;
-  code: string;
-  name: string;
-  published?: boolean | null;
-  description?: string | null;
-  url?: string | null;
-  location?: string | null;
-  map_lat?: number | null;
-  map_lng?: number | null;
-  logo?: (number | null) | Media;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "materials".
- */
-export interface Material {
-  id: number;
-  _order?: string | null;
-  code: string;
-  name: string;
-  name_en?: string | null;
-  description?: string | null;
-  illustration?: (number | null) | Media;
+  folder?: (number | null) | FolderInterface;
+  documentsAndFolders?: {
+    docs?: (
+      | {
+          relationTo?: 'payload-folders';
+          value: number | FolderInterface;
+        }
+      | {
+          relationTo?: 'media';
+          value: number | Media;
+        }
+      | {
+          relationTo?: 'products';
+          value: number | Product;
+        }
+      | {
+          relationTo?: 'product-images';
+          value: number | ProductImage;
+        }
+    )[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  folderType?: ('media' | 'products' | 'product-images')[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -316,6 +292,53 @@ export interface Product {
   materials?: (number | Material)[] | null;
   main_image?: (number | null) | ProductImage;
   images?: (number | ProductImage)[] | null;
+  folder?: (number | null) | FolderInterface;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partners".
+ */
+export interface Partner {
+  id: number;
+  _order?: string | null;
+  code: string;
+  name: string;
+  published?: boolean | null;
+  description?: string | null;
+  url?: string | null;
+  logo?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: number;
+  _order?: string | null;
+  code: string;
+  name: string;
+  description?: string | null;
+  partners?: (number | Partner)[] | null;
+  illustration?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "materials".
+ */
+export interface Material {
+  id: number;
+  _order?: string | null;
+  code: string;
+  name: string;
+  name_en?: string | null;
+  description?: string | null;
+  illustration?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -326,6 +349,7 @@ export interface Product {
 export interface ProductImage {
   id: number;
   caption?: string | null;
+  folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -379,6 +403,25 @@ export interface ProductImage {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customers".
+ */
+export interface Customer {
+  id: number;
+  _order?: string | null;
+  code: string;
+  name: string;
+  published?: boolean | null;
+  description?: string | null;
+  url?: string | null;
+  location?: string | null;
+  map_lat?: number | null;
+  map_lng?: number | null;
+  logo?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -435,6 +478,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'product-images';
         value: number | ProductImage;
+      } | null)
+    | ({
+        relationTo: 'payload-folders';
+        value: number | FolderInterface;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -556,6 +603,7 @@ export interface UsersSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   caption?: T;
   kind?: T;
+  folder?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -712,6 +760,7 @@ export interface ProductsSelect<T extends boolean = true> {
   materials?: T;
   main_image?: T;
   images?: T;
+  folder?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -721,6 +770,7 @@ export interface ProductsSelect<T extends boolean = true> {
  */
 export interface ProductImagesSelect<T extends boolean = true> {
   caption?: T;
+  folder?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -794,6 +844,18 @@ export interface ProductImagesSelect<T extends boolean = true> {
 export interface PayloadKvSelect<T extends boolean = true> {
   key?: T;
   data?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-folders_select".
+ */
+export interface PayloadFoldersSelect<T extends boolean = true> {
+  name?: T;
+  folder?: T;
+  documentsAndFolders?: T;
+  folderType?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

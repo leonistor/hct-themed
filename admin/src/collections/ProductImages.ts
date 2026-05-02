@@ -5,6 +5,7 @@ export const ProductImages: CollectionConfig = {
   slug: 'product-images',
   access: { read: () => true },
   enableQueryPresets: true,
+  folders: true,
   fields: [
     {
       name: 'caption',

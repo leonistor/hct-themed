@@ -9,6 +9,7 @@ export const Products: CollectionConfig = {
   },
   access: { read: () => true },
   enableQueryPresets: true,
+  folders: true,
   orderable: true,
   fields: [
     {

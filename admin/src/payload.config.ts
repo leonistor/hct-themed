@@ -36,6 +36,9 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Partners, Categories, Customers, Materials, Products, ProductImages],
+  folders: {
+    browseByFolder: true,
+  },
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '22db8265bed0b27620bba651',
   typescript: {
