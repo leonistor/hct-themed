@@ -20,7 +20,10 @@ export const Materials: CollectionConfig = {
       type: 'relationship',
       relationTo: 'media',
       hasMany: false,
-      admin: { appearance: 'drawer' },
+      admin: {
+        appearance: 'drawer',
+        components: { Cell: 'src/components/Custom#ImageCell' },
+      },
     },
   ],
   admin: {
