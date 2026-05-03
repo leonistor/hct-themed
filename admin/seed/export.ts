@@ -1,4 +1,4 @@
-// TODO: also use plugin
+// TODO: export image files
 import config from '@payload-config'
 import { getPayload } from 'payload'
 

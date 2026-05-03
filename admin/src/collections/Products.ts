@@ -16,7 +16,7 @@ export const Products: CollectionConfig = {
       name: 'code',
       type: 'text',
       required: true,
-      admin: { description: 'partner-code--name-with-space-to-dash' },
+      admin: { description: 'partner-code--name-with-space-to-dash', disableListColumn: true },
     },
     { name: 'name', type: 'text', required: true },
     { name: 'name_en', type: 'text', admin: { disableListColumn: true } },
@@ -27,6 +27,7 @@ export const Products: CollectionConfig = {
       name: 'published',
       type: 'checkbox',
       defaultValue: false,
+      index: true,
       admin: {
         position: 'sidebar',
         components: { Cell: 'src/components/Custom#Published' },
@@ -69,6 +70,7 @@ export const Products: CollectionConfig = {
       type: 'relationship',
       relationTo: 'partners',
       hasMany: false,
+      index: true,
       admin: { position: 'sidebar', allowCreate: false, allowEdit: false },
     },
     {
@@ -76,6 +78,7 @@ export const Products: CollectionConfig = {
       type: 'relationship',
       relationTo: 'categories',
       hasMany: false,
+      index: true,
       admin: { position: 'sidebar', allowCreate: false, allowEdit: false },
     },
     {
@@ -83,6 +86,7 @@ export const Products: CollectionConfig = {
       type: 'relationship',
       relationTo: 'materials',
       hasMany: true,
+      index: true,
       admin: { disableListColumn: true, position: 'sidebar', allowCreate: false, allowEdit: false },
     },
     {

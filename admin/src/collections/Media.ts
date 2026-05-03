@@ -13,6 +13,7 @@ export const Media: CollectionConfig = {
       name: 'kind',
       type: 'radio',
       required: true,
+      index: true,
       options: [
         { label: 'Draft', value: 'draft' },
         { label: 'Illustration', value: 'illustration' },

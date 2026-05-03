@@ -4,6 +4,7 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { importExportPlugin } from '@payloadcms/plugin-import-export'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -49,9 +50,26 @@ export default buildConfig({
     Projects,
     Pages,
   ],
+  defaultDepth: 2,
   folders: {
     browseByFolder: true,
   },
+  plugins: [
+    importExportPlugin({
+      debug: true,
+      collections: [
+        { slug: 'products', export: { disableJobsQueue: true, format: 'json' } },
+        { slug: 'product-images', export: { disableJobsQueue: true, format: 'json' } },
+        { slug: 'media', export: { disableJobsQueue: true, format: 'json' } },
+        { slug: 'partners', export: { disableJobsQueue: true, format: 'json' } },
+        { slug: 'categories', export: { disableJobsQueue: true, format: 'json' } },
+        { slug: 'customers', export: { disableJobsQueue: true, format: 'json' } },
+        { slug: 'materials', export: { disableJobsQueue: true, format: 'json' } },
+        { slug: 'projects', export: { disableJobsQueue: true, format: 'json' } },
+        { slug: 'pages', export: { disableJobsQueue: true, format: 'json' } },
+      ],
+    }),
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '22db8265bed0b27620bba651',
   typescript: {
@@ -65,6 +83,5 @@ export default buildConfig({
     transactionOptions: {},
   }),
   sharp,
-  plugins: [],
   cors: '*',
 })

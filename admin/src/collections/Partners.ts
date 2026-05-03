@@ -11,12 +11,13 @@ export const Partners: CollectionConfig = {
   enableQueryPresets: true,
   orderable: true,
   fields: [
-    { name: 'code', type: 'text', required: true },
+    { name: 'code', type: 'text', required: true, index: true },
     { name: 'name', type: 'text', required: true },
     {
       name: 'published',
       type: 'checkbox',
       defaultValue: false,
+      index: true,
       admin: {
         position: 'sidebar',
         components: { Cell: 'src/components/Custom#Published' },
