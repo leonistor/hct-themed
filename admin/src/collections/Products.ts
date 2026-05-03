@@ -52,6 +52,7 @@ export const Products: CollectionConfig = {
         {
           type: 'row',
           fields: [
+            // TODO: select page from a list
             { name: 'page', type: 'text' },
             { name: 'url', type: 'text' },
           ],
@@ -59,7 +60,7 @@ export const Products: CollectionConfig = {
       ],
       admin: {
         disableListColumn: true,
-        initCollapsed: true,
+        // initCollapsed: true,
         components: { RowLabel: 'src/components/VariantLabel#VariantLabel' },
       },
     },

@@ -11,6 +11,7 @@ export async function Overview({ payload }: { payload: Payload }) {
     return { published, unpublished }
   }
 
+  // TODO: show only drafts
   const partners_counts = await getPublishedUnpublished('partners')
   const partners_published = partners_counts.published
   const partners_unpublished = partners_counts.unpublished
