@@ -27,8 +27,17 @@ export const Categories: CollectionConfig = {
       hasMany: false,
       admin: {
         appearance: 'drawer',
-        components: { Cell: 'src/components/Custom#ImageCell' },
+        position: 'sidebar',
+        components: {
+          Cell: 'src/components/Custom#ImageCell',
+        },
       },
+    },
+    {
+      name: 'products',
+      type: 'join',
+      collection: 'products',
+      on: 'category',
     },
   ],
   admin: {

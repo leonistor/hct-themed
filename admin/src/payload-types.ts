@@ -88,6 +88,9 @@ export interface Config {
     'payload-query-presets': PayloadQueryPreset;
   };
   collectionsJoins: {
+    categories: {
+      products: 'products';
+    };
     'payload-folders': {
       documentsAndFolders: 'payload-folders' | 'media' | 'products' | 'product-images';
     };
@@ -341,6 +344,11 @@ export interface Category {
   description?: string | null;
   partners?: (number | Partner)[] | null;
   illustration?: (number | null) | Media;
+  products?: {
+    docs?: (number | Product)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -925,6 +933,7 @@ export interface CategoriesSelect<T extends boolean = true> {
   description?: T;
   partners?: T;
   illustration?: T;
+  products?: T;
   updatedAt?: T;
   createdAt?: T;
 }
