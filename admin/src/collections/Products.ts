@@ -114,6 +114,7 @@ export const Products: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     group: 'Content',
+    groupBy: true,
     pagination: default_pagination,
   },
 }
