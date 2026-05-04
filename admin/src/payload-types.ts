@@ -374,6 +374,7 @@ export interface Material {
 export interface ProductImage {
   id: number;
   caption?: string | null;
+  product?: (number | null) | Product;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
@@ -1008,6 +1009,7 @@ export interface ProductsSelect<T extends boolean = true> {
  */
 export interface ProductImagesSelect<T extends boolean = true> {
   caption?: T;
+  product?: T;
   folder?: T;
   updatedAt?: T;
   createdAt?: T;
