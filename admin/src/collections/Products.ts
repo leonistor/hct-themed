@@ -22,7 +22,14 @@ export const Products: CollectionConfig = {
     { name: 'name_en', type: 'text', admin: { disableListColumn: true } },
     { name: 'description', type: 'textarea', admin: { disableListColumn: true, rows: 5 } },
     { name: 'page', type: 'text', admin: { disableListColumn: true, position: 'sidebar' } },
-    { name: 'url', type: 'text', admin: { disableListColumn: true } },
+    {
+      name: 'url',
+      type: 'text',
+      admin: {
+        disableListColumn: true,
+        components: { afterInput: ['src/components/Copy.tsx#CopyText'] },
+      },
+    },
     {
       name: 'published',
       type: 'checkbox',

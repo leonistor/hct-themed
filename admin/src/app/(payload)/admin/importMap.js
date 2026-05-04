@@ -4,6 +4,7 @@ import { ExportListMenuItem as ExportListMenuItem_cdf7e044479f899a31f804427d568b
 import { ImportListMenuItem as ImportListMenuItem_cdf7e044479f899a31f804427d568b36 } from '@payloadcms/plugin-import-export/rsc'
 import { Published as Published_1e9b05f860e65291a0a186b7b75bf24f } from 'src/components/Custom'
 import { ImageCell as ImageCell_1e9b05f860e65291a0a186b7b75bf24f } from 'src/components/Custom'
+import { CopyText as CopyText_a3818aaa3ad4413a87f943eb5a3d3ab1 } from 'src/components/Copy.tsx'
 import { VariantLabel as VariantLabel_debd71a8b47b0ca52bb833a72c729cd8 } from 'src/components/VariantLabel'
 import { FormatField as FormatField_cdf7e044479f899a31f804427d568b36 } from '@payloadcms/plugin-import-export/rsc'
 import { LimitField as LimitField_cdf7e044479f899a31f804427d568b36 } from '@payloadcms/plugin-import-export/rsc'
@@ -37,6 +38,7 @@ export const importMap = {
   "@payloadcms/plugin-import-export/rsc#ImportListMenuItem": ImportListMenuItem_cdf7e044479f899a31f804427d568b36,
   "src/components/Custom#Published": Published_1e9b05f860e65291a0a186b7b75bf24f,
   "src/components/Custom#ImageCell": ImageCell_1e9b05f860e65291a0a186b7b75bf24f,
+  "src/components/Copy.tsx#CopyText": CopyText_a3818aaa3ad4413a87f943eb5a3d3ab1,
   "src/components/VariantLabel#VariantLabel": VariantLabel_debd71a8b47b0ca52bb833a72c729cd8,
   "@payloadcms/plugin-import-export/rsc#FormatField": FormatField_cdf7e044479f899a31f804427d568b36,
   "@payloadcms/plugin-import-export/rsc#LimitField": LimitField_cdf7e044479f899a31f804427d568b36,
