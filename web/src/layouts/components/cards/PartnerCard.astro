@@ -1,0 +1,65 @@
+---
+import { Image } from "astro:assets";
+import Button from "@/components/Button.astro";
+import Icons from "@/helpers/Icons.astro";
+import type { Media, Partner } from "admin";
+
+type Props = {
+  index?: number;
+  partner: Partner;
+};
+
+let { index = 0, partner } = Astro.props;
+---
+
+<div
+  class="group flex flex-col"
+  data-aos="fade-up-sm"
+  data-aos-duration="700"
+  data-aos-delay={index * 100}>
+  <a
+    href={`/partners/${partner.code}`}
+    class:list={["relative mb-3 overflow-hidden xl:mb-6", "grow"]}
+    aria-label={partner.name}>
+    {
+      partner.logo && (
+        <Image
+          src={`http://localhost:3000${(partner.logo! as Media).url}`}
+          alt={partner.name}
+          width={360}
+          height={100}
+          class:list={[
+            "h-auto w-full object-cover",
+            "transition-transform duration-700 ease-in-out group-hover:scale-105",
+            "h-full",
+          ]}
+        />
+      )
+    }
+
+    <!-- <div
+      class="text-text-dark bg-light absolute right-0 bottom-0 flex items-center overflow-hidden p-4.5 transition-all duration-600 ease-out select-none">
+      <Icons
+        icon="ArrowUpRight"
+        class="group-hover:text-primary size-7 transition-transform duration-600"
+      />
+    </div> -->
+  </a>
+
+  <div class="flex flex-col gap-2">
+    <div class="text-text-dark flex items-center gap-4 opacity-80">
+      <div class="bg-dark/50 flex h-0.5 w-10"></div>
+    </div>
+    <h3 class="flex">
+      <Button
+        tag="a"
+        variant="text"
+        url={`/partners/${partner.code}`}
+        label={partner.name}
+        aria-label={partner.name}
+        class="text-text-dark group-hover:text-primary text-h5-sm lg:text-h6 xl:text-h5 group-hover:border-b-primary! min-w-0 border-transparent whitespace-normal"
+      />
+    </h3>
+    <p>{partner.description}</p>
+  </div>
+</div>

@@ -4,12 +4,14 @@ import { getEntryCTM } from "@/lib/contentParser.astro";
 import { generatePaths } from "@/lib/utils/i18nUtils.ts";
 import { getPayload } from "payload";
 import { config, type Media } from "admin";
+import PartnerCard from "@/layouts/components/cards/PartnerCard.astro";
 
 const payload = await getPayload({ config });
 
 const partners = await payload.find({
   collection: "partners",
   depth: 2,
+  sort: "_order",
   where: { published: { equals: true } },
 });
 
@@ -43,15 +45,8 @@ const page = await getEntryCTM("about-us", "-index", Astro.currentLocale);
         <div
           class="grid grid-cols-1 gap-x-4 gap-y-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-10">
           {
-            partners.docs.map((partner) => (
-              <div class="col-span-1">
-                <h2>{partner.name}</h2>
-                <img
-                  src={`http://localhost:3000${(partner.logo! as Media).url}`}
-                  alt={partner.name}
-                />
-                <p>{partner.description}</p>
-              </div>
+            partners.docs.map((partner, index) => (
+              <PartnerCard partner={partner} index={index} />
             ))
           }
         </div>
