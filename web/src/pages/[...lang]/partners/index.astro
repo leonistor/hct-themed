@@ -2,12 +2,12 @@
 import Base from "@/layouts/Base.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { generatePaths } from "@/lib/utils/i18nUtils.ts";
+import { getPayload } from "payload";
+import { config as payloadConfig, type Media } from "admin";
 import PartnerCard from "@/layouts/components/cards/PartnerCard.astro";
 import PageTitle from "@/layouts/components/ui/PageTitle.astro";
 import { useTranslations } from "@/lib/utils/i18nUtils";
 
-import { getPayload } from "payload";
-import { config as payloadConfig, type Media } from "admin";
 const payload = await getPayload({ config: payloadConfig });
 
 const partners = await payload.find({
