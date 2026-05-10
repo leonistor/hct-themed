@@ -22,6 +22,7 @@
     "node": ">=22.12.0"
   },
   "dependencies": {
+    "admin": "workspace:*",
     "@astrojs/node": "^10.1.0",
     "@preline/accordion": "^4.1.3",
     "@preline/collapse": "^4.1.3",
