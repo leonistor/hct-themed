@@ -64,5 +64,9 @@
     "copyright": "Copyright © {{ year }}. [Taxo](https://taxo-dev.netlify.app/) Alle Rechte vorbehalten.",
     "_comment": "Wir schätzen es sehr, wenn Sie das Theme-Copyright behalten. Vielen Dank für Ihre Unterstützung von Taxo!",
     "since": "seit 1990"
+  },
+  "partners": {
+    "title": "Partner",
+    "tagline": "Durch Partnerschaften mit den wichtigsten europäischen Herstellern bieten wir ein umfassendes Sortiment an Produkten und Dienstleistungen für die Recyclingindustrie an."
   }
 }

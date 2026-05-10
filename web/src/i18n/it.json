@@ -67,5 +67,9 @@
     "copyright": "Copyright © {{ year }}. [Taxo](https://taxo-dev.netlify.app/) Tutti i diritti riservati.",
     "_comment": "Apprezziamo se mantieni il copyright del tema. Grazie per supportare Taxo!",
     "since": "dal 1990"
+  },
+  "partners": {
+    "title": "Partner",
+    "tagline": "Grazie alla collaborazione con i più importanti produttori europei, offriamo una gamma completa di prodotti e servizi per il settore del riciclo."
   }
 }
