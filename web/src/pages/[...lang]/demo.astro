@@ -2,6 +2,13 @@
 import Base from "@/layouts/Base.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { generatePaths } from "@/lib/utils/i18nUtils.ts";
+import { getPayload } from "payload";
+import { config } from "admin";
+
+const payload = await getPayload({ config });
+
+const medias = await payload.find({ collection: "media" });
+console.debug("######### ", medias.docs.length);
 
 export function getStaticPaths() {
   return generatePaths();
