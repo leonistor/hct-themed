@@ -1,3 +1,7 @@
+
+TODO: etichete nou la parteneri, produse
+TODO: adjust colors
+
 ## pagini
 
 /about - despre
@@ -11,6 +15,7 @@
 /partners - parteneri
 /customers - clienti
 /projects - proiecte
+
 
 ```json
 [

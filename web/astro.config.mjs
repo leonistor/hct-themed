@@ -11,6 +11,7 @@ import fontsJson from "./src/config/fonts.json";
 import { generateAstroFontsConfig } from "./src/lib/utils/AstroFont.ts";
 import { enabledLanguages } from "./src/lib/utils/i18nUtils.ts";
 
+import node from "@astrojs/node";
 import astroInspectClip from "astro-inspect-clip";
 
 const fonts = generateAstroFontsConfig(fontsJson);
@@ -32,6 +33,9 @@ export default defineConfig({
     enabled: true,
     // placement: "bottom-right",
   },
+  adapter: node({
+    mode: "standalone",
+  }),
   fonts,
   i18n: {
     locales: enabledLanguages,
@@ -87,7 +91,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
-      exclude: ["astro/runtime/client/dev-toolbar/entrypoint.js"],
+      // exclude: ["astro/runtime/client/dev-toolbar/entrypoint.js"],
     },
   },
 });

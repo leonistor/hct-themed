@@ -3,12 +3,15 @@ import Base from "@/layouts/Base.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { generatePaths } from "@/lib/utils/i18nUtils.ts";
 import { getPayload } from "payload";
-import { config } from "admin";
+import { config, type Media } from "admin";
 
 const payload = await getPayload({ config });
 
-const medias = await payload.find({ collection: "media" });
-console.debug("######### ", medias.docs.length);
+const partners = await payload.find({
+  collection: "partners",
+  depth: 2,
+  where: { published: { equals: true } },
+});
 
 export function getStaticPaths() {
   return generatePaths();
@@ -33,12 +36,25 @@ const page = await getEntryCTM("about-us", "-index", Astro.currentLocale);
           Demo page
         </h1>
 
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, debitis
-          doloremque. Alias, sequi aliquam corporis, quasi eius laudantium culpa
-          odio dolorem dolorum eligendi explicabo qui beatae, minima architecto
-          veritatis possimus!
-        </p>
+        <hr />
+      </div>
+
+      <div class="container">
+        <div
+          class="grid grid-cols-1 gap-x-4 gap-y-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-10">
+          {
+            partners.docs.map((partner) => (
+              <div class="col-span-1">
+                <h2>{partner.name}</h2>
+                <img
+                  src={`http://localhost:3000${(partner.logo! as Media).url}`}
+                  alt={partner.name}
+                />
+                <p>{partner.description}</p>
+              </div>
+            ))
+          }
+        </div>
       </div>
     </div>
   </section>
