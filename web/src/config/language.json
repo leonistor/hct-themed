@@ -1,5 +1,11 @@
 [
   {
+    "languageName": "Ro",
+    "languageCode": "ro",
+    "contentDir": "romanian",
+    "weight": 2
+  },
+  {
     "languageName": "En",
     "languageCode": "en",
     "contentDir": "english",
@@ -9,6 +15,18 @@
     "languageName": "Fr",
     "languageCode": "fr",
     "contentDir": "french",
-    "weight": 2
+    "weight": 3
+  },
+  {
+    "languageName": "De",
+    "languageCode": "de",
+    "contentDir": "deutsch",
+    "weight": 4
+  },
+  {
+    "languageName": "It",
+    "languageCode": "it",
+    "contentDir": "italian",
+    "weight": 5
   }
 ]

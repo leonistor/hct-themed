@@ -24,7 +24,7 @@ let { content: list, twoColumn, class: className = "", ...rest } = Astro.props;
 
 <div
   class:list={[
-    "has-list has-list-check styled-list bg-theme-light prose-ul:grid prose-ul:gap-6 p-6",
+    "has-list has-list-check styled-list bg-body prose-ul:grid prose-ul:gap-0 prose-ul:pl-0 p-6",
     twoColumn ? "prose-ul:md:grid-cols-2" : "prose-ul:grid-cols-1",
     className,
   ]}

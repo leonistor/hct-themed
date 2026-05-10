@@ -1,304 +1,245 @@
+import config from ".astro/config.generated.json";
+import { defineCollection } from "astro:content";
+import { button, sectionsSchema } from "./sections.schema";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
-import { defineCollection } from "astro:content";
+import {
+  BLOG_CARD_LAYOUT,
+  CASESTUDIES_CARD_LAYOUT,
+  SERVICE_CARD_LAYOUT,
+} from "@/enum";
+
+const caseStudiesFolder = config.settings.caseStudiesFolder as "case-studies";
+const blogFolder = config.settings.blogFolder || "blog";
+const serviceFolder = config.settings.serviceFolder || "services";
+const testimonialFolder = config.settings.testimonialFolder || "testimonial";
 
 const contentLoader = (base: string) =>
   glob({ pattern: "**/[^_]*.{md,mdx}", base });
 
-export const sharedButton = z
-  .object({
-    enable: z.boolean().optional(),
-    tag: z.enum(["a", "button"]).optional(),
-    url: z.string(),
-    label: z.string(),
-    class: z.string().optional(),
-    rel: z.string().optional(),
-    icon: z.string().optional(),
-    showIcon: z.string().optional(),
-    target: z.string().optional(),
-    size: z.enum(["md"]).optional(),
-    hoverEffect: z
-      .enum(["text-flip", "creative-fill", "magnetic", "magnetic-text-flip"])
-      .optional(),
-    variant: z
-      .enum(["fill", "outline", "outline-white", "text", "text-white"])
-      .optional(),
-  })
-  .passthrough();
-
-export const sharedButtonTag = sharedButton.refine(
-  (data) => data.tag !== "a" || !!data.url,
-  {
-    message: "`url` is required when `tag` is 'a'",
-    path: ["url"],
-  },
-);
-
-// Universal Page Schema
-const page = z.object({
+// ------------------------
+// Base Page Schema
+// ------------------------
+const basePage = z.object({
+  badge: z.string().optional(),
+  badgeSecondary: z.string().optional(),
   title: z.string(),
-  date: z.date().optional(), // example date format 2022-01-01 or 2022-01-01T00:00:00+00:00 (Year-Month-Day Hour:Minute:Second+Timezone)
+  titleSecondary: z.string().optional(),
+  author: z.string().optional(),
+  categories: z.array(z.string()).optional(),
+  tags: z.array(z.string()).optional(),
+  date: z.date().optional(),
+  comments: z.number().optional(),
   description: z.string().optional(),
+  weight: z.number().optional(),
   image: z.string().optional(),
   draft: z.boolean().optional(),
+  button: button.optional(),
   metaTitle: z.string().optional(),
   metaDescription: z.string().optional(),
   robots: z.string().optional(),
   excludeFromSitemap: z.boolean().optional(),
+  excludeFromCollection: z.boolean().optional(),
   customSlug: z.string().optional(),
   canonical: z.string().optional(),
   keywords: z.array(z.string()).optional(),
   disableTagline: z.boolean().optional(),
 });
 
+export const page = basePage.extend(sectionsSchema);
+
+// ------------------------
 // Marquee Schema
+// ------------------------
 export const marqueeConfig = z.object({
-  marqueeElementWidth: z.string(),
-  marqueeElementWidthResponsive: z.string(),
-  marqueeElementWidthAuto: z.boolean(),
-  marqueePauseOnHover: z.boolean(),
-  marqueeReverse: z.enum(["reverse", ""]).optional(), // Optional: "reverse" or an empty string
-  marqueeDuration: z.string(),
+  elementWidth: z.string(),
+  elementWidthAuto: z.boolean(),
+  elementWidthInSmallDevices: z.string(),
+  pauseOnHover: z.boolean(),
+  reverse: z.enum(["reverse", ""]).optional(),
+  duration: z.string(),
 });
 
-// Animated Number
-const animatedNumber = z.object({
-  value: z.string(),
-  prependValue: z.string(),
-  appendValue: z.string(),
-});
+// ------------------------
+// Collections
+// ------------------------
 
-// Pages collection schema
+// Pages
 const pagesCollection = defineCollection({
   loader: contentLoader("./src/content/pages"),
   schema: page,
 });
 
-const servicesSection = z.object({
-  enable: z.boolean().optional(),
-  title: z.string().optional(),
-  subtitle: z.string().optional(),
-  creativeShape: z
-    .object({
-      enable: z.boolean(),
-      position: z.enum(["top", "bottom"]),
-    })
-    .optional(),
-  cta: z.enum(["link", "slider-nav"]).optional(),
-  colorScheme: z.enum(["dark", "light"]).optional(),
-  showServicesAs: z.enum(["slider", "static"]).optional(),
-  limit: z.union([z.number(), z.literal(false)]).optional(),
-  button: sharedButtonTag.optional(),
-});
-
-// Service collection schema
+// Services
 const serviceCollection = defineCollection({
-  loader: contentLoader("./src/content/services"),
+  loader: contentLoader(`./src/content/${serviceFolder}`),
   schema: page.extend({
     icon: z.string().optional(),
-    hasCustomLineAnimationBg: z.boolean().optional(),
-    serviceDetailsMarquee: marqueeConfig.optional(),
-    intro: z
+    image: z.string().optional(),
+    imagePosition: z.string().optional(),
+    image3: z.string().optional(),
+    options: z
       .object({
-        // Call to Action Button
-        enable: z.boolean(),
-        image: z.string().optional(),
-        title: z.string(),
-        description: z.string(),
-        button: sharedButtonTag.optional(),
-      })
-      .optional(),
-    details: z
-      .object({
-        enable: z.boolean(),
-        title: z.string(),
-        description: z.string(),
-        list: z.array(
-          z.object({
-            enable: z.boolean(),
-            image: z.string(),
-            title: z.string(),
-            description: z.string(),
-            button: sharedButtonTag.optional(),
-          }),
-        ),
-      })
-      .optional(),
-    impact: z
-      .object({
-        enable: z.boolean(),
-        title: z.string(),
-        description: z.string(),
-        list: z.array(z.string()),
-        statsBlock: z.object({
-          enable: z.boolean(),
-          lg: z
-            .array(
-              z.object({
-                background: z
-                  .object({
-                    type: z.enum(["image-overlay", "light-color"]),
-                    image: z.string(),
-                  })
-                  .optional(),
-                title: animatedNumber,
-                description: z.string(),
-              }),
-            )
-            .optional(),
-          md: z
-            .array(
-              z.object({
-                background: z
-                  .object({
-                    type: z.enum(["image-overlay", "light-color"]),
-                    image: z.string(),
-                  })
-                  .optional(),
-                title: animatedNumber,
-                description: z.string(),
-              }),
-            )
-            .optional(),
-          sm: z
-            .array(
-              z.object({
-                background: z
-                  .object({
-                    type: z.enum(["image-overlay", "light-color"]),
-                    image: z.string(),
-                  })
-                  .optional(),
-                title: animatedNumber,
-                description: z.string(),
-              }),
-            )
-            .optional(),
-        }),
-        button: sharedButtonTag.optional(),
-      })
-      .optional(),
-    servicesSection: servicesSection.optional(),
-    indexServicesSection: servicesSection.optional(),
-    faqSection: z
-      .object({
-        enable: z.boolean().optional(),
-        title: z.string().optional(),
-        sectionLayout: z.enum(["horizontal", "vertical"]).optional(),
-        minimalFaqLayout: z.boolean().optional(),
-        faqLayoutOnly: z.boolean().optional(),
-        showCategories: z.boolean().optional(),
-        subtitle: z.string().optional(),
-        button: sharedButtonTag.optional(),
+        layout: z.enum(SERVICE_CARD_LAYOUT).optional(),
+        limit: z.union([z.number().int(), z.literal(false)]).optional(),
       })
       .optional(),
   }),
 });
 
-// Post collection schema
+// Blog
 const blogCollection = defineCollection({
-  loader: contentLoader("./src/content/blog"),
+  loader: contentLoader(`./src/content/${blogFolder}`),
   schema: page.extend({
-    categories: z.array(z.string()).default(["others"]),
-    author: z.string().optional(),
-    excerpt: z.string().optional(),
-    settings: z
+    searchSection: z
       .object({
-        content: z.enum(["blog"]).optional(),
-        layout: z.enum(["grid"]).optional(),
+        title: z.string(),
+        searchPlaceholder: z.string(),
+        button: button.optional(),
+      })
+      .optional(),
+    options: z
+      .object({
+        search: z.boolean().optional(),
+        layout: z.enum(BLOG_CARD_LAYOUT).optional(),
+        appearance: z.enum(["dark", "light"]).optional(),
         columns: z.union([z.literal(1), z.literal(2), z.literal(3)]).optional(),
         limit: z.union([z.number().int(), z.literal(false)]).optional(),
-        gap: z.enum(["gap-6", "gap-8"]).optional(),
-        card: z.object({
-          layout: z
-            .enum(["classic", "overlay", "modern", "horizontal"])
-            .optional(),
-        }),
       })
       .optional(),
-    single: z
-      .object({
-        layout: z.enum(["minimal", "modern"]),
-      })
+    commentList: z
+      .array(
+        z.object({
+          avatar: z.string().optional(),
+          name: z.string(),
+          date: z.string(),
+          content: z.string(),
+        }),
+      )
       .optional(),
   }),
 });
 
-// Portfolio Collection
-export const portfolioCollection = defineCollection({
-  loader: contentLoader("./src/content/case-studies"),
+// CaseStudies
+const caseStudyCollection = defineCollection({
+  loader: contentLoader(`./src/content/${caseStudiesFolder}`),
   schema: page.extend({
-    categories: z.array(z.string()).optional(),
-    masonryImage: z.string().optional(),
+    images: z.array(z.string()).min(1).optional(),
+    options: z
+      .object({
+        layout: z.enum(CASESTUDIES_CARD_LAYOUT),
+        appearance: z.enum(["dark", "light"]).optional(),
+        limit: z.union([z.number().int(), z.literal(false)]).optional(),
+      })
+      .optional(),
     information: z
       .array(
         z.object({
-          icon: z.string(),
           label: z.string(),
           value: z.string(),
         }),
       )
       .optional(),
-    indexPortfolioSection: z
-      .object({
-        enable: z.boolean(),
-        uniqueId: z.boolean().optional(),
-        headType: z.enum(["filter", "heading"]),
-        filter: z.object({
-          layout: z.enum(["classic", "boxed", "modern"]),
-        }),
-        head: z.object({
-          title: z.string(),
-          subtitle: z.string(),
-          button: sharedButtonTag.optional(),
-        }),
-        body: z.object({
-          content: z.enum(["portfolio", "blog"]).optional(),
-          layout: z.enum(["masonry", "grid"]).optional(),
-          card: z.object({
-            layout: z.enum(["classic", "overlay"]),
-          }),
-        }),
-      })
-      .optional(),
   }),
 });
 
-// Export collections
+// Team
+const teamItem = z.object({
+  enable: z.boolean().default(true).optional(),
+  title: z.string(),
+  image: z.string(),
+  profession: z.string().optional(),
+  description: z.string().optional(),
+  email: z.string().optional(),
+  phone: z.string().optional(),
+  social: z
+    .array(
+      z.object({
+        enable: z.boolean(),
+        label: z.string(),
+        url: z.string(),
+      }),
+    )
+    .optional(),
+});
+export const teamCollection = defineCollection({
+  loader: contentLoader("./src/content/team"),
+  schema: page.extend({
+    list: z.array(teamItem).optional(),
+  }),
+});
+
+const testimonialItem = z.object({
+  enable: z.boolean().default(true).optional(),
+  content: z.string(),
+  platform: z
+    .object({
+      name: z.string(),
+      icon: z.string(),
+    })
+    .optional(),
+  customer: z.object({
+    name: z.string(),
+    role: z.string(),
+    avatar: z.string().optional(),
+    company: z.string().optional(),
+    companyLogo: z.string().optional(),
+    rating: z.number().min(1).max(5).optional(),
+  }),
+});
+export const testimonialCollection = defineCollection({
+  loader: glob({
+    pattern: "**/[^_]*.{md,mdx}",
+    base: `./src/content/${testimonialFolder}`,
+  }),
+  schema: page.extend({
+    list: z.array(testimonialItem).optional(),
+    listHome2: z.array(testimonialItem).optional(),
+  }),
+});
+
+// ------------------------
+// Export Collections
+// ------------------------
 export const collections = {
+  [blogFolder]: blogCollection,
   blog: blogCollection,
+
+  [serviceFolder]: serviceCollection,
   services: serviceCollection,
-  "case-studies": portfolioCollection,
+
+  [caseStudiesFolder]: caseStudyCollection,
 
   pages: pagesCollection,
+  team: teamCollection,
+
   sections: defineCollection({
     loader: contentLoader("./src/content/sections"),
   }),
-  about: defineCollection({
-    loader: contentLoader("./src/content/about"),
-  }),
-  contact: defineCollection({
-    loader: contentLoader("./src/content/contact"),
-  }),
-  faq: defineCollection({
-    loader: contentLoader("./src/content/faq"),
-  }),
-  team: defineCollection({
-    loader: contentLoader("./src/content/team"),
-  }),
-  pricing: defineCollection({
-    loader: contentLoader("./src/content/pricing"),
-  }),
+
   homepage: defineCollection({
     loader: contentLoader("./src/content/homepage"),
   }),
+
+  "about-us": defineCollection({
+    loader: contentLoader("./src/content/about-us"),
+  }),
+
+  contact: defineCollection({
+    loader: contentLoader("./src/content/contact"),
+  }),
+
+  faq: defineCollection({
+    loader: contentLoader("./src/content/faq"),
+  }),
+
+  pricing: defineCollection({
+    loader: contentLoader("./src/content/pricing"),
+  }),
+
   author: defineCollection({
     loader: contentLoader("./src/content/author"),
   }),
-  career: defineCollection({
-    loader: contentLoader("./src/content/career"),
-  }),
-  widgets: defineCollection({
-    loader: contentLoader("./src/content/widgets"),
-  }),
+
+  testimonial: testimonialCollection,
 };

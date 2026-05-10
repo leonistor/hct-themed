@@ -1,27 +1,20 @@
 ---
 enable: true
-title: "Solutions d'Affaires Stratégiques pour une Croissance Durable"
-subtitle: "Nos Services"
-
-# Services data comes from "/content/services"
-
-# If you enable this button, the slider navigation buttons will be hidden, and this button will be displayed.
+badge: "Ce que nous offrons"
+title: "Préparation fiscale fiable et expérimentée"
+description: "Il existe de nombreuses variantes de passages de Lorem Ipsum, mais la majorité ont subi des modifications, par humour injecté ou mots aléatoires qui ne semblent pas crédibles."
+image: "/images/services/what-we-prove.png"
+imageAlt: "Ce que nous offrons"
 button:
+  # Refer to the `sharedButton` schema in `src/sections.schema.ts` for all available configuration options
+  # (e.g., enable, label, url, hoverEffect, variant, icon, tag, rel, class, target, etc.)
   enable: true
-  label: "Voir Tous les Services"
-  url: "/services"
-  rel: ""
-  target: ""
-  showIcon: "true"
-  variant: "outline-white" # "fill", "outline", "outline-white", "text"
-  hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
-
-creativeShape: # Background shape (Used in home & about page)
-  enable: true
-  position: "bottom"
-
-cta: "link" # "link" | "slider-nav" ( Define weather call to action button should be slider control or a link )
-colorScheme: "light" # "dark" | "light"; weather to show services in light or dark color scheme
-showServicesAs: "static" # "slider" | "static"; weather to show services as slider or static list
-limit: 3 # number / false Limit the number of services to be displayed (Only work if showServicesAs is static)
+  label: "Découvrir nos services"
+  url: "/services/"
+  variant: "fill" # Optional: fill | outline | text | circle | white
+  # hoverEffect: "" # Optional: text-flip | creative-fill | magnetic | magnetic-text-flip
+  # rel: "" # Optional
+  # target: "" # Optional
+cardLayout: "horizontal" # Optional: listImage | horizontal (default)
+limit: 4
 ---

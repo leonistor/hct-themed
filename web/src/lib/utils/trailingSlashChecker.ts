@@ -7,6 +7,11 @@ import config from "../../../.astro/config.generated.json";
  * @returns The url with or without a trailing slash appended to it depending on the config.
  */
 const trailingSlashChecker = (url: string): string => {
+  // Don't modify root path or root with anchor
+  if (url === "/" || url.startsWith("/#")) {
+    return url;
+  }
+
   // Separate the URL path from the fragment (if any)
   const [urlPath, fragment] = url.split("#");
 
@@ -26,7 +31,7 @@ const trailingSlashChecker = (url: string): string => {
   // Reattach the fragment if it exists
   const fullURL = fragment ? `${adjustedPath}#${fragment}` : adjustedPath;
 
-  return fullURL as string;
+  return fullURL;
 };
 
 export default trailingSlashChecker;

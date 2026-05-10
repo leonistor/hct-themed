@@ -1,31 +1,27 @@
 html {
-  @apply text-base-sm scroll-smooth md:text-base;
-  -webkit-font-smoothing: antialiased; /* smooth, like Figma */
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  @apply max-md:text-base-sm scroll-smooth;
   font-feature-settings:
     "lnum" 1,
     "tnum" 1;
 }
 
 body {
-  @apply bg-body font-primary text-text-default leading-body font-normal;
-}
-
-/* Custom Scrollbar */
-.has-customized-scrollbar {
-  @apply [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-track]:bg-white;
+  @apply bg-body font-primary text-text-dark leading-body overflow-x-hidden font-normal;
 }
 
 /* Global Section Spacing */
-main.has-section-spacing-md section,
-.has-call-to-action {
-  @apply pt-20;
+main section {
+  @apply section-spacing;
 }
 
-main.has-section-spacing-lg > section,
-.has-call-to-action {
-  @apply pt-16 md:pt-28;
+/* If the page has no CTA section, add top margin to the footer for better visual spacing */
+body > main:not(:has(section.cta-section)) + footer {
+  @apply section-spacing-m;
+}
+
+/* If current page has no CTA section, remove top padding from appropriate footers */
+body > main:not(:has(section.cta-section)) + footer .has-footer-padding {
+  @apply pt-0!;
 }
 
 h1,
@@ -34,41 +30,35 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-secondary text-dark leading-snug font-bold tracking-wide;
+  @apply font-secondary text-dark leading-tight font-bold tracking-wide wrap-break-word;
 
   br {
     @apply max-md:hidden;
   }
 }
 
-h1,
-.h1 {
-  @apply text-h1-md md:text-h1;
+h1 {
+  @apply text-h1-sm md:text-h1;
 }
 
-h2,
-.h2 {
-  @apply text-h2-md md:text-h2;
+h2 {
+  @apply text-h2-sm md:text-h2;
 }
 
-h3,
-.h3 {
-  @apply text-h3-md md:text-h3;
+h3 {
+  @apply text-h3-sm md:text-h3;
 }
 
-h4,
-.h4 {
-  @apply text-h4;
+h4 {
+  @apply text-h4-sm md:text-h4 leading-snug;
 }
 
-h5,
-.h5 {
-  @apply text-h5;
+h5 {
+  @apply text-h5 leading-snug;
 }
 
-h6,
-.h6 {
-  @apply text-h6;
+h6 {
+  @apply text-h6 leading-snug;
 }
 
 b,
@@ -81,7 +71,7 @@ code {
 }
 
 a {
-  @apply text-primary;
+  @apply transition-colors duration-300;
 }
 
 p {
@@ -96,7 +86,7 @@ button:not(:disabled),
 }
 
 * {
-  @apply border-border-light;
+  @apply border-border-dark;
 }
 
 /* Adds pointer cursor to buttons */

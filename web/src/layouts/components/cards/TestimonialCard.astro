@@ -1,115 +1,112 @@
 ---
-import { markdownify, toSentenceCase } from "@/lib/utils/textConverter";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
-import Icons from "@/helpers/Icons.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import Rating from "../widgets/Rating.astro";
+import type { CollectionEntry } from "astro:content";
 
-const { class: className } = Astro.props;
-let { enable, rating, source, customer, content } = Astro.props.content || {};
+interface Props {
+  data: NonNullable<CollectionEntry<"testimonial">["data"]["list"]>[number];
+  options?: {
+    layout?: "card" | "cardWithSign";
+  };
+  index?: number;
+}
 
-rating = new Array(rating || 5).fill(null);
+const { data, options, index = 0 } = Astro.props;
+const { customer, content } = data;
+const layout = options?.layout || "card";
+
+// Build per-star fill amounts for precise half/decimal star rendering
+const rating = customer?.rating ?? 0;
 ---
 
 {
-  enable && (
-    <div class:list={["relative flex w-full bg-white p-6 " + className]}>
-      <OptimizedImage
-        inlineSvg={true}
-        class="text-primary/35 pointer-events-none absolute top-0 left-0 h-56 w-48"
-        width={119}
-        height={224}
-        src="/images/shapes/review-pattern.svg"
-        perspective="none"
-        alt="pattern"
-      />
-      <div class="flex flex-col justify-between space-y-4 md:space-y-8">
+  layout === "card" ? (
+    <div
+      class="bg-light group flex h-full justify-between gap-6 rounded-lg border border-transparent p-6 transition-all duration-300 max-sm:flex-col max-sm:items-center xl:gap-8 xl:p-8 2xl:gap-20 2xl:p-10"
+      data-aos="fade-up"
+      data-aos-delay={index * 120}
+      data-aos-duration="600">
+      <div class="flex items-center gap-4">
+        <OptimizedImage
+          src={customer?.avatar ?? "/images/customers/avatar/devid-marko.png"}
+          alt={customer?.name ?? "Customer"}
+          width={190}
+          height={236}
+          class="h-59 min-w-48! rounded-lg object-cover"
+        />
+      </div>
+      <div class="flex flex-col gap-4 sm:gap-6">
+        <div class="flex flex-col gap-1.5">
+          {customer?.name && (
+            <div
+              class="text-lg font-bold lg:text-xl"
+              set:html={markdownify(customer.name)}
+            />
+          )}
+          {customer?.role && (
+            <p
+              class="text-primary font-medium"
+              set:html={markdownify(customer.role)}
+            />
+          )}
+        </div>
         {content && (
-          <div class="space-y-8 md:space-y-16">
-            {customer && (
-              <div class="flex flex-wrap-reverse items-center justify-between gap-5 opacity-70">
-                <div class="flex items-center gap-3">
-                  {customer.company.logo && (
-                    <OptimizedImage
-                      class="h-6 w-6"
-                      width={24}
-                      height={24}
-                      src={customer.company.logo}
-                      alt={customer.company.name}
-                    />
-                  )}
-                  {customer.company.name && (
-                    <div
-                      class="text-dark whitespace-nowrap"
-                      set:html={markdownify(customer.company.name)}
-                    />
-                  )}
-                </div>
-                {source && source.logo && (
-                  <div class="border-secondary relative flex items-center gap-2 rounded-full border px-3 py-1">
-                    <span class="text-primary text-sm">Review From</span>
-                    <OptimizedImage
-                      class="h-4 w-4"
-                      width={16}
-                      height={16}
-                      src={source.logo}
-                      alt={toSentenceCase(
-                        "Logo of this website - " + source.url,
-                      )}
-                    />
-                    {source.url && (
-                      <a
-                        tabindex="-1"
-                        class="absolute inset-0"
-                        href={source.url}
-                        target="_blank"
-                        title="Visit this external linked website"
-                        rel="nofollow noopener noreferrer"
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
-            )}
-            <div class="prose-styles" set:html={markdownify(content, true)} />
-          </div>
+          <p
+            class="text-text-dark text-base leading-relaxed xl:text-xl 2xl:text-2xl"
+            set:html={markdownify(content)}
+          />
         )}
-        {customer && (
-          <div class="flex flex-wrap-reverse items-center justify-between gap-x-2 gap-y-10">
-            <div class="flex items-center gap-4">
-              {
-                <OptimizedImage
-                  class="h-12 w-12 rounded-full"
-                  width={48}
-                  height={48}
-                  src={customer.image}
-                  alt={customer.name}
-                />
-              }
-              <div>
-                {customer.name && (
-                  <div
-                    class="text-dark"
-                    set:html={markdownify(customer.name)}
-                  />
-                )}
-                {customer.role && (
-                  <p
-                    class="text-light text-sm"
-                    set:html={markdownify(customer.role)}
-                  />
-                )}
-              </div>
-            </div>
-            <div class="bg-theme-light flex items-center gap-2 rounded-full px-3 py-1.5">
-              {rating.map(() => (
-                <Icons
-                  icon="Star"
-                  class="fill-yellow-500 stroke-transparent text-lg"
-                />
-              ))}
-            </div>
-          </div>
-        )}
+        <Rating content={{ rating, variant: "secondary" }} />
       </div>
     </div>
-  )
+  ) : layout === "cardWithSign" ? (
+    <div class="bg-light flex h-full flex-col items-center justify-between gap-4 p-6 md:flex-row lg:gap-6 xl:p-9">
+      <div class="flex items-center gap-4">
+        <OptimizedImage
+          src={customer?.avatar ?? "/images/customers/avatar/devid-marko.png"}
+          alt={customer?.name ?? "Customer"}
+          width={122}
+          height={224}
+          class="h-56 min-w-30.5! object-cover"
+        />
+      </div>
+      <div>
+        <div class="flex justify-center md:justify-start">
+          <OptimizedImage
+            src="/images/icons/svg/quote.svg"
+            width={46}
+            height={46}
+            class="text-primary size-11.5 h-auto"
+          />
+        </div>
+        <div class="my-6 xl:my-6">
+          {content && (
+            <p
+              class="text-text-dark lg:text-lg xl:text-xl xl:leading-7.5 xl:font-medium"
+              set:html={markdownify(content)}
+            />
+          )}
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="flex flex-col gap-2.5">
+            {customer?.name && (
+              <div
+                class="text-text-dark font-secondary text-xl leading-none font-bold"
+                set:html={markdownify(customer.name)}
+              />
+            )}
+            {customer?.role && (
+              <p
+                class="text-primary leading-none font-medium"
+                set:html={markdownify(customer.role)}
+              />
+            )}
+          </div>
+
+          <Rating content={{ rating }} />
+        </div>
+      </div>
+    </div>
+  ) : null
 }

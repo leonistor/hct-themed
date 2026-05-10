@@ -1,0 +1,71 @@
+{
+  "common": {
+    "readMore": "Citește mai mult",
+    "viewDetails": "Vezi detalii",
+    "readMoreAbout": "Citește mai multe despre",
+    "viewProject": "Vezi proiectul",
+    "learnMoreAbout": "Află mai multe despre",
+    "emailPlaceholder": "Adresă de e-mail",
+    "paginationPrevious": "Anterior",
+    "paginationNext": "Următorul",
+    "paginationCaseStudiesPrev": "Studii de caz anterioare",
+    "paginationCaseStudiesNext": "Studii de caz următoare",
+    "workingHours": "Program de lucru",
+    "workHour": "Ora de lucru",
+    "workingHoursValue": "Duminică-luni, 09:00-17:00",
+    "workHourValue": "Luni-vineri: 9:00-17:00 Sâmbătă Închis",
+    "call": "Apel:",
+    "callUs": "Sună-ne",
+    "play": "Redă",
+    "contactUs": "Contactează-ne",
+    "ourServices": "Serviciile noastre",
+    "recentProjects": "Proiecte recente",
+    "discoverMore": "Descoperă mai mult",
+    "hotLine": "Linie fierbinte",
+    "searchHere": "Caută aici",
+    "letsChat": "Hai să discutăm",
+    "sendRequest": "Trimite cerere",
+    "noFaqsFoundFor": "Nu s-au găsit întrebări frecvente pentru",
+    "loadingMap": "Încărcare hartă...",
+    "comments": "Comentarii",
+    "reply": "Răspunde"
+  },
+  "widgets": {
+    "postSearchFormPlaceholder": "Încearcă să cauți 'sfaturi'...",
+    "categoriesTitle": "Categorii",
+    "tagsTitle": "Etichete",
+    "popularTagsTitle": "Etichete populare",
+    "recentPostsTitle": "Articole recente",
+    "haveAnyQuestionsTitle": "Ai întrebări?",
+    "haveAnyQuestionsDescription": "Există multe variațiuni de pasaje Lorem Ipsum disponibile, dar modificarea într-o anumită formă,"
+  },
+  "header": {
+    "announcement": "Obține un consultant fiscal gratuit astăzi și economisește 10% la prima ta sesiune. [Începe](/contact/)"
+  },
+  "headerOffcanvas": {
+    "description": "Suntem o agenție digitală care ajută companiile să creeze experiențe imersive.",
+    "buttonLabel": "Vorbește cu noi"
+  },
+  "blog": {
+    "category": "Categorie",
+    "share": "Distribuie:",
+    "follow": "Urmărește:",
+    "paginationPrevious": "Articol anterior",
+    "paginationNext": "Articol următor"
+  },
+  "navigation": {
+    "buttonLabel": "Contactează-ne"
+  },
+  "subscription": {
+    "title": "Adaugă propriile detalii și informează toate cerințele tale fiscale"
+  },
+  "footer": {
+    "menuTitleLinks": "Legături",
+    "freeSupport": "Suport gratuit",
+    "description": "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit minus id quod maxime placeat facere assumenda est omnis dolor repellendus.",
+    "contact": "Contact",
+    "copyright": "Drepturi de autor © {{ year }}. [Taxo](https://taxo-dev.netlify.app/) Toate drepturile rezervate.",
+    "_comment": "Apreciem cu amabilitate dacă păstrați dreptul de autor al temei. Vă mulțumim pentru sprijinul Taxo!",
+    "since": "începând cu 1990"
+  }
+}

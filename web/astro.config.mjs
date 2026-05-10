@@ -4,20 +4,20 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import AutoImport from "astro-auto-import";
 import { defineConfig } from "astro/config";
-import fontsJson from "./src/config/fonts.json";
 import rehypeExternalLinks from "rehype-external-links";
-import { enabledLanguages } from "./src/lib/utils/i18nUtils.ts";
 import remarkParseContent from "./src/lib/utils/remarkParseContent.ts";
+import config from "./.astro/config.generated.json";
+import fontsJson from "./src/config/fonts.json";
 import { generateAstroFontsConfig } from "./src/lib/utils/AstroFont.ts";
-import config from "./.astro/config.generated.json" with { type: "json" };
-import bun from "@wyattjoh/astro-bun-adapter";
+import { enabledLanguages } from "./src/lib/utils/i18nUtils.ts";
+
+import astroInspectClip from "astro-inspect-clip";
 
 const fonts = generateAstroFontsConfig(fontsJson);
-
 let {
   seo: { sitemap: sitemapConfig },
   settings: {
-    multilingual: { defaultLanguage, showDefaultLangInUrl },
+    multilingual: { showDefaultLangInUrl, defaultLanguage },
   },
 } = config;
 
@@ -25,15 +25,14 @@ let {
 export default defineConfig({
   site: config.site.baseUrl ? config.site.baseUrl : "http://examplesite.com",
   trailingSlash: config.site.trailingSlash ? "always" : "never",
-  fonts,
-  devToolbar: { enabled: false },
-  adapter: bun(),
-  server: { host: "0.0.0.0" },
-  output: "static",
-  security: { checkOrigin: false },
   image: {
-    domains: ["localhost"],
+    layout: "constrained",
   },
+  devToolbar: {
+    enabled: true,
+    // placement: "bottom-right",
+  },
+  fonts,
   i18n: {
     locales: enabledLanguages,
     defaultLocale: defaultLanguage,
@@ -45,21 +44,23 @@ export default defineConfig({
     sitemapConfig.enable ? sitemap() : null,
     AutoImport({
       imports: [
-        "@/components/CustomButton.astro",
+        "@/components/Button.astro",
         "@/shortcodes/Accordion.astro",
         "@/shortcodes/Notice.astro",
         "@/shortcodes/Tabs.astro",
         "@/shortcodes/Tab.astro",
         "@/shortcodes/Testimonial.astro",
         "@/shortcodes/ListCheck.astro",
-        "@/shortcodes/StatsWrapper.astro",
         "@/shortcodes/ImageList.astro",
         "@/shortcodes/ImageItem.astro",
-        "@/shortcodes/StatsItem.astro",
         "@/shortcodes/VideoInline.astro",
+        "@/shortcodes/CardWrapper.astro",
+        "@/shortcodes/Card.astro",
+        "@/shortcodes/BlockQuoteCard.astro",
       ],
     }),
     mdx(),
+    astroInspectClip(),
   ],
   markdown: {
     rehypePlugins: [
@@ -85,21 +86,8 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
-    clearScreen: false,
-    build: {
-      chunkSizeWarningLimit: 700,
+    optimizeDeps: {
+      exclude: ["astro/runtime/client/dev-toolbar/entrypoint.js"],
     },
-    // server: {
-    //   watch: {
-    //     ignored: ["pocket/**", "*.txt", "TODO.md", "import_data/*"],
-    //   },
-    //   proxy: {
-    //     "/pocket": {
-    //       target: "http://localhost:8090",
-    //       changeOrigin: true,
-    //       rewrite: (path) => path.replace(/^\/pocket/, ""),
-    //     },
-    //   },
-    // },
   },
 });

@@ -2,52 +2,44 @@
 .header {
   @apply relative z-30 w-full;
 
-  &:not(.header-dark) {
-    @apply bg-none!;
+  &.has-sticky-behavior {
+    @apply sticky top-0 z-40 transition-[transform,opacity,background] duration-500;
   }
 
-  &.sticky-header {
-    @apply sticky top-0 z-50 w-full transition-[transform,opacity,0.3s_background] duration-500;
+  &.has-sticky-behavior {
+    @apply bg-transparent;
   }
 
-  /* Sticky Animation */
-  &.scroll-down {
-    @apply pointer-events-none -translate-y-4 opacity-0;
+  /* Sticky Animation On Fixed Header */
+  &.scroll-down.has-sticky-behavior:not(.has-dark-background),
+  &.scroll-up.has-sticky-behavior:not(.has-dark-background) {
+    @apply bg-white backdrop-blur-lg;
+  }
 
-    .hs-dropdown-menu.mega-menu {
-      @apply pointer-events-none!;
-    }
+  &.scroll-down.has-sticky-behavior.has-dark-background,
+  &.scroll-up.has-sticky-behavior.has-dark-background {
+    @apply bg-black backdrop-blur-lg;
+  }
+
+  /* Following Code Make Sticky Upwards */
+  &.scroll-down,
+  &.scroll-up {
+    @apply pointer-events-auto translate-y-0 opacity-100;
   }
 
   &.scroll-up {
-    @apply pointer-events-auto translate-y-0 opacity-100;
-
     .hs-dropdown-menu.mega-menu {
       @apply pointer-events-auto;
     }
-
-    &:not(.header-dark) {
-      @apply bg-white;
-    }
   }
-}
-
-.header-dark {
-  @apply before:border-border-light/25 bg-theme-dark/20 backdrop-blur-sm before:border-b;
-}
-
-.header-dark.scroll-up,
-.banner {
-  @apply before:bg-theme-dark before:absolute before:inset-0 before:-z-[09] before:h-full before:w-full before:opacity-35;
-  @apply after:from-theme-dark after:via-theme-dark/80 after:absolute after:inset-0 after:-z-10 after:h-full after:w-full after:bg-linear-to-r after:from-0% after:via-35% after:to-transparent;
 }
 
 /* Language Switcher */
 .language-switcher {
-  @apply text-text-default relative;
+  @apply relative;
 
   .language-switcher-button {
-    @apply flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-inherit uppercase;
+    @apply btn text-text-dark font-primary flex items-center gap-2 p-0 text-base font-normal capitalize;
 
     svg * {
       @apply stroke-current!;
@@ -55,68 +47,148 @@
   }
 
   .language-switcher-dropdown {
-    @apply border-border-light hs-dropdown-open:opacity-100 absolute top-[calc(100%+0.5rem)] right-0 min-w-32 rounded-md border bg-white p-1 opacity-0 transition-[opacity,margin];
+    @apply border-border-dark hs-dropdown-open:opacity-100 divide-border-light absolute inset-e-0 top-[calc(100%+0.5rem)] min-w-32 divide-y border bg-white opacity-0 transition-[opacity,margin];
 
     li a {
-      @apply text-text-default hover:bg-primary/10 hover:text-primary block rounded-lg bg-white px-3 py-1.5 text-center transition;
+      @apply btn text-text-dark hover:bg-primary/10! hover:text-light block bg-white p-2 text-center transition-colors duration-300;
+      &.active {
+        @apply bg-primary text-light;
+      }
+    }
+  }
+
+  &.language-switcher-light {
+    .language-switcher-button {
+      @apply text-light;
+    }
+    .language-switcher-dropdown li a {
+      @apply text-text-dark hover:bg-accent hover:text-dark;
     }
   }
 }
 
-.header-dark .language-switcher {
-  @apply text-white;
-}
-
-/* Navbar */
+/* === Common Navbar Base Styles === */
 .navbar {
-  @apply lg:flex!;
-  @apply flex max-h-[80vh] max-lg:overflow-auto lg:relative lg:ml-auto lg:bg-transparent;
-  @apply max-lg:hs-dropdown-open:opacity-100 mx-auto max-lg:top-full max-lg:z-40 max-lg:hidden max-lg:w-full max-lg:flex-col max-lg:space-y-1 max-lg:border max-lg:bg-white max-lg:p-2 max-lg:opacity-0 max-lg:transition-[opacity,margin] lg:items-center;
+  /* Base layout */
+  @apply flex max-h-[80vh] lg:relative lg:mx-auto lg:items-center lg:bg-transparent;
 
-  .nav-item {
+  /* Mobile overlay behavior */
+  @apply max-lg:hs-dropdown-open:opacity-100 max-lg:top-full max-lg:z-40 max-lg:hidden max-lg:w-full max-lg:flex-col max-lg:space-y-1 max-lg:border max-lg:bg-white max-lg:p-2 max-lg:opacity-0 max-lg:transition-[opacity,margin];
+
+  /* Nav Items & Links */
+  .nav-item,
+  .nav-dropdown-item {
+    @apply mb-0 bg-transparent;
+
+    .nav-toggle {
+      @apply cursor-pointer appearance-none justify-between gap-1 border-0 bg-transparent text-start select-none;
+
+      .nav-toggle-icon {
+        @apply hs-dropdown-open:rotate-180 inline-block h-4 w-4 transition duration-300;
+      }
+    }
+
     .nav-link {
-      @apply hover:bg-primary/5 hover:text-primary text-text-default relative flex items-center rounded-sm px-4 py-1.5 transition duration-300 lg:py-2 xl:px-6;
+      @apply hover:lg:border-primary/5 lg:border lg:border-transparent;
+    }
+    .nav-link,
+    .nav-dropdown-link {
+      @apply font-secondary text-base-sm text-text-dark hover:bg-primary/5 relative flex w-full items-center px-2 py-2 font-bold transition duration-300 md:py-3 md:text-base lg:text-sm xl:px-3 xl:text-base;
 
-      /* Active Menu Style */
-      &.nav-link-active {
-        @apply max-lg:bg-primary/5 max-lg:text-primary;
+      &.nav-link-active,
+      &.active,
+      &:focus {
+        @apply bg-primary/5 text-primary max-lg:text-primary outline-none;
       }
+    }
+    .nav-dropdown-link.active.nav-dropdown-link.active:focus {
+      @apply bg-primary/5 outline-none;
     }
   }
 
-  /* Regular Dropdown */
-  [data-icon="arrow-down"] * {
-    @apply stroke-current!;
+  /* Dropdown List Styles */
+  .nav-dropdown-list {
+    @apply hs-dropdown-open:pointer-events-auto hs-dropdown-open:opacity-100 border-border-dark pointer-events-none absolute top-0 z-10 mt-4 hidden min-w-72 border bg-white p-1 opacity-0 transition-[opacity,margin] max-lg:static! max-lg:transform-none! lg:inset-s-1/2 lg:mx-2! lg:-translate-x-1/2;
   }
 
-  .nav-dropdown {
-    .hs-dropdown-toggle {
-      @apply cursor-pointer select-none;
+  .nav-dropdown-link {
+    @apply font-secondary px-2.5 py-3 text-inherit lg:px-5;
+  }
 
-      svg {
-        @apply inline-block;
+  .nav-dropdown .nav-toggle {
+    @apply lg:hs-dropdown-open:bg-primary/5 lg:hs-dropdown-open:text-primary;
+  }
+
+  /* Navbar for Mobile */
+  &.navbar-mobile {
+    @apply flex max-h-fit border-0 bg-transparent px-0 py-0 opacity-100 lg:hidden!;
+
+    .nav-link,
+    .nav-dropdown-link {
+      @apply hover:text-primary! hover:bg-transparent;
+      &:not(.active) {
+        @apply px-0!;
       }
     }
 
-    /* Add Background Color to Toggle Button If Dropdown Open */
-    &.open > .hs-dropdown-toggle {
-      @apply max-lg:bg-primary/5 max-lg:text-primary;
+    .nav-item.open,
+    .nav-dropdown.open {
+      .nav-dropdown-list,
+      > .nav-toggle {
+        @apply border-border-dark;
+      }
+      > .nav-toggle {
+        @apply text-primary/80!;
+      }
+    }
+
+    .nav-item > .nav-toggle {
+      @apply justify-between;
+    }
+
+    .nav-dropdown-list .nav-dropdown > .nav-toggle {
+      @apply border-s border-transparent;
     }
 
     .nav-dropdown-list {
-      @apply border-border-light/35 z-10 min-w-60 border bg-white p-1 lg:left-1/2 lg:-translate-x-1/2;
+      @apply mt-0 border-y-0 border-e-0 bg-transparent p-0 ps-5 text-sm;
 
-      .nav-dropdown-item {
-        .nav-dropdown-link {
-          @apply hover:bg-primary/5 hover:text-primary px-2.5 py-1.5 text-inherit transition lg:px-5;
-        }
+      .nav-dropdown-link {
+        @apply px-4 py-3;
       }
     }
   }
+  .mega-menu a.active {
+    @apply text-primary bg-slate-50;
+  }
 
-  /* Show navbar on click on small devices */
-  &.expanded {
-    @apply translate-x-0 translate-y-0 max-lg:visible;
+  .mega-menu {
+    @apply shadow-[0_28px_80px_-56px_rgba(15,23,42,0.45)];
+
+    @media (max-width: 1023px) {
+      max-height: none;
+      overflow: visible;
+    }
+
+    .mega-menu-link.active {
+      @apply border-slate-200/90 bg-white shadow-[0_10px_30px_-24px_rgba(15,23,42,0.3)];
+    }
+  }
+}
+
+.navbar.navbar-active-border {
+  .nav-item:not(.has-mega-menu) {
+    &:has(.active, .nav-link-active) > .nav-link,
+    > .nav-link:is(.active, .nav-link-active) {
+      @apply border-primary border;
+    }
+  }
+}
+
+/* Dark Header Variant */
+.header.has-dark-background {
+  .nav-link {
+    @apply text-light hover:text-primary;
   }
 }
 
@@ -125,15 +197,15 @@
   @apply relative inline-block;
 
   &:not(.badge-dot) {
-    @apply relative ml-2 inline-block rounded-sm px-1.5 py-0.5 text-xs font-medium;
+    @apply relative ms-3 inline-block px-1.5 py-1 text-xs! font-normal;
   }
 
   &.badge-dot {
-    @apply absolute top-1 -right-3 h-1.5 w-1.5 rounded-full lg:-top-1;
+    @apply absolute -inset-e-3 top-1 h-1.5 w-1.5 rounded-full lg:-top-1;
   }
 
   &.badge-primary {
-    @apply bg-primary text-white;
+    @apply bg-primary text-light;
 
     &.badge-dot {
       @apply bg-primary;
@@ -141,63 +213,57 @@
   }
 
   &.badge-info {
-    @apply bg-gray-600 text-gray-200;
+    @apply bg-blue-100 text-blue-800;
 
     &.badge-dot {
-      @apply bg-gray-400;
+      @apply bg-blue-400;
+    }
+  }
+
+  &.badge-accent {
+    @apply bg-purple-100 text-purple-800;
+
+    &.badge-dot {
+      @apply bg-purple-400;
     }
   }
 
   &.badge-success {
-    @apply bg-green-600 text-green-100;
+    @apply bg-emerald-100 text-emerald-800;
 
     &.badge-dot {
-      @apply bg-green-400;
+      @apply bg-emerald-400;
     }
   }
 
   &.badge-danger {
-    @apply bg-red-600 text-red-50;
+    @apply bg-rose-100 text-rose-800;
 
     &.badge-dot {
-      @apply bg-red-400;
+      @apply bg-rose-400;
     }
   }
 }
 
-.header-dark {
-  .navbar {
-    .nav-item {
-      > .nav-link {
-        @apply lg:text-white;
-
-        @apply lg:hover:bg-white/5;
-      }
-    }
+/* Changing Badges That Appearing badly On Dark Header */
+header.has-dark-background .navbar .badge {
+  &.badge-primary {
+    @apply bg-primary text-light;
   }
-  .navbar .badge {
-    &.badge-primary {
-      /* @apply text-white bg-primary; */
 
-      &.badge-dot {
-        @apply bg-blue-400;
-      }
-    }
+  &.badge-info {
+    @apply bg-blue-300;
+  }
 
-    &.badge-success {
-      /* @apply text-green-100 bg-green-700; */
+  &.badge-accent {
+    @apply bg-purple-300;
+  }
 
-      &.badge-dot {
-        @apply bg-green-400;
-      }
-    }
+  &.badge-success {
+    @apply bg-emerald-700 text-emerald-100;
+  }
 
-    &.badge-danger {
-      /* @apply text-red-100 bg-red-600; */
-
-      &.badge-dot {
-        @apply bg-red-600;
-      }
-    }
+  &.badge-danger {
+    @apply bg-rose-600 text-rose-50;
   }
 }

@@ -1,12 +1,12 @@
 ---
 title: "Politique de confidentialit "
-description: "Ceci est un exemple de description m ta"
+metaDescription: "Ceci est un exemple de description m ta"
 draft: false
 ---
 
 **Effective Date: July, 2022**
 
-Welcome to Looka ("we," "our," or "us"). Your privacy is important to us, and we are committed to protecting the personal information you share with us. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website, https://www.looka.com ("Website").
+Welcome to Taxo ("we," "our," or "us"). Your privacy is important to us, and we are committed to protecting the personal information you share with us. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website, https://www.taxo.com ("Website").
 
 ### Information We Collect
 
@@ -68,7 +68,7 @@ Depending on your location, you may have the following rights regarding your per
 - Restrict processing of your data
 - Withdraw consent for data usage
 
-To exercise your rights, please contact us at privacy@looka.com.
+To exercise your rights, please contact us at privacy@taxo.com.
 
 ### Third-Party Links
 
@@ -86,8 +86,8 @@ We may update this Privacy Policy from time to time. Any changes will be posted 
 
 If you have any questions or concerns about this Privacy Policy, please contact us at:
 
-Looka
-Email: privacy@looka.com
-Address: 123 Looka Lane, Imaginary City, IC 12345, USA
+Taxo
+Email: privacy@taxo.com
+Address: 123 Taxo Lane, Imaginary City, IC 12345, USA
 
-Thank you for trusting Looka with your personal information!
+Thank you for trusting Taxo with your personal information!

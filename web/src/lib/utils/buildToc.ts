@@ -1,5 +1,5 @@
 import type { TocHeading } from "@/types";
-import config from ".astro/config.generated.json" assert { type: "json" };
+import config from ".astro/config.generated.json";
 import type { MarkdownHeading } from "astro";
 
 interface TocOptions {
@@ -8,9 +8,13 @@ interface TocOptions {
   ordered: boolean;
 }
 
-export default function buildToc(headings: MarkdownHeading[]): TocHeading[] {
+export default function buildToc(
+  headings: MarkdownHeading[] | undefined,
+): TocHeading[] {
   const { startLevel, endLevel, ordered } = config.settings.markup
     .tableOfContents as TocOptions;
+
+  if (!headings) return [];
 
   const toc: TocHeading[] = [];
   const parentHeadings: TocHeading[] = [];
@@ -19,32 +23,26 @@ export default function buildToc(headings: MarkdownHeading[]): TocHeading[] {
     if (heading.depth >= startLevel && heading.depth <= endLevel) {
       const newHeading: TocHeading = { ...heading, subheadings: [] };
 
-      // Find the correct parent for the current heading
+      // Find the correct parent (or reset if depth is lower or equal)
       while (
         parentHeadings.length > 0 &&
         parentHeadings[parentHeadings.length - 1].depth >= newHeading.depth
       ) {
-        parentHeadings.pop(); // Remove invalid parents
+        parentHeadings.pop();
       }
 
       if (parentHeadings.length === 0) {
-        // Top-level heading
-        toc.push(newHeading);
+        toc.push(newHeading); // Top-level
       } else {
-        // Add as a child to the closest valid parent
         const parent = parentHeadings[parentHeadings.length - 1];
-        parent.subheadings?.push(newHeading);
+        parent.subheadings.push(newHeading); // Nest under parent
       }
 
-      // Push the current heading to the stack of parents
       parentHeadings.push(newHeading);
     }
   });
 
-  // Optionally sort the TOC
-  if (ordered) {
-    sortToc(toc);
-  }
+  if (ordered) sortToc(toc);
 
   return toc;
 }
@@ -53,7 +51,7 @@ export default function buildToc(headings: MarkdownHeading[]): TocHeading[] {
 function sortToc(toc: TocHeading[]): void {
   toc.sort((a, b) => a.text.localeCompare(b.text));
   toc.forEach((heading) => {
-    if (heading.subheadings && heading.subheadings.length > 0) {
+    if (heading.subheadings.length > 0) {
       sortToc(heading.subheadings);
     }
   });

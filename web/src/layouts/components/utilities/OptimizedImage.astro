@@ -1,15 +1,11 @@
 ---
-/**
- * OptimizedImage component is a modified version of Astro's built-in Image component.
- * It allows to optimize images inside public, src/assets and content folders.
- * To optimize remote images, follow: https://docs.astro.build/en/guides/images/#authorizing-remote-images
- */
+import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 
 interface InlineSvgProps {
   src: string;
   inlineSvg: true;
-  alt?: string;
+  alt?: string; // Optional if inlineSvg is true
   width?: string;
   height?: string;
   class?: string;
@@ -20,11 +16,12 @@ interface InlineSvgProps {
 interface ImageProps {
   src: string;
   alt?: string;
-  width?: any;
-  height?: any;
+  width?: number;
+  height?: number;
+  layout?: "responsive" | "full-width" | "none" | undefined;
   loading?: "eager" | "lazy" | null | undefined;
   decoding?: "async" | "auto" | "sync" | null | undefined;
-  formats?: "png" | "webp";
+  formats?: string[] | "auto" | "avif" | "jpeg" | "png" | "svg" | "webp";
   class?: string;
   style?: any;
   [key: string]: any;
@@ -46,76 +43,73 @@ let {
   ...rest
 } = Astro.props;
 
-const isRemoteImage = src.startsWith("http://") || src.startsWith("https://");
-let image = src as any;
-let SVG = "" as any;
+if (!src) {
+  throw new Error("No image source provided.");
+}
+const normalizedSrc = src.startsWith("/src/assets") ? src : `/src/assets${src}`;
 
-if (!isRemoteImage) {
-  // Regular Images
-  const images = import.meta.glob([
-    "/src/assets/images/**/*.{jpeg,jpg,png,avif,tiff,gif,webp,svg,gif}",
-    "/public/images/**/*.{jpeg,jpg,png,avif,tiff,gif,webp,svg,gif}",
-    "/src/content/**/*.{jpeg,jpg,png,avif,tiff,gif,webp,svg,gif}",
-  ]);
+const images = import.meta.glob(
+  "/src/assets/images/**/*.{jpeg,jpg,png,webp,svg,gif}",
+);
+const rawSvgs = import.meta.glob("/src/assets/images/**/*.svg", {
+  query: "raw",
+  import: "default",
+});
 
-  // Get Raw Image For Inline SVG
-  const imagesRaw = import.meta.glob(
-    [
-      "/src/assets/images/**/*.svg",
-      "/src/content/**/*.svg",
-      "/public/images/**/*.svg",
-    ],
-    {
-      query: "raw",
-      import: "default",
-    },
+const isValidPath = !!images[normalizedSrc];
+
+if (!isValidPath) {
+  console.error(
+    `\x1b[31mImage not found - ${normalizedSrc}.\x1b[0m Make sure the image is in the /src/assets/images folder.`,
   );
+}
 
-  if (inlineSvg && src.includes(".svg")) {
-    const key = Object.keys(images).find((k) => k.includes(src));
-    SVG = key ? await imagesRaw[key]() : null;
+let SVG;
+if (inlineSvg && normalizedSrc.includes(".svg")) {
+  try {
+    SVG = (await rawSvgs[normalizedSrc]()) as string;
+    SVG = SVG.split("<svg");
 
     if (SVG.length > 1) {
-      SVG = SVG.split("<svg"); // Split at the opening <svg> tag
-
-      if (SVG.length > 1) {
-        // Convert rest object to a string of attributes
-        const attributes = Object.entries(rest)
-          .map(([key, value]) => `${key}="${value}"`)
-          .join(" ");
-
-        // Add the attributes to the <svg> tag
-        SVG[1] = ` data-icon="true" ${attributes} ${SVG[1]}`;
-      }
-
-      // Join the array back into a string
-      SVG = SVG.join("<svg");
+      const attributes = Object.entries(rest)
+        .map(([key, value]) => `${key}="${value}"`)
+        .join(" ");
+      SVG[1] = ` data-icon="true" ${attributes} ${SVG[1]}`;
     }
+
+    SVG = SVG.join("<svg");
+  } catch (error) {
+    console.error(`Failed to load inline SVG: ${normalizedSrc}`, error);
   }
-
-  const key = Object.keys(images).find((k) => k.includes(src));
-  image = key ? await images[key]() : null;
-
-  image = image && image.default ? image.default : null;
 }
 ---
 
 {
-  inlineSvg && SVG && src.includes(".svg") ? (
-    <Fragment set:html={SVG} />
-  ) : image ? (
-    // @ts-expect-error
-    <Image
-      style={style}
-      alt={alt || ""}
-      width={width}
-      height={height}
-      formats={formats}
-      loading={loading}
-      decoding={decoding}
-      src={image}
-      {...{ class: Astro.props.class }}
-      {...rest}
-    />
-  ) : null
+  isValidPath &&
+    (inlineSvg && SVG && normalizedSrc.includes(".svg") ? (
+      <Fragment set:html={SVG} />
+    ) : (
+      // @ts-expect-error
+      <Image
+        style={style}
+        alt={alt || ""}
+        width={width}
+        height={height}
+        formats={formats}
+        loading={loading}
+        decoding={decoding}
+        src={(() => {
+          try {
+            return images[normalizedSrc]() as Promise<{
+              default: ImageMetadata;
+            }>;
+          } catch (err) {
+            console.error(`Failed to load image module: ${normalizedSrc}`, err);
+            return undefined;
+          }
+        })()}
+        {...{ class: Astro.props.class }}
+        {...rest}
+      />
+    ))
 }

@@ -5,7 +5,8 @@
  * This can improve the page's visibility in search engine results and provide users with additional information about the page.
  */
 import { absoluteUrl } from "./absoluteUrl";
-import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
+import { getLocaleUrlCTM } from "./i18nUtils";
+import removeEmptyKeys from "./removeEmptyKeys";
 import trailingSlashChecker from "./trailingSlashChecker";
 import social from "@/config/social.json";
 
@@ -29,14 +30,10 @@ export default function JsonLdGenerator(content: JSONLDProps, Astro: any) {
     description = "",
     image = "",
     pageType = "",
-    lang,
+    lang = "en", // Default language (should be dynamically set)
     alternateLangs = [], // Array of alternate language URLs
     config,
   } = content || {};
-
-  if (!lang) {
-    lang = config.settings.multilingual.defaultLanguage;
-  }
 
   // Generate JSON-LD data dynamically based on page type
   let jsonLdData: Record<string, any> = {
@@ -93,5 +90,5 @@ export default function JsonLdGenerator(content: JSONLDProps, Astro: any) {
   };
 
   // Utility to remove empty or undefined keys
-  return jsonLdData;
+  return removeEmptyKeys(jsonLdData);
 }

@@ -3,32 +3,29 @@
  * Example Usage
 
   <Testimonial
-    customerImage="/images/customers/avatar/1.jpg"
+    customerImage="/images/customers/avatar/customer-1.jpg"
     customerName="Sarah Jones"
     customerRole="CEO, Founder"
-    customerCompanyLogo="/images/customers/company-logo/acme.png"
-    customerCompanyName="Acme Inc."
+    rating={5}
   >
-    Our partnership with Looka demonstrates the power of a well-executed customer
+    Our partnership with Taxo demonstrates the power of a well-executed customer
     engagement strategy. By integrating advanced technologies and data-driven
     insights, we helped them achieve a more personalized, consistent, and
-    rewarding customer experience. At Looka, we are committed to helping
+    rewarding customer experience. At Taxo, we are committed to helping
     businesses like Oloyon revolutionize their customer engagement and drive
     long-term success.
   </Testimonial>
 
  */
-import { markdownify } from "@/lib/utils/textConverter";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
-import Icons from "@/helpers/Icons.astro";
+import Rating from "@/layouts/components/widgets/Rating.astro";
 
 interface Props {
   class?: string;
   customerImage?: string;
   customerName?: string;
   customerRole?: string;
-  customerCompanyLogo?: string;
-  customerCompanyName?: string;
+  rating?: number;
 }
 
 const {
@@ -36,88 +33,56 @@ const {
   customerImage,
   customerName,
   customerRole,
-  customerCompanyLogo,
-  customerCompanyName,
+  rating = 5,
 } = Astro.props;
-
-let rating = new Array(5).fill(null);
 ---
 
 <div
   class:list={[
-    "testimonial-component bg-theme-light not-prose relative flex w-full p-6 " +
-      className,
+    "bg-body not-prose flex flex-col items-center justify-between gap-4 p-6 md:flex-row lg:gap-6 xl:p-9",
+    className,
   ]}>
-  <OptimizedImage
-    inlineSvg={true}
-    class="text-primary/35 pointer-events-none absolute top-0 left-0 h-56 w-48"
-    width={119}
-    height={224}
-    src="/images/shapes/review-pattern.svg"
-    perspective="none"
-    alt="pattern"
-  />
-  <div class="flex flex-col justify-between space-y-8">
-    <div class="space-y-8 md:space-y-16">
-      {
-        customerCompanyName && (
-          <div class="flex flex-wrap-reverse items-center justify-between gap-3 opacity-70">
-            <div class="flex items-center gap-2">
-              {customerCompanyLogo && (
-                <OptimizedImage
-                  class="w-6"
-                  height={24}
-                  layout={"full-width"}
-                  src={customerCompanyLogo}
-                  alt={customerCompanyName}
-                />
-              )}
-              {customerCompanyName && (
-                <div
-                  class="text-dark whitespace-nowrap"
-                  set:html={markdownify(customerCompanyName)}
-                />
-              )}
-            </div>
-          </div>
-        )
-      }
-      <div class="prose-styles">
+  <div class="flex items-center gap-4">
+    <OptimizedImage
+      src={customerImage ?? "/images/customers/avatar/devid-marko.png"}
+      alt={customerName ?? "Customer"}
+      width={122}
+      height={224}
+      class="h-56 min-w-30.5! object-cover"
+    />
+  </div>
+  <div>
+    <div class="flex justify-center md:justify-start">
+      <OptimizedImage
+        src="/images/icons/svg/quote.svg"
+        width={46}
+        height={46}
+        class="text-primary size-11.5 h-auto"
+      />
+    </div>
+    <div class="my-6 xl:my-6">
+      <div
+        class="text-text-dark lg:text-lg xl:text-xl xl:leading-7.5 xl:font-medium">
         <slot />
       </div>
     </div>
-    {
-      customerName && (
-        <div class="flex flex-wrap-reverse items-center justify-between gap-x-2 gap-y-10">
-          <div class="flex items-center gap-4">
-            {customerImage && (
-              <OptimizedImage
-                class="h-12 w-12 rounded-full"
-                width={48}
-                height={48}
-                src={customerImage}
-                alt={customerName}
-              />
-            )}
-            <div>
-              {customerName && (
-                <div class="text-dark" set:html={markdownify(customerName)} />
-              )}
-              {customerRole && (
-                <p
-                  class="text-light text-sm"
-                  set:html={markdownify(customerRole)}
-                />
-              )}
+    <div class="flex items-center justify-between">
+      <div class="flex flex-col gap-2.5">
+        {
+          customerName && (
+            <div class="text-text-dark font-secondary text-xl leading-none font-bold">
+              {customerName}
             </div>
-          </div>
-          <div class="flex items-center gap-2 rounded-full bg-white px-3 py-1.5">
-            {rating.map(() => (
-              <Icons icon="Star" class="text-lg text-yellow-500" />
-            ))}
-          </div>
-        </div>
-      )
-    }
+          )
+        }
+        {
+          customerRole && (
+            <p class="text-primary leading-none font-medium">{customerRole}</p>
+          )
+        }
+      </div>
+
+      <Rating content={{ rating }} />
+    </div>
   </div>
 </div>

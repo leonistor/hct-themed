@@ -1,107 +1,72 @@
 ---
-enable: true # Contrôle de la visibilité de cette section sur toutes les pages où elle est utilisée
-title: "Choisissez le plan tarifaire qui alimente vos objectifs commerciaux"
-subtitle: "Tarifs"
-
-plans:
-  # Liste des plans disponibles. Assurez-vous d'utiliser ces noms de manière cohérente dans d'autres endroits où cela est applicable.
-  - "Mensuel" # Utilisez cette valeur exactement dans tous les endroits correspondants ci-dessous.
-  - "Annuel" # Utilisez cette valeur exactement dans tous les endroits correspondants ci-dessous.
+enable: true # Control the visibility of this section across all pages where it is used
+badge: "Nos plans tarifaires"
+title: "Tarification simple et transparente."
+decorativeImage: "/images/decorative/shape/shape-8.png"
+decorativeImageAlt: "Arrière-plan des tarifs"
 
 list:
-  # Plan de base
   - enable: true
-    name: "Essentiel" # Nom du plan de tarification.
-    description: "Entreprises avec une compréhension de base de leur public cible et de leur marché."
-
+    name: "Basic"
+    description: "Duis aute irure dolor in reprehendreit voluptate velit esse cillum dolore eu fleiat"
     price:
-      # Détails des prix pour chaque type de plan.
-      - type: "Mensuel" # Type de plan (doit correspondre aux valeurs de la section 'plans' ci-dessus).
-        prependValue: "€"
-        value: "200"
-        appendValue: ""
-      - type: "Annuel" # Type de plan (doit correspondre aux valeurs de la section 'plans' ci-dessus).
-        prependValue: "€"
-        value: "3000"
-        appendValue: ""
-
+      prependValue: "$"
+      value: "44.9"
+      appendValue: "/ Mois"
     features:
-      - Atelier de positionnement de marque
-      - Analyse de la concurrence **Top 3 concurrents**
-      - Analyse de marché de base
-      - Insights clients et segmentation
-
+      - Consultation gratuite
+      - Service de réduction
+      - Planification des fonctionnalités
+      - Assistance 24/7
     button:
+      # Refer to the `sharedButton` schema in `src/sections.schema.ts` for all available configuration options (e.g., enable, label, url, hoverEffect, variant, icon, tag, rel, class, target, etc.)
       enable: true
-      label: "Commander maintenant"
-      url: "/contact"
-      rel: ""
-      target: ""
-      showIcon: "true"
-      variant: "outline" # "fill", "outline", "outline-white", "text"
-      hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
-
-  # Plan de milieu de gamme
+      label: "Acheter maintenant"
+      url: "/contact/"
+      # hoverEffect: "" # Optional: text-flip | creative-fill | magnetic | magnetic-text-flip
+      # variant: "" # Optional: fill | outline | text | circle
+      # rel: "" # Optional
+      # target: "" # Optional
   - enable: true
-    name: "Croissance" # Nom du plan de tarification.
-    description: "Raffinez votre marque et obtenez une compréhension approfondie de votre marché et de vos clients."
-
+    name: "Professional"
+    description: "Duis aute irure dolor in reprehendreit voluptate velit esse cillum dolore eu fleiat"
     price:
-      # Détails des prix pour chaque type de plan.
-      - type: "Mensuel" # Type de plan (doit correspondre aux valeurs de la section 'plans' ci-dessus).
-        prependValue: "€"
-        value: "500"
-        appendValue: ""
-      - type: "Annuel" # Type de plan (doit correspondre aux valeurs de la section 'plans' ci-dessus).
-        prependValue: "€"
-        value: "4000"
-        appendValue: ""
-
+      prependValue: "$"
+      value: "54.9"
+      appendValue: "/ Mois"
     features:
-      - Atelier de positionnement de marque approfondi
-      - Analyse de la concurrence **Top 5 concurrents**
-      - Analyse de marché approfondie
-      - Insights clients et segmentation
-
+      - Consultation gratuite
+      - Service de réduction
+      - Planification des fonctionnalités
+      - Assistance 24/7
     button:
+      # Refer to the `sharedButton` schema in `src/sections.schema.ts` for all available configuration options (e.g., enable, label, url, hoverEffect, variant, icon, tag, rel, class, target, etc.)
       enable: true
-      label: "Commander maintenant"
-      url: "/contact"
-      rel: ""
-      target: ""
-      showIcon: "true"
-      variant: "outline" # "fill", "outline", "outline-white", "text"
-      hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
-
-  # Plan Pro
+      label: "Acheter maintenant"
+      url: "/contact/"
+      # hoverEffect: "" # Optional: text-flip | creative-fill | magnetic | magnetic-text-flip
+      # variant: "" # Optional: fill | outline | text | circle
+      # rel: "" # Optional
+      # target: "" # Optional
   - enable: true
-    name: "Entreprise" # Nom du plan de tarification.
-    description: "Obtenez une analyse de marché approfondie et des insights clients détaillés."
-
+    name: "Enterprise"
+    description: "Duis aute irure dolor in reprehendreit voluptate velit esse cillum dolore eu fleiat"
     price:
-      # Détails des prix pour chaque type de plan.
-      - type: "Mensuel" # Type de plan (doit correspondre aux valeurs de la section 'plans' ci-dessus).
-        prependValue: "€"
-        value: "600"
-        appendValue: ""
-      - type: "Annuel" # Type de plan (doit correspondre aux valeurs de la section 'plans' ci-dessus).
-        prependValue: "€"
-        value: "6000"
-        appendValue: ""
-
+      prependValue: "$"
+      value: "64.9"
+      appendValue: "/ Mois"
     features:
-      - Stratégie de positionnement de marque approfondie
-      - Analyse de la concurrence complète
-      - Analyse de marché avancée
-      - Insights clients détaillés
-
+      - Consultation gratuite
+      - Service de réduction
+      - Planification des fonctionnalités
+      - Assistance 24/7
     button:
+      # Refer to the `sharedButton` schema in `src/sections.schema.ts` for all available configuration options (e.g., enable, label, url, hoverEffect, variant, icon, tag, rel, class, target, etc.)
       enable: true
-      label: "Commander maintenant"
-      url: "/contact"
-      rel: ""
-      target: ""
-      showIcon: "true"
-      variant: "outline" # "fill", "outline", "outline-white", "text"
-      hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
+      label: "Acheter maintenant"
+      url: "/contact/"
+      # hoverEffect: "" # Optional: text-flip | creative-fill | magnetic | magnetic-text-flip
+      # variant: "" # Optional: fill | outline | text | circle
+      # rel: "" # Optional
+      # target: "" # Optional
 ---

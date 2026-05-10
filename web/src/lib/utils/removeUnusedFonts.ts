@@ -24,12 +24,10 @@ export async function cleanUnusedFonts(fontConfigs: Array<any>): Promise<void> {
       if (!allowedFiles.has(file)) {
         const filePath = path.join(fontsDirectory, file);
         await fs.unlink(filePath);
-        // console.log(`[font] ▶ Deleted unused file: ${filePath}`);
       }
     });
 
     await Promise.all(deletionPromises);
-    // console.log("[font] ▶ Clean-up complete.");
   } catch (error) {
     console.error("[font] ▶ Error during clean-up:", error);
   }

@@ -1,171 +1,310 @@
 ---
+import type { Section } from "@/types";
 import { getEntryCTM } from "@/lib/contentParser.astro";
-import overrideObjects from "@/lib/utils/overrideObjects.ts";
-import { markdownify } from "@/lib/utils/textConverter";
 import AccordionList from "@/layouts/components/widgets/AccordionList.astro";
-import type { FAQCategory, FAQItem, Section } from "@/types";
-import CustomButton from "../CustomButton.astro";
+import type { faqSectionSchema } from "@/sections.schema";
+import type { z } from "astro/zod";
+import SectionBadge from "../global/SectionBadge.astro";
+import SectionTitle from "../global/SectionTitle.astro";
+import OptimizedImage from "../utilities/OptimizedImage.astro";
+import Button from "../Button.astro";
+import { useTranslations } from "@/lib/utils/i18nUtils";
+const t = await useTranslations(Astro.currentLocale as string);
 
-// Type for this section data
-type sectionType = Section & {
-  list?: FAQCategory[];
-  sectionLayout?: "vertical" | "horizontal";
-  minimalFaqLayout?: boolean;
-  faqLayoutOnly?: boolean;
-  showCategories?: boolean;
-};
+type SectionType = Section & z.infer<typeof faqSectionSchema>;
 type Props = {
-  content?: sectionType;
+  content?: any;
+  mode?: "light" | "dark" | "shadow";
+  badgeVariant?: "default" | "secondary";
+  hasSectionSpacingBottom?: boolean;
 };
 
 // Fetching the default content for the this section
-let defaultContent = (await getEntryCTM("faq", "-index", Astro.currentLocale))
-  ?.data as sectionType;
+let defaultContent = (
+  await getEntryCTM("sections", "faq-section", Astro.currentLocale)
+)?.data as SectionType;
 
-// Enables content customization (e.g., title, description) with a fallback to 'defaultContent' if not provided.
-// The 'content' prop should match the structure of 'defaultContent'.
-// Allows using this section with different content across multiple pages.
-// If 'content' is missing, 'defaultContent' will be used.
-let actualContent = overrideObjects(
-  { ...defaultContent },
-  Astro.props.content,
-) as sectionType;
+// Default content fetch from sections collection
+let actualContent = defaultContent as SectionType;
 
-// Extracting required values from 'content' object
+// Extract the faqSection search header data passed from the page
+const faqSection = Astro.props.content;
 let {
   enable = true,
+  badge,
   title,
-  subtitle,
-  button,
-  list,
-  limit,
-  sectionLayout,
-  faqLayoutOnly,
-  minimalFaqLayout,
-  showCategories,
-} = actualContent as sectionType;
+  imageList = [],
+  decorativeShapes = [],
+  list = [],
+} = actualContent;
 
-// Featured Faqs
-let featuredFaqs = [] as FAQItem[];
-list &&
-  list.map((faq: FAQCategory, faqIndex: number) => {
-    const list = faq.list.filter(
-      (item) => item.featured && (faqIndex === 0 ? !item.active : true),
-    );
-    featuredFaqs.push(...list);
-  });
-
-// Sort featuredFaqs by active status
-featuredFaqs.sort(
-  (a: FAQItem, b: FAQItem) => Number(b.active) - Number(a.active),
-);
-
-// Limit the number of items to be displayed
-list = limit && list ? list.slice(0, limit as number) : list;
-
-// IF services group is not enabled then only show first category faqs
-if (!showCategories) {
-  list = list?.slice(0, 1);
+if (!enable) {
+  return null;
 }
+const mode = Astro.props.mode ?? "light";
+const badgeVariant = Astro.props.badgeVariant ?? "primary";
+const hasSectionSpacingBottom = Astro.props.hasSectionSpacingBottom ?? false;
 ---
 
-{
-  enable && (
-    <section>
-      <div class="container">
-        <div
-          class:list={[
-            "grid place-items-start gap-12 md:gap-16",
-            !faqLayoutOnly && sectionLayout === "horizontal"
-              ? "lg:grid-cols-2"
-              : "lg:grid-cols-1",
-          ]}>
-          {!faqLayoutOnly && (
-            <div
-              class:list={[
-                "lg:max-w-2xl",
-                sectionLayout === "vertical"
-                  ? "mx-auto text-center"
-                  : "lg:sticky lg:top-40",
-              ]}>
-              <div data-aos="fade-up-sm">
-                {subtitle && (
-                  <span
-                    set:html={markdownify(subtitle)}
-                    class="bg-primary/5 border-secondary text-primary mb-2.5 inline-block rounded-full border px-5 py-px"
-                  />
-                )}
-                {title && (
-                  <h2
-                    class="text-h3 text-inherit"
-                    set:html={markdownify(title)}
-                  />
-                )}
-              </div>
-
-              {button?.enable && (
-                <div data-aos="fade-up-sm" data-aos-delay="250">
-                  <CustomButton
-                    {...button}
-                    class="text-base-sm mt-8 capitalize md:text-base"
-                  />
-                </div>
-              )}
-            </div>
+<section
+  class:list={[
+    "relative overflow-clip",
+    mode === "dark" ? "bg-dark" : "bg-light",
+    hasSectionSpacingBottom && "section-spacing-bottom",
+  ]}>
+  {
+    faqSection && (
+      <div class="container mb-16 md:mb-20">
+        <div class="mx-auto text-center">
+          {faqSection.badge && (
+            <SectionBadge
+              title={faqSection.badge}
+              dataAos="reveal-anim-top"
+              mode={mode}
+              variant={badgeVariant}
+              className="justify-center"
+            />
           )}
-          {list && list.length > 0 && (
-            <div
-              data-aos="fade-up-sm"
-              data-aos-delay="300"
-              class:list={[
-                "w-full",
-                { "mx-auto w-full max-w-5xl": sectionLayout === "vertical" },
-              ]}>
-              {showCategories && (
-                <nav
-                  role="tablist"
-                  aria-label="Tabs"
-                  aria-orientation="horizontal"
-                  class:list={[
-                    showCategories &&
-                      "mb-8 flex flex-wrap gap-x-1 border-b pb-8",
-                  ]}>
-                  {list.map((button: FAQCategory, index: number) => (
-                    <button
-                      role="tab"
-                      type="button"
-                      set:html={button.label}
-                      id={"tab-item-" + (index + 1)}
-                      data-hs-tab={"#tab-" + (index + 1)}
-                      aria-controls={"tab-" + (index + 1)}
-                      aria-selected={index === 0 ? "true" : "false"}
-                      class:list={[
-                        "hs-tab-active:bg-white rounded-md px-6 py-3.5 text-lg/none",
-                        { active: index === 0 },
-                      ]}
-                    />
-                  ))}
-                </nav>
-              )}
-              {
-                <div
-                  class:list={[!minimalFaqLayout && "rounded-lg bg-white p-6"]}>
-                  {list.map((tab: FAQCategory, index: number) => (
-                    <AccordionList
-                      role="tabpanel"
-                      content={tab.list}
-                      class={index === 0 ? "block" : "hidden"}
-                      id={"tab-" + (index + 1)}
-                      tabIndex={"group-" + (index + 1)}
-                      aria-labelledby={"tab-item-" + (index + 1)}
-                    />
-                  ))}
-                </div>
-              }
-            </div>
+          {faqSection.title && (
+            <SectionTitle
+              title={faqSection.title}
+              dataAos="reveal-anim-top"
+              variant={mode === "dark" ? "dark" : "light"}
+              className="text-center"
+            />
           )}
         </div>
+
+        <div
+          class="mt-8 w-full"
+          data-aos="reveal-anim-top"
+          data-aos-duration="600">
+          <form
+            id="faq-search-form"
+            class="faq-search-bar bg-body flex items-stretch overflow-hidden">
+            <input
+              id="faq-search-input"
+              name="faq-search"
+              type="text"
+              placeholder={faqSection.searchPlaceholder}
+              class="text-dark h-full w-full border-none bg-transparent px-6 py-4 outline-0 placeholder:opacity-60 focus:shadow-none focus:ring-0 md:py-6"
+            />
+            <Button
+              buttonType="submit"
+              variant="fill"
+              hoverEffect="creative-fill"
+              label=""
+              {...faqSection.button}
+              icon={{
+                enable: true,
+                name: "Search",
+                position: "right",
+                size: "sm",
+              }}
+              class="btn-accent effect-color-dark text-text-dark! mt-2 mr-2 h-10 w-10 items-center justify-center p-0 leading-normal md:h-14 md:w-14"
+            />
+          </form>
+        </div>
+
+        <div
+          id="faq-no-results"
+          class="mx-auto mt-8 hidden max-w-3xl text-center">
+          <p class="text-h6 text-text-dark">
+            {t("common.noFaqsFoundFor")}{" "}
+            <span id="faq-search-term" class="text-primary">
+              ""
+            </span>
+          </p>
+        </div>
       </div>
-    </section>
-  )
-}
+    )
+  }
+
+  {/* ── FAQ Content Area ── */}
+  <div
+    id="faq-content-area"
+    class:list={[
+      "relative container grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-20",
+    ]}>
+    {
+      decorativeShapes &&
+        decorativeShapes.length > 0 &&
+        mode === "dark" &&
+        decorativeShapes[0] && (
+          <OptimizedImage
+            src={decorativeShapes[0].url}
+            alt={decorativeShapes[0].alt || "Decorative shape"}
+            width={168}
+            height={90}
+            widths={[84, 120, 168]}
+            sizes="168px"
+            quality={60}
+            class="absolute -top-18 -right-16 h-23 w-42 rotate-45 object-cover sm:-top-20 sm:-right-36"
+          />
+        )
+    }
+    {
+      decorativeShapes &&
+        decorativeShapes.length > 1 &&
+        mode === "dark" &&
+        decorativeShapes[1] && (
+          <OptimizedImage
+            src={decorativeShapes[1].url}
+            width={100}
+            height={100}
+            quality={60}
+            class="absolute left-0 h-auto w-70 rotate-180 object-contain sm:-left-20 -bottom-44 md:-left-70"
+            alt={decorativeShapes[1].alt || "Decorative shape"}
+          />
+        )
+    }
+
+    {/* Left Column - Sticky Header and Images */}
+    <div
+      class="flex flex-col items-start gap-4 lg:sticky lg:top-28 lg:self-start xl:gap-7">
+      <div data-aos="reveal-anim-right" data-aos-duration="600">
+        {
+          badge && (
+            <SectionBadge
+              title={badge}
+              dataAos="reveal-anim-right"
+              mode={mode}
+              variant={badgeVariant}
+            />
+          )
+        }
+        {
+          title && (
+            <SectionTitle
+              title={title}
+              dataAos="reveal-anim-right"
+              variant={mode === "dark" ? "dark" : "light"}
+            />
+          )
+        }
+      </div>
+
+      <div
+        class="relative flex w-full shrink-0 items-center gap-6 overflow-hidden"
+        data-aos="reveal-anim-right"
+        data-aos-duration="600">
+        <div class="flex flex-col items-center gap-6">
+          {
+            imageList && imageList.length > 0 && (
+              <OptimizedImage
+                src={imageList[0].url}
+                alt={imageList[0].alt}
+                width={360}
+                height={360}
+                widths={[180, 240, 360]}
+                sizes="(min-width: 1024px) 25vw, 50vw"
+                quality={60}
+                class="h-full w-full object-cover"
+              />
+            )
+          }
+          {
+            imageList && imageList.length > 1 && (
+              <OptimizedImage
+                src={imageList[1].url}
+                alt={imageList[1].alt}
+                width={360}
+                height={240}
+                widths={[180, 240, 360]}
+                sizes="(min-width: 1024px) 25vw, 50vw"
+                quality={60}
+                class="h-full w-full object-cover"
+              />
+            )
+          }
+        </div>
+        <div class="flex flex-col items-center gap-6">
+          {
+            imageList && imageList.length > 2 && (
+              <OptimizedImage
+                src={imageList[2].url}
+                alt={imageList[2].alt}
+                width={234}
+                height={450}
+                widths={[117, 180, 234]}
+                sizes="(min-width: 1024px) 20vw, 40vw"
+                quality={60}
+                class="h-full w-full object-cover"
+              />
+            )
+          }
+        </div>
+      </div>
+    </div>
+
+    {/* Right Column - FAQ Accordion List */}
+    <div class="flex flex-col items-start gap-4 lg:self-center xl:gap-7">
+      {list.length > 0 && <AccordionList content={list} mode={mode} />}
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchForm = document.getElementById(
+        "faq-search-form",
+      ) as HTMLFormElement | null;
+      const searchInput = document.getElementById(
+        "faq-search-input",
+      ) as HTMLInputElement | null;
+      const noResults = document.getElementById("faq-no-results");
+      const searchTermSpan = document.getElementById("faq-search-term");
+      const contentArea = document.getElementById("faq-content-area");
+
+      if (!searchForm || !searchInput || !contentArea) return;
+
+      // Get all accordion items within the FAQ content area
+      const accordionItems = contentArea.querySelectorAll(
+        ".hs-accordion",
+      ) as NodeListOf<HTMLElement>;
+
+      function performSearch(term: string) {
+        const query = term.toLowerCase().trim();
+
+        if (!query) {
+          // Show all items when search is empty
+          accordionItems.forEach((item) => {
+            item.style.display = "";
+          });
+          if (noResults) noResults.classList.add("hidden");
+          return;
+        }
+
+        let matchCount = 0;
+
+        accordionItems.forEach((item) => {
+          const titleEl = item.querySelector("h3");
+          const contentEl = item.querySelector("[role='region'] div div");
+          const titleText = titleEl?.textContent?.toLowerCase() || "";
+          const contentText = contentEl?.textContent?.toLowerCase() || "";
+
+          if (titleText.includes(query) || contentText.includes(query)) {
+            item.style.display = "";
+            matchCount++;
+          } else {
+            item.style.display = "none";
+          }
+        });
+
+        // Show/hide no results message
+        if (noResults && searchTermSpan) {
+          if (matchCount === 0) {
+            searchTermSpan.textContent = `"${term}"`;
+            noResults.classList.remove("hidden");
+          } else {
+            noResults.classList.add("hidden");
+          }
+        }
+      }
+
+      // Search on form submit (Enter key or button click)
+      searchForm.addEventListener("submit", (e: Event) => {
+        e.preventDefault();
+        performSearch(searchInput.value);
+      });
+    });
+  </script>
+</section>

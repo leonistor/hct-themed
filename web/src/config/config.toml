@@ -1,33 +1,64 @@
 # Site Configuration
 [site]
-  title            = "Looka" # Shared title for SEO and OpenGraph
-  description      = "A highly customizable consulting & business astro theme built with Tailwind CSS and Astro Js" # Shared description for SEO and OpenGraph
-  tagline          = "Corporate Business & Consulting Astro Js Theme"
-  taglineSeparator = "" # default is " - " 
-  baseUrl          = "https://looka-astro.netlify.app" # Base URL for the site and used in OpenGraph meta tags.
-  logo             = "/images/logo.svg" # Path to the site's logo
-  logoAlternate    = "" # Path to the site's logo
-  logoText         = "Looka" # Text displayed next to the logo
-  logoWidth        = "29px" # Width of the logo
-  logoHeight       = "29px" # Height of the logo
+  title            = "Hațegan Consulting & Trading" # Shared title for SEO and OpenGraph
+  description      = "Soluții la cheie pentru reciclare fier vechi, aluminiu, DEEE-uri, VSU-uri, deșeuri din industria hârtiei." # Shared description for SEO and OpenGraph
+  tagline          = "Soluții la cheie pentru reciclare"
+  taglineSeparator = "" # default is " - "
+  baseUrl          = "https://www.h-ct.ro" # Base URL for the site and used in OpenGraph meta tags.
+  logo             = "/images/logo-hct-original.svg" # Path to the site's logo
+  logoAlternate    = "/images/logo-light.svg" # Path to the site's logo
+  logoText         = "" # Text displayed next to the logo
+  logoWidth        = "" # Width of the logo
+  logoHeight       = "70px" # Height of the logo
 
-  # Add a trailing slash at the end of URLs (e.g., https://example.com/, https://example.com/contact/)
+  # Add a trailing slash at the end of URLs (e.g., https://example.com/, https://example.com/contact/)˝
   # Note: Manually restart your server when you change this value
-  trailingSlash = true
+  trailingSlash = false
 
   # Add your site logo in image path below and open your terminal and run "npm run generate-favicons" to generate favicons for different devices and platform (https://realfavicongenerator.net/checker)
   [site.favicon]
     path  = "/images/favicons" # favicon images path (No need to change it)
-    image = "/images/logo.svg" # Add your site logo path here and follow upper instruction
+    image = "/images/logo-hct-original.svg" # Add your site logo path here and follow upper instruction
 
 
 # SEO Metadata
 # Specific SEO configurations that complement the general site settings.
 # -----------------------------------------------------------------------------------------------------------------------------------
 [seo]
-  author   = "Getastrothemes"
-  keywords = ["business astro theme, consulting astro theme"] # SEO keywords
-  robots   = "index, follow" # Instructs search engines on how to crawl and index the pages.
+  author = "Hațegan Consulting & Trading"
+  keywords = [
+    "recycling machinery for sale",
+    "industrial recycling equipment",
+    "buy recycling machines",
+    "recycling plant equipment supplier",
+    "used recycling machinery",
+    "plastic recycling machine",
+    "metal shredder machine",
+    "paper recycling equipment",
+    "e-waste recycling machinery",
+    "tire shredding machine",
+    "material recovery equipment",
+    "waste sorting machine",
+    "baling press machine",
+    "granulator recycling machine",
+    "scrap metal processing equipment",
+    "recycling machinery manufacturer",
+    "industrial waste shredder supplier",
+    "recycling line turnkey solutions",
+    "heavy duty baler for recycling",
+    "recycling equipment leasing",
+    "recycling machinery Europe",
+    "industrial recycling equipment Europe",
+    "recycling machines supplier Europe",
+    "recycling machinery Romania",
+    "industrial recycling equipment Romania",
+    "recycling plant Romania",
+    "recycling machinery Brasov",
+    "recycling equipment Brasov Romania",
+    "industrial shredder Brasov",
+    "waste processing equipment Brasov"
+  ]
+  robots = "index, follow" # Instructs search engines on how to crawl and index the pages.
 
   [seo.robotsTxt]
     enable   = true # Enables or disables robots.txt file generation on site build
@@ -45,13 +76,15 @@
   # - "src/content" folder
   # - "src/[...lang]/pages" folder
   # - "src/content.config.ts" collection object
-  blogFolder      = "blog" # Folder where blog posts are stored
-  servicesFolder  = "services" # Folder where services are stored
-  portfolioFolder = "case-studies" # Folder where case-studies or projects or portfolio are stored
+  blogFolder        = "blog" # Folder where blog posts are stored
+  serviceFolder     = "services" # Folder where services are stored
+  caseStudiesFolder = "case-studies" # Folder where case-studies/projects are stored
+  testimonialFolder = "testimonial" # Folder where testimonial/reviews are stored
+  teamFolder        = "team" # Folder where team members are stored
 
-  pagination   = 4 # Number of posts displayed on each page blog list page
-  stickyHeader = true # Enables or disable sticky feature of header
-  brandName    = "Looka" # Name to be displayed in the footer as big text
+  pagination             = 6 # Number of posts displayed on each page blog list page
+  stickyHeader           = true # Enables scroll-aware sticky behavior (e.g., hide on scroll down), not applicable to fixed headers
+  pageHeaderDefaultImage = "/images/page-header/default.png" # if you don't pass image in frontmatter of a page then this image will be used as header image
 
   # docs - https://formspree.io/ | https://formsubmit.co/ | https://docs.netlify.com/forms/setup/
   # Form action URL for the contact form (For more settings related to form see "src/content/sections/contact-section.md")
@@ -62,16 +95,18 @@
   footerDescription = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the footer description in different languages or directly add value here if you are not using internationalization feature
 
   # For changing footer description and footer copyright in different languages see src/i18n/en.json and src/i18n/fr.json
-  # We kindly appreciate it if you retain the theme copyright. Thank you for supporting Getastrothemes!
+  # We kindly appreciate it if you retain the theme copyright. Thank you for supporting Taxo!
   [settings.copyright]
     enable = true
     text   = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the copyright text in different languages or directly add value here if you are not using internationalization feature
 
   # Mailchimp Subscription Form located in footer
   [settings.subscription]
-    enable     = true # Enables or disable the subscription form
-    title      = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the title in different languages or directly add value here if you are not using internationalization feature
-    formAction = "https://gmail.us11.list-manage.com/subscribe/post?u=d870b06d86c16269e4b1f9b39&amp;id=12cf0c6ac2&amp;f_id=007e61e1f0"
+    enable            = false # Enables or disable the subscription form
+    title             = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the title in different languages or directly add value here if you are not using internationalization feature
+    note              = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the note in different languages or directly add value here if you are not using internationalization feature
+    formAction        = "https://gmail.us11.list-manage.com/subscribe/post?u=d870b06d86c16269e4b1f9b39&amp;id=12cf0c6ac2&amp;f_id=007e61e1f0"
+    mailchimpTagValue = ""
 
   # Multilingual settings (check src/config/language.json for changing the languages)
   # NOTE: Manually restart your server when you change the following multilingual table values
@@ -79,31 +114,55 @@
     # Set `enable` to `true` for enabling the multilingual feature or `false` for disabling it.
     # Run `npm run remove-multilingual` for removing multilingual content files after disabling the feature.
     enable               = true
-    defaultLanguage      = "en"
-    disableLanguages     = [] # List of languages to disable (eg: ["fr", "es"])
+    defaultLanguage      = "ro"
+    disableLanguages     = [""] # List of languages to disable (eg: ["fr", "es"])
     showDefaultLangInUrl = false # Show default language in URL (eg: https://getastrothemes.com/en/)
 
-  # Navigation Button In Header
-  [settings.navigationButton]
-    enable   = true
-    label    = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the navigation button label in different languages or directly add value here if you are not using internationalization feature
-    url      = "/contact/"
-    showIcon = "true" # "true" or "false"
-    # hoverEffect = "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
+  # Global Contact Information
+  [settings.contactInfo]
+    address = "Str. Zizinului 111, etaj 2, camera 28-29<br />500407 Braşov, România"
+    email   = "info@h-ct.ro"
+    phone   = "+40-743-100.883"
+    mapLink = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22312.272413765848!2d25.618056333186377!3d45.65013792101316!2m3!1f0!2f0!3f0!3m 2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b35c68685b14b9%3A0x21e2e9f73d56529e!2sStrada%20Zizinului%20111%2C%20Bra%C8%99ov%20500407!5e0!3m2!1sen!2sro!4v1764656768291!5m2!1sen!2sro"
 
-  [settings.markup.tableOfContents]
-    enable     = true
-    expanded   = true # whether to expand the table of contents by default
-    endLevel   = 5
-    ordered    = false
-    startLevel = 1
+  # Header Offcanvas Configuration
+  # Update social links in `src/config/social.json`
+  [settings.headerOffcanvas]
+    enable      = true
+    logo        = "/images/logo-light.svg"
+    description = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the description in different languages or directly add value here if you are not using internationalization feature. This is also used in footer of personal-case studies homepage
+
+    # Call To Action Button
+    [settings.headerOffcanvas.button]
+      enable = true
+      label  = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the button label in different languages or directly add value here if you are not using internationalization feature
+      url    = "/contact/"
+
+# Navigation Button In Header
+[settings.navigationButton]
+  enable = true
+  label  = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the navigation button label in different languages or directly add value here if you are not using internationalization feature
+  url    = "/contact/"
+
+# Announcement bar in HeaderTwo topbar
+[settings.announcementBar]
+  enable = true
+  label  = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the announcement label in different languages or directly add value here if you are not using internationalization feature
+
+[settings.markup.tableOfContents]
+  enable     = false
+  expanded   = false # whether to expand the table of contents by default
+  endLevel   = 5
+  ordered    = false
+  startLevel = 1
 
 
 # OpenGraph Metadata
 # Specific OpenGraph settings, using values from the [site] section where possible.
 # -----------------------------------------------------------------------------------------------------------------------------------
+# TODO: screenshot OG Image
 [opengraph]
-  image       = "/images/og-image.png" # Image used in OpenGraph previews
+  image       = "/images/og-image.jpg" # Image used in OpenGraph previews
   ogLocale    = "en_US" # Locale setting for OpenGraph
   ogType      = "website" # Type of content for OpenGraph protocol
   twitter     = "" # Twitter handle for Twitter Card meta tags
@@ -113,6 +172,4 @@
 # -----------------------------------------------------------------------------------------------------------------------------------
 [head]
   content = """
-  <!-- You can easily add this type of tracking code by updating the `config.toml` file -->
-  <script defer src="/umami.is.js" data-website-id=""></script>
   """

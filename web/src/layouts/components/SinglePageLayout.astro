@@ -1,135 +1,109 @@
 ---
-import { render } from "astro:content";
-import ContentMeta from "./widgets/ContentMeta.astro";
-import { useTranslations } from "@/lib/utils/i18nUtils";
+import buildToc from "@/lib/utils/buildToc";
+import TOC from "./widgets/TableOfContents.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
-import TableOfContents from "./widgets/TableOfContents.astro";
+import config from ".astro/config.generated.json";
 import OptimizedImage from "./utilities/OptimizedImage.astro";
+import formatRelativeDate from "@/lib/utils/formatRelativeDate";
 import { markdownify, slugifyyy } from "@/lib/utils/textConverter";
-import config from ".astro/config.generated.json" assert { type: "json" };
-import dateFormat from "@/lib/utils/dateFormat";
+import { render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
-const { content, layout = "modern" } = Astro.props;
-const { title, date, image, author, excerpt, categories, masonryImage } =
-  content.data || {};
-
-const translations = await useTranslations(Astro.currentLocale as string);
-const { tableOfContents } = config.settings.markup;
-
-const { Content, headings } = await render(content);
-
-// Get Author Details
-let authorEntry = [];
-if (author) {
-  const slug = slugifyyy(author);
-  const entry = await getEntryCTM("author", slug, Astro.currentLocale);
-  authorEntry = entry?.data || [];
+interface Props {
+  content: CollectionEntry<"pages">;
+  [key: string]: any;
 }
 
+// Configuration and constants
+const { tableOfContents } = config.settings.markup;
+
+const { content, class: className } = Astro.props;
+let { title, date, image, author, categories } = content.data;
+
+// Process markdown content if function is provided
+let Content: any, headings;
+({ Content, headings } = await render(content));
+
+// Fetch author entry if author name is provided
+const authorName = author
+  ? (await getEntryCTM("author", slugifyyy(author), Astro.currentLocale))?.data
+      ?.title
+  : "";
+
+// Build table of contents from headings if available
+const tocHeadings = headings ? buildToc(headings) : undefined;
+
 // Check if table of contents is enable
-const tocEnabled = tableOfContents?.enable && headings?.length > 0;
+const tocEnabled =
+  tableOfContents?.enable && tocHeadings && tocHeadings.length > 0;
 ---
 
-<section>
+<section class:list={[Astro.props.class]}>
   <div class="container">
-    <div class="grid grid-cols-1 justify-items-center space-y-12">
-      <!-- Post/Portfolio Meta -->
+    <div
+      class:list={[
+        "has-video-modal bg-light max-w-full space-y-10 rounded-lg p-5 md:p-8",
+        className,
+      ]}>
       {
-        layout === "modern" ? (
-          <div class="max-w-full space-y-8 text-center lg:max-w-3xl">
-            <div>
-              {categories && categories.length > 0 && (
-                <ul class="mb-2 flex items-center justify-center gap-2">
-                  {categories.map((category: string) => (
-                    <li
-                      class="inline-block text-sm font-medium tracking-wider"
-                      set:html={markdownify(category)}
-                    />
-                  ))}
-                  <li>·</li>
-                  <li>
-                    {date && (
-                      <p
-                        class="text-sm font-medium"
-                        set:html={dateFormat(date)}
-                      />
-                    )}
-                  </li>
-                </ul>
-              )}
-
-              {title && <h1 class="text-h3 md:text-h2" set:html={title} />}
-            </div>
-            {excerpt && <p set:html={markdownify(excerpt)} />}
-            <div class="flex justify-center gap-4">
-              {authorEntry && authorEntry.title && (
-                <div class="flex flex-wrap justify-center gap-4">
-                  {authorEntry.image && (
-                    <OptimizedImage
-                      width={64}
-                      height={64}
-                      src={authorEntry.image}
-                      alt={authorEntry.title || "author image"}
-                      class="border-border-light/75 h-16 w-16 rounded-full border-4"
-                    />
-                  )}
-                  <div class="text-start">
-                    {authorEntry.title && (
-                      <p
-                        class="font-medium"
-                        set:html={markdownify(authorEntry.title)}
-                      />
-                    )}
-                    {authorEntry.role && (
-                      <p set:html={markdownify(authorEntry.role)} />
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        ) : (
-          <div class="w-full max-w-full space-y-8 lg:max-w-4xl">
-            {title && <h1 class="text-h3 md:text-h2" set:html={title} />}
-            {excerpt && <p set:html={markdownify(excerpt)} />}
-
-            <ContentMeta
-              content={{
-                author: authorEntry,
-                date,
-                categories,
-                translations,
-              }}
-            />
-          </div>
-        )
-      }
-
-      <!-- Post/Portfolio Image -->
-      {
-        (masonryImage || image) && (
+        image && Content && (
           <OptimizedImage
-            src={(masonryImage || image) as string}
             width={896}
-            height={384}
+            height={500}
+            widths={[480, 640, 768, 896]}
+            sizes="(min-width: 1024px) 896px, 100vw"
+            quality={60}
+            loading="eager"
+            fetchpriority="high"
+            decoding="sync"
             alt={title}
-            class="h-96 w-full object-cover lg:max-w-4xl"
+            src={image as string}
+            class:list={["h-125 w-full object-cover"]}
           />
         )
       }
-      <div class="w-full max-w-full space-y-8 lg:max-w-4xl">
-        <!-- Table of Contents -->
-        {tocEnabled && <TableOfContents toc={headings} marker={false} />}
 
-        <!-- Main Content -->
+      <div class="space-y-2">
+        <ul
+          class="text-dark flex flex-wrap items-center gap-x-5 gap-y-1 tracking-wide">
+          {
+            date && (
+              <li>
+                {date && markdownify(formatRelativeDate(date, "dd MMM, yyyy"))}
+              </li>
+            )
+          }
+
+          {
+            categories?.map((category: string) => (
+              <li class="before:bg-dark relative pe-5 before:absolute before:inset-e-0 before:top-1/2 before:h-1 before:w-1 before:-translate-y-1/2 before:rounded-full before:content-['']">
+                {markdownify(category)}
+              </li>
+            ))
+          }
+
+          {
+            authorName && (
+              <li class="before:bg-dark relative pe-5 before:absolute before:inset-e-0 before:top-1/2 before:h-1 before:w-1 before:-translate-y-1/2 before:rounded-full before:content-['']">
+                By {markdownify(authorName)}
+              </li>
+            )
+          }
+        </ul>
         {
-          Content && (
-            <div class="prose-styles content has-video-modal">
-              <Content />
-            </div>
+          title && (
+            <h1 class="text-h2-sm md:text-h2" set:html={markdownify(title)} />
           )
         }
       </div>
+      {tocEnabled && tocHeadings && <TOC toc={tocHeadings} marker={false} />}
+      {
+        Content && (
+          <div class="prose-styles content has-video-modal prose-headings:mb-6 prose-headings:mt-10">
+            <Content />
+          </div>
+        )
+      }
     </div>
   </div>
 </section>

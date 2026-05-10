@@ -4,24 +4,24 @@
 
   <ImageList>
     <ImageItem
-      imageSrc="/images/gallery/1.jpg"
+      imageSrc="/images/banner/banner-common.png"
       imageAlt="example alt text"
       videoSrc="rFVpSwgCkCo"
     />
     <ImageItem
-      imageSrc="/images/gallery/2.jpg"
+      imageSrc="/images/banner/banner-common.png"
       imageAlt="example alt text"
       videoSrc="/videos/test-video.mp4"
       videoProvider="html5"
     />
     <ImageItem
       width="1/2"
-      imageSrc="/images/gallery/3.jpg"
+      imageSrc="/images/banner/banner-common.png"
       imageAlt="example alt text"
     />
     <ImageItem
       width="1/2"
-      imageSrc="/images/gallery/4.jpg"
+      imageSrc="/images/banner/banner-common.png"
       imageAlt="example alt text"
     />
   </ImageList>
@@ -74,7 +74,7 @@ const id = videoId
 {
   imageSrc && (
     <div
-      class="not-prose relative"
+      class="not-prose relative mt-8"
       class:list={[
         {
           "col-span-6": !width,
@@ -87,8 +87,10 @@ const id = videoId
         width={900}
         height={400}
         src={imageSrc}
-        alt={imageAlt || "alt text"}
-        class:list={["h-72! w-full max-w-full! object-cover md:h-96!"]}
+        alt={imageAlt}
+        class:list={[
+          "h-72! w-full max-w-full! object-cover object-top lg:h-112!",
+        ]}
       />
       {videoSrc && (
         <>
@@ -100,11 +102,11 @@ const id = videoId
             aria-controls={"#" + id}
             data-hs-overlay={"#" + id}
             data-hs-overlay-options={`{"emulateScrollbarSpace" : true}`}
-            class="video-modal-toggle translate-centered has-animated-waves waves-white absolute flex h-20 w-20 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 lg:h-20 lg:w-20">
+            class="video-modal-toggle translate-centered has-animated-waves waves-white absolute flex h-20 w-20 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 lg:h-24 lg:w-24">
             <div class="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-white">
               <Icons
                 icon="Play"
-                class="text-primary fill-primary ml-1 h-7 w-7"
+                class="text-primary fill-text-dark h-6 w-6 stroke-none"
               />
             </div>
           </button>

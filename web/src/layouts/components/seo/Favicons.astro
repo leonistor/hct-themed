@@ -1,9 +1,15 @@
 ---
-import config from ".astro/config.generated.json" with { type: "json" };
+import config from ".astro/config.generated.json";
 
 let faviconPath = "/images/favicons";
 
-const favicons = [
+const favicons: {
+  rel: string;
+  type?: string;
+  sizes?: string;
+  href: string;
+  color?: string;
+}[] = [
   {
     rel: "apple-touch-icon",
     sizes: "180x180",
@@ -43,20 +49,19 @@ const favicons = [
 ];
 
 const metaTags = [
-  { name: "msapplication-TileColor", content: "#2b5797" },
+  { color: "msapplication-TileColor", content: "#ffffff" },
   { name: "apple-mobile-web-app-title", content: config.site.title },
 ];
 ---
 
-<!--------------
-    Favicons    
----------------->{
+<!------------------------ Favicons ------------------------>{
   favicons.map((favicon) => (
     <link
       rel={favicon.rel}
       type={favicon.type}
       sizes={favicon.sizes}
       href={favicon.href}
+      color={favicon.color}
     />
   ))
 }

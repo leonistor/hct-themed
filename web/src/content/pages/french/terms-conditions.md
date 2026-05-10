@@ -1,12 +1,12 @@
 ---
 title: "Conditions d'utilisation"
-description: "Ceci est un exemple de description m ta"
+metaDescription: "Ceci est un exemple de description m ta"
 draft: false
 ---
 
 **Effective Date:** July, 2022
 
-Welcome to Looka ("we," "our," or "us"). By accessing or using our website, <https://www.looka.com> ("Website"), you agree to comply with and be bound by the following Terms and Conditions ("Terms"). If you do not agree with these Terms, please do not use our Website.
+Welcome to Taxo ("we," "our," or "us"). By accessing or using our website, <https://www.taxo.com> ("Website"), you agree to comply with and be bound by the following Terms and Conditions ("Terms"). If you do not agree with these Terms, please do not use our Website.
 
 ### Acceptance of Terms
 
@@ -27,7 +27,7 @@ If you create an account on our Website, you are responsible for maintaining the
 
 ### Intellectual Property
 
-All content on the Website, including but not limited to text, images, logos, and software, is the property of Looka or its licensors and is protected by copyright, trademark, and other intellectual property laws. You may not reproduce, distribute, or modify any content without prior written consent from Looka.
+All content on the Website, including but not limited to text, images, logos, and software, is the property of Taxo or its licensors and is protected by copyright, trademark, and other intellectual property laws. You may not reproduce, distribute, or modify any content without prior written consent from Taxo.
 
 ### Purchases and Payments
 
@@ -39,7 +39,7 @@ The Website and its content are provided "as is" without warranties of any kind,
 
 ### Limitation of Liability
 
-To the fullest extent permitted by law, Looka shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Website or inability to access it. Our total liability for any claims related to the Website shall not exceed the amount paid by you, if any, to Looka.
+To the fullest extent permitted by law, Taxo shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Website or inability to access it. Our total liability for any claims related to the Website shall not exceed the amount paid by you, if any, to Taxo.
 
 ### Termination
 
@@ -61,9 +61,9 @@ We reserve the right to update or modify these Terms at any time without prior n
 
 If you have any questions or concerns about these Terms, please contact us at:
 
-Looka
+Taxo
 
-Email: <support@looka.com>  
-Address: 123 Looka Lane, Imaginary City, IC 12345, USA
+Email: <support@taxo.com>  
+Address: 123 Taxo Lane, Imaginary City, IC 12345, USA
 
-Thank you for using Looka!
+Thank you for using Taxo!

@@ -1,19 +1,9 @@
 ---
-enable: true # Contrôler la visibilité de cette section sur toutes les pages où elle est utilisée
-title: "Quelles Nouvelles Avons-Nous Aujourd'hui Dernier Blog"
-subtitle: "Blog"
-bgPatternImage: "/images/line-pattern.svg"
+enable: true # Control the visibility of this section across all pages where it is used
+badge: "Actualités"
+title: "Actualités fiscales et financières mises à jour quotidiennement"
 
-button:
-  enable: true
-  label: "Tous les Articles de Blog"
-  url: "/blog/"
-  rel: ""
-  target: ""
-  showIcon: "true"
-  variant: "outline" # "fill", "outline", "outline-white", "text"
-  hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
-
-# Définir le nombre maximum de témoignages à afficher dans cette instance de composant
-limit: 3 # false / nombre
+options:
+  layout: "grid" # grid | horizontal | featured | compact
+  limit: 2
 ---

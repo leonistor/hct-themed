@@ -1,0 +1,24 @@
+---
+enable: true
+title: "Peste [10 ani de experiență](/team)<br /> în consultanță, montaj și service<br /> pentru utilaje de reciclare"
+
+features:
+  - enable: false
+    icon: "/images/icons/svg/premium-quality.svg"
+    title: "Quality Service"
+    description: "Nemo enim ipsam voluplatem quia voluptas sit aspernatur aut odit aut fugit magni"
+    backgroundImage: "/images/decorative/pattern/pattern-4.png"
+    backgroundImageAlt: "Background Pattern"
+  - enable: false
+    icon: "/images/icons/svg/group.svg"
+    title: "Professional Team"
+    description: "Nemo enim ipsam voluplatem quia voluptas sit aspernatur aut odit aut fugit magni"
+    backgroundImage: "/images/decorative/pattern/pattern-4.png"
+    backgroundImageAlt: "Background Pattern"
+  - enable: false
+    icon: "/images/icons/svg/24-hours-support.svg"
+    title: "24/7 Full Support"
+    description: "Nemo enim ipsam voluplatem quia voluptas sit aspernatur aut odit aut fugit magni"
+    backgroundImage: "/images/decorative/pattern/pattern-4.png"
+    backgroundImageAlt: "Background Pattern"
+---

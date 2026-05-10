@@ -1,90 +1,97 @@
 ---
 import Logo from "@/components/global/Logo.astro";
-import LineAnimation from "@/components/widgets/LineAnimation.astro";
-import config from ".astro/config.generated.json" assert { type: "json" };
-import LanguageSwitcher from "@/layouts/components/global/header/LanguageSwitcher.astro";
-import NavMenuItem from "@/layouts/components/global/header/MenuItem.astro";
-import NavToggleBtn from "@/layouts/components/global/header/NavToggleBtn.astro";
-import type { NavigationLink } from "@/types";
+import Offcanvas from "../../widgets/Offcanvas.astro";
+import config from ".astro/config.generated.json";
 import { useTranslations } from "@/lib/utils/i18nUtils.ts";
-import { filteredEnabled } from "@/lib/utils/filteredEnabled";
-import CustomButton from "@/components/CustomButton.astro";
+import NavbarToggler from "@/layouts/components/global/header/NavbarToggler.astro";
+import HeaderOffcanvasContent from "@/components/widgets/HeaderOffcanvasContent.astro";
+import Navbar from "./Navbar.astro";
+import Button from "@/components/Button.astro";
+import TopBar from "./TopBar.astro";
 
 const t = await useTranslations(Astro.currentLocale as string);
-let main = t("main") as NavigationLink[];
-main = filteredEnabled(main);
 
-const isDarkHeader =
-  Astro.url.pathname === "/" ||
-  Astro.url.pathname === "/" + Astro.currentLocale ||
-  Astro.url.pathname === "/" + Astro.currentLocale + "/";
+const {
+  site: { logoAlternate },
+  settings: { stickyHeader, navigationButton, headerOffcanvas },
+} = config;
 
-// Check if the current page is the category filtered page
-const urlPattern = "/" + config.settings.blogFolder + "/category/";
-const isCategoryFilteredPage = Astro.url.pathname.includes(urlPattern);
-
-const { stickyHeader, navigationButton } = config.settings;
+const { position, hideOffcanvas, class: ClassName } = Astro.props;
 ---
+
+<TopBar />
 
 <header
   class:list={[
     "header group/header transform",
-    { "sticky-header fixed": stickyHeader && isDarkHeader },
-    { "sticky-header": stickyHeader && !isDarkHeader },
-    { "header-dark": isDarkHeader },
+    { sticky: position === "sticky" },
+    { fixed: position === "fixed" },
+    { "has-sticky-behavior": stickyHeader || position === "fixed" },
+    ClassName,
   ]}>
-  <nav class="relative container">
+  <div class="container">
     <div
-      class="hs-dropdown relative flex items-center justify-between py-4 [--auto-close:inside] [--gpu-acceleration:false] [--strategy:absolute] lg:[--strategy:static]">
+      class="bg-light hs-dropdown relative flex flex-wrap items-stretch justify-between rounded-b-2xl px-6 py-2 [--auto-close:inside] [--gpu-acceleration:false] [--strategy:absolute] lg:justify-center lg:px-7.5 lg:[--strategy:static]">
       <Logo />
 
-      <ul
-        id="nav-menu"
-        class="navbar hs-dropdown-menu hs-dropdown-open:flex hs-dropdown-open:max-lg:mt-2 has-customized-scrollbar hs-dropdown-open:static max-lg:absolute max-lg:transform-none! lg:static! lg:transform-none!">
-        {main.map((menu) => <NavMenuItem menu={menu} />)}
-        {/* Navigation Button For Small Devices */}
-        {
-          navigationButton.enable && (
-            <li class="max-lg:px-4 max-lg:py-2 lg:hidden" role="menuitem">
-              <CustomButton
-                {...navigationButton}
-                variant="outline"
-                label={navigationButton.label || t("navigation.buttonLabel")}
-              />
-            </li>
-          )
-        }
-      </ul>
+      {/* Navbar For Header */}
+      <Navbar />
 
-      {/* Language Switcher For Small Devices */}
-      {
-        config.settings.multilingual.enable && !isCategoryFilteredPage && (
-          <div class="me-4 ml-auto flex lg:hidden">
-            <LanguageSwitcher />
-          </div>
-        )
-      }
-
-      {/* Navigation Button For Large Devices */}
+      {/* Navigation Actions - Search + CTA Button */}
       {
         (navigationButton.enable || config.settings.multilingual.enable) && (
-          <div class="hidden gap-3.5 max-lg:me-4 max-lg:ml-auto lg:flex lg:items-center">
-            {config.settings.multilingual.enable && !isCategoryFilteredPage && (
-              <LanguageSwitcher />
+          <div class="hidden gap-3.5 justify-self-end max-lg:ms-auto max-lg:me-4 lg:flex lg:items-center">
+            {navigationButton.enable && (
+              <Button
+                variant="text"
+                {...navigationButton}
+                label={navigationButton.label || t("navigation.buttonLabel")}
+                icon={{
+                  enable: true,
+                  name: "ArrowRight",
+                  position: "right",
+                }}
+              />
             )}
-            <CustomButton
-              {...navigationButton}
-              variant={isDarkHeader ? "outline-white" : "outline"}
-              label={navigationButton.label || t("navigation.buttonLabel")}
-            />
           </div>
         )
       }
-      <NavToggleBtn isDarkHeader={isDarkHeader} />
+
+      {/* Desktop Sidebar Offcanvas Toggle Button */}
+      {
+        headerOffcanvas?.enable && (
+          <NavbarToggler
+            title="Open sidebar content"
+            appearance="dark"
+            isOffcanvasToggler={true}
+            class:list={[
+              "ring-primary/25 rounded-full duration-500 ease-out",
+              hideOffcanvas ? "lg:hidden" : "",
+            ]}
+            aria-haspopup="dialog"
+            aria-expanded="false"
+            aria-controls="offcanvas-main"
+            data-hs-overlay="#offcanvas-main"
+            data-hs-overlay-options='{"emulateScrollbarSpace": true}'
+          />
+        )
+      }
     </div>
-  </nav>
+  </div>
 </header>
 
+{/* Desktop Sidebar Offcanvas */}
+{
+  headerOffcanvas?.enable && (
+    <Offcanvas
+      class={hideOffcanvas ? "lg:hidden" : ""}
+      id="offcanvas-main"
+      direction="right"
+      size="md">
+      <HeaderOffcanvasContent offcanvas={"offcanvas-main"} />
+    </Offcanvas>
+  )
+}
 <script>
   import { HSDropdown } from "preline";
 
@@ -96,41 +103,59 @@ const { stickyHeader, navigationButton } = config.settings;
     HSDropdown?.autoInit();
   }
 
+  function updateMegaMenuOffset(): void {
+    const header = document.querySelector(".header") as HTMLElement | null;
+    if (!header) return;
+
+    const headerBottom = Math.round(header.getBoundingClientRect().bottom);
+    document.documentElement.style.setProperty(
+      "--header-bottom",
+      `${Math.max(headerBottom, 0)}px`,
+    );
+  }
+
   function stickyHeader(): void {
     const header = document.querySelector(
-      ".sticky-header",
+      ".has-sticky-behavior",
     ) as HTMLElement | null;
-    if (!header) return; // Early exit if no header is found
+    if (!header) return;
 
     let prevScrollPos = window.scrollY;
+    let ticking = false;
 
+    // Initial state
     if (prevScrollPos > 0) {
       header.classList.add("scroll-up");
     }
+    updateMegaMenuOffset();
 
-    window.addEventListener("scroll", () => {
-      const currentScrollPos = window.scrollY;
-
-      if (prevScrollPos > currentScrollPos) {
-        // Scrolling up
-        header.classList.remove("scroll-down");
-        header.classList.add("scroll-up");
-      } else if (prevScrollPos < currentScrollPos) {
-        // Scrolling down
-        header.classList.remove("scroll-up");
-        header.classList.add("scroll-down");
-      }
+    const updateHeader = () => {
+      const currentScrollPos = Math.max(0, window.scrollY);
 
       if (currentScrollPos === 0) {
-        header.classList.remove("scroll-up");
-        header.classList.remove("scroll-down");
+        header.classList.remove("scroll-up", "scroll-down");
+      } else {
+        header.classList.add("scroll-up");
       }
 
-      prevScrollPos = currentScrollPos;
+      updateMegaMenuOffset();
+      ticking = false;
+    };
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateHeader);
+          ticking = true;
+        }
+      },
+      { passive: true },
+    );
+    window.addEventListener("resize", updateMegaMenuOffset, {
+      passive: true,
     });
   }
 
   stickyHeader();
 </script>
-
-{Astro.url.pathname !== "/" && <LineAnimation {...Astro.props} />}

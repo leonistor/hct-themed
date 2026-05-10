@@ -1,120 +1,201 @@
 ---
-import Marquee from "@/components/widgets/Marquee.astro";
+import { z } from "astro/zod";
 import { getEntryCTM } from "@/lib/contentParser.astro";
-import type { Section } from "@/types";
-import { markdownify } from "@/lib/utils/textConverter";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import type { testimonialSectionSchema } from "@/sections.schema";
+import SectionTitle from "../global/SectionTitle.astro";
 import TestimonialCard from "@/layouts/components/cards/TestimonialCard.astro";
-import CustomButton from "../CustomButton.astro";
-import type { marqueeConfig } from "@/content.config";
-import type { z } from "astro/zod";
+import config from ".astro/config.generated.json";
+import SectionBadge from "../global/SectionBadge.astro";
+import { markdownify } from "@/lib/utils/textConverter";
 
-// Type for this section data
-export type sectionType = Section & {
-  marquee: z.output<typeof marqueeConfig>;
-  list: {
-    enable: boolean;
-    rating: number;
-    content: string;
-    source: {
-      logo: string;
-      url: string;
-    };
-    customer: {
-      image: string;
-      name: string;
-      role: string;
-      company: {
-        logo: string;
-        name: string;
-      };
-    };
-  }[];
-};
-type Props = {
-  content?: sectionType;
-};
+// Type
+export type TestimonialSectionType = z.infer<typeof testimonialSectionSchema>;
 
-// Fetching the default content for the this section
+// Default content fetch
 let defaultContent = (
   await getEntryCTM("sections", "testimonial-section", Astro.currentLocale)
-)?.data as sectionType;
+)?.data as TestimonialSectionType;
 
-// Enables content customization (e.g., title, description) with a fallback to 'defaultContent' if not provided.
-// The 'content' prop should match the structure of 'defaultContent'.
-// Allows using this section with different content across multiple pages.
-// If 'content' is missing, 'defaultContent' will be used.
 let actualContent = overrideObjects(
   { ...defaultContent },
   Astro.props.content,
-) as sectionType;
+) as TestimonialSectionType;
 
-// Extracting required values from 'content' object
 let {
   enable = true,
   title,
-  subtitle,
-  button,
-  list,
-  marquee,
-} = actualContent as sectionType;
+  badge,
+  decorativeImage,
+  decorativeImageAlt,
+  cardLayout,
+} = (actualContent as TestimonialSectionType) || {};
+if (!enable) return;
+
+let pageData = (
+  await getEntryCTM(
+    config.settings.testimonialFolder as "testimonial",
+    "-index",
+    Astro.currentLocale,
+  )
+)?.data;
+const list = pageData.list?.filter((item) => item.enable !== false) ?? [];
 ---
 
-{
-  enable && (
-    <section class="overflow-hidden">
-      <div class="bg-theme-light py-16 md:py-28">
-        <div class="container overflow-x-hidden">
-          <div
-            data-aos="fade-right-sm"
-            class="flex flex-wrap items-center justify-between gap-6 lg:flex-nowrap">
-            <div class="lg:max-w-2xl">
-              {subtitle && (
-                <span
-                  class="bg-primary/5 border-secondary text-primary mb-2.5 inline-block rounded-full border px-5 py-px"
-                  set:html={markdownify(subtitle)}
+<section>
+  <div class="relative">
+    {
+      decorativeImage && (
+        <OptimizedImage
+          src={decorativeImage}
+          alt={decorativeImageAlt}
+          width={1920}
+          height={794}
+          widths={[480, 640, 768, 1024, 1280, 1920]}
+          sizes="(min-width: 1536px) 1920px, (min-width: 1280px) 1280px, (min-width: 1024px) 1024px, (min-width: 768px) 768px, 100vw"
+          quality={60}
+          class="pointer-events-none absolute top-0 right-0 z-[-1]"
+        />
+      )
+    }
+    <div class="container space-y-14">
+      <div class="mx-auto max-w-4xl text-center">
+        {badge && <SectionBadge title={badge} dataAos="reveal-anim-top" />}
+        {title && <SectionTitle title={title} dataAos="reveal-anim-top" />}
+      </div>
+      <div
+        class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4">
+        {
+          list?.map((item, i) => (
+            <button
+              type="button"
+              data-index={i}
+              class:list={[
+                "testimonial-nav-btn group hover:bg-accent hover:text-text-dark flex w-full cursor-pointer items-center gap-4 rounded-md p-2 text-left transition-all duration-300 ease-in-out",
+                i === 0
+                  ? "bg-accent text-text-dark is-active"
+                  : "bg-primary text-text-light",
+              ]}
+              aria-label={`View testimonial from ${item.customer?.name ?? "customer"}`}>
+              <div>
+                <OptimizedImage
+                  src={
+                    item.customer?.avatar ??
+                    "/images/customers/avatar/devid-marko.png"
+                  }
+                  alt={item.customer?.name ?? "Customer"}
+                  width={84}
+                  height={84}
+                  class="h-full w-full rounded-full object-cover"
                 />
-              )}
-              {title && (
-                <h2
-                  class="text-h3 text-inherit"
-                  set:html={markdownify(title)}
-                />
-              )}
-            </div>
-            {button && button.enable && (
-              <div data-aos="fade-right-sm" data-aos-delay="200">
-                <CustomButton {...button} />
               </div>
-            )}
-          </div>
+              <div class="flex flex-col gap-1">
+                <h3
+                  class="text-lg text-inherit"
+                  set:html={markdownify(item.customer?.name)}
+                />
+                <p
+                  class="text-sm"
+                  set:html={markdownify(item.customer?.role)}
+                />
+              </div>
+            </button>
+          ))
+        }
+      </div>
+      <div
+        id="testimonial-slider-grid"
+        class="swiper mx-auto max-w-4xl overflow-hidden">
+        <div class="swiper-wrapper relative box-content flex w-full pb-16">
+          {
+            list?.map((item, i) => (
+              <div class="swiper-slide h-auto! w-full shrink-0">
+                <TestimonialCard
+                  data={item}
+                  options={{ layout: cardLayout }}
+                  index={i}
+                />
+              </div>
+            ))
+          }
         </div>
-        <div class="relative" data-aos="fade-up-sm" data-aos-delay="300">
+
+        <div
+          class="relative flex h-20 items-center justify-center overflow-hidden">
           <div
-            class="testimonial-gradient-bg [--accent-color:--color-accent]"
-            aria-hidden="true"
-          />
-          <div class="relative mt-12 flex overflow-x-hidden md:mt-16">
-            <Marquee
-              class="items-stretch"
-              marqueeElements={list.length}
-              {...marquee}>
-              {list.map((item) => (
-                <div class="min-w-(--marquee-element-width-responsive) px-4 md:min-w-(--marquee-element-width)">
-                  <TestimonialCard class="min-h-full" content={item} />
-                </div>
-              ))}
-              {list.map((item) => (
-                <div
-                  class="min-w-(--marquee-element-width-responsive) px-4 md:min-w-(--marquee-element-width)"
-                  aria-hidden="true">
-                  <TestimonialCard class="min-h-full" content={item} />
-                </div>
-              ))}
-            </Marquee>
+            class="bg-light absolute top-0 left-1/2 z-[-1] h-20 w-75 -translate-x-1/2 [clip-path:polygon(50%_0%,0%_100%,100%_100%)]">
+          </div>
+          <div
+            class:list={[
+              "swiper-pagination testimonial-pagination flex justify-center",
+              "[--swiper-pagination-bullet-height:12px]",
+              "[--swiper-pagination-bullet-inactive-opacity:1]",
+              "[--swiper-pagination-bullet-width:12px]",
+              "[--swiper-pagination-color:var(--color-accent)]",
+              "max-md:[--swiper-pagination-bottom:10px]",
+              "md:[--swiper-pagination-bottom:20px]",
+              "[&_.swiper-pagination-bullet:not(.swiper-pagination-bullet-active)]:border",
+              "[&_.swiper-pagination-bullet:not(.swiper-pagination-bullet-active)]:bg-transparent!",
+              "gap-2 pt-4",
+            ]}>
           </div>
         </div>
       </div>
-    </section>
-  )
-}
+    </div>
+  </div>
+  <script>
+    window.addEventListener("load", async function () {
+      const { Swiper } = await import("swiper");
+      const { Autoplay, Pagination } = await import("swiper/modules");
+
+      const testimonialSlider = document.querySelector(
+        "#testimonial-slider-grid",
+      ) as HTMLElement;
+      const navBtns = Array.from(
+        document.querySelectorAll<HTMLElement>(".testimonial-nav-btn"),
+      );
+
+      const swiper = new Swiper(testimonialSlider, {
+        modules: [Autoplay, Pagination],
+        speed: 800,
+        spaceBetween: 30,
+        slidesPerView: 1,
+        pagination: {
+          el: ".testimonial-pagination",
+          clickable: true,
+          renderBullet(_index: number, className: string) {
+            return `<span class="${className} cursor-pointer inline-block size-2.5 rounded-full border border-accent bg-transparent opacity-100 transition-all [.swiper-pagination-bullet-active&]:bg-accent"></span>`;
+          },
+        },
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: true,
+        },
+        loop: true,
+        on: {
+          slideChange(sw: any) {
+            syncNavBtns(sw.activeIndex);
+          },
+        },
+      });
+
+      function syncNavBtns(activeIndex: number) {
+        navBtns.forEach((btn, i) => {
+          const isActive = i === activeIndex;
+          btn.classList.toggle("is-active", isActive);
+          btn.classList.toggle("bg-accent", isActive);
+          btn.classList.toggle("text-text-dark", isActive);
+          btn.classList.toggle("bg-primary", !isActive);
+          btn.classList.toggle("text-text-light", !isActive);
+        });
+      }
+
+      navBtns.forEach((btn, i) => {
+        btn.addEventListener("click", () => {
+          swiper.slideTo(i);
+        });
+      });
+    });
+  </script>
+</section>

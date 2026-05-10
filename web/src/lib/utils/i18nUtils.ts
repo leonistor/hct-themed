@@ -1,4 +1,5 @@
 import path from "node:path";
+import type { CollectionEntry, CollectionKey } from "astro:content";
 import trailingSlashChecker from "./trailingSlashChecker";
 import config from "../../../.astro/config.generated.json";
 import languagesJSON from "../../config/language.json";
@@ -216,11 +217,11 @@ export const getLocaleUrlCTM = (
     }
   }
 
-  let updatedUrl = url;
-  let isExternalUrl = checkIsExternal(url);
+  let updatedUrl = url ? url.replace(/\\/g, "/") : url;
+  let isExternalUrl = checkIsExternal(updatedUrl);
 
   // Don't handle external url
-  if (isExternalUrl) return url;
+  if (isExternalUrl) return updatedUrl;
 
   // if url contain .md or .mdx remove it
   if (url.endsWith(".mdx") || url.endsWith(".md")) {
@@ -244,10 +245,24 @@ export const getLocaleUrlCTM = (
     }
   }
 
+  // Normalize internal relative paths to absolute paths so browsers don't resolve
+  // them against the current nested route (for example `components/` -> `/components/`).
+  if (
+    updatedUrl &&
+    !updatedUrl.startsWith("/") &&
+    !updatedUrl.startsWith("#") &&
+    !updatedUrl.startsWith("?")
+  ) {
+    updatedUrl = `/${updatedUrl}`;
+  }
+
   // Remove any existing language directories from the URL
   for (const langDir of languageDirectories) {
-    if (updatedUrl.startsWith(`${langDir}/`)) {
-      updatedUrl = updatedUrl.replace(`${langDir}/`, "/");
+    if (
+      updatedUrl.startsWith(`${langDir}/`) ||
+      updatedUrl.startsWith(`/${langDir}/`)
+    ) {
+      updatedUrl = updatedUrl.replace(new RegExp(`^/?${langDir}/`), "/");
       break;
     }
   }
@@ -314,4 +329,36 @@ export const getLocaleUrlCTM = (
   }
 
   return updatedUrl;
+};
+
+type SlugEntry = Pick<CollectionEntry<CollectionKey>, "id" | "collection"> & {
+  data?: {
+    customSlug?: string;
+  };
+};
+
+export const getEntryRouteParam = (
+  entry: Pick<CollectionEntry<CollectionKey>, "id"> & {
+    data?: {
+      customSlug?: string;
+    };
+  },
+): string =>
+  entry.data?.customSlug ||
+  entry.id
+    .replace(/\\/g, "/")
+    .replace(/\.mdx?|\.md/g, "")
+    .split("/")
+    .pop() ||
+  entry.id.replace(/\\/g, "/");
+
+export const getEntrySlugCTM = (
+  entry: SlugEntry,
+  providedLang: string | undefined,
+): string => {
+  return getLocaleUrlCTM(
+    getEntryRouteParam(entry),
+    providedLang,
+    entry.collection,
+  );
 };

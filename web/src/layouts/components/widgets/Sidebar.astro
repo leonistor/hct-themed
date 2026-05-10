@@ -1,81 +1,73 @@
 ---
 import Search from "./Search.astro";
-import CtaBlock from "./CtaBlock.astro";
 import Categories from "./Categories.astro";
 import RecentPosts from "./RecentPosts.astro";
-import RelatedPortfolios from "./RelatedPortfolios.astro";
+import Tags from "./Tags.astro";
+import CTA from "./CTA.astro";
 
 interface Props {
   content: {
-    widgets?: Array<
-      "Search" | "RelatedPortfolios" | "Categories" | "RecentPosts" | "CtaBlock"
-    >;
-    position?: "left" | "right";
     sticky?: boolean;
-    boxShadow?: boolean;
-    widgetsContent?: {
-      relatedPortfolios?: any;
-      search?: any;
-      categories?: any;
-      recentPosts?: any;
-      ctaBlock?: any;
-    };
+    position?: "left" | "right";
+    search?: any;
+    categories?: any;
+    tags?: any;
+    recentPosts?: any;
+    widgets?: any;
+    currentPost?: any;
   };
-  class?: string;
 }
 
-const {
-  widgets = ["Search", "Categories", "RecentPosts", "CtaBlock"],
-  sticky,
-  widgetsContent,
-  boxShadow,
-  position,
-} = Astro.props.content || {};
+const { content, ...rest } = Astro.props;
+const { sticky, position, search, recentPosts } = content;
 
-const widgetsContainer = [
-  {
-    name: "RelatedPortfolios",
-    Component: RelatedPortfolios,
-    props: widgetsContent?.relatedPortfolios,
-  },
-  { name: "Search", Component: Search, props: widgetsContent?.search },
+const {
+  widgets: widgetList = ["Search", "Categories", "RecentPosts", "Tags", "CTA"],
+} = content;
+const widgets = [
+  { name: "Search", Component: Search, props: search },
   {
     name: "Categories",
     Component: Categories,
-    props: widgetsContent?.categories,
+    props: {},
   },
   {
     name: "RecentPosts",
     Component: RecentPosts,
-    props: widgetsContent?.recentPosts,
+    props: { recentPosts, currentPost: content.currentPost },
   },
-  { name: "CtaBlock", Component: CtaBlock, props: widgetsContent?.ctaBlock },
+  {
+    name: "Tags",
+    Component: Tags,
+    props: {},
+  },
+  {
+    name: "CTA",
+    Component: CTA,
+    props: {},
+  },
 ];
 ---
 
 <div
+  {...rest}
   class:list={[
     "lg:col-span-4",
-    sticky ? "sticky-sidebar lg:sticky" : "space-y-8 lg:bg-white lg:p-5",
-    boxShadow && !sticky && "lg:box-shadow-primary",
-    position === "right" ? "order-1 lg:order-2" : "order-1",
+    sticky ? "sticky-sidebar lg:sticky" : "space-y-8",
+    position === "right" ? "order-2" : "order-2 lg:order-1",
   ]}>
   {
     sticky ? (
-      <div
-        class:list={[
-          "space-y-8 lg:bg-white lg:p-5",
-          boxShadow && "lg:box-shadow-primary",
-        ]}>
-        {widgetsContainer
-          .filter(({ name }) => widgets.includes(name as any))
+      <div class:list={["space-y-4 lg:space-y-8"]}>
+        {widgets
+          .filter(({ name }) => widgetList.includes(name))
           .map(({ Component, props }) => (
             <Component {...props} />
           ))}
       </div>
     ) : (
-      widgetsContainer
-        .filter(({ name }) => widgets.includes(name as any))
+      widgets
+        .filter(({ name }) => widgetList.includes(name))
         .map(({ Component, props }) => <Component {...props} />)
     )
   }

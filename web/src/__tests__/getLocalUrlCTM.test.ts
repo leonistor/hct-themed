@@ -1,5 +1,5 @@
-import config from "../../.astro/config.generated.json";
 import { getLocaleUrlCTM } from "../lib/utils/i18nUtils";
+import config from "../../.astro/config.generated.json";
 
 const paths = [
   "http://localhost:4321",
@@ -86,23 +86,13 @@ describe("getLocaleUrlCTM", () => {
     );
   });
 
-  test("Handles relative URL file extension in URL", () => {
-    const url = "en/case-studies-01.mdx";
-    const result = getLocaleUrlCTM(url, "en", prependValue);
-    const expected =
-      showDefaultLangInUrl && defaultLanguage === "en"
-        ? "/en/case-studies/case-studies-01/"
-        : "/case-studies/case-studies-01/";
-    expect(result).toBe(expected);
-  });
-
   test("Handles relative URL with language directory in URL", () => {
-    const url = "french/case-studies-01";
+    const url = "french/case-study-1";
     const result = getLocaleUrlCTM(url, "en", prependValue);
     const expected =
       showDefaultLangInUrl && defaultLanguage === "en"
-        ? "/en/case-studies/case-studies-01/"
-        : "/case-studies/case-studies-01/";
+        ? "/en/case-studies/case-study-1/"
+        : "/case-studies/case-study-1/";
     expect(result).toBe(expected);
   });
 

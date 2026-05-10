@@ -1,42 +1,71 @@
 {
   "common": {
     "readMore": "Lire la suite",
+    "viewDetails": "Voir les détails",
     "readMoreAbout": "En savoir plus sur",
-    "learnMoreAbout": "En savoir plus",
-    "viewMoreDetails": "Voir plus de details",
+    "viewProject": "Voir le projet",
+    "learnMoreAbout": "En apprendre davantage sur",
     "emailPlaceholder": "Adresse e-mail",
-    "monthlyPlan": "Mensuel",
+    "paginationPrevious": "Précédent",
     "paginationNext": "Suivant",
-    "paginationPrevious": "Pr c dent"
+    "paginationCaseStudiesPrev": "CaseStudies précédent",
+    "paginationCaseStudiesNext": "CaseStudies suivant",
+    "workHour": "Heure de travail",
+    "workingHours": "Heures d'ouverture",
+    "workingHoursValue": "Lun-sam, 09h-17h",
+    "workHourValue": "Du lundi au vendredi : 9 h – 17 h. Samedi : fermé.",
+    "call": "Appel",
+    "callUs": "Appelez-nous",
+    "play": "Play",
+    "contactUs": "Parlons-en",
+    "ourServices": "Nos services",
+    "recentProjects": "Projets récents",
+    "discoverMore": "Découvrir plus",
+    "hotLine": "Ligne d'urgence",
+    "searchHere": "Rechercher ici",
+    "letsChat": "Discutons",
+    "sendRequest": "Envoyer demande",
+    "noFaqsFoundFor": "Aucune FAQ trouvée pour",
+    "loadingMap": "Chargement de la carte...",
+    "comments": "Commentaires",
+    "reply": "Répondre"
   },
   "widgets": {
-    "postSearchTitle": "Rechercher un article",
-    "postSearchFormPlaceholder": "Rechercher...",
-    "categoriesTitle": "Catégorie",
-    "recentPostsTitle": "Articles récents"
+    "postSearchFormPlaceholder": "Essayez de rechercher 'conseils'...",
+    "categoriesTitle": "Catégories",
+    "tagsTitle": "Étiquettes",
+    "popularTagsTitle": "Tags populaires",
+    "recentPostsTitle": "Articles récents",
+    "haveAnyQuestionsTitle": "Vous avez des questions?",
+    "haveAnyQuestionsDescription": "Il existe de nombreuses variantes de passages du Lorem Ipsum disponibles, mais la plupart ont subi"
   },
-  "career": {
-    "location": "Emplacement",
-    "deadline": "Date de clôture des candidatures",
-    "jobType": "Type de poste"
+  "header": {
+    "announcement": "Conseiller fiscal gratuit aujourd’hui, -10 % sur votre première séance. [Commencer](/contact/)"
+  },
+  "headerOffcanvas": {
+    "description": "Nous sommes une agence numérique qui aide les entreprises à créer des expériences immersives.",
+    "buttonLabel": "Discutons ensemble"
   },
   "blog": {
-    "writtenBy": "Rédigé par",
-    "publishedOn": "Publié le",
-    "category": "Catégorie"
+    "category": "Catégorie",
+    "share": "Partager:",
+    "follow": "Suivre:",
+    "paginationPrevious": "Article précédent",
+    "paginationNext": "Article suivant"
   },
   "navigation": {
-    "buttonLabel": "Commencez à utiliser"
+    "buttonLabel": "Parlons-en"
   },
   "subscription": {
-    "label": "Abonnez-vous à notre newsletter pour obtenir les dernières mises"
+    "title": "Ajoutez vos propres détails et informez toutes vos exigences fiscales"
   },
-  "quickLinks": "Rapides",
   "footer": {
-    "legal": "Juridique",
-    "resources": "Ressources",
-    "description": "Looka est une entreprise de design et de technologie basée à San Francisco, fondée en 2016. Leur mission est de démocratiser le design en rendant les outils de branding professionnels accessibles à tous.",
-    "copyright": "Droits d'auteur {{ year }} / Tous droits réservés par Looka / Construit avec amour [Astro Themes](https://getastrothemes.com/)",
-    "_comment": "We kindly appreciate it if you retain the theme copyright. Thank you for supporting Getastrothemes!"
+    "menuTitleLinks": "Liens",
+    "freeSupport": "Support gratuit",
+    "description": "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit minus id quod maxime placeat facere assumenda est omnis dolor repellendus.",
+    "contact": "Contact",
+    "copyright": "Copyright © {{ year }}. [Taxo](https://taxo-dev.netlify.app/) Tous droits réservés.",
+    "_comment": "Nous vous serions reconnaissants de conserver le copyright du thème. Merci de soutenir Taxo !",
+    "since": "depuis 1990"
   }
 }

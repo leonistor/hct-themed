@@ -12,6 +12,10 @@ description: ""
 # Content Date
 date: 2020-02-05
 
+# customSlug: Set a custom slug for the page. This will override the default slug based on the file name.
+# NOTE: make sure slug is same across localized versions of the same page.
+customSlug: my-custom-slug
+
 # metaTitle & metaDescription: Override the page's default title and description specifically for SEO.
 # If set, these will be used as the meta title and description instead of the primary title and description.
 metaTitle: ""
@@ -38,6 +42,9 @@ robots: "noindex, nofollow"
 
 # excludeFromSitemap: Set to `true` to exclude this page from the sitemap, even if it’s generated.
 excludeFromSitemap: false # true/false (default is false)
+
+# excludeFromCollection: Set to `true` to exclude this page from the collection of pages for a specific collection.
+excludeFromCollection: false # true/false (default is false)
 
 # author: Specify the author of this page, if different from the global site author.
 author: ""

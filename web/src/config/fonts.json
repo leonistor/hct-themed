@@ -1,24 +1,44 @@
 [
   {
-    "name": "DM Sans",
-    "weights": [400, 500, 600, 700],
-    "styles": ["normal"],
+    "name": "Geist",
+    "variants": [
+      {
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "style": "normal",
+        "weight": "700"
+      }
+    ],
     "preload": false,
     "display": "swap",
     "cssVariable": "--font-primary",
-    "provider": "google",
-    "subsets": ["latin"],
-    "fallbacks": ["sans-serif"]
+    "provider": "fontsource",
+    "subsets": ["latin", "latin-ext"],
+    "fallback": "sans-serif"
   },
   {
-    "name": "Syne",
-    "weights": [700],
-    "styles": ["normal"],
+    "name": "Raleway",
+    "variants": [
+      {
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "style": "normal",
+        "weight": "700"
+      }
+    ],
     "preload": false,
     "display": "swap",
     "cssVariable": "--font-secondary",
-    "provider": "google",
-    "subsets": ["latin"],
-    "fallbacks": ["sans-serif"]
+    "provider": "fontsource",
+    "subsets": ["latin", "latin-ext"],
+    "fallback": "sans-serif"
   }
 ]

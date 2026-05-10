@@ -1,135 +1,139 @@
 ---
-title: "L'équipe"
-description: "Ceci est un exemple de description m ta"
+badge: "Notre équipe"
+badgeVariant: "secondary"
+title: "Faites confiance à l’expertise de nos conseillers fiscaux et financiers"
+image: "/images/team/team-header.png"
+metaDescription: "Ceci est une description d'exemple"
 draft: false
 
-leadershipTeam:
-  enable: true # Contrôler la visibilité de cette section sur toutes les pages où elle est utilisée
-  title: "Direction et gestion"
-  description: "Au cœur de notre organisation se trouve une équipe de leaders dédiés et expérimentés qui font progresser notre mission avec passion et expertise."
-  subtitle: "Équipe de direction"
-  layout: "horizontal"
-  leadershipTeam: true
+# Override Default Content of `/sections/team-section.md`
+# Uncomment key values that you want to override
+teamSection:
+  enable: true # Control the visibility of this section across all pages where it is used
+  title: ""
 
-  quote:
-    enable: true
-    value: "Partenaires avec nous pour des solutions d'affaires sur mesure qui élèvent votre performance commerciale et assurent un succès à long terme"
-    attribution: "- John C. Maxwell"
+  # Set the maximum number of team members to display in this component instance
+  limit: false # false / number
 
-  button:
-    enable: false
-    label: "Voir tous les membres"
-    url: "/team"
-    rel: ""
-    target: ""
-    showIcon: "true"
-    variant: "outline" # "fill", "outline", "outline-white", "text"
-    hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
-
-  # Définir le nombre maximum de membres d'équipe à afficher dans cette instance de composant
-  limit: 3 # false / number
-
-members:
-  - image: "/images/team/1.jpg"
-    name: "Sarah Johnson"
-    role: "Fondatrice et directrice générale"
-    leadershipTeam: true
+list:
+  - enable: true
+    title: "Debra Harris"
+    image: "/images/team/team-1.png"
+    profession: "Conseiller fiscal"
+    metaDescription: "Car nul ne méprise le plaisir lui-même parce qu'il est plaisir."
+    email: "daniyel.karlos42@gmail.com"
+    phone: "+1 415 555 2387"
     social:
-      enable: true
-      list:
-        - enable: true
-          label: "Linkedin"
-          icon: "/images/icons/social/linkedin.svg"
-          url: "https://www.linkedin.com/"
-        - enable: true
-          label: "x-twitter"
-          icon: "/images/icons/social/twitter.svg"
-          url: "https://twitter.com/"
-  - image: "/images/team/2.jpg"
-    name: "Jane Smith"
-    role: "Directrice financière"
-    leadershipTeam: true
+      - enable: true
+        label: "FB"
+        url: "https://www.facebook.com/taxo"
+      - enable: true
+        label: "TW"
+        url: "https://twitter.com/taxo"
+      - enable: true
+        label: "LI"
+        url: "https://www.linkedin.com/taxo"
+      - enable: true
+        label: "BE"
+        url: "https://www.behance.net/taxo"
+  - enable: true
+    title: "D.A Fanlink"
+    image: "/images/team/team-2.png"
+    profession: "Conseiller fiscal"
+    metaDescription: "Car nul ne méprise le plaisir lui-même parce qu'il est plaisir."
+    email: "example@example.com"
+    phone: "+1 840 841 25 69"
     social:
-      enable: true
-      list:
-        - enable: true
-          label: "Linkedin"
-          icon: "/images/icons/social/linkedin.svg"
-          url: "https://www.linkedin.com/"
-        - enable: true
-          label: "x-twitter"
-          icon: "/images/icons/social/twitter.svg"
-          url: "https://twitter.com/"
-  - image: "/images/team/3.jpg"
-    name: "Robert Brown"
-    role: "Directeur des opérations"
-    leadershipTeam: true
+      - enable: true
+        label: "FB"
+        url: "https://www.facebook.com/taxo"
+      - enable: true
+        label: "TW"
+        url: "https://twitter.com/taxo"
+      - enable: true
+        label: "LI"
+        url: "https://www.linkedin.com/taxo"
+      - enable: true
+        label: "BE"
+        url: "https://www.behance.net/taxo"
+  - enable: true
+    title: "D.A Fanlink"
+    image: "/images/team/team-3.png"
+    profession: "Conseiller fiscal"
+    metaDescription: "Car nul ne méprise le plaisir lui-même parce qu'il est plaisir."
+    email: "example@example.com"
+    phone: "+1 840 841 25 69"
     social:
-      enable: true
-      list:
-        - enable: true
-          label: "Linkedin"
-          icon: "/images/icons/social/linkedin.svg"
-          url: "https://www.linkedin.com/"
-        - enable: true
-          label: "x-twitter"
-          icon: "/images/icons/social/twitter.svg"
-          url: "https://twitter.com/"
-  - image: "/images/team/4.jpg"
-    name: "Mark Thompson"
-    role: "Ingénieur en chef"
+      - enable: true
+        label: "FB"
+        url: "https://www.facebook.com/taxo"
+      - enable: true
+        label: "TW"
+        url: "https://twitter.com/taxo"
+      - enable: true
+        label: "LI"
+        url: "https://www.linkedin.com/taxo"
+      - enable: true
+        label: "BE"
+        url: "https://www.behance.net/taxo"
+  - enable: true
+    title: "Olivia Chen"
+    image: "/images/team/team-4.png"
+    profession: "Designer UI/UX"
+    metaDescription: "Car nul ne méprise le plaisir lui-même parce qu'il est plaisir."
+    email: "example@example.com"
+    phone: "+1 840 841 25 69"
     social:
-      enable: true
-      list:
-        - enable: true
-          label: "Linkedin"
-          icon: "/images/icons/social/linkedin.svg"
-          url: "https://www.linkedin.com/"
-        - enable: true
-          label: "x-twitter"
-          icon: "/images/icons/social/twitter.svg"
-          url: "https://twitter.com/"
-  - image: "/images/team/5.jpg"
-    name: "Michael Davis"
-    role: "Marketing"
+      - enable: true
+        label: "FB"
+        url: "https://www.facebook.com/taxo"
+      - enable: true
+        label: "TW"
+        url: "https://twitter.com/taxo"
+      - enable: true
+        label: "LI"
+        url: "https://www.linkedin.com/taxo"
+      - enable: true
+        label: "BE"
+        url: "https://www.behance.net/taxo"
+  - enable: true
+    title: "Marcus Riley"
+    image: "/images/team/team-5.png"
+    profession: "Développeur Full Stack"
+    metaDescription: "Car nul ne méprise le plaisir lui-même parce qu'il est plaisir."
+    email: "example@example.com"
+    phone: "+1 840 841 25 69"
     social:
-      enable: true
-      list:
-        - enable: true
-          label: "Linkedin"
-          icon: "/images/icons/social/linkedin.svg"
-          url: "https://www.linkedin.com/"
-        - enable: true
-          label: "x-twitter"
-          icon: "/images/icons/social/twitter.svg"
-          url: "https://twitter.com/"
-  - image: "/images/team/6.jpg"
-    name: "Linda White"
-    role: "Ventes"
+      - enable: true
+        label: "FB"
+        url: "https://www.facebook.com/taxo"
+      - enable: true
+        label: "TW"
+        url: "https://twitter.com/taxo"
+      - enable: true
+        label: "LI"
+        url: "https://www.linkedin.com/taxo"
+      - enable: true
+        label: "BE"
+        url: "https://www.behance.net/taxo"
+  - enable: true
+    title: "Sophia Turner"
+    image: "/images/team/team-6.png"
+    profession: "Designer UI/UX"
+    metaDescription: "Car nul ne méprise le plaisir lui-même parce qu'il est plaisir."
+    email: "example@example.com"
+    phone: "+1 840 841 25 69"
     social:
-      enable: true
-      list:
-        - enable: true
-          label: "Linkedin"
-          icon: "/images/icons/social/linkedin.svg"
-          url: "https://www.linkedin.com/"
-        - enable: true
-          label: "x-twitter"
-          icon: "/images/icons/social/twitter.svg"
-          url: "https://twitter.com/"
-
-  - image: "/images/team/7.jpg"
-    name: "Jessica Harris"
-    role: "Design"
-    social:
-      enable: true
-      list:
-        - enable: true
-          label: "Linkedin"
-          icon: "/images/icons/social/linkedin.svg"
-          url: "https://www.linkedin.com/"
-        - enable: true
-          label: "x-twitter"
-          icon: "/images/icons/social/twitter.svg"
-          url: "https://twitter.com/"
+      - enable: true
+        label: "FB"
+        url: "https://www.facebook.com/taxo"
+      - enable: true
+        label: "TW"
+        url: "https://twitter.com/taxo"
+      - enable: true
+        label: "LI"
+        url: "https://www.linkedin.com/taxo"
+      - enable: true
+        label: "BE"
+        url: "https://www.behance.net/taxo"
 ---

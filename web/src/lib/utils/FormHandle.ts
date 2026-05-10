@@ -245,7 +245,7 @@ export const formspreeSubmit = async (
   } catch (error) {
     setMessage(
       error +
-        "! Please use this mail - [looka-astro-theme@gmail.com](mailto:looka-astro-theme@gmail.com) to submit a ticket!",
+        "! Please use this mail - [taxo-astro-theme@gmail.com](mailto:taxo-astro-theme@gmail.com) to submit a ticket!",
       true,
       false,
       form,

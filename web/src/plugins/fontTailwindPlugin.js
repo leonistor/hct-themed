@@ -9,7 +9,7 @@
  * [
  *   {
  *     "name": "Inter",
- *     "cssVariable": "font-inter",
+ *     "cssVariable": "--font-inter",
  *     "fallback": "sans-serif"
  *   }
  * ]

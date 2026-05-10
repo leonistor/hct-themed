@@ -1,116 +1,112 @@
 ---
 enable: true # Control the visibility of this section across all pages where it is used
-title: "Contactez-nous pour en savoir plus"
-description: "Que vous cherchiez une aide d'experts, notre équipe dédiée est prête à vous soutenir à chaque étape du chemin."
-subtitle: "Contact"
+badge: "Questions générales"
+title: "Question fréquemment posée."
+backgroundImage: "/images/decorative/pattern/pattern-3.png"
+backgroundImageAlt: "Parlons-en"
+decorativeImage: "/images/decorative/contact-person-2.png"
+decorativeImageAlt: "Parlons-en"
 
-contactList:
-  enable: true
-  list:
-    - icon: "Phone"
-      label: "Appelez-nous maintenant"
-      value: "+1-202-555-0190"
-    - icon: "Mail"
-      label: "Envoyez-nous un e-mail"
-      value: "example@gmail.com"
-    - icon: "Send"
-      label: "Discutez avec nous"
-      value: "@example"
+faqList:
+  - enable: true
+    title: "Changer mon mot de passe facilement?"
+    content: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, commodo ligula eget dolor. Massa énéenne. Cum sociis OTAN penatibus
+  - enable: true
+    title: "Consultation fiscale entreprises"
+    content: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, commodo ligula eget dolor. Massa énéenne. Cum sociis OTAN penatibus
+  - enable: true
+    title: "Fiscalité & planification financière"
+    content: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, commodo ligula eget dolor. Massa énéenne. Cum sociis OTAN penatibus
 
-social:
-  enable: true
-  title: "Suivez-nous sur les réseaux sociaux"
-  # # uncomment below list if you want to override `src/config/social.json` data
-  # list:
-  #   - enable: true
-  #     label: "facebook"
-  #     icon: "/images/icons/social/facebook.svg"
-  #     url: "/"
+contactTitle: "Demande de rappel"
+contactBadge: "Envoyer un message"
 
 # Check config.toml file for form action related settings
+# this is also used in the footer of the personal case studies homepage
 form:
-  emailSubject: "Nouvelle soumission de formulaire du site web Looka" # Customized email subject (applicable when anyone submit form, form submission may receive by email depend on provider)
+  emailSubject: "Nouvelle soumission de formulaire depuis le site taxo" # Customized email subject (applicable when anyone submit form, form submission may receive by email depend on provider)
   submitButton:
-    label: "Envoyer votre réponse"
-    showIcon: "true"
-    variant: "outline" # "fill", "outline", "outline-white", "text"
-    hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
+    # Refer to the `sharedButton` schema in `src/sections.schema.ts` for all available configuration options (e.g., enable, label, url, hoverEffect, variant, icon, tag, rel, class, target, etc.)
+    enable: true
+    label: "Envoyer un message"
+    # hoverEffect: "" # Optional: text-flip | creative-fill | magnetic | magnetic-text-flip
+    # variant: "" # Optional: fill | outline | text | circle
+    # rel: "" # Optional
+    # target: "" # Optional
+
   # This note will show at the end of form
   # note: |
-  #   Vos données sont en sécurité avec nous. Nous respectons votre vie privée et ne partageons jamais vos informations. <br /> Lisez notre [Politique de confidentialité](/privacy-policy/).
+  #   Your data is safe with us. We respect your privacy and never share your information. <br /> Read our [Privacy Policy](/privacy-policy/).
   inputs:
     - label: ""
-      placeholder: "Nom complet"
-      name: "Nom complet" # This is crucial. Its indicate under which name you want to receive this field data
+      placeholder: "Nom complet *"
+      name: "Full Name" # This is crucial. Its indicate under which name you want to receive this field data
       required: true
       halfWidth: true
       defaultValue: ""
     - label: ""
-      placeholder: "Adresse e-mail"
-      name: "Adresse e-mail" # This is crucial. Its indicate under which name you want to receive this field data
+      placeholder: "Adresse e-mail *"
+      name: "Email Address" # This is crucial. Its indicate under which name you want to receive this field data
       required: true
       type: "email"
       halfWidth: true
       defaultValue: ""
     - label: ""
-      placeholder: "Numéro de téléphone"
-      name: "Numéro de téléphone" # This is crucial. Its indicate under which name you want to receive this field data
-      required: true
-      type: "text"
-      halfWidth: true
-      defaultValue: ""
-    - label: ""
-      placeholder: "Entreprise"
-      name: "Entreprise" # This is crucial. Its indicate under which name you want to receive this field data
-      required: true
-      type: "text"
-      halfWidth: true
-      defaultValue: ""
-    - label: ""
-      placeholder: "Sujet"
-      name: "Sujet" # This is crucial. Its indicate under which name you want to receive this field data
-      required: true
+      placeholder: "Sujet *"
+      name: "Subject" # This is crucial. Its indicate under which name you want to receive this field data
+      required: false
       halfWidth: true
       dropdown:
         type: "" # select | search - default is select
         search: # if type is search then it will work
           placeholder: ""
         items:
-          - label: "Exemple 01"
-            value: "Exemple 01"
-          - label: "Exemple 02"
-            value: "Exemple 02"
-          - label: "Exemple 03"
-            value: "Exemple 03"
+          - label: "Demande générale"
+            value: "Demande générale"
+            selected: false
+          - label: "Opportunité de partenariat"
+            value: "Opportunité de partenariat"
+            selected: false
+          - label: "Opportunité d'investissement"
+            value: "Opportunité d'investissement"
+            selected: false
     - label: ""
-      placeholder: "Sujet avec recherche"
-      name: "Sujet avec recherche" # This is crucial. Its indicate under which name you want to receive this field data
-      required: true
+      placeholder: "Sujet avec recherche *"
+      name: "Subject With Search" # This is crucial. Its indicate under which name you want to receive this field data
+      required: false
       halfWidth: true
       dropdown:
         type: "search" # select | search - default is select
         search: # if type is search then it will work
           placeholder: "Sujet avec recherche"
         items:
-          - label: "Lowni Saiki"
-            value: "Lowni Saiki"
-          - label: "Sikow Pow"
-            value: "Sikow Pow"
-          - label: "Kenbi Shaktun"
-            value: "Kenbi Shaktun"
-          - label: "Aruyyo Kawn"
-            value: "Aruyyo Kawn"
-          - label: "Marong Lowbbi"
-            value: "Marong Lowbbi"
+          - label: "Demande générale"
+            value: "Demande générale"
+            selected: false
+          - label: "Opportunité de partenariat"
+            value: "Opportunité de partenariat"
+            selected: false
+          - label: "Opportunité de carrière"
+            value: "Opportunité de carrière"
+            selected: false
+          - label: "Opportunité d'investissement"
+            value: "Opportunité d'investissement"
+            selected: false
+          - label: "Demande des médias"
+            value: "Demande des médias"
+            selected: false
     - label: ""
       tag: "textarea"
       defaultValue: ""
-      rows: "4" # Only work if tag is textarea
-      placeholder: "Entrez votre message."
+      rows: "2" # Only work if tag is textarea
+      placeholder: "Comment pouvons-nous vous aider? *"
       name: "Message" # This is crucial. Its indicate under which name you want to receive this field data
       required: true
       halfWidth: false
-    - label: "Google Search" # only valid for type="checkbox" & type === "radio"
+    - label: "Recherche Google" # only valid for type="checkbox" & type === "radio"
       checked: false # only valid for type="checkbox" & type === "radio"
       name: "User Source" # This is crucial. Its indicate under which name you want to receive this field data
       required: true
@@ -119,7 +115,7 @@ form:
       type: "radio"
       halfWidth: true
       defaultValue: ""
-    - label: "Médias sociaux" # only valid for type="checkbox" & type === "radio"
+    - label: "Réseaux sociaux" # only valid for type="checkbox" & type === "radio"
       name: "User Source" # This is crucial. Its indicate under which name you want to receive this field data
       required: true
       groupLabel: "" # Radio Inputs Label
@@ -127,23 +123,24 @@ form:
       type: "radio"
       halfWidth: true
       defaultValue: ""
-    - label: "Parrainage" # only valid for type="checkbox" & type === "radio"
-      name: "User Source" # This is crucial. Its indicate under which name you want to receive this field data
-      required: true
-      groupLabel: "" # Radio Inputs Label
-      group: "source" # when you add group then it will omit space between the same group radio input
-      type: "radio"
-      halfWidth: true
-      defaultValue: ""
-    - label: "Autre" # only valid for type="checkbox" & type === "radio"
-      name: "User Source" # This is crucial. Its indicate under which name you want to receive this field data
-      required: true
-      groupLabel: "" # Radio Inputs Label
-      group: "source" # when you add group then it will omit space between the same group radio input
-      type: "radio"
-      halfWidth: true
-      defaultValue: ""
-    - label: "J'accepte les termes et conditions et la [politique de confidentialité](/contact/)." # only valid for type="checkbox" & type === "radio"
+    # - label: "Referral" # only valid for type="checkbox" & type === "radio"
+    #   name: "User Source" # This is crucial. Its indicate under which name you want to receive this field data
+    #   required: true
+    #   groupLabel: "" # Radio Inputs Label
+    #   group: "source" # when you add group then it will omit space between the same group radio input
+    #   type: "radio"
+    #   halfWidth: true
+    #   defaultValue: ""
+    # - label: "Other" # only valid for type="checkbox" & type === "radio"
+    #   name: "User Source" # This is crucial. Its indicate under which name you want to receive this field data
+    #   required: true
+    #   groupLabel: "" # Radio Inputs Label
+    #   group: "source" # when you add group then it will omit space between the same group radio input
+    #   type: "radio"
+    #   halfWidth: true
+    #   defaultValue: ""
+    - label: "J'accepte les conditions générales et la [politique de confidentialité](/contact/)." # only valid for type="checkbox" & type === "radio"
+      id: "privacy-policy"
       name: "Agreed Privacy" # This is crucial. Its indicate under which name you want to receive this field data
       value: "Agreed" # Value that will be submit (applicable for type="checkbox" & type === "radio")
       checked: false # only valid for type="checkbox" & type === "radio"
@@ -153,8 +150,8 @@ form:
       defaultValue: ""
     - note: success # info | warning | success | deprecated | hint
       parentClass: "hidden text-sm message success"
-      content: Nous avons reçu votre message! Nous vous répondrons dès que possible.
+      content: Nous avons bien reçu votre message ! Nous vous répondrons dans les plus brefs délais.
     - note: deprecated # info | warning | success | deprecated | hint
       parentClass: "hidden text-sm message error"
-      content: Quelque chose a mal tourné! Veuillez utiliser ce courriel - [looka-astro-theme@gmail.com](mailto:looka-astro-theme@gmail.com) pour soumettre un ticket!
+      content: Une erreur s'est produite ! Veuillez utiliser ce mail - [taxo-astro-theme@gmail.com](mailto:taxo-astro-theme@gmail.com) pour soumettre un ticket!
 ---

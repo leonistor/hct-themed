@@ -1,14 +1,14 @@
 ---
 import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils.ts";
-import { humanize } from "@/lib/utils/textConverter";
+import { humanize, markdownify } from "@/lib/utils/textConverter";
 
 // Props
 interface Props {
   class?: string;
-  hiddenPaths?: string[];
+  breadcrumbExcludedPaths?: string[];
 }
 
-const { hiddenPaths, class: className, ...rest } = Astro.props;
+const { breadcrumbExcludedPaths, class: className, ...rest } = Astro.props;
 
 // Helper function to create breadcrumb parts
 const createBreadcrumbParts = (pathname: string) => {
@@ -49,32 +49,36 @@ const createBreadcrumbParts = (pathname: string) => {
 let breadcrumbParts = createBreadcrumbParts(Astro.url.pathname);
 
 // Removed hidden paths
-if (hiddenPaths && hiddenPaths.length > 0) {
+if (breadcrumbExcludedPaths && breadcrumbExcludedPaths.length > 0) {
   breadcrumbParts = breadcrumbParts.map((part) => {
     return {
       ...part,
-      href: !hiddenPaths?.includes(part.label) ? part.href : "",
+      href: !breadcrumbExcludedPaths?.includes(part.label) ? part.href : "",
     };
   });
 }
 ---
 
-<nav aria-label="Breadcrumb" class:list={[className]} {...rest}>
-  <ol
-    class="has-list has-list-slash slash-dark inline-flex flex-wrap gap-y-3"
-    role="list">
-    {
-      breadcrumbParts.map(({ label, ...attrs }, index) => (
-        <li class="mx-1 capitalize" role="listitem">
-          {index !== breadcrumbParts.length - 1 && attrs.href !== "" ? (
-            <a class="text-primary" {...attrs}>
-              {label}
-            </a>
-          ) : (
-            <span class="text-text-default/70" set:html={label} />
-          )}
-        </li>
-      ))
-    }
-  </ol>
-</nav>
+<section class:list={["bg-body pt-0", className]}>
+  <div class="xl:container-2xl relative py-4 max-xl:container">
+    <nav aria-label="Breadcrumb" class:list={[className]} {...rest}>
+      <ol
+        class="has-list has-list-slash slash-dark inline-flex flex-wrap gap-x-2 gap-y-3"
+        role="list">
+        {
+          breadcrumbParts.map(({ label, ...attrs }, index) => (
+            <li class="capitalize" role="listitem">
+              {index !== breadcrumbParts.length - 1 && attrs.href !== "" ? (
+                <a class="text-primary" {...attrs}>
+                  {label}
+                </a>
+              ) : (
+                <span class="text-text-dark/70" set:html={markdownify(label)} />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+  </div>
+</section>

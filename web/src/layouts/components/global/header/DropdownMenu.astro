@@ -1,7 +1,8 @@
 ---
 import type { NavigationLink } from "@/types";
-import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
 import NavMegaMenu from "@/layouts/components/global/header/MegaMenu.astro";
+import Icons from "@/helpers/Icons.astro";
+import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils.ts";
 
 const { recursive } = Astro.props;
 const menu = Astro.props.menu as NavigationLink;
@@ -12,53 +13,50 @@ const { pathname } = Astro.url;
   class:list={[
     "hs-dropdown nav-dropdown group [--auto-close:inside] [--offset:0px]",
     recursive ? "nav-dropdown-item [--placement:right-start]" : "nav-item",
-    menu.hasMegaMenu || menu.hasChildren ? "relative" : "",
+    menu.hasMegaMenu && "has-mega-menu",
     menu.hasMegaMenu
-      ? "lg:[--strategy:fixed]"
+      ? "max-lg:relative lg:static!"
       : menu.hasChildren
-        ? "[--strategy:static] lg:[--strategy:absolute]"
+        ? "relative"
+        : "",
+    menu.hasMegaMenu
+      ? "lg:[--strategy:static]"
+      : menu.hasChildren
+        ? "lg:[--strategy:absolute]"
         : "",
   ]}
-  role="menuitem">
-  <span
+  role="none">
+  <button
+    type="button"
+    aria-haspopup="menu"
+    aria-expanded="false"
+    role="menuitem"
     class:list={[
-      "nav-dropdown-toggle hs-dropdown-toggle flex items-center",
+      "hs-dropdown-toggle nav-toggle",
       {
         active:
           menu.children?.map(({ url }) => url).includes(pathname) ||
           menu.children?.map(({ url }) => `${url}/`).includes(pathname),
       },
-      recursive
-        ? "nav-dropdown-link justify-between"
-        : "nav-link max-lg:flex! max-lg:justify-between",
+      recursive ? "nav-dropdown-link" : "nav-link",
     ]}>
     {menu.name}
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      data-icon
-      class="hs-dropdown-open:rotate-180 ml-2 h-4 w-4 transition duration-300">
-      <path d="m6 9 6 6 6-6"></path>
-    </svg>
-  </span>
+
+    <Icons class="nav-toggle-icon" icon="ChevronDown" />
+  </button>
   {
     !menu.hasMegaMenu && menu.hasChildren && (
       <ul
-        class="nav-dropdown-list hs-dropdown-menu hs-dropdown-open:mt-2! hs-dropdown-open:pointer-events-auto hs-dropdown-open:opacity-100 pointer-events-none top-0 mt-4 hidden opacity-0 transition-[opacity,margin] max-lg:m-0! max-lg:transform-none!"
+        class="nav-dropdown-list hs-dropdown-menu"
+        role="menu"
         {...(recursive ? { "aria-orientation": "vertical" } : {})}>
         {menu.children?.map((child) =>
           child.hasChildren ? (
             child.hasChildren && <Astro.self recursive menu={child} />
           ) : (
-            <li class="nav-dropdown-item" role="menuitem">
+            <li class="nav-dropdown-item" role="none">
               <a
+                role="menuitem"
                 href={getLocaleUrlCTM(
                   child.url || Astro.url.origin,
                   Astro.currentLocale,
@@ -81,7 +79,32 @@ const { pathname } = Astro.url;
                       pathname === `${child.url}/` || pathname === child.url,
                   },
                 ]}>
-                {child.name}
+                {child.badge ? (
+                  child.badge.type === "dot" ? (
+                    <span class="relative inline-block">
+                      {child.name}
+                      <sup
+                        class:list={[
+                          "badge badge-dot",
+                          child.badge.color && `badge-${child.badge.color}`,
+                        ]}
+                      />
+                    </span>
+                  ) : (
+                    <>
+                      {child.name}
+                      <span
+                        class:list={[
+                          "badge",
+                          child?.badge.color && `badge-${child?.badge.color}`,
+                        ]}>
+                        {child?.badge.label}
+                      </span>
+                    </>
+                  )
+                ) : (
+                  child.name
+                )}
               </a>
             </li>
           ),
@@ -89,5 +112,9 @@ const { pathname } = Astro.url;
       </ul>
     )
   }
-  {!menu.hasChildren && menu.hasMegaMenu && <NavMegaMenu menu={menu} />}
+  {
+    !menu.hasChildren && menu.hasMegaMenu && (
+      <NavMegaMenu isMobile={Astro.props.isMobile} menu={menu} />
+    )
+  }
 </li>

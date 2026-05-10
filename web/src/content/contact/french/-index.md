@@ -1,5 +1,6 @@
 ---
-title: "Contacter"
-description: "Prendre contact avec nous! Pour les demandes, le support ou les commentaires. "
+badge: "Parlons-en"
+title: "Retrouvez nos informations et contactez-nous directement ici"
+description: "Parlons-en ! Pour toute demande, support ou retour."
 draft: false
 ---

@@ -1,42 +1,71 @@
 {
   "common": {
     "readMore": "Read More",
+    "viewDetails": "View Details",
     "readMoreAbout": "Read more about",
+    "viewProject": "View Project",
     "learnMoreAbout": "Learn more about",
-    "viewMoreDetails": "View more details",
     "emailPlaceholder": "Email Address",
-    "monthlyPlan": "Monthly",
+    "paginationPrevious": "Previous",
     "paginationNext": "Next",
-    "paginationPrevious": "Previous"
+    "paginationCaseStudiesPrev": "Previous CaseStudies",
+    "paginationCaseStudiesNext": "Next CaseStudies",
+    "workingHours": "Working Hours",
+    "workHour": "Work Hour",
+    "workingHoursValue": "Sun-monday, 09am-5pm",
+    "workHourValue": "Monday To Friday: 9PM - 5PM Saturday Closed",
+    "call": "Call:",
+    "callUs": "Call Us",
+    "play": "Play",
+    "contactUs": "Contact Us",
+    "ourServices": "Our Services",
+    "recentProjects": "Recent Projects",
+    "discoverMore": "Discover More",
+    "hotLine": "Hot Line",
+    "searchHere": "Search Here",
+    "letsChat": "Let's Chat",
+    "sendRequest": "Send Request",
+    "noFaqsFoundFor": "No FAQs found for",
+    "loadingMap": "Loading Map...",
+    "comments": "Comments",
+    "reply": "Reply"
   },
   "widgets": {
-    "postSearchTitle": "Search Post",
-    "postSearchFormPlaceholder": "Search For ...",
-    "categoriesTitle": "Category",
-    "recentPostsTitle": "Recent Posts"
+    "postSearchFormPlaceholder": "Try Searching 'tips'...",
+    "categoriesTitle": "Categories",
+    "tagsTitle": "Tags",
+    "popularTagsTitle": "Popular Tags",
+    "recentPostsTitle": "Recent Posts",
+    "haveAnyQuestionsTitle": "Have Any Questions?",
+    "haveAnyQuestionsDescription": "There are many variations of passages of Lorem Ipsum available, but the alteration in some form,"
   },
-  "career": {
-    "location": "Location",
-    "deadline": "Application Deadline",
-    "jobType": "Job Type"
+  "header": {
+    "announcement": "Get Your Free Tax Advisor Today and Save 10% on Your First Session. [Get Started](/contact/)"
+  },
+  "headerOffcanvas": {
+    "description": "We are a digital agency that helps businesses create immersive experiences.",
+    "buttonLabel": "Let’s Talk With Us"
   },
   "blog": {
-    "writtenBy": "Written By",
-    "publishedOn": "Published On",
-    "category": "Category"
+    "category": "Category",
+    "share": "Share:",
+    "follow": "Follow:",
+    "paginationPrevious": "Previous Post",
+    "paginationNext": "Next Post"
   },
   "navigation": {
-    "buttonLabel": "Get Started"
+    "buttonLabel": "Get in Touch"
   },
   "subscription": {
-    "label": "Subscribe to our newsletter for the latest updates"
+    "title": "Add Your Own Details and Inform All Your Tax Requirements"
   },
   "footer": {
-    "quickLinks": "Quick Links",
-    "legal": "Legal",
-    "resources": "Resources",
-    "description": "Looka is a San Francisco-based design and technology company founded in 2016. Their mission is to democratize design by making professional branding tools accessible to everyone.",
-    "copyright": "Copyright {{ year }} / All Rights Reserved By Looka / Built with love using [Astro Themes](https://getastrothemes.com/)",
-    "_comment": "We kindly appreciate it if you retain the theme copyright. Thank you for supporting Getastrothemes!"
+    "menuTitleLinks": "Links",
+    "freeSupport": "Free Support",
+    "description": "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit minus id quod maxime placeat facere assumenda est omnis dolor repellendus.",
+    "contact": "Contact",
+    "copyright": "Copyright © {{ year }}. [Taxo](https://taxo-dev.netlify.app/) All Rights Reserved.",
+    "_comment": "We kindly appreciate it if you retain the theme copyright. Thank you for supporting Taxo!",
+    "since": "since 1990"
   }
 }

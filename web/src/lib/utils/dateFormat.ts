@@ -1,16 +1,38 @@
+type DatePattern = "dd MMM, yyyy" | "dd MMMM yyyy";
+
 const dateFormat = (
   date: Date | string,
-  pattern: string = "dd MMM, yyyy",
+  pattern: DatePattern = "dd MMM, yyyy",
+  locale: string = "en-US",
 ): string => {
   const dateObj = new Date(date);
 
+  if (isNaN(dateObj.getTime())) {
+    throw new Error("Invalid date provided");
+  }
+
+  const day = new Intl.DateTimeFormat(locale, {
+    day: "2-digit",
+  }).format(dateObj);
+
+  const monthShort = new Intl.DateTimeFormat(locale, {
+    month: "short",
+  }).format(dateObj);
+
+  const monthLong = new Intl.DateTimeFormat(locale, {
+    month: "long",
+  }).format(dateObj);
+
+  const year = new Intl.DateTimeFormat(locale, {
+    year: "numeric",
+  }).format(dateObj);
+
   if (pattern === "dd MMM, yyyy") {
-    const formatter = new Intl.DateTimeFormat("en-US", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-    return formatter.format(dateObj);
+    return `${day} ${monthShort}, ${year}`;
+  }
+
+  if (pattern === "dd MMMM yyyy") {
+    return `${day} ${monthLong} ${year}`;
   }
 
   throw new Error(`Unsupported pattern: ${pattern}`);

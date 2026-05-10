@@ -1,0 +1,369 @@
+{
+  "headerPrimary": [
+    {
+      "enable": true,
+      "name": "Acasă",
+      "weight": 0,
+      "url": "/"
+    },
+    {
+      "enable": true,
+      "name": "Meniu Mega",
+      "weight": 1,
+      "hasMegaMenu": true,
+      "menus": [
+        {
+          "enable": true,
+          "name": "Servicii Principale",
+          "description": "Lucrări de livrare pentru companii care lansează site-uri web, produse și redesign-uri axate pe conversie.",
+          "weight": 0,
+          "children": [
+            {
+              "enable": true,
+              "name": "Platforme Web",
+              "description": "Site-uri de marketing, site-uri corporative și construcții CMS care rămân rapide sub încărcare.",
+              "icon": "Monitor",
+              "url": "/services/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Design de Produs",
+              "description": "Fluxuri de utilizator, sisteme de interfață și ecrane pregătite pentru predare pentru echipe reale de produs.",
+              "icon": "PenTool",
+              "url": "/services/custom-slug-services-1/",
+              "weight": 1
+            },
+            {
+              "enable": true,
+              "name": "Inginerie Frontend",
+              "description": "Implementare Astro, React și axată pe performanță pentru stack-uri web moderne.",
+              "icon": "Code2",
+              "url": "/services/",
+              "weight": 2,
+              "badge": {
+                "enable": true,
+                "label": "Popular",
+                "color": "accent",
+                "type": "text"
+              }
+            },
+            {
+              "enable": true,
+              "name": "SEO Tehnic",
+              "description": "Structura site-ului, arhitectura conținutului și optimizări de viteză care îmbunătățesc descoperirea.",
+              "icon": "Search",
+              "url": "/services/",
+              "weight": 3
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Modele de Colaborare",
+          "description": "Modalități prin care clienții aduc de obicei Lumio, de la un sprint concentrat la suport continuu pentru produs.",
+          "weight": 1,
+          "children": [
+            {
+              "enable": true,
+              "name": "Sprint de Lansare MVP",
+              "description": "Un scop compact pentru a lansa un produs nou sau o ofertă fără a prelungi timeline-ul.",
+              "icon": "Rocket",
+              "url": "/pricing/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Augmentarea Echipei",
+              "description": "Adaugă capacitate de design și dezvoltare într-o echipă internă cu mai puțină frictionare la angajare.",
+              "icon": "Users",
+              "url": "/about/",
+              "weight": 1
+            },
+            {
+              "enable": true,
+              "name": "Reconstrucție și Replatformare",
+              "description": "Pleacă de la configurări lente și greu de gestionat fără a sacrifica căile de conversie.",
+              "icon": "RefreshCcw",
+              "url": "/case-studies/",
+              "weight": 2
+            },
+            {
+              "enable": true,
+              "name": "Suport Retainer",
+              "description": "Design, dezvoltare și iterație continuă pentru echipe care lansează în fiecare lună.",
+              "icon": "Clock3",
+              "url": "/contact/",
+              "weight": 3
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Dovezi și Pași Următori",
+          "description": "Pagini pe care cumpărătorii le vor de obicei înainte de a programa un apel sau de a face o listă scurtă cu un partener.",
+          "weight": 2,
+          "children": [
+            {
+              "enable": true,
+              "name": "Studiu de Caz Evidențiat",
+              "description": "O privire mai atentă asupra unui proiect, de la încadrarea problemei până la rezultatele măsurabile ale lansării.",
+              "icon": "ChartNoAxesCombined",
+              "url": "/case-studies/custom-slug-case-studies-1/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Toate Studiile de Caz",
+              "description": "Revizuiește lucrările recente de livrare în proiecte axate pe produs, serviciu și creștere.",
+              "icon": "FolderKanban",
+              "url": "/case-studies/",
+              "weight": 1
+            },
+            {
+              "enable": true,
+              "name": "Perspective și Articole",
+              "description": "Note de proces, lecții de lansare și idei practice pe care echipele le pot aplica imediat.",
+              "icon": "BookOpenText",
+              "url": "/blog/",
+              "weight": 2
+            },
+            {
+              "enable": true,
+              "name": "Programează un Call de Descoperire",
+              "description": "Începe cu scopul, timeline-ul și bugetul în loc de un schimb introductiv vag.",
+              "icon": "MessageSquareMore",
+              "url": "/contact/",
+              "weight": 3
+            }
+          ]
+        }
+      ],
+      "cta": {
+        "enable": true,
+        "eyebrow": "Partener de Livrare",
+        "image": "/images/case-studies/case-study-1.png",
+        "title": "Ai nevoie de o echipă care poate proiecta, construi și lansa fără straturi suplimentare?",
+        "description": "Folosește meniul pentru a explora liniile de servicii, apoi treci la o conversație reală despre scop când potrivirea este clară.",
+        "items": [
+          "Strategie, design și inginerie într-un singur flux de lucru",
+          "Potrivit pentru agenții, firme B2B și branduri conduse de consultanță",
+          "Pași următori clari prin prețuri, studii de caz și contact"
+        ],
+        "button": {
+          "enable": true,
+          "label": "Începe un Proiect",
+          "url": "/contact/",
+          "variant": "fill",
+          "tag": "a",
+          "hoverEffect": "creative-fill",
+          "icon": {
+            "enable": true,
+            "name": "ArrowUpRight",
+            "position": "right"
+          }
+        }
+      }
+    },
+    {
+      "name": "Pagini",
+      "enable": true,
+      "weight": 2,
+      "hasChildren": true,
+      "children": [
+        {
+          "enable": true,
+          "name": "Acasă",
+          "weight": 0,
+          "hasChildren": true,
+          "children": [
+            {
+              "enable": true,
+              "name": "Acasă 01",
+              "url": "/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Acasă 02",
+              "url": "/home-two/",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Studii de Caz",
+          "weight": 0,
+          "hasChildren": true,
+          "children": [
+            {
+              "enable": true,
+              "name": "Studii de Caz",
+              "url": "/case-studies/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Studiu de Caz Individual",
+              "url": "/case-studies/custom-slug-case-studies-1/",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Blog",
+          "weight": 0,
+          "hasChildren": true,
+          "children": [
+            {
+              "enable": true,
+              "name": "Blog",
+              "url": "/blog/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Articol Blog Individual",
+              "url": "/blog/custom-slug-post-1/",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Servicii",
+          "weight": 0,
+          "hasChildren": true,
+          "children": [
+            {
+              "enable": true,
+              "name": "Servicii",
+              "url": "/services/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Serviciu Individual",
+              "url": "/services/custom-slug-services-1/",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Despre Noi",
+          "url": "/about/",
+          "weight": 0
+        },
+        {
+          "enable": true,
+          "name": "Echipă",
+          "url": "/team",
+          "weight": 0
+        },
+        {
+          "enable": true,
+          "name": "Prețuri",
+          "url": "/pricing/",
+          "weight": 0
+        },
+        {
+          "enable": true,
+          "name": "Întrebări Frecvente",
+          "url": "/faq/",
+          "weight": 0
+        },
+        {
+          "enable": true,
+          "name": "404",
+          "url": "/404/",
+          "weight": 0,
+          "badge": {
+            "enable": true,
+            "label": "Etichetă",
+            "color": "accent",
+            "_color_comment": "color expected value - accent, info, success, danger, dark",
+            "type": "text",
+            "_type_comment": "type expected value - text, dot"
+          }
+        }
+      ]
+    },
+    {
+      "enable": true,
+      "name": "Componente",
+      "weight": 3,
+      "url": "/components/",
+      "badge": {
+        "enable": true,
+        "label": "Nou",
+        "color": "accent",
+        "_color_comment": "color expected value - accent, info, success, danger, dark",
+        "type": "text",
+        "_type_comment": "type expected value - text, dot"
+      }
+    },
+    {
+      "enable": true,
+      "name": "Contact",
+      "weight": 4,
+      "url": "/contact/"
+    }
+  ],
+  "footerPrimary": [
+    {
+      "enable": true,
+      "name": "Despre Noi",
+      "url": "/about/"
+    },
+    {
+      "enable": true,
+      "name": "Servicii",
+      "url": "/services/"
+    },
+    {
+      "enable": true,
+      "name": "Echipă",
+      "url": "/team/"
+    },
+    {
+      "enable": true,
+      "name": "Blog",
+      "url": "/blog/"
+    },
+    {
+      "enable": true,
+      "name": "Contactează-ne",
+      "url": "/contact/"
+    }
+  ],
+  "footerSecondary": [
+    {
+      "enable": true,
+      "name": "Despre",
+      "url": "/about/"
+    },
+    {
+      "enable": true,
+      "name": "Servicii",
+      "url": "/services/"
+    },
+    {
+      "enable": true,
+      "name": "Proiecte",
+      "url": "/case-studies/"
+    },
+    {
+      "enable": true,
+      "name": "Blog",
+      "url": "/blog/"
+    },
+    {
+      "enable": true,
+      "name": "Contact",
+      "url": "/contact/"
+    }
+  ]
+}

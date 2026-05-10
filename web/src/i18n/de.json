@@ -1,0 +1,69 @@
+{
+  "common": {
+    "readMore": "Weiterlesen",
+    "viewDetails": "Details anzeigen",
+    "readMoreAbout": "Mehr erfahren über",
+    "viewProject": "Projekt anzeigen",
+    "learnMoreAbout": "Mehr erfahren über",
+    "emailPlaceholder": "E-Mail-Adresse",
+    "paginationPrevious": "Zurück",
+    "paginationNext": "Weiter",
+    "paginationCaseStudiesPrev": "Vorherige Fallstudien",
+    "paginationCaseStudiesNext": "Nächste Fallstudien",
+    "workingHours": "Geschäftszeiten",
+    "workHour": "Arbeitszeit",
+    "workingHoursValue": "So–Mo, 09:00–17:00",
+    "workHourValue": "Montag bis Freitag: 9:00–17:00, Samstag geschlossen",
+    "call": "Anruf:",
+    "callUs": "Rufen Sie uns an",
+    "play": "Abspielen",
+    "contactUs": "Kontaktieren Sie uns",
+    "ourServices": "Unsere Dienstleistungen",
+    "recentProjects": "Aktuelle Projekte",
+    "discoverMore": "Mehr entdecken",
+    "hotLine": "Hotline",
+    "searchHere": "Hier suchen",
+    "letsChat": "Chatten Sie mit uns",
+    "sendRequest": "Anfrage senden",
+    "noFaqsFoundFor": "Keine FAQs gefunden für",
+    "loadingMap": "Karte wird geladen...",
+    "comments": "Kommentare",
+    "reply": "Antworten"
+  },
+  "widgets": {
+    "postSearchFormPlaceholder": "Versuchen Sie, nach 'Tipps' zu suchen...",
+    "categoriesTitle": "Kategorien",
+    "tagsTitle": "Tags",
+    "popularTagsTitle": "Beliebte Tags",
+    "recentPostsTitle": "Neueste Beiträge",
+    "haveAnyQuestionsTitle": "Haben Sie Fragen?",
+    "haveAnyQuestionsDescription": "Es gibt viele Variationen von Passagen des Lorem Ipsum, aber die Änderung in irgendeiner Form,"
+  },
+  "header": {
+    "announcement": "Holen Sie sich noch heute Ihren kostenlosen Steuerberater und sparen Sie 10% bei Ihrer ersten Sitzung. [Jetzt starten](/contact/)"
+  },
+  "headerOffcanvas": {
+    "description": "Wir sind eine Digitalagentur, die Unternehmen dabei hilft, immersive Erlebnisse zu schaffen.",
+    "buttonLabel": "Sprechen Sie mit uns"
+  },
+  "blog": {
+    "category": "Kategorie",
+    "share": "Teilen:",
+    "follow": "Folgen:",
+    "paginationPrevious": "Vorheriger Beitrag",
+    "paginationNext": "Nächster Beitrag"
+  },
+  "navigation": {
+    "buttonLabel": "Kontakt aufnehmen"
+  },
+  "footer": {
+    "menuTitleLinks": "Links",
+    "freeSupport": "Kostenloser Support",
+    "description": "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit minus id quod maxime placeat facere assumenda est omnis dolor repellendus.",
+    "contact": "Kontakt",
+    "copyright": "Copyright © {{ year }}. [Taxo](https://taxo-dev.netlify.app/) Alle Rechte vorbehalten.",
+    "_comment": "Wir schätzen es sehr, wenn Sie das Theme-Copyright behalten. Vielen Dank für Ihre Unterstützung von Taxo!",
+    "since": "seit 1990"
+  }
+}
+}

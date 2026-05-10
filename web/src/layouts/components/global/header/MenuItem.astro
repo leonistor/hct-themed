@@ -1,6 +1,6 @@
 ---
 import type { NavigationLink } from "@/types";
-import NavDropdownMenu from "@/layouts/components/global/header/DropdownMenu.astro";
+import DropdownMenu from "@/layouts/components/global/header/DropdownMenu.astro";
 import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils.ts";
 
 const menu = Astro.props.menu as NavigationLink;
@@ -9,11 +9,12 @@ const { pathname } = Astro.url;
 
 {
   (menu.hasChildren || menu.hasMegaMenu) && menu.name ? (
-    <NavDropdownMenu menu={menu} />
+    <DropdownMenu isMobile={Astro.props.isMobile} menu={menu} />
   ) : (
     menu.name && (
-      <li class="nav-item" role="menuitem">
+      <li class="nav-item" role="none">
         <a
+          role="menuitem"
           {...{
             // Set `rel` attribute for external links or use provided value
             rel: menu.url?.startsWith("http")
@@ -37,7 +38,7 @@ const { pathname } = Astro.url;
                 pathname === `${menu.url}/` || pathname === menu.url,
             },
           ]}>
-          {menu.badge && menu.badge.enable ? (
+          {menu.badge ? (
             menu.badge.type === "dot" ? (
               <span class="relative inline-block">
                 {menu.name}

@@ -1,0 +1,369 @@
+{
+  "headerPrimary": [
+    {
+      "enable": true,
+      "name": "Startseite",
+      "weight": 0,
+      "url": "/"
+    },
+    {
+      "enable": true,
+      "name": "Mega-Menü",
+      "weight": 1,
+      "hasMegaMenu": true,
+      "menus": [
+        {
+          "enable": true,
+          "name": "Kerndienstleistungen",
+          "description": "Lieferarbeit für Unternehmen, die Websites, Produkte und konversionsorientierte Neugestaltungen ausliefern.",
+          "weight": 0,
+          "children": [
+            {
+              "enable": true,
+              "name": "Web-Plattformen",
+              "description": "Marketing-Websites, Unternehmenswebsites und CMS-Builds, die auch unter Last schnell bleiben.",
+              "icon": "Monitor",
+              "url": "/services/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Produktdesign",
+              "description": "Benutzerabläufe, Oberflächensysteme und übergabebereite Bildschirme für echte Produktteams.",
+              "icon": "PenTool",
+              "url": "/services/custom-slug-services-1/",
+              "weight": 1
+            },
+            {
+              "enable": true,
+              "name": "Frontend-Entwicklung",
+              "description": "Astro, React und performante Implementierung für moderne Web-Stacks.",
+              "icon": "Code2",
+              "url": "/services/",
+              "weight": 2,
+              "badge": {
+                "enable": true,
+                "label": "Beliebt",
+                "color": "accent",
+                "type": "text"
+              }
+            },
+            {
+              "enable": true,
+              "name": "Technisches SEO",
+              "description": "Seitenstruktur, Inhaltsarchitektur und Geschwindigkeitsoptimierung für bessere Auffindbarkeit.",
+              "icon": "Search",
+              "url": "/services/",
+              "weight": 3
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Einsatzmodelle",
+          "description": "Möglichkeiten, wie Kunden Lumio typischerweise einbinden, von fokussierten Sprints bis hin zu laufendem Produktsupport.",
+          "weight": 1,
+          "children": [
+            {
+              "enable": true,
+              "name": "MVP-Launch-Sprint",
+              "description": "Ein kompakter Umfang, um ein neues Produkt oder Angebot ohne Zeitverzögerung live zu bringen.",
+              "icon": "Rocket",
+              "url": "/pricing/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Teamverstärkung",
+              "description": "Design- und Entwicklungskapazitäten in ein internes Team einbringen, mit weniger Reibungsverlusten bei der Einstellung.",
+              "icon": "Users",
+              "url": "/about/",
+              "weight": 1
+            },
+            {
+              "enable": true,
+              "name": "Neubau & Plattformwechsel",
+              "description": "Weg von langsamen, schwer zu verwaltenden Systemen, ohne Konversionspfade zu opfern.",
+              "icon": "RefreshCcw",
+              "url": "/case-studies/",
+              "weight": 2
+            },
+            {
+              "enable": true,
+              "name": "Retainer-Support",
+              "description": "Kontinuierliches Design, Entwicklung und Iteration für Teams, die jeden Monat ausliefern.",
+              "icon": "Clock3",
+              "url": "/contact/",
+              "weight": 3
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Nachweise & nächste Schritte",
+          "description": "Seiten, die Käufer normalerweise sehen möchten, bevor sie einen Anruf buchen oder einen Partner in die engere Wahl nehmen.",
+          "weight": 2,
+          "children": [
+            {
+              "enable": true,
+              "name": "Ausgewählte Fallstudie",
+              "description": "Ein detaillierter Blick auf ein Projekt, von der Problemdefinition bis zu messbaren Ergebnissen nach dem Launch.",
+              "icon": "ChartNoAxesCombined",
+              "url": "/case-studies/custom-slug-case-studies-1/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Alle Fallstudien",
+              "description": "Überblick über aktuelle Lieferarbeiten bei produkt-, service- und wachstumsorientierten Projekten.",
+              "icon": "FolderKanban",
+              "url": "/case-studies/",
+              "weight": 1
+            },
+            {
+              "enable": true,
+              "name": "Einblicke & Artikel",
+              "description": "Prozessnotizen, Launch-Erkenntnisse und praktische Ideen, die Teams sofort umsetzen können.",
+              "icon": "BookOpenText",
+              "url": "/blog/",
+              "weight": 2
+            },
+            {
+              "enable": true,
+              "name": "Entdeckungsgespräch buchen",
+              "description": "Beginnen Sie mit Umfang, Zeitplan und Budget, anstatt mit vagen Einführungsgesprächen hin und her.",
+              "icon": "MessageSquareMore",
+              "url": "/contact/",
+              "weight": 3
+            }
+          ]
+        }
+      ],
+      "cta": {
+        "enable": true,
+        "eyebrow": "Umsetzungspartner",
+        "image": "/images/case-studies/case-study-1.png",
+        "title": "Brauchen Sie ein Team, das designen, entwickeln und launcht, ohne zusätzliche Hierarchieebenen?",
+        "description": "Nutzen Sie das Menü, um Dienstleistungen zu erkunden, und führen Sie ein konkretes Gespräch, wenn die Passung klar ist.",
+        "items": [
+          "Strategie, Design und Entwicklung in einem Workflow",
+          "Geeignet für Agenturen, B2B-Unternehmen und beratungsgeführte Marken",
+          "Klare nächste Schritte durch Preise, Fallstudien und Kontakt"
+        ],
+        "button": {
+          "enable": true,
+          "label": "Projekt starten",
+          "url": "/contact/",
+          "variant": "fill",
+          "tag": "a",
+          "hoverEffect": "creative-fill",
+          "icon": {
+            "enable": true,
+            "name": "ArrowUpRight",
+            "position": "right"
+          }
+        }
+      }
+    },
+    {
+      "name": "Seiten",
+      "enable": true,
+      "weight": 2,
+      "hasChildren": true,
+      "children": [
+        {
+          "enable": true,
+          "name": "Startseite",
+          "weight": 0,
+          "hasChildren": true,
+          "children": [
+            {
+              "enable": true,
+              "name": "Startseite 01",
+              "url": "/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Startseite 02",
+              "url": "/home-two/",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Fallstudien",
+          "weight": 0,
+          "hasChildren": true,
+          "children": [
+            {
+              "enable": true,
+              "name": "Fallstudien",
+              "url": "/case-studies/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Einzelne Fallstudie",
+              "url": "/case-studies/custom-slug-case-studies-1/",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Blog",
+          "weight": 0,
+          "hasChildren": true,
+          "children": [
+            {
+              "enable": true,
+              "name": "Blog",
+              "url": "/blog/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Einzelner Blogbeitrag",
+              "url": "/blog/custom-slug-post-1/",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Dienstleistungen",
+          "weight": 0,
+          "hasChildren": true,
+          "children": [
+            {
+              "enable": true,
+              "name": "Dienstleistungen",
+              "url": "/services/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Einzelne Dienstleistung",
+              "url": "/services/custom-slug-services-1/",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Über uns",
+          "url": "/about/",
+          "weight": 0
+        },
+        {
+          "enable": true,
+          "name": "Team",
+          "url": "/team",
+          "weight": 0
+        },
+        {
+          "enable": true,
+          "name": "Preise",
+          "url": "/pricing/",
+          "weight": 0
+        },
+        {
+          "enable": true,
+          "name": "FAQ",
+          "url": "/faq/",
+          "weight": 0
+        },
+        {
+          "enable": true,
+          "name": "404",
+          "url": "/404/",
+          "weight": 0,
+          "badge": {
+            "enable": true,
+            "label": "Badge",
+            "color": "accent",
+            "_color_comment": "color expected value - accent, info, success, danger, dark",
+            "type": "text",
+            "_type_comment": "type expected value - text, dot"
+          }
+        }
+      ]
+    },
+    {
+      "enable": true,
+      "name": "Komponenten",
+      "weight": 3,
+      "url": "/components/",
+      "badge": {
+        "enable": true,
+        "label": "Neu",
+        "color": "accent",
+        "_color_comment": "color expected value - accent, info, success, danger, dark",
+        "type": "text",
+        "_type_comment": "type expected value - text, dot"
+      }
+    },
+    {
+      "enable": true,
+      "name": "Kontakt",
+      "weight": 4,
+      "url": "/contact/"
+    }
+  ],
+  "footerPrimary": [
+    {
+      "enable": true,
+      "name": "Über uns",
+      "url": "/about/"
+    },
+    {
+      "enable": true,
+      "name": "Dienstleistungen",
+      "url": "/services/"
+    },
+    {
+      "enable": true,
+      "name": "Team",
+      "url": "/team/"
+    },
+    {
+      "enable": true,
+      "name": "Blog",
+      "url": "/blog/"
+    },
+    {
+      "enable": true,
+      "name": "Kontakt",
+      "url": "/contact/"
+    }
+  ],
+  "footerSecondary": [
+    {
+      "enable": true,
+      "name": "Über uns",
+      "url": "/about/"
+    },
+    {
+      "enable": true,
+      "name": "Dienstleistungen",
+      "url": "/services/"
+    },
+    {
+      "enable": true,
+      "name": "Projekte",
+      "url": "/case-studies/"
+    },
+    {
+      "enable": true,
+      "name": "Blog",
+      "url": "/blog/"
+    },
+    {
+      "enable": true,
+      "name": "Kontakt",
+      "url": "/contact/"
+    }
+  ]
+}

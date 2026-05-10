@@ -1,19 +1,20 @@
 ---
-import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import Base from "@/layouts/Base.astro";
+import Button from "@/components/Button.astro";
 ---
 
-<Base status={404} title="Page Not Found" disableTagline={true}>
-  <section class="py-8 md:py-16">
+<Base title="Page Not Found" disableTagline={true} fitToScreen={false}>
+  <section>
     <div class="container">
       <div class="flex flex-col items-center gap-y-10">
-        <OptimizedImage
-          width={500}
-          class="max-w-full sm:max-w-lg"
-          src="/images/404.svg"
-          alt="404"
-        />
-        <h1 class="text-h2-md md:text-h1 text-center">Page Not Found</h1>
+        <div class="space-y-4 text-center text-lg">
+          <h1 class="text-8xl sm:text-9xl md:text-[16rem]">404</h1>
+          <h2 class="text-h1-sm md:text-h1">Look Like You’re Lost</h2>
+          <p>
+            The link you followed probably broken or the page has been removed
+          </p>
+        </div>
+        <Button class="uppercase" label="Back to Home" url="/" variant="text" />
       </div>
     </div>
   </section>

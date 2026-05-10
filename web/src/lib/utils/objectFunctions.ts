@@ -13,11 +13,11 @@
  * const original = { a: 1, b: { c: 2 } };
  * const shallowCopy = original; // Points to the same object in memory.
  * shallowCopy.b.c = 42;
- * console.log(original.b.c); // Outputs: 42
+ * log(original.b.c); // Outputs: 42
  *
  * const deepCopy = recursiveCloneObject(original); // Creates a new, independent object.
  * deepCopy.b.c = 99;
- * console.log(original.b.c); // Outputs: 42 (unchanged).
+ * log(original.b.c); // Outputs: 42 (unchanged).
  * ```
  */
 export function recursiveCloneObject(obj: any) {
