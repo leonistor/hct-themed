@@ -1,0 +1,38 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { generatePaths } from "@/lib/utils/i18nUtils.ts";
+
+export function getStaticPaths() {
+  return generatePaths();
+}
+
+const page = await getEntryCTM("about-us", "-index", Astro.currentLocale);
+---
+
+<Base {...page?.data} hideOffcanvas={true}>
+  <section class="relative">
+    <div class="container">
+      <div
+        class=""
+        class:list={[
+          "mx-auto flex max-w-5xl flex-col items-center text-center",
+        ]}>
+        <h1
+          data-aos="reveal-anim-top"
+          data-aos-offset="0"
+          data-aos-duration="600"
+          class:list={["text-h1-sm md:text-h1"]}>
+          Demo page
+        </h1>
+
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, debitis
+          doloremque. Alias, sequi aliquam corporis, quasi eius laudantium culpa
+          odio dolorem dolorum eligendi explicabo qui beatae, minima architecto
+          veritatis possimus!
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
