@@ -71,5 +71,8 @@
   "partners": {
     "title": "Partenaires",
     "tagline": "Nous fournissons une gamme complète de produits et de services pour l'industrie de la récyclage à travers les partenariats avec les principaux fabricants européens."
+  },
+  "customers": {
+    "title": "Clients"
   }
 }

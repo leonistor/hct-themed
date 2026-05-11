@@ -71,5 +71,8 @@
   "partners": {
     "title": "Partner",
     "tagline": "Grazie alla collaborazione con i più importanti produttori europei, offriamo una gamma completa di prodotti e servizi per il settore del riciclo."
+  },
+  "customers": {
+    "title": "Clienti"
   }
 }

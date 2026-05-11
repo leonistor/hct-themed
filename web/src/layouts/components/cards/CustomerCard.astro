@@ -1,0 +1,41 @@
+---
+import { Image } from "astro:assets";
+import Button from "@/components/Button.astro";
+import type { Media, Customer } from "admin";
+
+type Props = {
+  index?: number;
+  customer: Customer;
+};
+
+let { index = 0, customer } = Astro.props;
+---
+
+<div
+  class="group flex flex-col bg-gray-50 px-4 py-2"
+  data-aos="fade-up-sm"
+  data-aos-duration="700"
+  data-aos-delay={index * 100}>
+  <a
+    href={customer.url ?? "#"}
+    target="_blank"
+    class:list={["relative mb-3 overflow-hidden xl:mb-6"]}
+    aria-label={customer.name}>
+    {
+      customer.logo && (
+        <Image
+          src={`http://localhost:3000${(customer.logo! as Media).url}`}
+          alt={customer.name}
+          width={150}
+          height={150}
+          class:list={[
+            "mx-auto min-h-36 object-scale-down",
+            "transition-transform duration-700 ease-in-out group-hover:scale-105",
+          ]}
+        />
+      )
+    }
+  </a>
+  <div class="grow"></div>
+  <p class="text-center text-neutral-500">{customer.name}</p>
+</div>

@@ -14,6 +14,8 @@ const payload = await getPayload({ config: payloadConfig });
 const partners = await payload.find({
   collection: "partners",
   depth: 2,
+  pagination: false,
+  limit: 100,
   sort: "_order",
   where: { published: { equals: true } },
 });

@@ -5,15 +5,17 @@ import Base from "@/layouts/Base.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { getPayload } from "payload";
 import { config as payloadConfig, type Media } from "admin";
-import PartnerCard from "@/layouts/components/cards/PartnerCard.astro";
+import CustomerCard from "@/layouts/components/cards/CustomerCard.astro";
 import PageTitle from "@/layouts/components/ui/PageTitle.astro";
 import { useTranslations } from "@/lib/utils/i18nUtils";
 
 const payload = await getPayload({ config: payloadConfig });
 
-const partners = await payload.find({
-  collection: "partners",
+const customers = await payload.find({
+  collection: "customers",
   depth: 2,
+  pagination: false,
+  limit: 100,
   sort: "_order",
   where: { published: { equals: true } },
 });
@@ -26,13 +28,12 @@ const page = await getEntryCTM("about-us", "-index", Astro.currentLocale);
 <Base {...page?.data} hideOffcanvas={true}>
   <section class="relative">
     <div class="container">
-      <PageTitle title={t("partners.title")} />
-      <div class="pb-4 md:text-xl">{t("partners.tagline")}</div>
+      <PageTitle title={t("customers.title")} />
       <div
-        class="grid grid-cols-1 gap-x-4 gap-y-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-10">
+        class="grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6 lg:gap-y-10">
         {
-          partners.docs.map((partner, index) => (
-            <PartnerCard partner={partner} index={index} />
+          customers.docs.map((customer, index) => (
+            <CustomerCard customer={customer} index={index} />
           ))
         }
       </div>

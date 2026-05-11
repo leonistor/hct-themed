@@ -68,5 +68,8 @@
   "partners": {
     "title": "Partner",
     "tagline": "Durch Partnerschaften mit den wichtigsten europäischen Herstellern bieten wir ein umfassendes Sortiment an Produkten und Dienstleistungen für die Recyclingindustrie an."
+  },
+  "customers": {
+    "title": "Kunden"
   }
 }
