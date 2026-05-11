@@ -1,7 +1,8 @@
 
 TODO: etichete nou la parteneri, produse
 TODO: adjust colors
-TODO: vite proxy for payload
+TODO: api endpoint for payload
+TODO: sync menu, lang
 
 ## pagini
 

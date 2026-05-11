@@ -8,7 +8,7 @@
     },
     {
       "enable": true,
-      "name": "Meniu Mega",
+      "name": "Soluții",
       "weight": 1,
       "hasMegaMenu": true,
       "menus": [
@@ -59,7 +59,7 @@
           ]
         },
         {
-          "enable": true,
+          "enable": false,
           "name": "Modele de Colaborare",
           "description": "Modalități prin care clienții aduc de obicei Lumio, de la un sprint concentrat la suport continuu pentru produs.",
           "weight": 1,
@@ -99,7 +99,7 @@
           ]
         },
         {
-          "enable": true,
+          "enable": false,
           "name": "Dovezi și Pași Următori",
           "description": "Pagini pe care cumpărătorii le vor de obicei înainte de a programa un apel sau de a face o listă scurtă cu un partener.",
           "weight": 2,
@@ -166,7 +166,158 @@
       }
     },
     {
-      "name": "Pagini",
+      "enable": true,
+      "name": "Echipamente",
+      "weight": 1,
+      "hasMegaMenu": true,
+      "menus": [
+        {
+          "enable": true,
+          "name": "Categorii",
+          "description": "Lucrări de livrare pentru companii care lansează site-uri web, produse și redesign-uri axate pe conversie.",
+          "weight": 0,
+          "children": [
+            {
+              "enable": true,
+              "name": "Categ 1",
+              "description": "descriere categ 1",
+              "icon": "Monitor",
+              "url": "/services/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Categ 2",
+              "description": "descriere categ 2",
+              "icon": "PenTool",
+              "url": "/services/custom-slug-services-1/",
+              "weight": 1
+            },
+            {
+              "enable": true,
+              "name": "Categ 3",
+              "description": "descriere categ 3",
+              "icon": "Code2",
+              "url": "/services/",
+              "weight": 2,
+              "badge": {
+                "enable": true,
+                "label": "Nou",
+                "color": "accent",
+                "type": "text"
+              }
+            },
+            {
+              "enable": true,
+              "name": "Categ 4",
+              "description": "descriere categ 4",
+              "icon": "Search",
+              "url": "/services/",
+              "weight": 3
+            }
+          ]
+        }
+      ],
+      "cta": {
+        "enable": true,
+        "eyebrow": "subtitlu",
+        "image": "/images/case-studies/case-study-1.png",
+        "title": "Teaser title",
+        "description": "descriere categ 4",
+        "items": ["item one", "item two", "item three"],
+        "button": {
+          "enable": true,
+          "label": "Începe un Proiect",
+          "url": "/contact/",
+          "variant": "fill",
+          "tag": "a",
+          "hoverEffect": "creative-fill",
+          "icon": {
+            "enable": true,
+            "name": "ArrowUpRight",
+            "position": "right"
+          }
+        }
+      }
+    },
+    {
+      "enable": true,
+      "name": "Parteneri",
+      "weight": 1,
+      "hasMegaMenu": true,
+      "menus": [
+        {
+          "enable": true,
+          "name": "Parteneri",
+          "description": "descriere parteneri",
+          "weight": 0,
+          "children": [
+            {
+              "enable": true,
+              "name": "Parteneri",
+              "description": "descriere parteneri",
+              "icon": "Monitor",
+              "url": "/services/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Partener 2",
+              "description": "descriere partener 2",
+              "icon": "PenTool",
+              "url": "/services/custom-slug-services-1/",
+              "weight": 1
+            },
+            {
+              "enable": true,
+              "name": "Partener 3",
+              "description": "descriere partener 3",
+              "icon": "Code2",
+              "url": "/services/",
+              "weight": 2,
+              "badge": {
+                "enable": true,
+                "label": "Nou",
+                "color": "accent",
+                "type": "text"
+              }
+            },
+            {
+              "enable": true,
+              "name": "Partener 4",
+              "description": "descriere partener 4",
+              "icon": "Search",
+              "url": "/services/",
+              "weight": 3
+            }
+          ]
+        }
+      ],
+      "cta": {
+        "enable": true,
+        "eyebrow": "subtitlu",
+        "image": "/images/case-studies/case-study-1.png",
+        "title": "Teaser title",
+        "description": "descriere partener 4",
+        "items": ["item one", "item two", "item three"],
+        "button": {
+          "enable": true,
+          "label": "Începe un Proiect",
+          "url": "/contact/",
+          "variant": "fill",
+          "tag": "a",
+          "hoverEffect": "creative-fill",
+          "icon": {
+            "enable": true,
+            "name": "ArrowUpRight",
+            "position": "right"
+          }
+        }
+      }
+    },
+
+    {
+      "name": "Companie",
       "enable": true,
       "weight": 2,
       "hasChildren": true,
@@ -274,39 +425,17 @@
           "name": "Întrebări Frecvente",
           "url": "/faq/",
           "weight": 0
-        },
-        {
-          "enable": true,
-          "name": "404",
-          "url": "/404/",
-          "weight": 0,
-          "badge": {
-            "enable": true,
-            "label": "Etichetă",
-            "color": "accent",
-            "_color_comment": "color expected value - accent, info, success, danger, dark",
-            "type": "text",
-            "_type_comment": "type expected value - text, dot"
-          }
         }
       ]
     },
     {
       "enable": true,
-      "name": "Componente",
+      "name": "Blog",
       "weight": 3,
-      "url": "/components/",
-      "badge": {
-        "enable": true,
-        "label": "Nou",
-        "color": "accent",
-        "_color_comment": "color expected value - accent, info, success, danger, dark",
-        "type": "text",
-        "_type_comment": "type expected value - text, dot"
-      }
+      "url": "/blog/"
     },
     {
-      "enable": true,
+      "enable": false,
       "name": "Contact",
       "weight": 4,
       "url": "/contact/"
