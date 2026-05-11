@@ -168,7 +168,7 @@
     {
       "enable": true,
       "name": "Echipamente",
-      "weight": 1,
+      "weight": 2,
       "hasMegaMenu": true,
       "menus": [
         {
@@ -243,7 +243,7 @@
     {
       "enable": true,
       "name": "Parteneri",
-      "weight": 1,
+      "weight": 3,
       "hasMegaMenu": true,
       "menus": [
         {
@@ -319,7 +319,7 @@
     {
       "name": "Companie",
       "enable": true,
-      "weight": 2,
+      "weight": 4,
       "hasChildren": true,
       "children": [
         {
@@ -431,7 +431,7 @@
     {
       "enable": true,
       "name": "Blog",
-      "weight": 3,
+      "weight": 5,
       "url": "/blog/"
     },
     {
