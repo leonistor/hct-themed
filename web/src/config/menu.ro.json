@@ -348,63 +348,9 @@
       "children": [
         {
           "enable": true,
-          "name": "Acasă",
-          "weight": 0,
-          "hasChildren": true,
-          "children": [
-            {
-              "enable": true,
-              "name": "Acasă 01",
-              "url": "/",
-              "weight": 0
-            },
-            {
-              "enable": true,
-              "name": "Acasă 02",
-              "url": "/home-two/",
-              "weight": 0
-            }
-          ]
-        },
-        {
-          "enable": true,
-          "name": "Studii de Caz",
-          "weight": 0,
-          "hasChildren": true,
-          "children": [
-            {
-              "enable": true,
-              "name": "Studii de Caz",
-              "url": "/case-studies/",
-              "weight": 0
-            },
-            {
-              "enable": true,
-              "name": "Studiu de Caz Individual",
-              "url": "/case-studies/custom-slug-case-studies-1/",
-              "weight": 0
-            }
-          ]
-        },
-        {
-          "enable": true,
-          "name": "Blog",
-          "weight": 0,
-          "hasChildren": true,
-          "children": [
-            {
-              "enable": true,
-              "name": "Blog",
-              "url": "/blog/",
-              "weight": 0
-            },
-            {
-              "enable": true,
-              "name": "Articol Blog Individual",
-              "url": "/blog/custom-slug-post-1/",
-              "weight": 0
-            }
-          ]
+          "name": "Despre Noi",
+          "url": "/about/",
+          "weight": 0
         },
         {
           "enable": true,
@@ -414,34 +360,54 @@
           "children": [
             {
               "enable": true,
-              "name": "Servicii",
-              "url": "/services/",
+              "name": "Instalare și montaj",
+              "url": "/services/custom-slug-services-1",
               "weight": 0
             },
             {
               "enable": true,
-              "name": "Serviciu Individual",
-              "url": "/services/custom-slug-services-1/",
+              "name": "Recondiționare",
+              "url": "/services/service-03",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Accesorii și consumabile",
+              "url": "/services/service-05",
               "weight": 0
             }
           ]
         },
         {
           "enable": true,
-          "name": "Despre Noi",
-          "url": "/about/",
+          "name": "Clienți",
+          "url": "/customers",
           "weight": 0
         },
         {
           "enable": true,
-          "name": "Echipă",
+          "name": "Proiecte",
+          "weight": 0,
+          "hasChildren": true,
+          "children": [
+            {
+              "enable": true,
+              "name": "Proiect unu",
+              "url": "/case-studies/case-studies-1/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Proiect doi",
+              "url": "/case-studies/custom-slug-case-studies-1/",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "Echipa",
           "url": "/team",
-          "weight": 0
-        },
-        {
-          "enable": true,
-          "name": "Prețuri",
-          "url": "/pricing/",
           "weight": 0
         },
         {
