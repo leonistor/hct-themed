@@ -32,6 +32,7 @@
     "admin": "workspace:*",
     "aos": "^2.3.4",
     "astro-inspect-clip": "^1.0.3",
+    "astro-leaflet": "^1.11.0",
     "date-fns": "^4.1.0",
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",

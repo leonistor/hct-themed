@@ -91,6 +91,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
+      include: ["astro-leaflet > leaflet"],
       // exclude: ["astro/runtime/client/dev-toolbar/entrypoint.js"],
     },
   },

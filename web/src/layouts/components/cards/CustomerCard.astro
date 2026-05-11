@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import Button from "@/components/Button.astro";
+import Icons from "@/helpers/Icons.astro";
 import type { Media, Customer } from "admin";
 
 type Props = {
@@ -37,5 +37,15 @@ let { index = 0, customer } = Astro.props;
     }
   </a>
   <div class="grow"></div>
-  <p class="text-center text-neutral-500">{customer.name}</p>
+  <p class="text-center text-neutral-500">
+    <span class="text-xl font-bold">{customer.name}</span><br />{
+      customer.location!
+    }{
+      customer.url && (
+        <a href={customer.url} target="_blank">
+          <Icons icon="ArrowUpRight" class="inline-block size-6" />
+        </a>
+      )
+    }
+  </p>
 </div>
