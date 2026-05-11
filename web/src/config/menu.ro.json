@@ -14,87 +14,143 @@
       "menus": [
         {
           "enable": true,
-          "name": "Servicii Principale",
-          "description": "Lucrări de livrare pentru companii care lansează site-uri web, produse și redesign-uri axate pe conversie.",
+          "name": "Materiale",
+          "description": "Soluții pentru toate tipurile de materiale",
           "weight": 0,
           "children": [
             {
               "enable": true,
-              "name": "Platforme Web",
-              "description": "Site-uri de marketing, site-uri corporative și construcții CMS care rămân rapide sub încărcare.",
+              "name": "Metale",
+              "description": "Reciclarea metalelor",
               "icon": "Monitor",
-              "url": "/services/",
-              "weight": 0
+              "url": "/solutions/metale",
+              "weight": 0,
+              "logo": "/payload/api/media/file/materiale_metale_az8i13u5w2-5-150x150.jpg"
             },
             {
               "enable": true,
-              "name": "Design de Produs",
-              "description": "Fluxuri de utilizator, sisteme de interfață și ecrane pregătite pentru predare pentru echipe reale de produs.",
-              "icon": "PenTool",
-              "url": "/services/custom-slug-services-1/",
-              "weight": 1
+              "name": "Mixte",
+              "description": "Metale mixte",
+              "icon": "Monitor",
+              "url": "/solutions/mixte",
+              "weight": 1,
+              "logo": "/payload/api/media/file/materiale_mixte_d53p078to6-5-150x150.jpg"
             },
             {
               "enable": true,
-              "name": "Inginerie Frontend",
-              "description": "Implementare Astro, React și axată pe performanță pentru stack-uri web moderne.",
-              "icon": "Code2",
-              "url": "/services/",
+              "name": "Aluminiu",
+              "description": "Reciclarea aluminiului",
+              "icon": "Monitor",
+              "url": "/solutions/aluminiu",
               "weight": 2,
-              "badge": {
-                "enable": true,
-                "label": "Popular",
-                "color": "accent",
-                "type": "text"
-              }
+              "logo": "/payload/api/media/file/materiale_aluminiu_yctwewjyrj-5-150x150.jpg"
             },
             {
               "enable": true,
-              "name": "SEO Tehnic",
-              "description": "Structura site-ului, arhitectura conținutului și optimizări de viteză care îmbunătățesc descoperirea.",
-              "icon": "Search",
-              "url": "/services/",
-              "weight": 3
+              "name": "Cabluri",
+              "description": "Reciclarea cablurilor",
+              "icon": "Monitor",
+              "url": "/solutions/cabluri",
+              "weight": 3,
+              "logo": "/payload/api/media/file/materiale_cabluri_35dogmwz6h-5-150x150.jpg"
+            },
+            {
+              "enable": true,
+              "name": "Rafinare",
+              "description": "Rafinare",
+              "icon": "Monitor",
+              "url": "/solutions/rafinare",
+              "weight": 4,
+              "logo": "/payload/api/media/file/materiale_rafinare_l3pnyb5yb9-5-150x150.jpg"
+            },
+            {
+              "enable": true,
+              "name": "Vehicule",
+              "description": "Reciclarea vehiculelor scoase din uz",
+              "icon": "Monitor",
+              "url": "/solutions/vehicule",
+              "weight": 5,
+              "logo": "/payload/api/media/file/materiale_vehicule_q8hn046k0o-5-150x150.jpg"
+            },
+            {
+              "enable": true,
+              "name": "Motoare auto",
+              "description": "Motoare auto",
+              "icon": "Monitor",
+              "url": "/solutions/motoare-auto",
+              "weight": 6,
+              "logo": "/payload/api/media/file/materiale_motoare_auto_3i41ep1ogu-5-150x150.jpg"
             }
           ]
         },
         {
-          "enable": false,
-          "name": "Modele de Colaborare",
-          "description": "Modalități prin care clienții aduc de obicei Lumio, de la un sprint concentrat la suport continuu pentru produs.",
+          "enable": true,
+          "name": "",
+          "description": "",
           "weight": 1,
           "children": [
             {
               "enable": true,
-              "name": "Sprint de Lansare MVP",
-              "description": "Un scop compact pentru a lansa un produs nou sau o ofertă fără a prelungi timeline-ul.",
-              "icon": "Rocket",
-              "url": "/pricing/",
-              "weight": 0
+              "name": "Motoare electrice",
+              "description": "Reciclarea motoarelor electrice",
+              "icon": "Monitor",
+              "url": "/solutions/motoare-electrice",
+              "weight": 7,
+              "logo": "/payload/api/media/file/materiale_motoare_electrice_lg7btgbkcc-5-150x150.jpg"
             },
             {
               "enable": true,
-              "name": "Augmentarea Echipei",
-              "description": "Adaugă capacitate de design și dezvoltare într-o echipă internă cu mai puțină frictionare la angajare.",
-              "icon": "Users",
-              "url": "/about/",
-              "weight": 1
+              "name": "DEEE",
+              "description": "Reciclarea DEEE (Deșeuri de Echipamente Electrice și Electronice)",
+              "icon": "Monitor",
+              "url": "/solutions/deee",
+              "weight": 8,
+              "logo": "/payload/api/media/file/materiale_deee_nyx6op9agq-5-150x150.jpg"
             },
             {
               "enable": true,
-              "name": "Reconstrucție și Replatformare",
-              "description": "Pleacă de la configurări lente și greu de gestionat fără a sacrifica căile de conversie.",
-              "icon": "RefreshCcw",
-              "url": "/case-studies/",
-              "weight": 2
+              "name": "Hidrapulper ",
+              "description": "Recuperarea deșeurilor de hidrapulper de la fabricile de hârtie",
+              "icon": "Monitor",
+              "url": "/solutions/hidrapulper",
+              "weight": 9,
+              "logo": "/payload/api/media/file/materiale_hidrapulper_85n5efzm28-5-150x150.jpg"
             },
             {
               "enable": true,
-              "name": "Suport Retainer",
-              "description": "Design, dezvoltare și iterație continuă pentru echipe care lansează în fiecare lună.",
-              "icon": "Clock3",
-              "url": "/contact/",
-              "weight": 3
+              "name": "Frigidere",
+              "description": "Reciclarea frigiderelor",
+              "icon": "Monitor",
+              "url": "/solutions/frigidere",
+              "weight": 10,
+              "logo": "/payload/api/media/file/materiale_frigidere_dlskcqe0mq-5-150x150.jpg"
+            },
+            {
+              "enable": true,
+              "name": "Deșeuri urbane",
+              "description": "Deșeuri solide urbane",
+              "icon": "Monitor",
+              "url": "/solutions/deseuri-urbane",
+              "weight": 11,
+              "logo": "/payload/api/media/file/materiale_deseuri_urbane_osr1njmlt3-5-150x150.jpg"
+            },
+            {
+              "enable": true,
+              "name": "Conserve",
+              "description": "Conserve metalice / Cutii de conserve",
+              "icon": "Monitor",
+              "url": "/solutions/conserve",
+              "weight": 12,
+              "logo": "/payload/api/media/file/materiale_conserve_3y11vks7hz-5-150x150.jpg"
+            },
+            {
+              "enable": true,
+              "name": "Zgură",
+              "description": "Prelucrarea zgurii",
+              "icon": "Monitor",
+              "url": "/solutions/zgura",
+              "weight": 13,
+              "logo": "/payload/api/media/file/materiale_zgura_63k2fonllj-5-150x150.jpg"
             }
           ]
         },
@@ -174,46 +230,61 @@
         {
           "enable": true,
           "name": "Categorii",
-          "description": "Lucrări de livrare pentru companii care lansează site-uri web, produse și redesign-uri axate pe conversie.",
+          "description": "Echipamenate pentru toate categorile de utilizare",
           "weight": 0,
           "children": [
             {
               "enable": true,
-              "name": "Categ 1",
-              "description": "descriere categ 1",
+              "name": "Tăiere și dezmembrare",
+              "description": null,
               "icon": "Monitor",
-              "url": "/services/",
-              "weight": 0
+              "url": "/categories/taiere-si-dezmembrare",
+              "weight": 0,
+              "logo": "/payload/api/media/file/categ_taiere_y0bh74zvrr-5-150x150.jpg"
             },
             {
               "enable": true,
-              "name": "Categ 2",
-              "description": "descriere categ 2",
-              "icon": "PenTool",
-              "url": "/services/custom-slug-services-1/",
-              "weight": 1
+              "name": "Prese de balotat și compactoare",
+              "description": null,
+              "icon": "Monitor",
+              "url": "/categories/prese-de-balotat-si-compactoare",
+              "weight": 1,
+              "logo": "/payload/api/media/file/categ_prese_8dds649ybt-5-150x150.jpg"
             },
             {
               "enable": true,
-              "name": "Categ 3",
-              "description": "descriere categ 3",
-              "icon": "Code2",
-              "url": "/services/",
+              "name": "Tocare, mărunțire și granulare",
+              "description": null,
+              "icon": "Monitor",
+              "url": "/categories/tocare-maruntire-si-granulare",
               "weight": 2,
-              "badge": {
-                "enable": true,
-                "label": "Nou",
-                "color": "accent",
-                "type": "text"
-              }
+              "logo": "/payload/api/media/file/categ_tocare_c25lgx9y8b-5-150x150.jpg"
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "",
+          "description": "",
+          "weight": 0,
+          "children": [
+            {
+              "enable": true,
+              "name": "Dezmembrare vehicule și motoare",
+              "description": null,
+              "icon": "Monitor",
+              "url": "/categories/dezmembrare-vehicule-si-motoare",
+              "weight": 3,
+              "logo": "/payload/api/media/file/categ_vehicule_8vu3jjs5sb-5-150x150.jpg"
             },
             {
               "enable": true,
-              "name": "Categ 4",
-              "description": "descriere categ 4",
-              "icon": "Search",
-              "url": "/services/",
-              "weight": 3
+              "name": "Sisteme de sortare",
+              "description": null,
+              "icon": "Monitor",
+              "url": "/categories/sisteme-de-sortare",
+              "weight": 4,
+              "logo": "/payload/api/media/file/categ_sortare_7varlbrukq-5-150x150.jpg"
             }
           ]
         }
@@ -249,7 +320,7 @@
         {
           "enable": true,
           "name": "Parteneri",
-          "description": "descriere parteneri",
+          "description": "Asigurăm o paletă completă de produse și servicii pentru industria reciclării prin parteneriate cu cei mai importanți producători europeni.",
           "weight": 0,
           "children": [
             {
@@ -275,7 +346,15 @@
               "icon": "Monitor",
               "url": "/partners/tecnoecology",
               "weight": 2
-            },
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "",
+          "description": "",
+          "weight": 0,
+          "children": [
             {
               "enable": true,
               "name": "Mistra",
@@ -393,13 +472,19 @@
             {
               "enable": true,
               "name": "Proiect unu",
-              "url": "/case-studies/case-studies-1/",
+              "url": "/case-studies/case-study-3/",
               "weight": 0
             },
             {
               "enable": true,
               "name": "Proiect doi",
               "url": "/case-studies/custom-slug-case-studies-1/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Proiect trei",
+              "url": "/case-studies/case-study-3/",
               "weight": 0
             }
           ]

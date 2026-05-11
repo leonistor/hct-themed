@@ -30,7 +30,48 @@ for (const [index, partner] of partners.docs.entries()) {
     icon: "Monitor",
     url: `/partners/${partner.code}`,
     weight: index,
-    // logo: partner.logo,
+    // @ts-ignore
+    logo: "/payload" + partner.logo?.thumbnailURL ?? "",
+  });
+}
+
+const materials = await payload.find({
+  collection: "materials",
+  depth: 2,
+  limit: 100,
+  sort: "_order",
+});
+
+for (const [index, material] of materials.docs.entries()) {
+  result["solutii"].push({
+    enable: true,
+    name: material.name,
+    description: material.description,
+    icon: "Monitor",
+    url: `/solutions/${material.code}`,
+    weight: index,
+    // @ts-ignore
+    logo: "/payload" + material.illustration?.thumbnailURL ?? "",
+  });
+}
+
+const categories = await payload.find({
+  collection: "categories",
+  depth: 2,
+  limit: 100,
+  sort: "_order",
+});
+
+for (const [index, category] of categories.docs.entries()) {
+  result["echipamente"].push({
+    enable: true,
+    name: category.name,
+    description: category.description,
+    icon: "Monitor",
+    url: `/categories/${category.code}`,
+    weight: index,
+    // @ts-ignore
+    logo: "/payload" + category.illustration?.thumbnailURL ?? "",
   });
 }
 
