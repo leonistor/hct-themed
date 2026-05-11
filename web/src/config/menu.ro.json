@@ -254,27 +254,43 @@
           "children": [
             {
               "enable": true,
-              "name": "Parteneri",
-              "description": "descriere parteneri",
+              "name": "Panizzolo",
+              "description": "Producător de linii de reciclare la cheie.",
               "icon": "Monitor",
-              "url": "/services/",
+              "url": "/partners/panizzolo",
               "weight": 0
             },
             {
               "enable": true,
-              "name": "Partener 2",
-              "description": "descriere partener 2",
-              "icon": "PenTool",
-              "url": "/services/custom-slug-services-1/",
+              "name": "Bronneberg",
+              "description": "Soluții dedicate pentru toate tipurile de materiale: metale, electronice, hârtie, etc.",
+              "icon": "Monitor",
+              "url": "/partners/bronneberg",
               "weight": 1
             },
             {
               "enable": true,
-              "name": "Partener 3",
-              "description": "descriere partener 3",
-              "icon": "Code2",
-              "url": "/services/",
-              "weight": 2,
+              "name": "Tecnoecology",
+              "description": "Soluții inovatoare pentru prelucrarea cablurilor.",
+              "icon": "Monitor",
+              "url": "/partners/tecnoecology",
+              "weight": 2
+            },
+            {
+              "enable": true,
+              "name": "Mistra",
+              "description": "Foarfeci manuale și automate.",
+              "icon": "Monitor",
+              "url": "/partners/mistra",
+              "weight": 3
+            },
+            {
+              "enable": true,
+              "name": "Holmatro",
+              "description": "Peste 55 de ani de experiență în scule și sisteme hidraulice de înaltă presiune, foarfeci și tăietoare industriale.",
+              "icon": "Monitor",
+              "url": "/partners/holmatro",
+              "weight": 4,
               "badge": {
                 "enable": true,
                 "label": "Nou",
@@ -284,11 +300,19 @@
             },
             {
               "enable": true,
-              "name": "Partener 4",
-              "description": "descriere partener 4",
-              "icon": "Search",
-              "url": "/services/",
-              "weight": 3
+              "name": "Iris Mec",
+              "description": "Soluții și utilaje pentru reciclarea componentelor auto.",
+              "icon": "Monitor",
+              "url": "/partners/irismec",
+              "weight": 5
+            },
+            {
+              "enable": true,
+              "name": "Husmann",
+              "description": "Compactoare și stații de transfer.",
+              "icon": "Monitor",
+              "url": "/partners/husmann",
+              "weight": 6
             }
           ]
         }
