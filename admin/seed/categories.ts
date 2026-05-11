@@ -47,7 +47,7 @@ export async function seed_categories() {
           code: slug,
           illustration: uploadedImage,
           name: nume,
-          published: true,
+          // published: true,
         },
       })
 
