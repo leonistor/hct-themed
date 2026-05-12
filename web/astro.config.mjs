@@ -33,6 +33,7 @@ export default defineConfig({
     enabled: true,
     // placement: "bottom-right",
   },
+  outDir: "server",
   adapter: node({
     mode: "standalone",
   }),
