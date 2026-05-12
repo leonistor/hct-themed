@@ -241,8 +241,8 @@ export const collections = {
     loader: contentLoader("./src/content/author"),
   }),
 
-  demo: defineCollection({
-    loader: contentLoader("./src/content/demo"),
+  products: defineCollection({
+    loader: contentLoader("./src/content/products"),
   }),
 
   testimonial: testimonialCollection,
