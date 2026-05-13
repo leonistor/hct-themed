@@ -1,0 +1,99 @@
+---
+import type { Media } from "admin";
+import {
+  Swiper,
+  SwiperWrapper,
+  SwiperSlide,
+  SwiperButtonPrev,
+  SwiperButtonNext,
+} from "astro-swiper";
+import { fade } from "astro:transitions";
+
+interface Props {
+  images: Media[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="h-full w-full">
+  <!-- main swiper, with big slides -->
+  <Swiper
+    options={{
+      // check options at https://swiperjs.com/swiper-api
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      loop: true,
+      autoplay: false,
+      astro: {
+        thumbSwiperUniqueSelector: ".myswiper-thumbnail", // identify the thumbnail swiper to link with
+      },
+    }}>
+    <SwiperWrapper>
+      {
+        images.map((image) => (
+          <SwiperSlide>
+            <img src={image.url} alt="" />
+          </SwiperSlide>
+        ))
+      }
+    </SwiperWrapper>
+
+    <SwiperButtonPrev />
+    <SwiperButtonNext />
+  </Swiper>
+
+  <!-- thumbnail swiper, with small slides to follow progress -->
+  <Swiper
+    class="myswiper-thumbnail"
+    options={{
+      // check options at https://swiperjs.com/swiper-api
+      spaceBetween: 10,
+      slidesPerView: 4,
+      freeMode: true,
+      watchSlidesProgress: true,
+      loop: true,
+    }}>
+    <SwiperWrapper>
+      {
+        images.map((image) => (
+          <SwiperSlide>
+            <img src={image.thumbnailURL} alt="" />
+          </SwiperSlide>
+        ))
+      }
+    </SwiperWrapper>
+  </Swiper>
+</div>
+
+<style>
+  .swiper {
+    max-width: 100%;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .myswiper-thumbnail {
+    height: 25%;
+  }
+
+  .myswiper-thumbnail .swiper-wrapper {
+    box-sizing: border-box;
+    padding: 8px 0;
+    height: 100%;
+  }
+
+  .myswiper-thumbnail .swiper-slide {
+    width: 25%;
+    height: 100%;
+    opacity: 0.6;
+  }
+
+  .myswiper-thumbnail .swiper-slide-thumb-active {
+    opacity: 1;
+  }
+</style>
