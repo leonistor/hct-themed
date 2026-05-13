@@ -7,18 +7,6 @@ import ProductsGrid from "@/layouts/components/ui/ProductsGrid.astro";
 import PageTitle from "@/layouts/components/ui/PageTitle.astro";
 import { useTranslations } from "@/lib/utils/i18nUtils";
 
-import { getPayload } from "payload";
-import { config as payloadConfig, type Media } from "admin";
-const payload = await getPayload({ config: payloadConfig });
-
-const products = await payload.find({
-  collection: "products",
-  depth: 2,
-  sort: "_order",
-  where: { published: { equals: true } },
-});
-
-console.log(products.totalDocs, products.totalPages);
 const t = await useTranslations(Astro.currentLocale as string);
 
 const page = await getEntryCTM("products", "-index", Astro.currentLocale);
@@ -28,9 +16,8 @@ const page = await getEntryCTM("products", "-index", Astro.currentLocale);
   <section class="relative">
     <div class="container">
       <PageTitle title="Demo" />
-      <div class="pb-4 md:text-xl">
-        <pre>{JSON.stringify(Astro.url.search, null, 2)}</pre>
-      </div>
+      <div class="pb-4 md:text-xl"></div>
+      <div></div>
 
       <ProductsGrid />
     </div>
