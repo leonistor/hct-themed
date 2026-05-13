@@ -1,7 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import Button from "@/components/Button.astro";
-import type { Media, Product } from "admin";
+import Pill from "@/components/ui/Pill.astro";
+
+import type { Media, Partner, Product } from "admin";
 
 type Props = {
   index?: number;
@@ -48,7 +50,9 @@ let { index = 0, product } = Astro.props;
           class="text-text-dark group-hover:text-primary text-h5-sm lg:text-h6 xl:text-h5 group-hover:border-b-primary! min-w-0 border-transparent whitespace-normal"
         />
       </h3>
-      <p class="text-neutral-500">{product.description}</p>
+      <div class="flex gap-2">
+        <Pill partner={product.partner as Partner} />
+      </div>
     </div>
   </div>
 </div>

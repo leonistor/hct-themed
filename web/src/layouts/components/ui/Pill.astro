@@ -1,0 +1,45 @@
+---
+import type { Category, Material, Partner } from "admin";
+
+interface Props {
+  partner?: Partner;
+  material?: Material;
+  category?: Category;
+}
+
+const { partner, material, category } = Astro.props;
+
+const BG_COLORS = {
+  default: "#4b5563",
+  partner: "#ef476f",
+  material: "#06d6a0",
+  category: "#118ab2",
+};
+
+let bgColor = BG_COLORS.default;
+if (partner) bgColor = BG_COLORS.partner;
+if (material) bgColor = BG_COLORS.material;
+if (category) bgColor = BG_COLORS.category;
+
+let label = "label";
+if (partner) label = partner.name;
+if (material) label = material.name;
+if (category) label = category.name;
+
+let link = "/";
+if (partner) link = `/partners/${partner.code}`;
+if (material) link = `/materials/${material.code}`;
+if (category) link = `/categories/${category.code}`;
+---
+
+<a
+  class="pill px-3 py-1 text-sm whitespace-nowrap text-white hover:opacity-75"
+  href={link}>
+  {label}
+</a>
+
+<style define:vars={{ bgColor }}>
+  .pill {
+    background-color: var(--bgColor);
+  }
+</style>
