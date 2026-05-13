@@ -3,13 +3,24 @@ interface Props {
   label: string;
   link: string;
   bgColor?: string;
+  size?: "sm" | "md" | "lg";
 }
 
-const { label, link, bgColor } = Astro.props;
+const text_sizes = {
+  sm: "text-xs px-2 py-1",
+  md: "text-md px-3 py-1",
+  lg: "text-lg px-4 py-2",
+};
+
+const { label, link, bgColor, size = "md" } = Astro.props;
 ---
 
 <a
-  class="pill px-3 py-1 text-sm whitespace-nowrap text-gray-100 hover:text-gray-800"
+  class:list={[
+    "pill",
+    text_sizes[size],
+    "whitespace-nowrap text-gray-100 hover:text-gray-800",
+  ]}
   href={link}>
   {label}
 </a>

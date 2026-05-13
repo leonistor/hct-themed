@@ -6,9 +6,10 @@ interface Props {
   partner?: Partner;
   material?: Material;
   category?: Category;
+  size?: "sm" | "md" | "lg";
 }
 
-const { partner, material, category } = Astro.props;
+const { partner, material, category, size = "md" } = Astro.props;
 
 const BG_COLORS = {
   default: "#4b5563",
@@ -33,4 +34,4 @@ if (material) link = `/solutions/${material.code}`;
 if (category) link = `/categories/${category.code}`;
 ---
 
-<PillButton label={label} link={link} bgColor={bgColor} />
+<PillButton label={label} link={link} bgColor={bgColor} size={size} />

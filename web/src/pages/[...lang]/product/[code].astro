@@ -1,17 +1,20 @@
 ---
 export const prerender = false;
 
+import { Image } from "astro:assets";
 import Base from "@/layouts/Base.astro";
-import PageTitle from "@/layouts/components/ui/PageTitle.astro";
+import Pill from "@/components/ui/Pill.astro";
 
 import { getPayload } from "payload";
-import { config as payloadConfig, type Media } from "admin";
+import { config as payloadConfig } from "admin";
+import type { Media, Partner, Category, Material } from "admin";
 const payload = await getPayload({ config: payloadConfig });
 
 const { code } = Astro.params;
 
 const product_docs = await payload.find({
   collection: "products",
+  depth: 2,
   pagination: false,
   limit: 1,
   where: { code: { equals: code } },
@@ -25,10 +28,56 @@ const product = product_docs.docs[0];
 ---
 
 <Base hideOffcanvas={true}>
-  <section class="relative">
+  <section class="">
     <div class="container">
-      <PageTitle title={product.name} />
-      <div class="pb-4 md:text-xl">{product.description}</div>
+      <div class="grid gap-2 sm:grid-cols-12 sm:gap-4 sm:px-2">
+        <!-- nume+ -->
+        <div class="space-y-4 sm:col-span-7">
+          <div class="my-6">
+            <h1
+              class:list={[
+                "leading-tight font-medium tracking-tight text-balance",
+              ]}>
+              {product.name}
+            </h1>
+          </div>
+          <div>
+            <p class="">
+              <Pill size="lg" partner={product.partner as Partner} />
+            </p>
+          </div>
+          <div class="text-xl font-medium">
+            <div set:html={product.description} />
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <Pill category={product.category as Category} />
+            {
+              product.materials &&
+                product.materials.map((material) => (
+                  <Pill material={material as Material} />
+                ))
+            }
+          </div>
+        </div>
+        <!-- poza -->
+        <div class="p-2 sm:col-span-5">
+          <Image
+            src={(product.main_image! as Media).url!}
+            alt={product.name}
+            inferSize={true}
+            width={300}
+            height={300}
+            class:list={[
+              "w-full object-cover",
+              "transition-transform duration-700 ease-in-out group-hover:scale-105",
+            ]}
+          />
+        </div>
+      </div>
     </div>
   </section>
+
+  <pre>
+    {JSON.stringify(product, null, 2)}
+  </pre>
 </Base>
