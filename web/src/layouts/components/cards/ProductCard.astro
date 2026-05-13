@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import Button from "@/components/Button.astro";
 import Pill from "@/components/ui/Pill.astro";
 
-import type { Media, Partner, Product } from "admin";
+import type { Media, Partner, Product, Category, Material } from "admin";
 
 type Props = {
   index?: number;
@@ -14,7 +14,7 @@ let { index = 0, product } = Astro.props;
 ---
 
 <div
-  class="group flex flex-col bg-gray-50 px-4 py-2"
+  class="group flex flex-col gap-y-1 bg-gray-50 px-4 py-2"
   data-aos="fade-up-sm"
   data-aos-duration="700"
   data-aos-delay={index * 100}>
@@ -22,6 +22,14 @@ let { index = 0, product } = Astro.props;
     href={`/products/${product.code}`}
     class:list={["relative mb-3 overflow-hidden xl:mb-6"]}
     aria-label={product.name}>
+    <div
+      class:list={[
+        "text-primary text-h6-sm lg:text-h5 xl:text-h4 opacity-75",
+        "pb-2 group-hover:opacity-100",
+        "leading-tight font-medium tracking-tight",
+      ]}>
+      {product.name}
+    </div>
     {
       product.main_image! && (
         <Image
@@ -38,21 +46,16 @@ let { index = 0, product } = Astro.props;
     }
   </a>
 
-  <div class="">
-    <div class="flex flex-col gap-2">
-      <h3 class="flex">
-        <Button
-          tag="a"
-          variant="text"
-          url={`/products/${product.code}`}
-          label={product.name}
-          aria-label={product.name}
-          class="text-text-dark group-hover:text-primary text-h5-sm lg:text-h6 xl:text-h5 group-hover:border-b-primary! min-w-0 border-transparent whitespace-normal"
-        />
-      </h3>
-      <div class="flex gap-2">
-        <Pill partner={product.partner as Partner} />
-      </div>
-    </div>
+  <div class="grow"></div>
+
+  <div class="flex flex-wrap gap-2">
+    <Pill partner={product.partner as Partner} />
+    <Pill category={product.category as Category} />
+    {
+      product.materials &&
+        product.materials.map((material) => (
+          <Pill material={material as Material} />
+        ))
+    }
   </div>
 </div>
