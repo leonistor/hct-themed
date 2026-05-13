@@ -1,5 +1,53 @@
 ---
+// https://dev.to/meksquest/mobile-responsive-table-with-tailwindcss-57db
+import type { Product } from "admin";
 
+import Icons from "@/helpers/Icons.astro";
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
 ---
 
-<p>variants</p>
+<table class="border-separate border-spacing-y-2 text-sm">
+  <thead class="sr-only">
+    <tr>
+      <th class="w-4/12">Name</th>
+      <th class="w-6/12">Feature</th>
+      <!-- <th class="w-1/4">Description</th> -->
+      <th class="w-2/12">Url</th>
+    </tr>
+  </thead>
+  <tbody>
+    {
+      product.variants!.map((variant) => (
+        <tr class="tr-class">
+          <td class="td-class">{variant.name}</td>
+          <td class="td-class">{variant.feature}</td>
+          <!-- <td class="td-class">{variant.description}</td> -->
+          <td class="td-class">
+            <a href={variant.url} target="_blank">
+              <Icons icon="ArrowUpRight" class="size-6 text-gray-400" />
+            </a>
+          </td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>
+
+<div class="divide-y divide-gray-400"></div>
+
+<style lang="scss">
+  @import "tailwindcss";
+
+  .td-class {
+    @apply bg-white px-4 py-3 first:rounded-t-lg last:rounded-b-lg sm:first:rounded-t-none sm:first:rounded-tl-lg sm:first:rounded-bl-lg sm:last:rounded-tr-lg sm:last:rounded-b-none sm:last:rounded-br-lg;
+  }
+
+  .tr-class {
+    @apply mb-4 flex flex-col sm:table-row;
+  }
+</style>

@@ -5,11 +5,12 @@ import { Image } from "astro:assets";
 import Base from "@/layouts/Base.astro";
 import Pill from "@/components/ui/Pill.astro";
 import ProductGallery from "@/components/ui/ProductGallery.astro";
+import ProductVariants from "@/components/ui/ProductVariants.astro";
 import Icons from "@/helpers/Icons.astro";
 
 import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
-import type { Media, Partner, Category, Material } from "admin";
+import type { Media, Partner, Category, Material, Product } from "admin";
 const payload = await getPayload({ config: payloadConfig });
 
 const { code } = Astro.params;
@@ -35,6 +36,7 @@ const product_images: Media[] = product.images as Media[];
 <Base hideOffcanvas={true}>
   <section class="">
     <div class="container">
+      <!-- TODO: responsive -->
       <div class="grid gap-2 sm:grid-cols-12 sm:gap-4 sm:px-2">
         <!-- nume+ -->
         <div class="space-y-4 sm:col-span-6">
@@ -67,7 +69,13 @@ const product_images: Media[] = product.images as Media[];
             }
           </div>
           <!-- variants -->
-          <div class="">variants</div>
+          <div class="">
+            {
+              variants_count > 0 && (
+                <ProductVariants product={product as Product} />
+              )
+            }
+          </div>
         </div>
         <div class="space-y-2 p-2 sm:col-span-6">
           <!-- main image -->
