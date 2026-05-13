@@ -6,14 +6,22 @@ import { useTranslations } from "@/lib/utils/i18nUtils";
 
 import { getPayload } from "payload";
 import { config as payloadConfig, type Media } from "admin";
+import type { Where } from "payload";
 const payload = await getPayload({ config: payloadConfig });
+
+interface Props {
+  limit?: number;
+}
+
+const { limit } = Astro.props;
+const where: Where = { published: { equals: true } };
 
 const products = await payload.find({
   collection: "products",
   depth: 1,
-  limit: 50,
+  limit: limit ?? 9,
   sort: "_order",
-  where: { published: { equals: true } },
+  where,
   select: {
     folder: false,
     variants: false,

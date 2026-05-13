@@ -40,7 +40,7 @@
     "haveAnyQuestionsDescription": "Există multe variațiuni de pasaje Lorem Ipsum disponibile, dar modificarea într-o anumită formă,"
   },
   "header": {
-    "announcement": "[Produse](/products?page=1&perpage=10)"
+    "announcement": "[Produse](/products)"
   },
   "headerOffcanvas": {
     "description": "Suntem o agenție digitală care ajută companiile să creeze experiențe imersive.",

@@ -14,11 +14,11 @@ const payload = await getPayload({ config: payloadConfig });
 const products = await payload.find({
   collection: "products",
   depth: 2,
-  limit: 50,
   sort: "_order",
   where: { published: { equals: true } },
 });
 
+console.log(products.totalDocs, products.totalPages);
 const t = await useTranslations(Astro.currentLocale as string);
 
 const page = await getEntryCTM("products", "-index", Astro.currentLocale);
@@ -32,7 +32,7 @@ const page = await getEntryCTM("products", "-index", Astro.currentLocale);
         <pre>{JSON.stringify(Astro.url.search, null, 2)}</pre>
       </div>
 
-      <ProductsGrid server:defer products={products} />
+      <ProductsGrid />
     </div>
   </section>
 </Base>
