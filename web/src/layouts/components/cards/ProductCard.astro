@@ -11,6 +11,8 @@ type Props = {
 };
 
 let { index = 0, product } = Astro.props;
+
+console.log("product main image", product.main_image);
 ---
 
 <div
@@ -33,7 +35,7 @@ let { index = 0, product } = Astro.props;
     {
       product.main_image! && (
         <Image
-          src={`http://localhost:3000${(product.main_image! as Media).url}`}
+          src={(product.main_image! as Media).url!}
           alt={product.name}
           width={360}
           height={100}
