@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 import Base from "@/layouts/Base.astro";
 import Pill from "@/components/ui/Pill.astro";
 import ProductGallery from "@/components/ui/ProductGallery.astro";
+import Icons from "@/helpers/Icons.astro";
 
 import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
@@ -48,7 +49,9 @@ const product_images: Media[] = product.images as Media[];
           <!-- partner -->
           <div class="flex flex-wrap gap-2">
             <Pill size="lg" partner={product.partner as Partner} />
-            <div class="bg-gray-400">link partner</div>
+            <a href={product.url} target="_blank">
+              <Icons icon="ArrowUpRight" class="size-10 text-gray-400" />
+            </a>
           </div>
           <div class="text-xl font-medium">
             <div set:html={product.description} />
@@ -63,6 +66,7 @@ const product_images: Media[] = product.images as Media[];
                 ))
             }
           </div>
+          <!-- variants -->
           <div class="">variants</div>
         </div>
         <div class="space-y-2 p-2 sm:col-span-6">
@@ -78,6 +82,7 @@ const product_images: Media[] = product.images as Media[];
               // "transition-transform duration-700 ease-in-out group-hover:scale-105",
             ]}
           />
+          <!-- gallery -->
           {
             product_images.length > 0 && (
               <ProductGallery images={product_images} />
