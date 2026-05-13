@@ -74,5 +74,10 @@
   },
   "customers": {
     "title": "Clienți"
+  },
+  "products": {
+    "title": "Produse",
+    "variants": "Variante",
+    "description": ""
   }
 }

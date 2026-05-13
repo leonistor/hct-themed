@@ -14,12 +14,11 @@ const where: Where = { published: { equals: true } };
 const products = await payload.find({
   collection: "products",
   depth: 1,
-  limit: 9,
+  limit: 30,
   sort: "_order",
   where,
   select: {
     folder: false,
-    variants: false,
     images: false,
   },
 });
@@ -27,9 +26,6 @@ const products = await payload.find({
 const t = await useTranslations(Astro.currentLocale as string);
 ---
 
-<!-- <pre>
-  {JSON.stringify(products.docs[0], null, 2)}
-</pre> -->
 <div
   class="grid grid-cols-1 gap-x-4 gap-y-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-10">
   {

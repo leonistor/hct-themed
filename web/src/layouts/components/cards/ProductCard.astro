@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import Button from "@/components/Button.astro";
 import Pill from "@/components/ui/Pill.astro";
 
 import type { Media, Partner, Product, Category, Material } from "admin";
@@ -11,15 +10,17 @@ type Props = {
 };
 
 let { index = 0, product } = Astro.props;
+
+let variants_count = product.variants?.length ?? 0;
 ---
 
 <div
-  class="group flex flex-col gap-y-1 bg-gray-50 px-4 py-2"
+  class="group relative flex flex-col gap-y-1 bg-gray-50 px-4 py-2"
   data-aos="fade-up-sm"
   data-aos-duration="700"
   data-aos-delay={index * 100}>
   <a
-    href={`/products/${product.code}`}
+    href={`/product/${product.code}`}
     class:list={["relative mb-3 overflow-hidden xl:mb-6"]}
     aria-label={product.name}>
     <div
@@ -47,7 +48,20 @@ let { index = 0, product } = Astro.props;
   </a>
 
   <div class="grow"></div>
-
+  {
+    variants_count > 0 && (
+      <span
+        title={`${variants_count} variant${variants_count !== 1 ? "s" : ""}`}
+        class:list={[
+          "absolute inset-e-0 top-0 inline-flex items-center rounded-full",
+          "px-1.5 py-0.5 text-base font-light",
+          "translate-x-1/2 -translate-y-1/2",
+          "transform bg-orange-600 text-white",
+        ]}>
+        {variants_count}
+      </span>
+    )
+  }
   <div class="flex flex-wrap gap-2">
     <Pill partner={product.partner as Partner} />
     <Pill category={product.category as Category} />
