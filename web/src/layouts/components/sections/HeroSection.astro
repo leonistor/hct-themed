@@ -156,7 +156,7 @@ if (!enable) {
                 <div
                   class:list={[
                     "banner-slide absolute inset-0 w-full",
-                    "transition-opacity duration-700 ease-in-out",
+                    "transition-opacity duration-1000 ease-in-out",
                     i === 0 && "active",
                   ]}
                   data-slide={i}
@@ -177,11 +177,11 @@ if (!enable) {
                 </div>
               ))}
 
-              <div class="bg-dark/70 pointer-events-none absolute inset-0 z-2" />
+              <!-- <div class="bg-dark/70 pointer-events-none absolute inset-0 z-2" /> -->
 
               {video && (
                 <div class="relative inset-0 z-2 flex items-center justify-center pt-30 pb-50 max-sm:mr-3 sm:py-40 md:py-63 lg:py-75.5 xl:py-88">
-                  <Button
+                  <!-- <Button
                     tag="button"
                     variant="circle"
                     label={t("common.play")}
@@ -192,7 +192,7 @@ if (!enable) {
                     data-hs-overlay={`#${video.id}`}
                     data-hs-overlay-options='{"emulateScrollbarSpace": true}'
                     title={t("common.play")}
-                  />
+                  /> -->
                 </div>
               )}
             </div>

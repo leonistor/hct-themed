@@ -1,51 +1,51 @@
 ---
 enable: true
 
-subTitle: "Your Trusted Tax Advisor."
-titleLine1: "Trustworthy Tax"
-titleLine2: "Advice."
+subTitle: ""
+titleLine1: "Soluții la cheie"
+titleLine2: "pentru reciclare"
 
-description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint sunt in culpa qui officia deserunt [Discover More](/about/)"
+description: "Oferim [soluții](/solutions) și [echipamente de reciclare](/categories) prin [parteneriate](/partners) cu cei mai performanți producători europeni. [Despre noi](/about)"
 
-arrowDecorationImage: "/images/decorative/shape/shape-5.png"
-arrowDecorationImageAlt: "Decorative shape"
-shapeImage: "/images/decorative/shape/shape-1.png"
-shapeImageAlt: "Decorative shape"
+arrowDecorationImage: ""
+arrowDecorationImageAlt: ""
+shapeImage: ""
+shapeImageAlt: ""
 
 slides:
-  - image: "/images/banner/banner-1.png"
-    alt: "Tax advisory team meeting"
-  - image: "/images/banner/banner-2.png"
-    alt: "Professional tax consultation"
-  - image: "/images/banner/banner-common.png"
-    alt: "Tax advisory services"
+  - image: "/images/unsplash/haberdoedas-ii-owCWMXZwyPw-unsplash.jpg"
+    alt: "illustration"
+  - image: "/images/unsplash/compagnons-aI4RJ--Mw4I-unsplash.jpg"
+    alt: "illustration"
+  - image: "/images/unsplash/donald-giannatti-yBVfobfL6SA-unsplash.jpg"
+    alt: "illustration"
 
 satisfactionClients:
   enable: true
   avatars:
-    - "/images/customers/avatar/customer-1.png"
-    - "/images/customers/avatar/customer-2.png"
-    - "/images/customers/avatar/customer-3.png"
+    - "/images/logos/avatar-logo-heidelberg.png"
+    - "/images/logos/avatar-logo-holcim.png"
+    - "/images/logos/avatar-logo-urban.png"
   avatarAlt: "Client avatar"
-  count: "240+"
-  label: "Trusted Over 240+ Client Across Country"
+  count: "100+"
+  label: "100+ clienți în peste 10 ani de activitate"
 
 video:
-  src: "bTqVqk7FSmY" # Locally hosted video path (ex: /videos/test-video.mp4), or a YouTube/Vimeo video ID
+  src: "" # Locally hosted video path (ex: /videos/test-video.mp4), or a YouTube/Vimeo video ID
   type: "" # If video is stored locally in `public/videos`, set to video file type (e.g., "video/mp4")
-  provider: "youtube" # Options: "youtube", "vimeo", or "html5"
+  provider: "" # Options: "youtube", "vimeo", or "html5"
   poster: "/images/banner/banner-common.png" # Path to thumbnail image for the video
   autoplay: true # Set to true to autoplay; false for manual start (default: false)
   id: "hero-video-modal"
 
 helpDropdown:
   enable: true
-  label: "How can we help you?"
+  label: "Cum vă putem ajuta?"
   items:
-    - label: "Tax Planning"
+    - label: "Servicii"
       url: "/services/"
-    - label: "Business Advisory"
-      url: "/services/"
-    - label: "Financial Consulting"
-      url: "/services/"
+    - label: "Soluții"
+      url: "/solutions/"
+    - label: "Echipamente"
+      url: "/categories/"
 ---

@@ -3,6 +3,8 @@ TODO: etichete nou la parteneri, produse
 TODO: adjust colors
 TODO: sync menu, lang(!partners key)
 TODO: rename case-studies to projects
+TODO: unsplash credits
+TODO: title clienti
 
 ## pagini
 
