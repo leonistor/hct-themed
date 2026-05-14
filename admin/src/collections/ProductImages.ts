@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { default_image_sizes, default_pagination } from './common'
+import { default_image_sizes, default_pagination, default_allow_list } from './common'
 
 export const ProductImages: CollectionConfig = {
   slug: 'product-images',
@@ -23,17 +23,7 @@ export const ProductImages: CollectionConfig = {
     adminThumbnail: 'thumbnail',
     imageSizes: default_image_sizes,
     pasteURL: {
-      allowList: [
-        { hostname: 'www.panizzolo.com' },
-        { hostname: 'tecnoecology.com' },
-        { hostname: 'mistra.cz' },
-        { hostname: 'www.holmatro.com' },
-        { hostname: 'www.bronneberg-recycling.co.uk' },
-        { hostname: 'www.iris-mec.com' },
-        { hostname: 'husmann-umwelt-technik.de' },
-        { hostname: 'www.wolfshredders.com' },
-        { hostname: 'www.pressebull.it' },
-      ],
+      allowList: default_allow_list,
     },
   },
   admin: {

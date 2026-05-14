@@ -23,6 +23,16 @@ export const Partners: CollectionConfig = {
         components: { Cell: 'src/components/Custom#Published' },
       },
     },
+    {
+      name: 'promoted',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description: 'Highlighted with new badge',
+        components: { Cell: 'src/components/Custom#Published' },
+      },
+    },
     { name: 'description', type: 'textarea', required: false },
     { name: 'url', type: 'text', required: false },
     {

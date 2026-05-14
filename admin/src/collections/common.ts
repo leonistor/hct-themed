@@ -10,3 +10,16 @@ export const default_pagination = {
   defaultLimit: 20,
   limits: [20, 50, 100],
 }
+
+export const default_allow_list = [
+  { hostname: 'www.panizzolo.com' },
+  { hostname: 'tecnoecology.com' },
+  { hostname: 'mistra.cz' },
+  { hostname: 'www.holmatro.com' },
+  { hostname: 'www.bronneberg-recycling.co.uk' },
+  { hostname: 'www.iris-mec.com' },
+  { hostname: 'husmann-umwelt-technik.de' },
+  { hostname: 'www.wolfshredders.com' },
+  { hostname: 'www.pressebull.it' },
+  { hostname: 'h-ct.ro' },
+]

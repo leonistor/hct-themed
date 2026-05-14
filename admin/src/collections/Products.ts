@@ -41,6 +41,16 @@ export const Products: CollectionConfig = {
       },
     },
     {
+      name: 'promoted',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description: 'Highlighted with new badge',
+        components: { Cell: 'src/components/Custom#Published' },
+      },
+    },
+    {
       name: 'variants',
       type: 'array',
       required: false,

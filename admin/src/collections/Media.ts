@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { default_image_sizes } from './common'
+import { default_image_sizes, default_allow_list } from './common'
 import { default_pagination } from './common'
 
 export const Media: CollectionConfig = {
@@ -31,6 +31,9 @@ export const Media: CollectionConfig = {
     displayPreview: true,
     adminThumbnail: 'thumbnail',
     imageSizes: default_image_sizes,
+    pasteURL: {
+      allowList: default_allow_list,
+    },
   },
   admin: {
     group: 'Content',

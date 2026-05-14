@@ -22,6 +22,16 @@ export const Projects: CollectionConfig = {
         components: { Cell: 'src/components/Custom#Published' },
       },
     },
+    {
+      name: 'promoted',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description: 'Highlighted with new badge',
+        components: { Cell: 'src/components/Custom#Published' },
+      },
+    },
     { name: 'description', type: 'textarea', required: false, admin: { rows: 10 } },
     { name: 'page', type: 'text', admin: { disableListColumn: true, position: 'sidebar' } },
     {

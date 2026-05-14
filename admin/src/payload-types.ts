@@ -296,6 +296,10 @@ export interface Product {
   page?: string | null;
   url?: string | null;
   published?: boolean | null;
+  /**
+   * Highlighted with new badge
+   */
+  promoted?: boolean | null;
   variants?:
     | {
         code: string;
@@ -326,6 +330,10 @@ export interface Partner {
   code: string;
   name: string;
   published?: boolean | null;
+  /**
+   * Highlighted with new badge
+   */
+  promoted?: boolean | null;
   description?: string | null;
   url?: string | null;
   logo?: (number | null) | Media;
@@ -459,6 +467,10 @@ export interface Project {
   code: string;
   name: string;
   published?: boolean | null;
+  /**
+   * Highlighted with new badge
+   */
+  promoted?: boolean | null;
   description?: string | null;
   page?: string | null;
   illustration?: (number | null) | Media;
@@ -917,6 +929,7 @@ export interface PartnersSelect<T extends boolean = true> {
   code?: T;
   name?: T;
   published?: T;
+  promoted?: T;
   description?: T;
   url?: T;
   logo?: T;
@@ -983,6 +996,7 @@ export interface ProductsSelect<T extends boolean = true> {
   page?: T;
   url?: T;
   published?: T;
+  promoted?: T;
   variants?:
     | T
     | {
@@ -1086,6 +1100,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   code?: T;
   name?: T;
   published?: T;
+  promoted?: T;
   description?: T;
   page?: T;
   illustration?: T;
