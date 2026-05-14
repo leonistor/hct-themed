@@ -30,50 +30,19 @@ export async function Overview({ payload }: { payload: Payload }) {
 
   return (
     <div className="overview">
-      <OverviewButton
-        name="partners"
-        count_published={partners_published.totalDocs}
-        count_unpublished={partners_unpublished.totalDocs}
-      />
-      <OverviewButton
-        name="customers"
-        count_published={customers_published.totalDocs}
-        count_unpublished={customers_unpublished.totalDocs}
-      />
-      <OverviewButton
-        name="products"
-        count_published={products_published.totalDocs}
-        count_unpublished={products_unpublished.totalDocs}
-      />
-      <OverviewButton
-        name="projects"
-        count_published={projects_published.totalDocs}
-        count_unpublished={projects_unpublished.totalDocs}
-      />
+      Unpublished:
+      <OverviewButton name="partners" count_unpublished={partners_unpublished.totalDocs} />
+      <OverviewButton name="customers" count_unpublished={customers_unpublished.totalDocs} />
+      <OverviewButton name="products" count_unpublished={products_unpublished.totalDocs} />
+      <OverviewButton name="projects" count_unpublished={projects_unpublished.totalDocs} />
     </div>
   )
 }
 
-function OverviewButton({
-  name,
-  count_published,
-  count_unpublished,
-}: {
-  name: string
-  count_published: number
-  count_unpublished: number
-}) {
+function OverviewButton({ name, count_unpublished }: { name: string; count_unpublished: number }) {
   return (
-    <Button el="link" to="/collections" buttonStyle="pill">
-      {capitalizeFirstLetter(name)}: {count_published}
-      {count_unpublished ? (
-        <span>
-          {' '}
-          + {count_unpublished} {count_unpublished === 1 ? 'draft' : 'drafts'}
-        </span>
-      ) : (
-        ''
-      )}
+    <Button el="link" to={`/collections/${name}`} buttonStyle="pill">
+      {capitalizeFirstLetter(name)}: {count_unpublished}
     </Button>
   )
 }
