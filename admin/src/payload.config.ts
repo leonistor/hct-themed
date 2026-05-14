@@ -40,6 +40,10 @@ export default buildConfig({
           }
         : false,
     components: {
+      graphics: {
+        Icon: 'src/components/Logo',
+        Logo: 'src/components/Logo',
+      },
       beforeDashboard: ['src/components/Admin#Overview'],
     },
   },
