@@ -1,12 +1,12 @@
 
-TODO: etichete nou la parteneri, produse
 TODO: adjust colors
 TODO: sync menu, lang(!partners key)
 TODO: rename case-studies to projects
 TODO: unsplash credits
 TODO: title clienti
 TODO: footer
-
+TODO: partnerei overview si section la about
+TODO: categorii si materiale product grid
 
 ## pagini
 
