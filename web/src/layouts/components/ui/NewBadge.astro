@@ -1,0 +1,15 @@
+---
+import { useTranslations } from "@/lib/utils/i18nUtils";
+
+const t = await useTranslations(Astro.currentLocale as string);
+---
+
+<span
+  class:list={[
+    "absolute inset-e-0 top-0 inline-flex items-center rounded-full",
+    "px-2 py-0.5 text-base font-medium",
+    "translate-x-1/4 -translate-y-1/4",
+    "transform bg-orange-600 text-white",
+  ]}>
+  {t("common.new")}
+</span>

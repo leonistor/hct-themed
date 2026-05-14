@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import Pill from "@/components/ui/Pill.astro";
 import PillButton from "@/components/ui/PillButton.astro";
+import NewBadge from "@/components/ui/NewBadge.astro";
 
 import type { Media, Partner, Product, Category, Material } from "admin";
 
@@ -16,7 +17,8 @@ let { index = 0, product } = Astro.props;
 
 const t = await useTranslations(Astro.currentLocale as string);
 
-let variants_count = product.variants?.length ?? 0;
+const variants_count = product.variants?.length ?? 0;
+const is_promoted = product.promoted ?? false;
 ---
 
 <div
@@ -53,20 +55,7 @@ let variants_count = product.variants?.length ?? 0;
   </a>
 
   <div class="grow"></div>
-  {
-    variants_count > 0 && (
-      <span
-        title={`${variants_count} variant${variants_count !== 1 ? "s" : ""}`}
-        class:list={[
-          "absolute inset-e-0 top-0 inline-flex items-center rounded-full",
-          "px-1.5 py-0.5 text-base font-light",
-          "translate-x-1/2 -translate-y-1/2",
-          "transform bg-orange-600 text-white",
-        ]}>
-        {variants_count}
-      </span>
-    )
-  }
+  {is_promoted && <NewBadge />}
   <div class="flex flex-wrap gap-2">
     <Pill partner={product.partner as Partner} />
     <Pill category={product.category as Category} />
