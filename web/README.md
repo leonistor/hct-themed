@@ -1,9 +1,8 @@
 
 TODO: etichete nou la parteneri, produse
 TODO: adjust colors
-TODO: api endpoint for payload
 TODO: sync menu, lang(!partners key)
-TODO: clients map w/ https://pascal-brand38.github.io/astro-dev/packages/astro-leaflet/
+TODO: rename case-studies to projects
 
 ## pagini
 

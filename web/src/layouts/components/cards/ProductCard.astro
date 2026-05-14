@@ -1,8 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import Pill from "@/components/ui/Pill.astro";
+import PillButton from "@/components/ui/PillButton.astro";
 
 import type { Media, Partner, Product, Category, Material } from "admin";
+
+import { useTranslations } from "@/lib/utils/i18nUtils";
 
 type Props = {
   index?: number;
@@ -10,6 +13,8 @@ type Props = {
 };
 
 let { index = 0, product } = Astro.props;
+
+const t = await useTranslations(Astro.currentLocale as string);
 
 let variants_count = product.variants?.length ?? 0;
 ---
@@ -70,6 +75,15 @@ let variants_count = product.variants?.length ?? 0;
         product.materials.map((material) => (
           <Pill material={material as Material} />
         ))
+    }
+    {
+      variants_count > 0 && (
+        <PillButton
+          label={`${variants_count} ${t("products.variants")}`}
+          link={`/product/${product.code}`}
+          bgColor="#f97316"
+        />
+      )
     }
   </div>
 </div>

@@ -28,7 +28,8 @@
     "noFaqsFoundFor": "Nu s-au găsit întrebări frecvente pentru",
     "loadingMap": "Încărcare hartă...",
     "comments": "Comentarii",
-    "reply": "Răspunde"
+    "reply": "Răspunde",
+    "new": "nou"
   },
   "widgets": {
     "postSearchFormPlaceholder": "Încearcă să cauți 'sfaturi'...",

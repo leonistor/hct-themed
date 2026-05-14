@@ -10,12 +10,6 @@ import PageTitle from "@/layouts/components/ui/PageTitle.astro";
 import { useTranslations } from "@/lib/utils/i18nUtils";
 
 import { Leaflet, Marker, Popup } from "astro-leaflet";
-import type {
-  AstroLeafletOptionsType,
-  AstroLeafletMarkerType,
-} from "astro-leaflet";
-
-//
 
 const payload = await getPayload({ config: payloadConfig });
 
