@@ -245,5 +245,9 @@ export const collections = {
     loader: contentLoader("./src/content/products"),
   }),
 
+  solutions: defineCollection({
+    loader: contentLoader("./src/content/solutions"),
+  }),
+
   testimonial: testimonialCollection,
 };

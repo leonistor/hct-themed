@@ -76,6 +76,10 @@
   "customers": {
     "title": "Clienți"
   },
+  "solutions": {
+    "title": "Soluții",
+    "tagline": "Soluții pentru toate tipurile de materiale"
+  },
   "products": {
     "title": "Produse",
     "variants": "Variante",

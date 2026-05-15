@@ -8,6 +8,7 @@ TODO: footer
 TODO: partneri overview si section la about
 TODO: categorii si materiale product grid
 TODO: translate prods info, check payload langs
+TODO: CTA megamenus
 
 ## pagini
 

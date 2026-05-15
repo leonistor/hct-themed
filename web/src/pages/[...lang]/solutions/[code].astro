@@ -1,0 +1,35 @@
+---
+export const prerender = false;
+
+import Base from "@/layouts/Base.astro";
+import PageTitle from "@/layouts/components/ui/PageTitle.astro";
+
+import { getPayload } from "payload";
+import { config as payloadConfig, type Media } from "admin";
+const payload = await getPayload({ config: payloadConfig });
+
+const { code } = Astro.params;
+
+const material_docs = await payload.find({
+  collection: "materials",
+  pagination: false,
+  limit: 1,
+  where: { code: { equals: code } },
+});
+
+if (!material_docs) {
+  return Astro.redirect("/404");
+}
+
+const material = material_docs.docs[0];
+---
+
+<Base hideOffcanvas={true}>
+  <section class="relative">
+    <div class="container">
+      <PageTitle title={material.name} />
+      <div class="pb-4 md:text-xl">{material.description}</div>
+      <div>TODO: products grid</div>
+    </div>
+  </section>
+</Base>

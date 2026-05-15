@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+import Pill from "@/components/ui/Pill.astro";
+import PillButton from "@/components/ui/PillButton.astro";
+import NewBadge from "@/components/ui/NewBadge.astro";
+
+import type { Media, Partner, Product, Category, Material } from "admin";
+
+import { useTranslations } from "@/lib/utils/i18nUtils";
+
+type Props = {
+  index?: number;
+  material: Material;
+};
+
+let { index = 0, material } = Astro.props;
+
+const t = await useTranslations(Astro.currentLocale as string);
+---
+
+<div
+  class="group relative flex flex-col gap-y-1 bg-gray-50 px-4 py-2"
+  data-aos="fade-up-sm"
+  data-aos-duration="700"
+  data-aos-delay={index * 100}>
+  <a
+    href={`/product/${material.code}`}
+    class:list={["relative mb-3 overflow-hidden xl:mb-6"]}
+    aria-label={material.name}>
+    <div
+      class:list={[
+        "text-primary text-h6-sm lg:text-h5 xl:text-h4 opacity-75",
+        "pb-2 group-hover:opacity-100",
+        "leading-tight font-medium tracking-tight text-balance",
+      ]}>
+      {material.name}
+    </div>
+    {
+      material.illustration && (
+        <Image
+          src={(material.illustration as Media).url!}
+          alt={material.name}
+          width={360}
+          height={100}
+          class:list={[
+            "w-full object-cover",
+            "transition-transform duration-700 ease-in-out group-hover:scale-105",
+          ]}
+        />
+      )
+    }
+  </a>
+
+  <div class="grow"></div>
+  <div class="flex flex-wrap gap-2"></div>
+</div>
