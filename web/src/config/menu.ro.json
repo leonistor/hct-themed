@@ -197,7 +197,7 @@
         }
       ],
       "cta": {
-        "enable": true,
+        "enable": false,
         "eyebrow": "Partener de Livrare",
         "image": "/images/case-studies/case-study-1.png",
         "title": "Ai nevoie de o echipă care poate proiecta, construi și lansa fără straturi suplimentare?",
@@ -232,6 +232,7 @@
           "enable": true,
           "name": "Categorii",
           "description": "Echipamenate pentru toate categorile de utilizare",
+          "url": "/categories",
           "weight": 0,
           "children": [
             {
@@ -322,6 +323,7 @@
           "enable": true,
           "name": "Parteneri",
           "description": "Asigurăm o paletă completă de produse și servicii pentru industria reciclării prin parteneriate cu cei mai importanți producători europeni.",
+          "url": "/partners",
           "weight": 0,
           "children": [
             {

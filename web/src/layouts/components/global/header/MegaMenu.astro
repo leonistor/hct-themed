@@ -72,7 +72,11 @@ const columnCountClass =
                       />
                     )}
                     {group.description && (
-                      <p
+                      <a
+                        href={getLocaleUrlCTM(
+                          group.url || Astro.url.origin,
+                          Astro.currentLocale,
+                        )}
                         class="text-text-dark/60 max-w-[32ch] text-sm/relaxed"
                         set:html={group.description}
                       />
