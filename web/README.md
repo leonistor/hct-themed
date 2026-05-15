@@ -7,6 +7,7 @@ TODO: title clienti
 TODO: footer
 TODO: partnerei overview si section la about
 TODO: categorii si materiale product grid
+TODO: translate prods info, check payload langs
 
 ## pagini
 
