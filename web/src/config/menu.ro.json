@@ -16,6 +16,7 @@
           "enable": true,
           "name": "Materiale",
           "description": "Soluții pentru toate tipurile de materiale",
+          "url": "/solutions",
           "weight": 0,
           "children": [
             {

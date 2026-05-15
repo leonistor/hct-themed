@@ -84,5 +84,9 @@
     "title": "Produse",
     "variants": "Variante",
     "description": ""
+  },
+  "categories": {
+    "title": "Categorie",
+    "tagline": "Echipamenate pentru toate categorile de utilizare"
   }
 }

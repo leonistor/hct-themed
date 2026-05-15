@@ -10,25 +10,25 @@ const payload = await getPayload({ config: payloadConfig });
 
 const { code } = Astro.params;
 
-const partner_docs = await payload.find({
-  collection: "partners",
+const category_docs = await payload.find({
+  collection: "categories",
   pagination: false,
   limit: 1,
   where: { code: { equals: code } },
 });
 
-if (!partner_docs) {
+if (!category_docs) {
   return Astro.redirect("/404");
 }
 
-const partner = partner_docs.docs[0];
+const category = category_docs.docs[0];
 ---
 
 <Base hideOffcanvas={true}>
   <section class="relative">
     <div class="container">
-      <PageTitle title={partner.name} />
-      <div class="pb-4 md:text-xl">{partner.description}</div>
+      <PageTitle title={category.name} />
+      <div class="pb-4 md:text-xl">{category.description}</div>
       <div>TODO: products grid</div>
     </div>
   </section>
