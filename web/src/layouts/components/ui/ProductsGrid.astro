@@ -9,7 +9,30 @@ import { config as payloadConfig, type Media } from "admin";
 import type { Where } from "payload";
 const payload = await getPayload({ config: payloadConfig });
 
-const where: Where = { published: { equals: true } };
+interface Props {
+  materials_code?: string;
+  category_code?: string;
+  partner_code?: string;
+}
+
+const { materials_code, category_code, partner_code } = Astro.props;
+
+const where: Where = {
+  and: [
+    { published: { equals: true } },
+    {
+      ...(materials_code
+        ? { "materials.code": { contains: materials_code } }
+        : {}),
+    },
+    {
+      ...(category_code ? { "category.code": { equals: category_code } } : {}),
+    },
+    {
+      ...(partner_code ? { "partner.code": { equals: partner_code } } : {}),
+    },
+  ],
+};
 
 const products = await payload.find({
   collection: "products",

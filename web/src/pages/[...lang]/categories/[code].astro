@@ -3,6 +3,7 @@ export const prerender = false;
 
 import Base from "@/layouts/Base.astro";
 import PageTitle from "@/layouts/components/ui/PageTitle.astro";
+import ProductsGrid from "@/layouts/components/ui/ProductsGrid.astro";
 
 import { getPayload } from "payload";
 import { config as payloadConfig, type Media } from "admin";
@@ -29,7 +30,7 @@ const category = category_docs.docs[0];
     <div class="container">
       <PageTitle title={category.name} />
       <div class="pb-4 md:text-xl">{category.description}</div>
-      <div>TODO: products grid</div>
+      <ProductsGrid category_code={category.code} />
     </div>
   </section>
 </Base>

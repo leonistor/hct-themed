@@ -1,21 +1,21 @@
 {
   "name": "hct-themed",
   "module": "index.ts",
-  "type": "module",
-  "private": true,
-  "workspaces": [
-    "admin/**",
-    "web/**"
-  ],
-  "scripts": {
-    "dev:web": "cd web && bun run dev",
-    "dev:admin": "cd admin && bun run dev",
-    "dev": "bun run --parallel dev:web dev:admin"
-  },
   "devDependencies": {
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5"
-  }
+  },
+  "private": true,
+  "scripts": {
+    "dev:web": "cd web && bun run dev",
+    "dev:admin": "cd admin && bun run dev",
+    "dev": "bun run --parallel dev:web dev:admin"
+  },
+  "type": "module",
+  "workspaces": [
+    "admin/**",
+    "web/**"
+  ]
 }
