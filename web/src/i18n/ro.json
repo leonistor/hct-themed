@@ -17,7 +17,7 @@
     "call": "Apel:",
     "callUs": "Sună-ne",
     "play": "Redă",
-    "contactUs": "Contactează-ne",
+    "contactUs": "Contact",
     "ourServices": "Serviciile noastre",
     "recentProjects": "Proiecte recente",
     "discoverMore": "Descoperă mai mult",
@@ -55,19 +55,19 @@
     "paginationNext": "Articol următor"
   },
   "navigation": {
-    "buttonLabel": "Contactează-ne"
+    "buttonLabel": "Contact"
   },
   "subscription": {
     "title": "Adaugă propriile detalii și informează toate cerințele tale fiscale"
   },
   "footer": {
     "menuTitleLinks": "Legături",
-    "freeSupport": "Suport gratuit",
-    "description": "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit minus id quod maxime placeat facere assumenda est omnis dolor repellendus.",
+    "freeSupport": "Tel/WhatsApp",
+    "description": "",
     "contact": "Contact",
-    "copyright": "Drepturi de autor © {{ year }}. [Taxo](https://taxo-dev.netlify.app/) Toate drepturile rezervate.",
+    "copyright": "Copyright ©{{ year }}.",
     "_comment": "Apreciem cu amabilitate dacă păstrați dreptul de autor al temei. Vă mulțumim pentru sprijinul Taxo!",
-    "since": "începând cu 1990"
+    "since": ""
   },
   "partners": {
     "title": "Parteneri",
