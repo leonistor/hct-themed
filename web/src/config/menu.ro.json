@@ -440,19 +440,19 @@
             {
               "enable": true,
               "name": "Instalare și montaj",
-              "url": "/services/installation-setup",
+              "url": "/services/installation",
               "weight": 0
             },
             {
               "enable": true,
               "name": "Recondiționare",
-              "url": "/services/service-03",
+              "url": "/services/refurbish",
               "weight": 0
             },
             {
               "enable": true,
               "name": "Accesorii și consumabile",
-              "url": "/services/service-05",
+              "url": "/services/parts-supplies",
               "weight": 0
             }
           ]

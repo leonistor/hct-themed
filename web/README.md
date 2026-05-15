@@ -1,11 +1,11 @@
 
 TODO: adjust colors
-TODO: sync menu, lang(!partners key)
+TODO: sync menu and lang (new keys)
 TODO: rename case-studies to projects
 TODO: unsplash credits
 TODO: title clienti
 TODO: footer
-TODO: partnerei overview si section la about
+TODO: partneri overview si section la about
 TODO: categorii si materiale product grid
 TODO: translate prods info, check payload langs
 
