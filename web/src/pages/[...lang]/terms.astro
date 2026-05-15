@@ -1,0 +1,38 @@
+---
+import Base from "@/layouts/Base.astro";
+import { generatePaths } from "@/lib/utils/i18nUtils.ts";
+import { useTranslations } from "@/lib/utils/i18nUtils.ts";
+const t = await useTranslations(Astro.currentLocale as string);
+
+import { Content } from "@/content/terms.md";
+
+export function getStaticPaths() {
+  return generatePaths();
+}
+---
+
+<Base title="test">
+  <section>
+    <div class="container">
+      <h1>{t("common.terms")}</h1>
+      <Content />
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  .terms a {
+    text-decoration: underline;
+  }
+  .terms h1,
+  h2,
+  h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  @media screen and (min-width: 1024px) {
+    .terms {
+      column-width: 22rem;
+    }
+  }
+</style>

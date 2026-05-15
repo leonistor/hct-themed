@@ -1,5 +1,7 @@
 <div class="credits">
 
+Products photos and technical information from [partners](/partners).
+
 ### Design
 
 Astro theme by [GetAstroThemes](https://getastrothemes.com/) 

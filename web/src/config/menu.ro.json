@@ -518,17 +518,17 @@
     },
     {
       "enable": true,
-      "name": "Echipă",
-      "url": "/team/"
+      "name": "Termeni",
+      "url": "/terms/"
     },
     {
       "enable": true,
-      "name": "Blog",
-      "url": "/blog/"
+      "name": "Credite",
+      "url": "/credits/"
     },
     {
       "enable": true,
-      "name": "Contactează-ne",
+      "name": "Contact",
       "url": "/contact/"
     }
   ],
