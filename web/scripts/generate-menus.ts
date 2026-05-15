@@ -27,11 +27,11 @@ for (const [index, partner] of partners.docs.entries()) {
     enable: true,
     name: partner.name,
     description: partner.description,
-    icon: "Monitor",
     url: `/partners/${partner.code}`,
     weight: index,
+    promoted: partner.promoted,
     // @ts-ignore
-    logo: "/payload" + partner.logo?.thumbnailURL ?? "",
+    icon: "/api/media/file" + partner.logo?.filename ?? "",
   });
 }
 
@@ -47,11 +47,10 @@ for (const [index, material] of materials.docs.entries()) {
     enable: true,
     name: material.name,
     description: material.description,
-    icon: "Monitor",
     url: `/solutions/${material.code}`,
     weight: index,
     // @ts-ignore
-    logo: "/payload" + material.illustration?.thumbnailURL ?? "",
+    icon: "/api/media/file" + material.illustration?.filename ?? "",
   });
 }
 
@@ -67,11 +66,10 @@ for (const [index, category] of categories.docs.entries()) {
     enable: true,
     name: category.name,
     description: category.description,
-    icon: "Monitor",
     url: `/categories/${category.code}`,
     weight: index,
     // @ts-ignore
-    logo: "/payload" + category.illustration?.thumbnailURL ?? "",
+    icon: "/api/media/file" + category.illustration?.filename ?? "",
   });
 }
 

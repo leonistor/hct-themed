@@ -23,64 +23,57 @@
               "enable": true,
               "name": "Metale",
               "description": "Reciclarea metalelor",
-              "icon": "Monitor",
               "url": "/solutions/metale",
               "weight": 0,
-              "logo": "/payload/api/media/file/materiale_metale_az8i13u5w2-5-150x150.jpg"
+              "icon": "/api/media/file/materiale_metale_az8i13u5w2-5.jpg"
             },
             {
               "enable": true,
               "name": "Mixte",
               "description": "Metale mixte",
-              "icon": "Monitor",
               "url": "/solutions/mixte",
               "weight": 1,
-              "logo": "/payload/api/media/file/materiale_mixte_d53p078to6-5-150x150.jpg"
+              "icon": "/api/media/file/materiale_mixte_d53p078to6-5.jpg"
             },
             {
               "enable": true,
               "name": "Aluminiu",
               "description": "Reciclarea aluminiului",
-              "icon": "Monitor",
+              "icon": "/api/media/file/materiale_aluminiu_yctwewjyrj-5.jpg",
               "url": "/solutions/aluminiu",
-              "weight": 2,
-              "logo": "/payload/api/media/file/materiale_aluminiu_yctwewjyrj-5-150x150.jpg"
+              "weight": 2
             },
             {
               "enable": true,
               "name": "Cabluri",
               "description": "Reciclarea cablurilor",
-              "icon": "Monitor",
+              "icon": "/api/media/file/materiale_cabluri_35dogmwz6h-5.jpg",
               "url": "/solutions/cabluri",
-              "weight": 3,
-              "logo": "/payload/api/media/file/materiale_cabluri_35dogmwz6h-5-150x150.jpg"
+              "weight": 3
             },
             {
               "enable": true,
               "name": "Rafinare",
               "description": "Rafinare",
-              "icon": "Monitor",
+              "icon": "/api/media/file/materiale_rafinare_l3pnyb5yb9-5.jpg",
               "url": "/solutions/rafinare",
-              "weight": 4,
-              "logo": "/payload/api/media/file/materiale_rafinare_l3pnyb5yb9-5-150x150.jpg"
+              "weight": 4
             },
             {
               "enable": true,
               "name": "Vehicule",
               "description": "Reciclarea vehiculelor scoase din uz",
-              "icon": "Monitor",
+              "icon": "/api/media/file/materiale_vehicule_q8hn046k0o-5.jpg",
               "url": "/solutions/vehicule",
-              "weight": 5,
-              "logo": "/payload/api/media/file/materiale_vehicule_q8hn046k0o-5-150x150.jpg"
+              "weight": 5
             },
             {
               "enable": true,
               "name": "Motoare auto",
               "description": "Motoare auto",
-              "icon": "Monitor",
+              "icon": "/api/media/file/materiale_motoare_auto_3i41ep1ogu-5.jpg",
               "url": "/solutions/motoare-auto",
-              "weight": 6,
-              "logo": "/payload/api/media/file/materiale_motoare_auto_3i41ep1ogu-5-150x150.jpg"
+              "weight": 6
             }
           ]
         },
@@ -94,64 +87,57 @@
               "enable": true,
               "name": "Motoare electrice",
               "description": "Reciclarea motoarelor electrice",
-              "icon": "Monitor",
+              "icon": "/api/media/file/materiale_motoare_electrice_lg7btgbkcc-5.jpg",
               "url": "/solutions/motoare-electrice",
-              "weight": 7,
-              "logo": "/payload/api/media/file/materiale_motoare_electrice_lg7btgbkcc-5-150x150.jpg"
+              "weight": 7
             },
             {
               "enable": true,
               "name": "DEEE",
               "description": "Reciclarea DEEE (Deșeuri de Echipamente Electrice și Electronice)",
-              "icon": "Monitor",
+              "icon": "/api/media/file/materiale_deee_nyx6op9agq-5.jpg",
               "url": "/solutions/deee",
-              "weight": 8,
-              "logo": "/payload/api/media/file/materiale_deee_nyx6op9agq-5-150x150.jpg"
+              "weight": 8
             },
             {
               "enable": true,
               "name": "Hidrapulper ",
               "description": "Recuperarea deșeurilor de hidrapulper de la fabricile de hârtie",
-              "icon": "Monitor",
+              "icon": "/api/media/file/materiale_hidrapulper_85n5efzm28-5.jpg",
               "url": "/solutions/hidrapulper",
-              "weight": 9,
-              "logo": "/payload/api/media/file/materiale_hidrapulper_85n5efzm28-5-150x150.jpg"
+              "weight": 9
             },
             {
               "enable": true,
               "name": "Frigidere",
               "description": "Reciclarea frigiderelor",
-              "icon": "Monitor",
+              "icon": "/api/media/file/materiale_frigidere_dlskcqe0mq-5.jpg",
               "url": "/solutions/frigidere",
-              "weight": 10,
-              "logo": "/payload/api/media/file/materiale_frigidere_dlskcqe0mq-5-150x150.jpg"
+              "weight": 10
             },
             {
               "enable": true,
               "name": "Deșeuri urbane",
               "description": "Deșeuri solide urbane",
-              "icon": "Monitor",
+              "icon": "/api/media/file/materiale_deseuri_urbane_osr1njmlt3-5.jpg",
               "url": "/solutions/deseuri-urbane",
-              "weight": 11,
-              "logo": "/payload/api/media/file/materiale_deseuri_urbane_osr1njmlt3-5-150x150.jpg"
+              "weight": 11
             },
             {
               "enable": true,
               "name": "Conserve",
               "description": "Conserve metalice / Cutii de conserve",
-              "icon": "Monitor",
+              "icon": "/api/media/file/materiale_conserve_3y11vks7hz-5.jpg",
               "url": "/solutions/conserve",
-              "weight": 12,
-              "logo": "/payload/api/media/file/materiale_conserve_3y11vks7hz-5-150x150.jpg"
+              "weight": 12
             },
             {
               "enable": true,
               "name": "Zgură",
               "description": "Prelucrarea zgurii",
-              "icon": "Monitor",
+              "icon": "/api/media/file/materiale_zgura_63k2fonllj-5.jpg",
               "url": "/solutions/zgura",
-              "weight": 13,
-              "logo": "/payload/api/media/file/materiale_zgura_63k2fonllj-5-150x150.jpg"
+              "weight": 13
             }
           ]
         },
@@ -242,7 +228,7 @@
               "icon": "Monitor",
               "url": "/categories/taiere-si-dezmembrare",
               "weight": 0,
-              "logo": "/payload/api/media/file/categ_taiere_y0bh74zvrr-5-150x150.jpg"
+              "logo": "/payload/api/media/file/categ_taiere_y0bh74zvrr-5.jpg"
             },
             {
               "enable": true,
@@ -251,7 +237,7 @@
               "icon": "Monitor",
               "url": "/categories/prese-de-balotat-si-compactoare",
               "weight": 1,
-              "logo": "/payload/api/media/file/categ_prese_8dds649ybt-5-150x150.jpg"
+              "logo": "/payload/api/media/file/categ_prese_8dds649ybt-5.jpg"
             },
             {
               "enable": true,
@@ -260,7 +246,7 @@
               "icon": "Monitor",
               "url": "/categories/tocare-maruntire-si-granulare",
               "weight": 2,
-              "logo": "/payload/api/media/file/categ_tocare_c25lgx9y8b-5-150x150.jpg"
+              "logo": "/payload/api/media/file/categ_tocare_c25lgx9y8b-5.jpg"
             }
           ]
         },
@@ -277,7 +263,7 @@
               "icon": "Monitor",
               "url": "/categories/dezmembrare-vehicule-si-motoare",
               "weight": 3,
-              "logo": "/payload/api/media/file/categ_vehicule_8vu3jjs5sb-5-150x150.jpg"
+              "logo": "/payload/api/media/file/categ_vehicule_8vu3jjs5sb-5.jpg"
             },
             {
               "enable": true,
@@ -286,7 +272,7 @@
               "icon": "Monitor",
               "url": "/categories/sisteme-de-sortare",
               "weight": 4,
-              "logo": "/payload/api/media/file/categ_sortare_7varlbrukq-5-150x150.jpg"
+              "logo": "/payload/api/media/file/categ_sortare_7varlbrukq-5.jpg"
             }
           ]
         }

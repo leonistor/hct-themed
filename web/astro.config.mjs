@@ -28,6 +28,8 @@ export default defineConfig({
   trailingSlash: config.site.trailingSlash ? "always" : "never",
   image: {
     layout: "constrained",
+    domains: ["localhost"],
+    remotePatterns: [{ port: "4321" }, { port: "3000" }],
   },
   devToolbar: {
     enabled: true,

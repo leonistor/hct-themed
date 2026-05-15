@@ -4,6 +4,8 @@ import type { NavigationLink } from "@/types";
 import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
 import Button from "@/components/Button.astro";
 import Icons from "@/helpers/Icons.astro";
+import { Image } from "astro:assets";
+
 import { isActiveUrl } from "@/lib/utils/navigationActive";
 import type { IconName as SupportedIconName } from "@/lib/iconNames";
 
@@ -114,11 +116,14 @@ const columnCountClass =
                             ),
                           },
                         ]}>
-                        {child.icon && (
+                        {false && child.icon && (
                           <span class="text-text-dark group-hover/item:text-primary inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-slate-200/80 bg-slate-50/80 transition-all duration-200 group-hover/item:border-slate-300 group-hover/item:bg-white">
-                            <Icons
-                              icon={child.icon as SupportedIconName}
-                              class="size-4"
+                            <Image
+                              src={Astro.url.origin + child.icon}
+                              alt={child.name}
+                              width={400}
+                              height={400}
+                              priority
                             />
                           </span>
                         )}
