@@ -6,6 +6,8 @@ Astro theme by [GetAstroThemes](https://getastrothemes.com/)
 
 ### Photos
 
+<div class="photos">
+
 - Photo by <a href="https://unsplash.com/@ek_foto_dk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Eva Kristensen</a> on <a href="https://unsplash.com/photos/a-pile-of-scrap-metal-sitting-next-to-a-building-HsLRIeda_2w?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 - Photo by <a href="https://unsplash.com/@nathan_cima?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Nathan Cima</a> on <a href="https://unsplash.com/photos/a-large-truck-with-a-load-of-trash-in-a-warehouse-70_n8a-nE7s?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 - Photo by <a href="https://unsplash.com/@ltheritage?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Le Thanh Huyen</a> on <a href="https://unsplash.com/photos/a-pile-of-plastic-bottles-and-cans-in-a-cage-uooDda36y_Y?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
@@ -63,5 +65,7 @@ Astro theme by [GetAstroThemes](https://getastrothemes.com/)
 - Photo by <a href="https://unsplash.com/@susan_wilkinson?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Susan Wilkinson</a> on <a href="https://unsplash.com/photos/yellow-and-white-abstract-painting-ReiMJUT19uI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 - Photo by <a href="https://unsplash.com/@susan_wilkinson?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Susan Wilkinson</a> on <a href="https://unsplash.com/photos/an-abstract-painting-with-black-yellow-and-blue-colors-lK7YpJxpS_A?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 - Photo by <a href="https://unsplash.com/@kennyzhang29?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">- Kenny</a> on <a href="https://unsplash.com/photos/workers-in-hard-hats-repair-large-industrial-machinery-gears-nJo5fYZ_OK0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+</div>
 
 </div>

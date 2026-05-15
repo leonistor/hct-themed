@@ -24,4 +24,18 @@ export function getStaticPaths() {
   .credits a {
     text-decoration: underline;
   }
+  .credits h1,
+  h2,
+  h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .credits .photos {
+    column-count: auto;
+    column-width: 20rem;
+
+    & ul {
+      list-style: square;
+    }
+  }
 </style>
