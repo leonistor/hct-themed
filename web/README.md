@@ -1,7 +1,6 @@
 
 TODO: adjust colors
 TODO: sync menu and lang (new keys)
-TODO: rename case-studies to projects
 TODO: unsplash credits
 TODO: title clienti
 TODO: footer

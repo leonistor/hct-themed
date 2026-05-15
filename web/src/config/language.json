@@ -1,30 +1,30 @@
 [
   {
-    "languageName": "Ro",
+    "languageName": "Română",
     "languageCode": "ro",
     "contentDir": "romanian",
     "weight": 2
   },
   {
-    "languageName": "En",
+    "languageName": "English",
     "languageCode": "en",
     "contentDir": "english",
     "weight": 1
   },
   {
-    "languageName": "Fr",
+    "languageName": "Français",
     "languageCode": "fr",
     "contentDir": "french",
     "weight": 3
   },
   {
-    "languageName": "De",
+    "languageName": "Deutsch",
     "languageCode": "de",
     "contentDir": "deutsch",
     "weight": 4
   },
   {
-    "languageName": "It",
+    "languageName": "Italiano",
     "languageCode": "it",
     "contentDir": "italian",
     "weight": 5

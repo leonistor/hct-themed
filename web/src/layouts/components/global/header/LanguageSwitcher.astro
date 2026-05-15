@@ -2,6 +2,7 @@
 import Icons from "@/helpers/Icons.astro";
 import { getLocaleUrlCTM, supportedLanguages } from "@/lib/utils/i18nUtils.ts";
 import trailingSlashChecker from "@/lib/utils/trailingSlashChecker";
+import languagesJSON from "@/config/language.json";
 
 const currentLocale = Astro.currentLocale;
 const languages = supportedLanguages.map((lang) => {
@@ -17,6 +18,11 @@ const languages = supportedLanguages.map((lang) => {
     ...lang,
   };
 });
+
+function getLanguageName(locale: string): string {
+  const foundLang = languagesJSON.find((lang) => lang.languageCode === locale);
+  return foundLang?.languageName ?? locale;
+}
 ---
 
 <div
@@ -31,13 +37,7 @@ const languages = supportedLanguages.map((lang) => {
     aria-expanded="false"
     aria-label="Menu">
     <span class="text">
-      {
-        currentLocale === "en"
-          ? "US - English"
-          : currentLocale === "fr"
-            ? "FR - Français"
-            : currentLocale
-      }
+      {getLanguageName(currentLocale!)}
     </span>
     <Icons
       icon="ChevronDown"
