@@ -138,38 +138,6 @@ const bg = await bgOptimizedImage(
     </div>
 
     {/* Middle Area: Decorations & Giant 'Since 1990' */}
-    <div
-      class="relative container mt-8 flex flex-col items-center justify-between gap-10 lg:mt-24 lg:flex-row">
-      <div
-        class="absolute top-0 right-full flex h-32 w-full items-center justify-center gap-10 lg:w-auto lg:justify-start">
-        <div class="relative flex h-full">
-          {/* Circle decoration */}
-          <div
-            class="border-dark absolute right-14 bottom-6 size-20 rounded-full border-2"
-            style="transform: translateX(-50%)">
-          </div>
-          {/* 4-point Sparkle SVG CSS */}
-          <div
-            class="bg-dark absolute right-17 bottom-0 size-20"
-            style="clip-path: polygon(50% 0, 55% 45%, 100% 50%, 55% 55%, 50% 100%, 45% 55%, 0 50%, 45% 45%);">
-          </div>
-          <div
-            class="bg-dark absolute top-0 right-10 size-8"
-            style="clip-path: polygon(50% 0, 55% 45%, 100% 50%, 55% 55%, 50% 100%, 45% 55%, 0 50%, 45% 45%);">
-          </div>
-          <div
-            class="bg-dark absolute top-[30%] right-0 size-5"
-            style="clip-path: polygon(50% 0, 55% 45%, 100% 50%, 55% 55%, 50% 100%, 45% 55%, 0 50%, 45% 45%);">
-          </div>
-        </div>
-      </div>
-
-      <div
-        style={`background-image: url(${bg})`}
-        class="font-secondary mx-auto bg-cover bg-clip-text bg-position-[30%_70%] text-center text-[clamp(3rem,5vw,3.5rem)] leading-none font-bold text-transparent">
-        {t("footer.since")}
-      </div>
-    </div>
 
     {/* Navigation Links */}
     <ul

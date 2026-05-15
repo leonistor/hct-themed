@@ -29,7 +29,8 @@
     "loadingMap": "Încărcare hartă...",
     "comments": "Comentarii",
     "reply": "Răspunde",
-    "new": "nou"
+    "new": "nou",
+    "credits": "Credits"
   },
   "widgets": {
     "postSearchFormPlaceholder": "Încearcă să cauți 'sfaturi'...",
