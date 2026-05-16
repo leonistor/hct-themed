@@ -25,7 +25,7 @@
               "description": "Reciclarea metalelor",
               "url": "/solutions/metale",
               "weight": 0,
-              "icon": "/api/media/file/materiale_metale_az8i13u5w2-5.jpg"
+              "icon": "/payload/materiale_metale_az8i13u5w2-5-150x150.jpg"
             },
             {
               "enable": true,
@@ -33,47 +33,47 @@
               "description": "Metale mixte",
               "url": "/solutions/mixte",
               "weight": 1,
-              "icon": "/api/media/file/materiale_mixte_d53p078to6-5.jpg"
+              "icon": "/payload/materiale_mixte_d53p078to6-5-150x150.jpg"
             },
             {
               "enable": true,
               "name": "Aluminiu",
               "description": "Reciclarea aluminiului",
-              "icon": "/api/media/file/materiale_aluminiu_yctwewjyrj-5.jpg",
               "url": "/solutions/aluminiu",
-              "weight": 2
+              "weight": 2,
+              "icon": "/payload/materiale_aluminiu_yctwewjyrj-5-150x150.jpg"
             },
             {
               "enable": true,
               "name": "Cabluri",
               "description": "Reciclarea cablurilor",
-              "icon": "/api/media/file/materiale_cabluri_35dogmwz6h-5.jpg",
               "url": "/solutions/cabluri",
-              "weight": 3
+              "weight": 3,
+              "icon": "/payload/materiale_cabluri_35dogmwz6h-5-150x150.jpg"
             },
             {
               "enable": true,
               "name": "Rafinare",
               "description": "Rafinare",
-              "icon": "/api/media/file/materiale_rafinare_l3pnyb5yb9-5.jpg",
               "url": "/solutions/rafinare",
-              "weight": 4
+              "weight": 4,
+              "icon": "/payload/materiale_rafinare_l3pnyb5yb9-5-150x150.jpg"
             },
             {
               "enable": true,
               "name": "Vehicule",
               "description": "Reciclarea vehiculelor scoase din uz",
-              "icon": "/api/media/file/materiale_vehicule_q8hn046k0o-5.jpg",
               "url": "/solutions/vehicule",
-              "weight": 5
+              "weight": 5,
+              "icon": "/payload/materiale_vehicule_q8hn046k0o-5-150x150.jpg"
             },
             {
               "enable": true,
               "name": "Motoare auto",
               "description": "Motoare auto",
-              "icon": "/api/media/file/materiale_motoare_auto_3i41ep1ogu-5.jpg",
               "url": "/solutions/motoare-auto",
-              "weight": 6
+              "weight": 6,
+              "icon": "/payload/materiale_motoare_auto_3i41ep1ogu-5-150x150.jpg"
             }
           ]
         },
@@ -87,97 +87,57 @@
               "enable": true,
               "name": "Motoare electrice",
               "description": "Reciclarea motoarelor electrice",
-              "icon": "/api/media/file/materiale_motoare_electrice_lg7btgbkcc-5.jpg",
               "url": "/solutions/motoare-electrice",
-              "weight": 7
+              "weight": 7,
+              "icon": "/payload/materiale_motoare_electrice_lg7btgbkcc-5-150x150.jpg"
             },
             {
               "enable": true,
               "name": "DEEE",
               "description": "Reciclarea DEEE (Deșeuri de Echipamente Electrice și Electronice)",
-              "icon": "/api/media/file/materiale_deee_nyx6op9agq-5.jpg",
               "url": "/solutions/deee",
-              "weight": 8
+              "weight": 8,
+              "icon": "/payload/materiale_deee_nyx6op9agq-5-150x150.jpg"
             },
             {
               "enable": true,
               "name": "Hidrapulper ",
               "description": "Recuperarea deșeurilor de hidrapulper de la fabricile de hârtie",
-              "icon": "/api/media/file/materiale_hidrapulper_85n5efzm28-5.jpg",
               "url": "/solutions/hidrapulper",
-              "weight": 9
+              "weight": 9,
+              "icon": "/payload/materiale_hidrapulper_85n5efzm28-5-150x150.jpg"
             },
             {
               "enable": true,
               "name": "Frigidere",
               "description": "Reciclarea frigiderelor",
-              "icon": "/api/media/file/materiale_frigidere_dlskcqe0mq-5.jpg",
               "url": "/solutions/frigidere",
-              "weight": 10
+              "weight": 10,
+              "icon": "/payload/materiale_frigidere_dlskcqe0mq-5-150x150.jpg"
             },
             {
               "enable": true,
               "name": "Deșeuri urbane",
               "description": "Deșeuri solide urbane",
-              "icon": "/api/media/file/materiale_deseuri_urbane_osr1njmlt3-5.jpg",
               "url": "/solutions/deseuri-urbane",
-              "weight": 11
+              "weight": 11,
+              "icon": "/payload/materiale_deseuri_urbane_osr1njmlt3-5-150x150.jpg"
             },
             {
               "enable": true,
               "name": "Conserve",
               "description": "Conserve metalice / Cutii de conserve",
-              "icon": "/api/media/file/materiale_conserve_3y11vks7hz-5.jpg",
               "url": "/solutions/conserve",
-              "weight": 12
+              "weight": 12,
+              "icon": "/payload/materiale_conserve_3y11vks7hz-5-150x150.jpg"
             },
             {
               "enable": true,
               "name": "Zgură",
               "description": "Prelucrarea zgurii",
-              "icon": "/api/media/file/materiale_zgura_63k2fonllj-5.jpg",
               "url": "/solutions/zgura",
-              "weight": 13
-            }
-          ]
-        },
-        {
-          "enable": false,
-          "name": "Dovezi și Pași Următori",
-          "description": "Pagini pe care cumpărătorii le vor de obicei înainte de a programa un apel sau de a face o listă scurtă cu un partener.",
-          "weight": 2,
-          "children": [
-            {
-              "enable": true,
-              "name": "Studiu de Caz Evidențiat",
-              "description": "O privire mai atentă asupra unui proiect, de la încadrarea problemei până la rezultatele măsurabile ale lansării.",
-              "icon": "ChartNoAxesCombined",
-              "url": "/case-studies/custom-slug-case-studies-1/",
-              "weight": 0
-            },
-            {
-              "enable": true,
-              "name": "Toate Studiile de Caz",
-              "description": "Revizuiește lucrările recente de livrare în proiecte axate pe produs, serviciu și creștere.",
-              "icon": "FolderKanban",
-              "url": "/case-studies/",
-              "weight": 1
-            },
-            {
-              "enable": true,
-              "name": "Perspective și Articole",
-              "description": "Note de proces, lecții de lansare și idei practice pe care echipele le pot aplica imediat.",
-              "icon": "BookOpenText",
-              "url": "/blog/",
-              "weight": 2
-            },
-            {
-              "enable": true,
-              "name": "Programează un Call de Descoperire",
-              "description": "Începe cu scopul, timeline-ul și bugetul în loc de un schimb introductiv vag.",
-              "icon": "MessageSquareMore",
-              "url": "/contact/",
-              "weight": 3
+              "weight": 13,
+              "icon": "/payload/materiale_zgura_63k2fonllj-5-150x150.jpg"
             }
           ]
         }
@@ -222,28 +182,25 @@
               "enable": true,
               "name": "Tăiere și dezmembrare",
               "description": null,
-              "icon": "Monitor",
               "url": "/categories/taiere-si-dezmembrare",
               "weight": 0,
-              "logo": "/payload/api/media/file/categ_taiere_y0bh74zvrr-5.jpg"
+              "icon": "/payload/categ_taiere_y0bh74zvrr-5-150x150.jpg"
             },
             {
               "enable": true,
               "name": "Prese de balotat și compactoare",
               "description": null,
-              "icon": "Monitor",
               "url": "/categories/prese-de-balotat-si-compactoare",
               "weight": 1,
-              "logo": "/payload/api/media/file/categ_prese_8dds649ybt-5.jpg"
+              "icon": "/payload/categ_prese_8dds649ybt-5-150x150.jpg"
             },
             {
               "enable": true,
               "name": "Tocare, mărunțire și granulare",
               "description": null,
-              "icon": "Monitor",
               "url": "/categories/tocare-maruntire-si-granulare",
               "weight": 2,
-              "logo": "/payload/api/media/file/categ_tocare_c25lgx9y8b-5.jpg"
+              "icon": "/payload/categ_tocare_c25lgx9y8b-5-150x150.jpg"
             }
           ]
         },
@@ -257,19 +214,17 @@
               "enable": true,
               "name": "Dezmembrare vehicule și motoare",
               "description": null,
-              "icon": "Monitor",
               "url": "/categories/dezmembrare-vehicule-si-motoare",
               "weight": 3,
-              "logo": "/payload/api/media/file/categ_vehicule_8vu3jjs5sb-5.jpg"
+              "icon": "/payload/categ_vehicule_8vu3jjs5sb-5-150x150.jpg"
             },
             {
               "enable": true,
               "name": "Sisteme de sortare",
               "description": null,
-              "icon": "Monitor",
               "url": "/categories/sisteme-de-sortare",
               "weight": 4,
-              "logo": "/payload/api/media/file/categ_sortare_7varlbrukq-5.jpg"
+              "icon": "/payload/categ_sortare_7varlbrukq-5-150x150.jpg"
             }
           ]
         }
@@ -314,25 +269,28 @@
               "enable": true,
               "name": "Panizzolo",
               "description": "Producător de linii de reciclare la cheie.",
-              "icon": "Monitor",
               "url": "/partners/panizzolo",
-              "weight": 0
+              "weight": 0,
+              "promoted": false,
+              "icon": "/payload/logo_panizzolo_f0diw1yg44_j3zs059tz8-9-150x150.png"
             },
             {
               "enable": true,
               "name": "Bronneberg",
               "description": "Soluții dedicate pentru toate tipurile de materiale: metale, electronice, hârtie, etc.",
-              "icon": "Monitor",
               "url": "/partners/bronneberg",
-              "weight": 1
+              "weight": 1,
+              "promoted": false,
+              "icon": "/payload/logo_bronneberg_w6cmq1mvoy_fk9lm2nqup-9-150x150.png"
             },
             {
               "enable": true,
               "name": "Tecnoecology",
               "description": "Soluții inovatoare pentru prelucrarea cablurilor.",
-              "icon": "Monitor",
               "url": "/partners/tecnoecology",
-              "weight": 2
+              "weight": 2,
+              "promoted": false,
+              "icon": "/payload/logo_tecnoecology_jb6jtm791p_o2kja8u3s2-9-150x150.png"
             }
           ]
         },
@@ -346,17 +304,19 @@
               "enable": true,
               "name": "Mistra",
               "description": "Foarfeci manuale și automate.",
-              "icon": "Monitor",
               "url": "/partners/mistra",
-              "weight": 3
+              "weight": 3,
+              "promoted": false,
+              "icon": "/payload/logo_mistra_hyhaq2x1cy_sawi6hq7q5-9-150x150.png"
             },
             {
               "enable": true,
               "name": "Holmatro",
               "description": "Peste 55 de ani de experiență în scule și sisteme hidraulice de înaltă presiune, foarfeci și tăietoare industriale.",
-              "icon": "Monitor",
               "url": "/partners/holmatro",
               "weight": 4,
+              "promoted": false,
+              "icon": "/payload/logo_holmatro_p5w9v8iadh_f9fxl439ud-9-150x150.png",
               "badge": {
                 "enable": true,
                 "label": "Nou",
@@ -368,17 +328,34 @@
               "enable": true,
               "name": "Iris Mec",
               "description": "Soluții și utilaje pentru reciclarea componentelor auto.",
-              "icon": "Monitor",
               "url": "/partners/irismec",
-              "weight": 5
+              "weight": 5,
+              "promoted": false,
+              "icon": "/payload/logo_iris_id2bkyry7d_jx7y3qyd3g-9-150x150.png"
             },
             {
               "enable": true,
               "name": "Husmann",
               "description": "Compactoare și stații de transfer.",
-              "icon": "Monitor",
               "url": "/partners/husmann",
-              "weight": 6
+              "weight": 6,
+              "promoted": false,
+              "icon": "/payload/logo_husmann_i57gpkaohl_o1t2k3zjd0-9-150x150.png"
+            },
+            {
+              "enable": true,
+              "name": "Wolf Shredders",
+              "description": "Tocătoare robuste pentru multiple domenii de utilizare.",
+              "url": "/partners/wolf",
+              "weight": 7,
+              "promoted": true,
+              "icon": "/payload/logo_wolf_ih3cbmdvyq-9-150x150.png",
+              "badge": {
+                "enable": true,
+                "label": "Nou",
+                "color": "accent",
+                "type": "text"
+              }
             }
           ]
         }

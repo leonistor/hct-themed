@@ -31,7 +31,7 @@ for (const [index, partner] of partners.docs.entries()) {
     weight: index,
     promoted: partner.promoted,
     // @ts-ignore
-    icon: "/api/media/file/" + partner.logo?.filename ?? "",
+    icon: "/payload/" + partner.logo.sizes.thumbnail.filename,
   });
 }
 const materials = await payload.find({
@@ -49,7 +49,7 @@ for (const [index, material] of materials.docs.entries()) {
     url: `/solutions/${material.code}`,
     weight: index,
     // @ts-ignore
-    icon: "/api/media/file/" + material.illustration?.filename ?? "",
+    icon: "/payload/" + material.illustration.sizes.thumbnail.filename,
   });
 }
 
@@ -68,7 +68,7 @@ for (const [index, category] of categories.docs.entries()) {
     url: `/categories/${category.code}`,
     weight: index,
     // @ts-ignore
-    icon: "/api/media/file/" + category.illustration?.filename ?? "",
+    icon: "/payload/" + category.illustration.sizes.thumbnail.filename,
   });
 }
 
