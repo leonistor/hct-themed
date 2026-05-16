@@ -66,12 +66,24 @@ const columnCountClass =
             {visibleGroups.map((group) => (
               <section class="border-border-dark/8 flex h-full flex-col border-s px-2 py-2 md:px-3">
                 {(group.name || group.description) && (
+                  // x
                   <div class="mb-5 space-y-2 px-2 pb-1">
                     {group.name && (
-                      <div
-                        class="text-text-dark text-[11px] font-medium tracking-[0.2em] uppercase"
-                        set:html={group.name}
-                      />
+                      <a
+                        href={getLocaleUrlCTM(
+                          group.url || Astro.url.origin,
+                          Astro.currentLocale,
+                        )}
+                        class="flex flex-row gap-2">
+                        <div
+                          class="text-text-dark text-lg font-bold tracking-wide uppercase"
+                          set:html={group.name}
+                        />
+                        <Icons
+                          icon="ArrowRight"
+                          class="size-6 text-slate-500"
+                        />
+                      </a>
                     )}
                     {group.description && (
                       <a
@@ -79,7 +91,7 @@ const columnCountClass =
                           group.url || Astro.url.origin,
                           Astro.currentLocale,
                         )}
-                        class="text-text-dark/60 max-w-[32ch] text-sm/relaxed"
+                        class="text-text-dark/80 max-w-[32ch] text-sm/relaxed"
                         set:html={group.description}
                       />
                     )}
@@ -107,7 +119,7 @@ const columnCountClass =
                           Astro.currentLocale,
                         )}
                         class:list={[
-                          "mega-menu-link group/item flex items-start gap-3 rounded-lg border border-transparent px-3 py-3 text-inherit transition-all duration-200 hover:border-slate-200/80 hover:bg-white",
+                          "mega-menu-link group/item flex items-start gap-1 rounded-lg border border-transparent px-3 py-1 text-inherit transition-all duration-200 hover:border-slate-200/80 hover:bg-white",
                           {
                             active: isActiveUrl(
                               child.url,
@@ -128,9 +140,9 @@ const columnCountClass =
                           </span>
                         )}
 
-                        <span class="min-w-0 flex-1 space-y-1">
+                        <span class="min-w-0 flex-1 space-y-0.5">
                           {child.name && (
-                            <span class="flex items-center gap-2 text-[15px] leading-snug font-medium tracking-normal text-slate-950">
+                            <span class="flex items-center gap-1 text-[15px] leading-snug font-medium tracking-normal text-slate-950">
                               <span set:html={child.name} />
                               {child.badge?.enable &&
                                 (child.badge.type === "dot" ? (
@@ -156,7 +168,7 @@ const columnCountClass =
 
                           {child.description && (
                             <p
-                              class="text-text-dark/60 text-sm/relaxed"
+                              class="text-text-dark/70 text-sm/relaxed"
                               set:html={child.description}
                             />
                           )}
