@@ -1,7 +1,6 @@
 
 TODO: adjust colors
 TODO: sync menu and lang (new keys)
-TODO: unsplash credits
 TODO: title clienti
 TODO: footer
 TODO: partneri overview si section la about

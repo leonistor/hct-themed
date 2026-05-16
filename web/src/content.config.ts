@@ -253,5 +253,9 @@ export const collections = {
     loader: contentLoader("./src/content/categories"),
   }),
 
+  customers: defineCollection({
+    loader: contentLoader("./src/content/customers"),
+  }),
+
   testimonial: testimonialCollection,
 };

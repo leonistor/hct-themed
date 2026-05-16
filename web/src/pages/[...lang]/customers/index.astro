@@ -24,7 +24,7 @@ const customers = await payload.find({
 
 const t = await useTranslations(Astro.currentLocale as string);
 
-const page = await getEntryCTM("about-us", "-index", Astro.currentLocale);
+const page = await getEntryCTM("customers", "-index", Astro.currentLocale);
 ---
 
 <Base {...page?.data} hideOffcanvas={true}>
