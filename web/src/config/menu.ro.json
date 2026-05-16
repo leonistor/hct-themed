@@ -184,14 +184,14 @@
       ],
       "cta": {
         "enable": true,
-        "eyebrow": "Flex mobile hammer mills",
+        "eyebrow": "Nou!",
         "image": "/payload/products/mobile-Flex-500-uai-1440x700-300x300.jpg",
         "title": "Flex mobile hammer mills",
         "description": "The hammer mills of the Flex Mobile series are transportable machines designed for grinding metal scrap. Compact, easy to maintain and supplied turnkey, they deliver high performance and maximum flexibility.",
         "button": {
           "enable": true,
           "label": "Detalii",
-          "url": "/products/panizzolo-flex-mobile",
+          "url": "/product/panizzolo-flex-mobile",
           "variant": "fill",
           "tag": "a",
           "hoverEffect": "creative-fill",
@@ -201,7 +201,7 @@
             "position": "right"
           }
         },
-        "url": "/products/panizzolo-flex-mobile",
+        "url": "/product/panizzolo-flex-mobile",
         "weight": 0
       }
     },
@@ -276,15 +276,14 @@
       ],
       "cta": {
         "enable": true,
-        "eyebrow": "subtitlu",
-        "image": "/images/case-studies/case-study-1.png",
-        "title": "Teaser title",
-        "description": "descriere categ 4",
-        "items": ["item one", "item two", "item three"],
+        "eyebrow": "Nou!",
+        "image": "/payload/products/Trituratore-PZH-1500-R-uai-1440x617-300x300.jpg",
+        "title": "PZ H 1000 Waste shredder",
+        "description": "The Panizzolo Recycling two-shaft waste shredder range is specifically designed for shredding bulky mixed and industrial waste. These solutions can work independently or be integrated into more complex recycling plants. The final target of bulky waste shredders is volume reduction of the materials to be handled – materials that can subsequently undergo more specific refining and grinding phases.",
         "button": {
           "enable": true,
-          "label": "Începe un Proiect",
-          "url": "/contact/",
+          "label": "Detalii",
+          "url": "/product/panizzolo-pz-h-1000",
           "variant": "fill",
           "tag": "a",
           "hoverEffect": "creative-fill",
@@ -293,7 +292,9 @@
             "name": "ArrowUpRight",
             "position": "right"
           }
-        }
+        },
+        "url": "/product/panizzolo-pz-h-1000",
+        "weight": 1
       }
     },
     {
@@ -384,15 +385,14 @@
       ],
       "cta": {
         "enable": true,
-        "eyebrow": "subtitlu",
-        "image": "/images/case-studies/case-study-1.png",
-        "title": "Teaser title",
-        "description": "descriere partener 4",
-        "items": ["item one", "item two", "item three"],
+        "eyebrow": "Nou!",
+        "image": "/payload/products/T150-300x300.jpg",
+        "title": "Cable Stripper T 150",
+        "description": "Tecnoecology cable strippers are designed to efficiently and easily separate the conductive metal core from the insulating sheath in electrical cables.",
         "button": {
           "enable": true,
-          "label": "Începe un Proiect",
-          "url": "/contact/",
+          "label": "Detalii",
+          "url": "/product/tecnoecology-t-150",
           "variant": "fill",
           "tag": "a",
           "hoverEffect": "creative-fill",
@@ -401,7 +401,9 @@
             "name": "ArrowUpRight",
             "position": "right"
           }
-        }
+        },
+        "url": "/product/tecnoecology-t-150",
+        "weight": 2
       }
     },
 

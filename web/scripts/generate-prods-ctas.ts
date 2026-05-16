@@ -15,9 +15,9 @@ const promos = await payload.find({
 for (const [index, promo] of promos.docs.entries()) {
   result.push({
     enable: true,
-    eyebrow: promo.name,
+    eyebrow: "Nou!",
     // @ts-ignore
-    image: promo.main_image!.sizes!.medium?.filename,
+    image: "/payload/products/" + promo.main_image.sizes.medium.filename,
     title: promo.name,
     description: promo.description,
     button: {
