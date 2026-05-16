@@ -183,11 +183,11 @@
         }
       ],
       "cta": {
-        "enable": false,
+        "enable": true,
         "eyebrow": "Partener de Livrare",
         "image": "/images/case-studies/case-study-1.png",
-        "title": "Ai nevoie de o echipă care poate proiecta, construi și lansa fără straturi suplimentare?",
-        "description": "Folosește meniul pentru a explora liniile de servicii, apoi treci la o conversație reală despre scop când potrivirea este clară.",
+        "title": "Teaser title",
+        "description": "description",
         "items": [
           "Strategie, design și inginerie într-un singur flux de lucru",
           "Potrivit pentru agenții, firme B2B și branduri conduse de consultanță",
