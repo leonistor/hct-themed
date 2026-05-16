@@ -1,5 +1,6 @@
 ---
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import PayloadImage from "@/components/utilities/PayloadImage.astro";
 import type { NavigationLink } from "@/types";
 import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
 import Button from "@/components/Button.astro";
@@ -198,7 +199,7 @@ const columnCountClass =
               <div class="space-y-5 pe-5">
                 <div class="border-border-light/20 rounded-lg border bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0))] p-4 shadow-[0_24px_60px_-40px_rgba(0,0,0,0.8)]">
                   {menu.cta?.image && (
-                    <OptimizedImage
+                    <PayloadImage
                       width={340}
                       src={menu.cta.image}
                       alt={menu.cta.title}

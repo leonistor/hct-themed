@@ -184,19 +184,14 @@
       ],
       "cta": {
         "enable": true,
-        "eyebrow": "Partener de Livrare",
-        "image": "/images/case-studies/case-study-1.png",
-        "title": "Teaser title",
-        "description": "description",
-        "items": [
-          "Strategie, design și inginerie într-un singur flux de lucru",
-          "Potrivit pentru agenții, firme B2B și branduri conduse de consultanță",
-          "Pași următori clari prin prețuri, studii de caz și contact"
-        ],
+        "eyebrow": "Flex mobile hammer mills",
+        "image": "/payload/products/mobile-Flex-500-uai-1440x700-300x300.jpg",
+        "title": "Flex mobile hammer mills",
+        "description": "The hammer mills of the Flex Mobile series are transportable machines designed for grinding metal scrap. Compact, easy to maintain and supplied turnkey, they deliver high performance and maximum flexibility.",
         "button": {
           "enable": true,
-          "label": "Începe un Proiect",
-          "url": "/contact/",
+          "label": "Detalii",
+          "url": "/products/panizzolo-flex-mobile",
           "variant": "fill",
           "tag": "a",
           "hoverEffect": "creative-fill",
@@ -205,7 +200,9 @@
             "name": "ArrowUpRight",
             "position": "right"
           }
-        }
+        },
+        "url": "/products/panizzolo-flex-mobile",
+        "weight": 0
       }
     },
     {

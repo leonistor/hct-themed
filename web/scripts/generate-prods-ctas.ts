@@ -15,11 +15,26 @@ const promos = await payload.find({
 for (const [index, promo] of promos.docs.entries()) {
   result.push({
     enable: true,
-    name: promo.name,
+    eyebrow: promo.name,
+    // @ts-ignore
+    image: promo.main_image!.sizes!.medium?.filename,
+    title: promo.name,
     description: promo.description,
+    button: {
+      enable: true,
+      label: "Detalii",
+      url: `/products/${promo.code}`,
+      variant: "fill",
+      tag: "a",
+      hoverEffect: "creative-fill",
+      icon: {
+        enable: true,
+        name: "ArrowUpRight",
+        position: "right",
+      },
+    },
     url: `/products/${promo.code}`,
     weight: index,
-    // @ts-ignore
   });
 }
 

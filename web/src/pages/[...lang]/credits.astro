@@ -4,8 +4,6 @@ import { generatePaths } from "@/lib/utils/i18nUtils.ts";
 import { useTranslations } from "@/lib/utils/i18nUtils.ts";
 const t = await useTranslations(Astro.currentLocale as string);
 
-import PayloadImage from "@/components/utilities/PayloadImage.astro";
-
 import { Content } from "@/content/credits.md";
 
 export function getStaticPaths() {
@@ -15,14 +13,6 @@ export function getStaticPaths() {
 
 <Base title="test">
   <section>
-    <div class="container">
-      <PayloadImage
-        src="/payload/65_Flex-500-Mobile-uai-1440x810-400x400.jpg"
-        alt=""
-        width={400}
-        height={400}
-      />
-    </div>
     <div class="container">
       <h1>{t("common.credits")}</h1>
       <Content />

@@ -1,5 +1,5 @@
 import { getPayload } from "payload";
-import { config as payloadConfig, type Media } from "admin";
+import { config as payloadConfig } from "admin";
 const payload = await getPayload({ config: payloadConfig });
 
 // TODO: use translations
