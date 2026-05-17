@@ -120,7 +120,7 @@ const columnCountClass =
                           Astro.currentLocale,
                         )}
                         class:list={[
-                          "mega-menu-link group/item flex items-start gap-1 rounded-lg border border-transparent px-3 py-1 text-inherit transition-all duration-200 hover:border-slate-200/80 hover:bg-white",
+                          "mega-menu-link group/item flex items-center gap-1.5 rounded-lg border border-transparent px-2 py-1 text-inherit transition-all duration-200 hover:border-slate-200/80 hover:bg-white",
                           {
                             active: isActiveUrl(
                               child.url,
@@ -130,12 +130,17 @@ const columnCountClass =
                           },
                         ]}>
                         {child.icon && (
-                          <span class="text-text-dark group-hover/item:text-primary inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-slate-200/80 bg-slate-50/80 transition-all duration-200 group-hover/item:border-slate-300 group-hover/item:bg-white">
+                          <span
+                            class:list={[
+                              "text-text-dark group-hover/item:text-primary inline-flex",
+                              "h-24 w-32 shrink-0 items-center justify-center border border-gray-200 transition-all duration-200",
+                            ]}>
                             <PayloadImage
                               src={child.icon}
                               alt={child.name}
                               width={150}
                               height={150}
+                              fit="scale-down"
                               priority
                             />
                           </span>
