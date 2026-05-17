@@ -8,152 +8,150 @@
     },
     {
       "enable": true,
-      "name": "Mega Menu",
+      "name": "Solutions",
       "weight": 1,
       "hasMegaMenu": true,
       "menus": [
         {
           "enable": true,
-          "name": "Core Services",
-          "description": "Delivery work for companies shipping websites, products, and conversion-focused redesigns.",
+          "name": "Materials",
+          "description": "Solutions for all types of materials",
+          "url": "/solutions",
           "weight": 0,
           "children": [
             {
               "enable": true,
-              "name": "Web Platforms",
-              "description": "Marketing sites, corporate websites, and CMS builds that stay fast under load.",
-              "icon": "Monitor",
-              "url": "/services/",
-              "weight": 0
+              "name": "Metals",
+              "description": "Metal recycling",
+              "url": "/solutions/metale",
+              "weight": 0,
+              "icon": "/payload/materiale_metale_az8i13u5w2-5-225x300.jpg"
             },
             {
               "enable": true,
-              "name": "Product Design",
-              "description": "User flows, interface systems, and handoff-ready screens for real product teams.",
-              "icon": "PenTool",
-              "url": "/services/custom-slug-services-1/",
-              "weight": 1
+              "name": "Mixed",
+              "description": "Mixed metals",
+              "url": "/solutions/mixte",
+              "weight": 1,
+              "icon": "/payload/materiale_mixte_d53p078to6-5-451x300.jpg"
             },
             {
               "enable": true,
-              "name": "Frontend Engineering",
-              "description": "Astro, React, and performance-led implementation for modern web stacks.",
-              "icon": "Code2",
-              "url": "/services/",
+              "name": "Aluminum",
+              "description": "Aluminum recycling",
+              "url": "/solutions/aluminiu",
               "weight": 2,
-              "badge": {
-                "enable": true,
-                "label": "Popular",
-                "color": "accent",
-                "type": "text"
-              }
+              "icon": "/payload/materiale_aluminiu_yctwewjyrj-5-200x300.jpg"
             },
             {
               "enable": true,
-              "name": "Technical SEO",
-              "description": "Site structure, content architecture, and speed work that improves discoverability.",
-              "icon": "Search",
-              "url": "/services/",
-              "weight": 3
+              "name": "Cables",
+              "description": "Cable recycling",
+              "url": "/solutions/cabluri",
+              "weight": 3,
+              "icon": "/payload/materiale_cabluri_35dogmwz6h-5-450x300.jpg"
+            },
+            {
+              "enable": true,
+              "name": "Refining",
+              "description": "Refining",
+              "url": "/solutions/rafinare",
+              "weight": 4,
+              "icon": "/payload/materiale_rafinare_l3pnyb5yb9-5-400x300.jpg"
+            },
+            {
+              "enable": true,
+              "name": "Vehicles",
+              "description": "End-of-life vehicle recycling",
+              "url": "/solutions/vehicule",
+              "weight": 5,
+              "icon": "/payload/materiale_vehicule_q8hn046k0o-5-199x300.jpg"
+            },
+            {
+              "enable": true,
+              "name": "Car Engines",
+              "description": "Car engines",
+              "url": "/solutions/motoare-auto",
+              "weight": 6,
+              "icon": "/payload/materiale_motoare_auto_3i41ep1ogu-5-200x300.jpg"
             }
           ]
         },
         {
           "enable": true,
-          "name": "Engagement Models",
-          "description": "Ways clients usually bring Lumio in, from a focused sprint to ongoing product support.",
+          "name": "",
+          "description": "",
           "weight": 1,
           "children": [
             {
               "enable": true,
-              "name": "MVP Launch Sprint",
-              "description": "A compact scope to get a new product or offer live without dragging the timeline.",
-              "icon": "Rocket",
-              "url": "/pricing/",
-              "weight": 0
+              "name": "Electric Motors",
+              "description": "Electric motor recycling",
+              "url": "/solutions/motoare-electrice",
+              "weight": 7,
+              "icon": "/payload/materiale_motoare_electrice_lg7btgbkcc-5-450x300.jpg"
             },
             {
               "enable": true,
-              "name": "Team Augmentation",
-              "description": "Plug design and development capacity into an in-house team with less hiring friction.",
-              "icon": "Users",
-              "url": "/about/",
-              "weight": 1
+              "name": "WEEE",
+              "description": "WEEE recycling (Waste Electrical and Electronic Equipment)",
+              "url": "/solutions/deee",
+              "weight": 8,
+              "icon": "/payload/materiale_deee_nyx6op9agq-5-225x300.jpg"
             },
             {
               "enable": true,
-              "name": "Rebuild & Replatform",
-              "description": "Move away from slow, hard-to-manage setups without sacrificing conversion paths.",
-              "icon": "RefreshCcw",
-              "url": "/case-studies/",
-              "weight": 2
+              "name": "Hydrapulper",
+              "description": "Recovery of hydrapulper waste from paper mills",
+              "url": "/solutions/hidrapulper",
+              "weight": 9,
+              "icon": "/payload/materiale_hidrapulper_85n5efzm28-5-450x300.jpg"
             },
             {
               "enable": true,
-              "name": "Retainer Support",
-              "description": "Continuous design, development, and iteration for teams that ship every month.",
-              "icon": "Clock3",
-              "url": "/contact/",
-              "weight": 3
-            }
-          ]
-        },
-        {
-          "enable": true,
-          "name": "Proof & Next Steps",
-          "description": "Pages buyers usually want before they book a call or shortlist a partner.",
-          "weight": 2,
-          "children": [
-            {
-              "enable": true,
-              "name": "Featured Case Study",
-              "description": "A closer look at one project from problem framing through measurable launch results.",
-              "icon": "ChartNoAxesCombined",
-              "url": "/case-studies/custom-slug-case-studies-1/",
-              "weight": 0
+              "name": "Refrigerators",
+              "description": "Refrigerator recycling",
+              "url": "/solutions/frigidere",
+              "weight": 10,
+              "icon": "/payload/materiale_frigidere_dlskcqe0mq-5-450x300.jpg"
             },
             {
               "enable": true,
-              "name": "All Case Studies",
-              "description": "Review recent delivery work across product, service, and growth-focused projects.",
-              "icon": "FolderKanban",
-              "url": "/case-studies/",
-              "weight": 1
+              "name": "Urban Waste",
+              "description": "Urban solid waste",
+              "url": "/solutions/deseuri-urbane",
+              "weight": 11,
+              "icon": "/payload/materiale_deseuri_urbane_osr1njmlt3-5-200x300.jpg"
             },
             {
               "enable": true,
-              "name": "Insights & Articles",
-              "description": "Process notes, launch lessons, and practical ideas teams can apply right away.",
-              "icon": "BookOpenText",
-              "url": "/blog/",
-              "weight": 2
+              "name": "Cans",
+              "description": "Metal cans / Tin cans",
+              "url": "/solutions/conserve",
+              "weight": 12,
+              "icon": "/payload/materiale_conserve_3y11vks7hz-5-400x300.jpg"
             },
             {
               "enable": true,
-              "name": "Book Discovery Call",
-              "description": "Start with scope, timeline, and budget instead of a vague introductory back-and-forth.",
-              "icon": "MessageSquareMore",
-              "url": "/contact/",
-              "weight": 3
+              "name": "Slag",
+              "description": "Slag processing",
+              "url": "/solutions/zgura",
+              "weight": 13,
+              "icon": "/payload/materiale_zgura_63k2fonllj-5-200x300.jpg"
             }
           ]
         }
       ],
       "cta": {
         "enable": true,
-        "eyebrow": "Delivery Partner",
-        "image": "/images/case-studies/case-study-1.png",
-        "title": "Need a team that can design, build, and launch without extra layers?",
-        "description": "Use the menu to explore service lines, then move to a real scope conversation when the fit is clear.",
-        "items": [
-          "Strategy, design, and engineering in one workflow",
-          "Suited to agencies, B2B firms, and consulting-led brands",
-          "Clear next steps through pricing, case studies, and contact"
-        ],
+        "eyebrow": "New!",
+        "image": "/payload/products/mobile-Flex-500-uai-1440x700-300x300.jpg",
+        "title": "Flex mobile hammer mills",
+        "description": "The hammer mills of the Flex Mobile series are transportable machines designed for grinding metal scrap. Compact, easy to maintain and supplied turnkey, they deliver high performance and maximum flexibility.",
         "button": {
           "enable": true,
-          "label": "Start a Project",
-          "url": "/contact/",
+          "label": "Details",
+          "url": "/product/panizzolo-flex-mobile",
           "variant": "fill",
           "tag": "a",
           "hoverEffect": "creative-fill",
@@ -162,74 +160,241 @@
             "name": "ArrowUpRight",
             "position": "right"
           }
-        }
+        },
+        "url": "/product/panizzolo-flex-mobile",
+        "weight": 0
       }
     },
     {
-      "name": "Pages",
       "enable": true,
+      "name": "Equipment",
       "weight": 2,
+      "hasMegaMenu": true,
+      "menus": [
+        {
+          "enable": true,
+          "name": "Categories",
+          "description": "Equipment for all categories of use",
+          "url": "/categories",
+          "weight": 0,
+          "children": [
+            {
+              "enable": true,
+              "name": "Cutting and Dismantling",
+              "description": null,
+              "url": "/categories/taiere-si-dezmembrare",
+              "weight": 0,
+              "icon": "/payload/categ_taiere_y0bh74zvrr-5-450x300.jpg"
+            },
+            {
+              "enable": true,
+              "name": "Baling Presses and Compactors",
+              "description": null,
+              "url": "/categories/prese-de-balotat-si-compactoare",
+              "weight": 1,
+              "icon": "/payload/categ_prese_8dds649ybt-5-450x300.jpg"
+            },
+            {
+              "enable": true,
+              "name": "Shredding, Grinding and Granulation",
+              "description": null,
+              "url": "/categories/tocare-maruntire-si-granulare",
+              "weight": 2,
+              "icon": "/payload/categ_tocare_c25lgx9y8b-5-200x300.jpg"
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "",
+          "description": "",
+          "weight": 0,
+          "children": [
+            {
+              "enable": true,
+              "name": "Vehicle and Engine Dismantling",
+              "description": null,
+              "url": "/categories/dezmembrare-vehicule-si-motoare",
+              "weight": 3,
+              "icon": "/payload/categ_vehicule_8vu3jjs5sb-5-450x300.jpg"
+            },
+            {
+              "enable": true,
+              "name": "Sorting Systems",
+              "description": null,
+              "url": "/categories/sisteme-de-sortare",
+              "weight": 4,
+              "icon": "/payload/categ_sortare_7varlbrukq-5-200x300.jpg"
+            }
+          ]
+        }
+      ],
+      "cta": {
+        "enable": true,
+        "eyebrow": "New!",
+        "image": "/payload/products/Trituratore-PZH-1500-R-uai-1440x617-300x300.jpg",
+        "title": "PZ H 1000 Waste shredder",
+        "description": "The Panizzolo Recycling two-shaft waste shredder range is specifically designed for shredding bulky mixed and industrial waste. These solutions can work independently or be integrated into more complex recycling plants. The final target of bulky waste shredders is volume reduction of the materials to be handled – materials that can subsequently undergo more specific refining and grinding phases.",
+        "button": {
+          "enable": true,
+          "label": "Details",
+          "url": "/product/panizzolo-pz-h-1000",
+          "variant": "fill",
+          "tag": "a",
+          "hoverEffect": "creative-fill",
+          "icon": {
+            "enable": true,
+            "name": "ArrowUpRight",
+            "position": "right"
+          }
+        },
+        "url": "/product/panizzolo-pz-h-1000",
+        "weight": 1
+      }
+    },
+    {
+      "enable": true,
+      "name": "Partners",
+      "weight": 3,
+      "hasMegaMenu": true,
+      "menus": [
+        {
+          "enable": true,
+          "name": "Partners",
+          "description": "We provide a complete range of products and services for the recycling industry through partnerships with the most important European manufacturers.",
+          "url": "/partners",
+          "weight": 0,
+          "children": [
+            {
+              "enable": true,
+              "name": "Panizzolo",
+              "description": "Manufacturer of turnkey recycling lines.",
+              "url": "/partners/panizzolo",
+              "weight": 0,
+              "promoted": false,
+              "icon": "/payload/logo_panizzolo_f0diw1yg44_j3zs059tz8-9.png"
+            },
+            {
+              "enable": true,
+              "name": "Bronneberg",
+              "description": "Dedicated solutions for all types of materials: metals, electronics, paper, etc.",
+              "url": "/partners/bronneberg",
+              "weight": 1,
+              "promoted": false,
+              "icon": "/payload/logo_bronneberg_w6cmq1mvoy_fk9lm2nqup-9.png"
+            },
+            {
+              "enable": true,
+              "name": "Tecnoecology",
+              "description": "Innovative solutions for cable processing.",
+              "url": "/partners/tecnoecology",
+              "weight": 2,
+              "promoted": false,
+              "icon": "/payload/logo_tecnoecology_jb6jtm791p_o2kja8u3s2-9.png"
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "",
+          "description": "",
+          "weight": 0,
+          "children": [
+            {
+              "enable": true,
+              "name": "Mistra",
+              "description": "Manual and automatic shears.",
+              "url": "/partners/mistra",
+              "weight": 3,
+              "promoted": false,
+              "icon": "/payload/logo_mistra_hyhaq2x1cy_sawi6hq7q5-9.png"
+            },
+            {
+              "enable": true,
+              "name": "Holmatro",
+              "description": "Over 55 years of experience in high-pressure hydraulic tools and systems, industrial shears and cutters.",
+              "url": "/partners/holmatro",
+              "weight": 4,
+              "promoted": false,
+              "icon": "/payload/logo_holmatro_p5w9v8iadh_f9fxl439ud-9.png",
+              "badge": {
+                "enable": true,
+                "label": "New",
+                "color": "info",
+                "type": "text"
+              }
+            },
+            {
+              "enable": true,
+              "name": "IRIS Mec",
+              "description": "Solutions and machinery for automotive component recycling.",
+              "url": "/partners/irismec",
+              "weight": 5,
+              "promoted": false,
+              "icon": "/payload/logo_iris_id2bkyry7d_jx7y3qyd3g-9.png"
+            },
+            {
+              "enable": true,
+              "name": "Husmann",
+              "description": "Compactors and transfer stations.",
+              "url": "/partners/husmann",
+              "weight": 6,
+              "promoted": false,
+              "icon": "/payload/logo_husmann_i57gpkaohl_o1t2k3zjd0-9.png"
+            },
+            {
+              "enable": true,
+              "name": "Wolf Shredders",
+              "description": "Robust shredders for multiple fields of use.",
+              "url": "/partners/wolf",
+              "weight": 7,
+              "promoted": true,
+              "icon": "/payload/logo_wolf_ih3cbmdvyq-9.png",
+              "badge": {
+                "enable": true,
+                "label": "New",
+                "color": "info",
+                "type": "text"
+              }
+            }
+          ]
+        }
+      ],
+      "cta": {
+        "enable": true,
+        "eyebrow": "New!",
+        "image": "/payload/products/T150-300x300.jpg",
+        "title": "Cable Stripper T 150",
+        "description": "Tecnoecology cable strippers are designed to efficiently and easily separate the conductive metal core from the insulating sheath in electrical cables.",
+        "button": {
+          "enable": true,
+          "label": "Details",
+          "url": "/product/tecnoecology-t-150",
+          "variant": "fill",
+          "tag": "a",
+          "hoverEffect": "creative-fill",
+          "icon": {
+            "enable": true,
+            "name": "ArrowUpRight",
+            "position": "right"
+          }
+        },
+        "url": "/product/tecnoecology-t-150",
+        "weight": 2
+      }
+    },
+
+    {
+      "name": "Company",
+      "enable": true,
+      "weight": 4,
       "hasChildren": true,
       "children": [
         {
           "enable": true,
-          "name": "Home",
-          "weight": 0,
-          "hasChildren": true,
-          "children": [
-            {
-              "enable": true,
-              "name": "Home 01",
-              "url": "/",
-              "weight": 0
-            },
-            {
-              "enable": true,
-              "name": "Home 02",
-              "url": "/home-two/",
-              "weight": 0
-            }
-          ]
-        },
-        {
-          "enable": true,
-          "name": "Case Studies",
-          "weight": 0,
-          "hasChildren": true,
-          "children": [
-            {
-              "enable": true,
-              "name": "Case Studies",
-              "url": "/case-studies/",
-              "weight": 0
-            },
-            {
-              "enable": true,
-              "name": "Case Study Single",
-              "url": "/case-studies/custom-slug-case-studies-1/",
-              "weight": 0
-            }
-          ]
-        },
-        {
-          "enable": true,
-          "name": "Blog",
-          "weight": 0,
-          "hasChildren": true,
-          "children": [
-            {
-              "enable": true,
-              "name": "Blog",
-              "url": "/blog/",
-              "weight": 0
-            },
-            {
-              "enable": true,
-              "name": "Blog Single",
-              "url": "/blog/custom-slug-post-1/",
-              "weight": 0
-            }
-          ]
+          "name": "About Us",
+          "url": "/about/",
+          "weight": 0
         },
         {
           "enable": true,
@@ -239,23 +404,55 @@
           "children": [
             {
               "enable": true,
-              "name": "Services",
-              "url": "/services/",
+              "name": "Installation and Assembly",
+              "url": "/services/installation",
               "weight": 0
             },
             {
               "enable": true,
-              "name": "Services Single",
-              "url": "/services/custom-slug-services-1/",
+              "name": "Refurbishment",
+              "url": "/services/refurbish",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Accessories and Consumables",
+              "url": "/services/parts-supplies",
               "weight": 0
             }
           ]
         },
         {
           "enable": true,
-          "name": "About Us",
-          "url": "/about/",
+          "name": "Customers",
+          "url": "/customers",
           "weight": 0
+        },
+        {
+          "enable": true,
+          "name": "Projects",
+          "weight": 0,
+          "hasChildren": true,
+          "children": [
+            {
+              "enable": true,
+              "name": "Project One",
+              "url": "/case-studies/case-study-3/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Project Two",
+              "url": "/case-studies/custom-slug-case-studies-1/",
+              "weight": 0
+            },
+            {
+              "enable": true,
+              "name": "Project Three",
+              "url": "/case-studies/case-study-3/",
+              "weight": 0
+            }
+          ]
         },
         {
           "enable": true,
@@ -265,48 +462,20 @@
         },
         {
           "enable": true,
-          "name": "Pricing",
-          "url": "/pricing/",
-          "weight": 0
-        },
-        {
-          "enable": true,
           "name": "FAQ",
           "url": "/faq/",
           "weight": 0
-        },
-        {
-          "enable": true,
-          "name": "404",
-          "url": "/404/",
-          "weight": 0,
-          "badge": {
-            "enable": true,
-            "label": "Badge",
-            "color": "accent",
-            "_color_comment": "color expected value - accent, info, success, danger, dark",
-            "type": "text",
-            "_type_comment": "type expected value - text, dot"
-          }
         }
       ]
     },
     {
       "enable": true,
-      "name": "Components",
-      "weight": 3,
-      "url": "/components/",
-      "badge": {
-        "enable": true,
-        "label": "New",
-        "color": "accent",
-        "_color_comment": "color expected value - accent, info, success, danger, dark",
-        "type": "text",
-        "_type_comment": "type expected value - text, dot"
-      }
+      "name": "Blog",
+      "weight": 5,
+      "url": "/blog/"
     },
     {
-      "enable": true,
+      "enable": false,
       "name": "Contact",
       "weight": 4,
       "url": "/contact/"
@@ -320,22 +489,22 @@
     },
     {
       "enable": true,
-      "name": "Service",
+      "name": "Services",
       "url": "/services/"
     },
     {
       "enable": true,
-      "name": "Team",
-      "url": "/team/"
+      "name": "Terms",
+      "url": "/terms/"
     },
     {
       "enable": true,
-      "name": "Blog",
-      "url": "/blog/"
+      "name": "Credits",
+      "url": "/credits/"
     },
     {
       "enable": true,
-      "name": "Contact Us",
+      "name": "Contact",
       "url": "/contact/"
     }
   ],

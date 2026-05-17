@@ -28,7 +28,10 @@
     "noFaqsFoundFor": "No FAQs found for",
     "loadingMap": "Loading Map...",
     "comments": "Comments",
-    "reply": "Reply"
+    "reply": "Reply",
+    "new": "new",
+    "credits": "Credits",
+    "terms": "Terms & Conditions"
   },
   "widgets": {
     "postSearchFormPlaceholder": "Try Searching 'tips'...",
@@ -74,5 +77,18 @@
   },
   "customers": {
     "title": "Customers"
+  },
+  "solutions": {
+    "title": "Solutions",
+    "tagline": "Solutions for all types of materials"
+  },
+  "products": {
+    "title": "Products",
+    "variants": "Variants",
+    "description": ""
+  },
+  "categories": {
+    "title": "Category",
+    "tagline": "Equipment for all categories of use"
   }
 }

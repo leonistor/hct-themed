@@ -10,23 +10,5 @@
     "languageCode": "en",
     "contentDir": "english",
     "weight": 1
-  },
-  {
-    "languageName": "Français",
-    "languageCode": "fr",
-    "contentDir": "french",
-    "weight": 3
-  },
-  {
-    "languageName": "Deutsch",
-    "languageCode": "de",
-    "contentDir": "deutsch",
-    "weight": 4
-  },
-  {
-    "languageName": "Italiano",
-    "languageCode": "it",
-    "contentDir": "italian",
-    "weight": 5
   }
 ]
