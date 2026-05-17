@@ -37,6 +37,9 @@ const page = await getEntryCTM("customers", "-index", Astro.currentLocale);
         options={{
           center: [45.65761, 25.629],
           zoom: 6.5,
+          mapOptions: {
+            scrollWheelZoom: false,
+          },
         }}>
         {
           customers.docs.map((customer) => (
