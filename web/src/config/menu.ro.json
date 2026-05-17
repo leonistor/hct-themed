@@ -25,7 +25,7 @@
               "description": "Reciclarea metalelor",
               "url": "/solutions/metale",
               "weight": 0,
-              "icon": "/payload/materiale_metale_az8i13u5w2-5-300x200.jpg"
+              "icon": "/payload/materiale_metale_az8i13u5w2-5-225x300.jpg"
             },
             {
               "enable": true,
@@ -33,7 +33,7 @@
               "description": "Metale mixte",
               "url": "/solutions/mixte",
               "weight": 1,
-              "icon": "/payload/materiale_mixte_d53p078to6-5-300x200.jpg"
+              "icon": "/payload/materiale_mixte_d53p078to6-5-451x300.jpg"
             },
             {
               "enable": true,
@@ -41,7 +41,7 @@
               "description": "Reciclarea aluminiului",
               "url": "/solutions/aluminiu",
               "weight": 2,
-              "icon": "/payload/materiale_aluminiu_yctwewjyrj-5-300x200.jpg"
+              "icon": "/payload/materiale_aluminiu_yctwewjyrj-5-200x300.jpg"
             },
             {
               "enable": true,
@@ -49,7 +49,7 @@
               "description": "Reciclarea cablurilor",
               "url": "/solutions/cabluri",
               "weight": 3,
-              "icon": "/payload/materiale_cabluri_35dogmwz6h-5-300x200.jpg"
+              "icon": "/payload/materiale_cabluri_35dogmwz6h-5-450x300.jpg"
             },
             {
               "enable": true,
@@ -57,7 +57,7 @@
               "description": "Rafinare",
               "url": "/solutions/rafinare",
               "weight": 4,
-              "icon": "/payload/materiale_rafinare_l3pnyb5yb9-5-300x200.jpg"
+              "icon": "/payload/materiale_rafinare_l3pnyb5yb9-5-400x300.jpg"
             },
             {
               "enable": true,
@@ -65,7 +65,7 @@
               "description": "Reciclarea vehiculelor scoase din uz",
               "url": "/solutions/vehicule",
               "weight": 5,
-              "icon": "/payload/materiale_vehicule_q8hn046k0o-5-300x200.jpg"
+              "icon": "/payload/materiale_vehicule_q8hn046k0o-5-199x300.jpg"
             },
             {
               "enable": true,
@@ -73,7 +73,7 @@
               "description": "Motoare auto",
               "url": "/solutions/motoare-auto",
               "weight": 6,
-              "icon": "/payload/materiale_motoare_auto_3i41ep1ogu-5-300x200.jpg"
+              "icon": "/payload/materiale_motoare_auto_3i41ep1ogu-5-200x300.jpg"
             }
           ]
         },
@@ -89,7 +89,7 @@
               "description": "Reciclarea motoarelor electrice",
               "url": "/solutions/motoare-electrice",
               "weight": 7,
-              "icon": "/payload/materiale_motoare_electrice_lg7btgbkcc-5-300x200.jpg"
+              "icon": "/payload/materiale_motoare_electrice_lg7btgbkcc-5-450x300.jpg"
             },
             {
               "enable": true,
@@ -97,7 +97,7 @@
               "description": "Reciclarea DEEE (Deșeuri de Echipamente Electrice și Electronice)",
               "url": "/solutions/deee",
               "weight": 8,
-              "icon": "/payload/materiale_deee_nyx6op9agq-5-300x200.jpg"
+              "icon": "/payload/materiale_deee_nyx6op9agq-5-225x300.jpg"
             },
             {
               "enable": true,
@@ -105,7 +105,7 @@
               "description": "Recuperarea deșeurilor de hidrapulper de la fabricile de hârtie",
               "url": "/solutions/hidrapulper",
               "weight": 9,
-              "icon": "/payload/materiale_hidrapulper_85n5efzm28-5-300x200.jpg"
+              "icon": "/payload/materiale_hidrapulper_85n5efzm28-5-450x300.jpg"
             },
             {
               "enable": true,
@@ -113,7 +113,7 @@
               "description": "Reciclarea frigiderelor",
               "url": "/solutions/frigidere",
               "weight": 10,
-              "icon": "/payload/materiale_frigidere_dlskcqe0mq-5-300x200.jpg"
+              "icon": "/payload/materiale_frigidere_dlskcqe0mq-5-450x300.jpg"
             },
             {
               "enable": true,
@@ -121,7 +121,7 @@
               "description": "Deșeuri solide urbane",
               "url": "/solutions/deseuri-urbane",
               "weight": 11,
-              "icon": "/payload/materiale_deseuri_urbane_osr1njmlt3-5-300x200.jpg"
+              "icon": "/payload/materiale_deseuri_urbane_osr1njmlt3-5-200x300.jpg"
             },
             {
               "enable": true,
@@ -129,7 +129,7 @@
               "description": "Conserve metalice / Cutii de conserve",
               "url": "/solutions/conserve",
               "weight": 12,
-              "icon": "/payload/materiale_conserve_3y11vks7hz-5-300x200.jpg"
+              "icon": "/payload/materiale_conserve_3y11vks7hz-5-400x300.jpg"
             },
             {
               "enable": true,
@@ -137,7 +137,7 @@
               "description": "Prelucrarea zgurii",
               "url": "/solutions/zgura",
               "weight": 13,
-              "icon": "/payload/materiale_zgura_63k2fonllj-5-300x200.jpg"
+              "icon": "/payload/materiale_zgura_63k2fonllj-5-200x300.jpg"
             }
           ]
         }
@@ -184,7 +184,7 @@
               "description": null,
               "url": "/categories/taiere-si-dezmembrare",
               "weight": 0,
-              "icon": "/payload/categ_taiere_y0bh74zvrr-5-300x200.jpg"
+              "icon": "/payload/categ_taiere_y0bh74zvrr-5-450x300.jpg"
             },
             {
               "enable": true,
@@ -192,7 +192,7 @@
               "description": null,
               "url": "/categories/prese-de-balotat-si-compactoare",
               "weight": 1,
-              "icon": "/payload/categ_prese_8dds649ybt-5-300x200.jpg"
+              "icon": "/payload/categ_prese_8dds649ybt-5-450x300.jpg"
             },
             {
               "enable": true,
@@ -200,7 +200,7 @@
               "description": null,
               "url": "/categories/tocare-maruntire-si-granulare",
               "weight": 2,
-              "icon": "/payload/categ_tocare_c25lgx9y8b-5-300x200.jpg"
+              "icon": "/payload/categ_tocare_c25lgx9y8b-5-200x300.jpg"
             }
           ]
         },
@@ -216,7 +216,7 @@
               "description": null,
               "url": "/categories/dezmembrare-vehicule-si-motoare",
               "weight": 3,
-              "icon": "/payload/categ_vehicule_8vu3jjs5sb-5-300x200.jpg"
+              "icon": "/payload/categ_vehicule_8vu3jjs5sb-5-450x300.jpg"
             },
             {
               "enable": true,
@@ -224,7 +224,7 @@
               "description": null,
               "url": "/categories/sisteme-de-sortare",
               "weight": 4,
-              "icon": "/payload/categ_sortare_7varlbrukq-5-300x200.jpg"
+              "icon": "/payload/categ_sortare_7varlbrukq-5-200x300.jpg"
             }
           ]
         }
@@ -320,7 +320,7 @@
               "badge": {
                 "enable": true,
                 "label": "Nou",
-                "color": "accent",
+                "color": "info",
                 "type": "text"
               }
             },
@@ -353,7 +353,7 @@
               "badge": {
                 "enable": true,
                 "label": "Nou",
-                "color": "accent",
+                "color": "info",
                 "type": "text"
               }
             }

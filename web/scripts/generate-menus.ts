@@ -49,7 +49,7 @@ for (const [index, material] of materials.docs.entries()) {
     url: `/solutions/${material.code}`,
     weight: index,
     // @ts-ignore
-    icon: "/payload/" + material.illustration.sizes.thumbnail.filename,
+    icon: "/payload/" + material.illustration.sizes.medium.filename,
   });
 }
 
@@ -68,7 +68,7 @@ for (const [index, category] of categories.docs.entries()) {
     url: `/categories/${category.code}`,
     weight: index,
     // @ts-ignore
-    icon: "/payload/" + category.illustration.sizes.thumbnail.filename,
+    icon: "/payload/" + category.illustration.sizes.medium.filename,
   });
 }
 
