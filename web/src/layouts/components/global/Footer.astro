@@ -39,7 +39,7 @@ const bg = await bgOptimizedImage(
     <div
       class="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-10 lg:gap-8 xl:gap-10">
       {/* Col 1: Brand & Contact Strip */}
-      <div class="col-span-3 flex flex-col gap-2 sm:gap-6 lg:px-6">
+      <div class="col-span-5 flex flex-col gap-2 sm:gap-6 lg:px-6">
         <Logo />
         <p class="text-text-dark/90 leading-relaxed">
           {t("footer.description")}
@@ -65,111 +65,59 @@ const bg = await bgOptimizedImage(
         </div>
       </div>
 
-      <div
-        class="col-span-4 grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-8 md:gap-12 lg:pt-2 xl:gap-20">
-        {/* Col 2: Our Services */}
-        <div class="flex flex-col gap-2 sm:gap-4 lg:gap-8">
-          <h3 class="sm:text-h5 text-h5-sm">{t("common.ourServices")}</h3>
-          <ul class="flex flex-col gap-1 lg:gap-2">
-            {
-              servicesList.map((svc) => (
-                <li class="flex items-center gap-3">
-                  <span class="text-accent text-lg leading-none">✦</span>
-                  <Button
-                    tag="a"
-                    variant="text"
-                    label={svc.data.title}
-                    url={getEntrySlugCTM(svc, Astro.currentLocale)}
-                    aria-label={`${t("button.readMore")} ${svc.data.title}`}
-                    srOnly={`${t("button.readMore")} ${svc.data.title}`}
-                    class="text-text-dark/90 hover:text-accent border-none font-normal transition-colors hover:opacity-100">
-                    {svc.data.title}
-                  </Button>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-        {/* Col 3: Contact Us */}
-        <div class="flex flex-col gap-2 sm:gap-4 lg:gap-8">
-          <h3 class="sm:text-h5 text-h5-sm">{t("common.contactUs")}</h3>
-          <div class="text-text-dark/90 flex flex-col gap-1 sm:gap-3">
-            <div set:html={markdownify(contactInfo.address, true)} />
-            <div set:html={markdownify(contactInfo.phone, true)} />
-            <div set:html={markdownify(contactInfo.email, true)} />
-            <div class="font-medium">
-              {t("common.workHour")}
-            </div>
-            <div class="text-text-dark/90 flex flex-col gap-2">
-              <div
-                class="leading-relaxed"
-                set:html={markdownify(t("common.workHourValue"), true)}
-              />
-            </div>
+      {/* Col 3: Contact Us */}
+      <div class="col-span-5 flex flex-col gap-2 sm:gap-4 lg:gap-8">
+        <h3 class="sm:text-h5 text-h5-sm">{t("common.contactUs")}</h3>
+        <div class="text-text-dark/90 flex flex-col gap-1 sm:gap-3">
+          <div set:html={markdownify(contactInfo.address, true)} />
+          <div set:html={markdownify(contactInfo.phone, true)} />
+          <div set:html={markdownify(contactInfo.email, true)} />
+          <div class="font-medium">
+            {t("common.workHour")}
+          </div>
+          <div class="text-text-dark/90 flex flex-col gap-2">
+            <div
+              class="leading-relaxed"
+              set:html={markdownify(t("common.workHourValue"), true)}
+            />
           </div>
         </div>
       </div>
-
-      {/* Col 4: Recent Projects (Blogs) */}
-      <div class="col-span-3 flex flex-col gap-2 sm:gap-4 lg:gap-8 lg:pt-2">
-        <h3 class="sm:text-h5 text-h5-sm">{t("common.recentProjects")}</h3>
-        <div class="grid grid-cols-3 gap-2">
-          {
-            projects.map((post) => (
-              <a
-                href={getEntrySlugCTM(post, Astro.currentLocale)}
-                aria-label={`${t("button.readMore")} ${post.data.title}`}
-                class="group relative aspect-square overflow-hidden bg-gray-200">
-                {post.data.image && (
-                  <OptimizedImage
-                    src={post.data.image}
-                    alt={post.data.title}
-                    width={140}
-                    height={140}
-                    quality={50}
-                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                )}
-              </a>
-            ))
-          }
-        </div>
-      </div>
     </div>
-
-    {/* Middle Area: Decorations & Giant 'Since 1990' */}
-
-    {/* Navigation Links */}
-    <ul
-      class="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm font-bold uppercase lg:mt-12">
-      {
-        footerMenus?.map((item, i, arr) => (
-          <li class="flex items-center gap-4">
-            <Button
-              tag="a"
-              variant="text"
-              label={item.name}
-              url={getLocaleUrlCTM(item.url as string, Astro.currentLocale)}
-              class="hover:text-accent border-none text-base font-bold capitalize transition-colors"
-            />
-            {i !== arr.length - 1 && <span class="select-none">/</span>}
-          </li>
-        ))
-      }
-    </ul>
   </div>
 
-  {/* Copyright Banner */}
-  <div class="bg-accent w-full px-4 py-4 text-center">
-    <div
-      class="font-secondary font-bold"
-      set:html={markdownify(
-        t("footer.copyright")?.replace(
-          "{{ year }}",
-          String(new Date().getFullYear()),
-        ),
-        true,
-      )}
-    />
-  </div>
+  {/* Middle Area: Decorations & Giant 'Since 1990' */}
+
+  {/* Navigation Links */}
+  <ul
+    class="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm font-bold uppercase lg:mt-12">
+    {
+      footerMenus?.map((item, i, arr) => (
+        <li class="flex items-center gap-4">
+          <Button
+            tag="a"
+            variant="text"
+            label={item.name}
+            url={getLocaleUrlCTM(item.url as string, Astro.currentLocale)}
+            class="hover:text-accent border-none text-base font-bold capitalize transition-colors"
+          />
+          {i !== arr.length - 1 && <span class="select-none">/</span>}
+        </li>
+      ))
+    }
+  </ul>
 </footer>
+
+{/* Copyright Banner */}
+<div class="bg-accent w-full px-4 py-4 text-center">
+  <div
+    class="font-secondary font-bold"
+    set:html={markdownify(
+      t("footer.copyright")?.replace(
+        "{{ year }}",
+        String(new Date().getFullYear()),
+      ),
+      true,
+    )}
+  />
+</div>
