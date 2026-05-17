@@ -25,7 +25,7 @@
               "description": "Reciclarea metalelor",
               "url": "/solutions/metale",
               "weight": 0,
-              "icon": "/payload/materiale_metale_az8i13u5w2-5-150x150.jpg"
+              "icon": "/payload/materiale_metale_az8i13u5w2-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -33,7 +33,7 @@
               "description": "Metale mixte",
               "url": "/solutions/mixte",
               "weight": 1,
-              "icon": "/payload/materiale_mixte_d53p078to6-5-150x150.jpg"
+              "icon": "/payload/materiale_mixte_d53p078to6-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -41,7 +41,7 @@
               "description": "Reciclarea aluminiului",
               "url": "/solutions/aluminiu",
               "weight": 2,
-              "icon": "/payload/materiale_aluminiu_yctwewjyrj-5-150x150.jpg"
+              "icon": "/payload/materiale_aluminiu_yctwewjyrj-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -49,7 +49,7 @@
               "description": "Reciclarea cablurilor",
               "url": "/solutions/cabluri",
               "weight": 3,
-              "icon": "/payload/materiale_cabluri_35dogmwz6h-5-150x150.jpg"
+              "icon": "/payload/materiale_cabluri_35dogmwz6h-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -57,7 +57,7 @@
               "description": "Rafinare",
               "url": "/solutions/rafinare",
               "weight": 4,
-              "icon": "/payload/materiale_rafinare_l3pnyb5yb9-5-150x150.jpg"
+              "icon": "/payload/materiale_rafinare_l3pnyb5yb9-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -65,7 +65,7 @@
               "description": "Reciclarea vehiculelor scoase din uz",
               "url": "/solutions/vehicule",
               "weight": 5,
-              "icon": "/payload/materiale_vehicule_q8hn046k0o-5-150x150.jpg"
+              "icon": "/payload/materiale_vehicule_q8hn046k0o-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -73,7 +73,7 @@
               "description": "Motoare auto",
               "url": "/solutions/motoare-auto",
               "weight": 6,
-              "icon": "/payload/materiale_motoare_auto_3i41ep1ogu-5-150x150.jpg"
+              "icon": "/payload/materiale_motoare_auto_3i41ep1ogu-5-300x200.jpg"
             }
           ]
         },
@@ -89,7 +89,7 @@
               "description": "Reciclarea motoarelor electrice",
               "url": "/solutions/motoare-electrice",
               "weight": 7,
-              "icon": "/payload/materiale_motoare_electrice_lg7btgbkcc-5-150x150.jpg"
+              "icon": "/payload/materiale_motoare_electrice_lg7btgbkcc-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -97,7 +97,7 @@
               "description": "Reciclarea DEEE (Deșeuri de Echipamente Electrice și Electronice)",
               "url": "/solutions/deee",
               "weight": 8,
-              "icon": "/payload/materiale_deee_nyx6op9agq-5-150x150.jpg"
+              "icon": "/payload/materiale_deee_nyx6op9agq-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -105,7 +105,7 @@
               "description": "Recuperarea deșeurilor de hidrapulper de la fabricile de hârtie",
               "url": "/solutions/hidrapulper",
               "weight": 9,
-              "icon": "/payload/materiale_hidrapulper_85n5efzm28-5-150x150.jpg"
+              "icon": "/payload/materiale_hidrapulper_85n5efzm28-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -113,7 +113,7 @@
               "description": "Reciclarea frigiderelor",
               "url": "/solutions/frigidere",
               "weight": 10,
-              "icon": "/payload/materiale_frigidere_dlskcqe0mq-5-150x150.jpg"
+              "icon": "/payload/materiale_frigidere_dlskcqe0mq-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -121,7 +121,7 @@
               "description": "Deșeuri solide urbane",
               "url": "/solutions/deseuri-urbane",
               "weight": 11,
-              "icon": "/payload/materiale_deseuri_urbane_osr1njmlt3-5-150x150.jpg"
+              "icon": "/payload/materiale_deseuri_urbane_osr1njmlt3-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -129,7 +129,7 @@
               "description": "Conserve metalice / Cutii de conserve",
               "url": "/solutions/conserve",
               "weight": 12,
-              "icon": "/payload/materiale_conserve_3y11vks7hz-5-150x150.jpg"
+              "icon": "/payload/materiale_conserve_3y11vks7hz-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -137,7 +137,7 @@
               "description": "Prelucrarea zgurii",
               "url": "/solutions/zgura",
               "weight": 13,
-              "icon": "/payload/materiale_zgura_63k2fonllj-5-150x150.jpg"
+              "icon": "/payload/materiale_zgura_63k2fonllj-5-300x200.jpg"
             }
           ]
         }
@@ -184,7 +184,7 @@
               "description": null,
               "url": "/categories/taiere-si-dezmembrare",
               "weight": 0,
-              "icon": "/payload/categ_taiere_y0bh74zvrr-5-150x150.jpg"
+              "icon": "/payload/categ_taiere_y0bh74zvrr-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -192,7 +192,7 @@
               "description": null,
               "url": "/categories/prese-de-balotat-si-compactoare",
               "weight": 1,
-              "icon": "/payload/categ_prese_8dds649ybt-5-150x150.jpg"
+              "icon": "/payload/categ_prese_8dds649ybt-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -200,7 +200,7 @@
               "description": null,
               "url": "/categories/tocare-maruntire-si-granulare",
               "weight": 2,
-              "icon": "/payload/categ_tocare_c25lgx9y8b-5-150x150.jpg"
+              "icon": "/payload/categ_tocare_c25lgx9y8b-5-300x200.jpg"
             }
           ]
         },
@@ -216,7 +216,7 @@
               "description": null,
               "url": "/categories/dezmembrare-vehicule-si-motoare",
               "weight": 3,
-              "icon": "/payload/categ_vehicule_8vu3jjs5sb-5-150x150.jpg"
+              "icon": "/payload/categ_vehicule_8vu3jjs5sb-5-300x200.jpg"
             },
             {
               "enable": true,
@@ -224,7 +224,7 @@
               "description": null,
               "url": "/categories/sisteme-de-sortare",
               "weight": 4,
-              "icon": "/payload/categ_sortare_7varlbrukq-5-150x150.jpg"
+              "icon": "/payload/categ_sortare_7varlbrukq-5-300x200.jpg"
             }
           ]
         }
@@ -272,7 +272,7 @@
               "url": "/partners/panizzolo",
               "weight": 0,
               "promoted": false,
-              "icon": "/payload/logo_panizzolo_f0diw1yg44_j3zs059tz8-9-150x150.png"
+              "icon": "/payload/logo_panizzolo_f0diw1yg44_j3zs059tz8-9.png"
             },
             {
               "enable": true,
@@ -281,7 +281,7 @@
               "url": "/partners/bronneberg",
               "weight": 1,
               "promoted": false,
-              "icon": "/payload/logo_bronneberg_w6cmq1mvoy_fk9lm2nqup-9-150x150.png"
+              "icon": "/payload/logo_bronneberg_w6cmq1mvoy_fk9lm2nqup-9.png"
             },
             {
               "enable": true,
@@ -290,7 +290,7 @@
               "url": "/partners/tecnoecology",
               "weight": 2,
               "promoted": false,
-              "icon": "/payload/logo_tecnoecology_jb6jtm791p_o2kja8u3s2-9-150x150.png"
+              "icon": "/payload/logo_tecnoecology_jb6jtm791p_o2kja8u3s2-9.png"
             }
           ]
         },
@@ -307,7 +307,7 @@
               "url": "/partners/mistra",
               "weight": 3,
               "promoted": false,
-              "icon": "/payload/logo_mistra_hyhaq2x1cy_sawi6hq7q5-9-150x150.png"
+              "icon": "/payload/logo_mistra_hyhaq2x1cy_sawi6hq7q5-9.png"
             },
             {
               "enable": true,
@@ -316,7 +316,7 @@
               "url": "/partners/holmatro",
               "weight": 4,
               "promoted": false,
-              "icon": "/payload/logo_holmatro_p5w9v8iadh_f9fxl439ud-9-150x150.png",
+              "icon": "/payload/logo_holmatro_p5w9v8iadh_f9fxl439ud-9.png",
               "badge": {
                 "enable": true,
                 "label": "Nou",
@@ -331,7 +331,7 @@
               "url": "/partners/irismec",
               "weight": 5,
               "promoted": false,
-              "icon": "/payload/logo_iris_id2bkyry7d_jx7y3qyd3g-9-150x150.png"
+              "icon": "/payload/logo_iris_id2bkyry7d_jx7y3qyd3g-9.png"
             },
             {
               "enable": true,
@@ -340,7 +340,7 @@
               "url": "/partners/husmann",
               "weight": 6,
               "promoted": false,
-              "icon": "/payload/logo_husmann_i57gpkaohl_o1t2k3zjd0-9-150x150.png"
+              "icon": "/payload/logo_husmann_i57gpkaohl_o1t2k3zjd0-9.png"
             },
             {
               "enable": true,
@@ -349,7 +349,7 @@
               "url": "/partners/wolf",
               "weight": 7,
               "promoted": true,
-              "icon": "/payload/logo_wolf_ih3cbmdvyq-9-150x150.png",
+              "icon": "/payload/logo_wolf_ih3cbmdvyq-9.png",
               "badge": {
                 "enable": true,
                 "label": "Nou",
