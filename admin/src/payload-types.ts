@@ -349,7 +349,9 @@ export interface Category {
   _order?: string | null;
   code: string;
   name: string;
+  name_en?: string | null;
   description?: string | null;
+  description_en?: string | null;
   partners?: (number | Partner)[] | null;
   illustration?: (number | null) | Media;
   products?: {
@@ -944,7 +946,9 @@ export interface CategoriesSelect<T extends boolean = true> {
   _order?: T;
   code?: T;
   name?: T;
+  name_en?: T;
   description?: T;
+  description_en?: T;
   partners?: T;
   illustration?: T;
   products?: T;
