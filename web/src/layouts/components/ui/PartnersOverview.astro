@@ -1,0 +1,51 @@
+---
+export const prerender = false;
+
+import { getPayload } from "payload";
+import { config as payloadConfig, type Media } from "admin";
+const payload = await getPayload({ config: payloadConfig });
+
+import { useTranslations } from "@/lib/utils/i18nUtils";
+import PayloadImage from "../utilities/PayloadImage.astro";
+const t = await useTranslations(Astro.currentLocale as string);
+
+const partners = await payload.find({
+  collection: "partners",
+  depth: 2,
+  pagination: false,
+  limit: 100,
+  sort: "_order",
+  where: { published: { equals: true } },
+});
+---
+
+<div class="bg-body-dark/10 px-4 py-12">
+  <div
+    class="text-text-dark mx-auto mb-6 max-w-4xl text-center text-balance md:text-xl/7">
+    {t("partners.tagline")}
+  </div>
+  <div
+    class="grid grid-cols-1 gap-x-4 gap-y-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-10">
+    {
+      partners.docs.map((partner, index) => (
+        <a
+          href={`/partners/${partner.code}`}
+          aria-label={partner.name}
+          class="">
+          {partner.logo && (
+            <PayloadImage
+              src={"/payload/" + (partner.logo as Media).filename!}
+              alt={partner.name}
+              width={360}
+              height={100}
+              class:list={[
+                "mx-auto overflow-hidden border border-gray-200",
+                "transition-transform duration-700 ease-in-out group-hover:scale-105",
+              ]}
+            />
+          )}
+        </a>
+      ))
+    }
+  </div>
+</div>

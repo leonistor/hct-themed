@@ -14,6 +14,7 @@ import ServicesSection from "@/components/sections/ServicesSection.astro";
 import CTAVideoSection from "@/components/sections/CTAVideoSection.astro";
 import TestimonialSection from "@/components/sections/TestimonialSection.astro";
 import CaseStudiesSection from "@/components/sections/CaseStudiesSection.astro";
+import PartnersOverview from "@/components/ui/PartnersOverview.astro";
 
 export function getStaticPaths() {
   return generatePaths();
@@ -24,18 +25,19 @@ const page = await getEntryCTM("homepage", "-index", Astro.currentLocale);
 
 <Base {...page?.data} headerLayout="header-2">
   <HeroSection />
+  <PartnersOverview />
   <FeaturesGrid />
   <ServicesSection />
   <StatsSection />
-  <AboutSection />
-  <CTAVideoSection hasLightBackground={true} />
-  <TestimonialSection />
+  <!-- <AboutSection /> -->
+  <!-- <CTAVideoSection hasLightBackground={true} /> -->
+  <!-- <TestimonialSection /> -->
   <CaseStudiesSection hasSectionSpacingBottom={true} />
-  <FaqSection
+  <!-- <FaqSection
     mode="dark"
     badgeVariant="default"
     hasSectionSpacingBottom={true}
-  />
+  /> -->
   <TeamSection hasSectionSpacingBottom={true} />
   <BlogSection />
   <CTASection />

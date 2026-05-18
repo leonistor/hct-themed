@@ -5,6 +5,7 @@ import { useTranslations } from "@/lib/utils/i18nUtils.ts";
 const t = await useTranslations(Astro.currentLocale as string);
 
 import { Content } from "@/content/credits.md";
+import PartnersOverview from "@/layouts/components/ui/PartnersOverview.astro";
 
 export function getStaticPaths() {
   return generatePaths();
@@ -13,6 +14,9 @@ export function getStaticPaths() {
 
 <Base title="Credits">
   <section>
+    <div class="container">
+      <PartnersOverview />
+    </div>
     <div class="container">
       <h1>{t("common.credits")}</h1>
       <Content />
