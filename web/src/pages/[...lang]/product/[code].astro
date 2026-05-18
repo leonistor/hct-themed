@@ -7,11 +7,15 @@ import Pill from "@/components/ui/Pill.astro";
 import ProductGallery from "@/components/ui/ProductGallery.astro";
 import ProductVariants from "@/components/ui/ProductVariants.astro";
 import Icons from "@/helpers/Icons.astro";
+import Button from "@/layouts/components/Button.astro";
 
 import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
 import type { Media, Partner, Category, Material, Product } from "admin";
 const payload = await getPayload({ config: payloadConfig });
+
+import { useTranslations } from "@/lib/utils/i18nUtils";
+const t = await useTranslations(Astro.currentLocale as string);
 
 const { code } = Astro.params;
 
@@ -75,6 +79,18 @@ const product_images: Media[] = product.images as Media[];
                 <ProductVariants product={product as Product} />
               )
             }
+          </div>
+          <!-- cta button -->
+          <div class="mt-8 flex items-center">
+            <a
+              href="/contact?x=y"
+              class="bg-accent px-4 py-2 text-white hover:text-black">
+              {t("common.call")}
+              <Icons
+                icon="MessagesSquare"
+                class="ml-2 inline-block size-6 stroke-white"
+              />
+            </a>
           </div>
         </div>
         <div class="space-y-2 p-2 sm:col-span-6">
