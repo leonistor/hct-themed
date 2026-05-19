@@ -85,7 +85,8 @@
   "products": {
     "title": "Produse",
     "variants": "Variante",
-    "description": ""
+    "description": "",
+    "allProducts": "Vezi toate produsele"
   },
   "categories": {
     "title": "Categorii",

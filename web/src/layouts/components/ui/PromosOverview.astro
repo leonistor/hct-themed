@@ -8,6 +8,7 @@ const payload = await getPayload({ config: payloadConfig });
 import { useTranslations } from "@/lib/utils/i18nUtils";
 const t = await useTranslations(Astro.currentLocale as string);
 import ProductCard from "@/layouts/components/cards/ProductCard.astro";
+import IconButton from "@/layouts/components/ui/IconButton.astro";
 
 const products = await payload.find({
   collection: "products",
@@ -32,5 +33,12 @@ const products = await payload.find({
         <ProductCard product={product} index={index} />
       ))
     }
+  </div>
+  <div class="mt-8">
+    <IconButton
+      label={t("products.allProducts")}
+      icon="ArrowRight"
+      href="/products"
+    />
   </div>
 </div>

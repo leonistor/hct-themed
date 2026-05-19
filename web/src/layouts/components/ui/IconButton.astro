@@ -1,0 +1,16 @@
+---
+import Icons from "@/layouts/helpers/Icons.astro";
+
+interface Props {
+  label: string;
+  href: string;
+  icon?: string;
+}
+
+const { label, href, icon = "MessagesSquare" } = Astro.props;
+---
+
+<a href={href} class="bg-accent px-4 py-2 text-white hover:text-black">
+  {label}
+  <Icons icon={icon} class="-mt-1 ml-2 inline-block size-6 stroke-gray-200" />
+</a>
