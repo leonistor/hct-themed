@@ -45,10 +45,13 @@ const page = await getEntryCTM("products", "-index", Astro.currentLocale);
     <div class="container">
       <PageTitle title={t("products.title")} />
       <div class="pb-4 md:text-xl"></div>
-      <div class="flex gap-4">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div class="">
-          <select name="material" id="material">
-            <option value="">Select a material</option>
+          <select name="material" id="material" class="w-full">
+            <option value="">
+              {t("common.select")}
+              {t("products.singular")}
+            </option>
             {
               all_materials.docs.map((material) => (
                 <option value={material.code}>{material.name}</option>
@@ -57,8 +60,11 @@ const page = await getEntryCTM("products", "-index", Astro.currentLocale);
           </select>
         </div>
         <div class="">
-          <select name="category" id="category">
-            <option value="">Select a category</option>
+          <select name="category" id="category" class="w-full">
+            <option value="">
+              {t("common.select")}
+              {t("categories.singular")}
+            </option>
             {
               all_categories.docs.map((category) => (
                 <option value={category.code}>{category.name}</option>
@@ -67,8 +73,11 @@ const page = await getEntryCTM("products", "-index", Astro.currentLocale);
           </select>
         </div>
         <div class="">
-          <select name="partner" id="partner">
-            <option value="">Select a partner</option>
+          <select name="partner" id="partner" class="w-full">
+            <option value="">
+              {t("common.select")}
+              {t("partners.singular")}
+            </option>
             {
               all_partners.docs.map((partner) => (
                 <option value={partner.code}>{partner.name}</option>

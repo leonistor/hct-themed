@@ -8,6 +8,8 @@ import { getPayload } from "payload";
 import { config as payloadConfig, type Media } from "admin";
 import type { Where } from "payload";
 import { cuid } from "astro:schema";
+import { a } from "server/server/chunks/server_Ncxv4MlI.mjs";
+import categ_tocare_c25lgx9y8b from "server/server/chunks/categ_tocare_c25lgx9y8b_3Ve1pndq.mjs";
 const payload = await getPayload({ config: payloadConfig });
 
 interface Props {
@@ -35,8 +37,8 @@ const where: Where = {
   ],
 };
 const currentUrl = Astro.url;
-let page = Number(currentUrl.searchParams.get("page")) ?? 1;
-let limit = Number(currentUrl.searchParams.get("limit")) ?? 9;
+let page = Number(currentUrl.searchParams.get("page"));
+let limit = Number(currentUrl.searchParams.get("limit"));
 page = page === 0 ? 1 : page;
 limit = limit === 0 ? 9 : limit;
 
@@ -56,13 +58,29 @@ const t = await useTranslations(Astro.currentLocale as string);
 
 const debug = JSON.parse(JSON.stringify(products));
 debug.docs = [];
-currentUrl.searchParams.set("page", String(page + 1));
+
+const nextPageUrl = new URL(currentUrl.toString());
+nextPageUrl.searchParams.set("page", String(page + 1));
+const prevPageUrl = new URL(currentUrl.toString());
+prevPageUrl.searchParams.set("page", String(page - 1));
 ---
 
 <div class="">
-  <a href={currentUrl.toString()}>next page</a>
+  <pre>{JSON.stringify([nextPageUrl.toString(), prevPageUrl.toString()])}</pre>
+  <div class="">
+    {
+      products.hasPrevPage && (
+        <a href={prevPageUrl.toString()}>&larr; prev page</a>
+      )
+    }
+  </div><div class="">
+    {
+      products.hasNextPage && (
+        <a href={nextPageUrl.toString()}>&rarr; next page</a>
+      )
+    }
+  </div>
 </div>
-<div class="">pagination</div>
 
 <div
   class="grid grid-cols-1 gap-x-4 gap-y-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-10">

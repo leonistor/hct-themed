@@ -30,6 +30,7 @@
     "comments": "Comentarii",
     "reply": "Răspunde",
     "new": "nou",
+    "select": "Selectează",
     "credits": "Credits",
     "terms": "Termeni și condiții"
   },
@@ -73,23 +74,28 @@
   },
   "partners": {
     "title": "Parteneri",
+    "singular": "partener",
     "tagline": "Asigurăm o paletă completă de produse și servicii pentru industria reciclării prin parteneriate cu cei mai importanți producători europeni."
   },
   "customers": {
-    "title": "Clienți"
+    "title": "Clienți",
+    "singular": "client"
   },
   "solutions": {
     "title": "Soluții",
+    "singular": "soluție",
     "tagline": "Soluții pentru toate tipurile de materiale"
   },
   "products": {
     "title": "Produse",
+    "singular": "produs",
     "variants": "Variante",
     "description": "",
     "allProducts": "Vezi toate produsele"
   },
   "categories": {
     "title": "Categorii",
-    "tagline": "Echipamenate pentru toate categorile de utilizare"
+    "tagline": "Echipamenate pentru toate categorile de utilizare",
+    "singular": "categorie"
   }
 }
