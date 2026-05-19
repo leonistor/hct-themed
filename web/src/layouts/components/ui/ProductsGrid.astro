@@ -65,21 +65,25 @@ const prevPageUrl = new URL(currentUrl.toString());
 prevPageUrl.searchParams.set("page", String(page - 1));
 ---
 
-<div class="">
-  <pre>{JSON.stringify([nextPageUrl.toString(), prevPageUrl.toString()])}</pre>
-  <div class="">
-    {
-      products.hasPrevPage && (
-        <a href={prevPageUrl.toString()}>&larr; prev page</a>
-      )
-    }
-  </div><div class="">
-    {
-      products.hasNextPage && (
-        <a href={nextPageUrl.toString()}>&rarr; next page</a>
-      )
-    }
+<div class="flex flex-wrap items-center justify-end gap-4 pt-4 pb-6">
+  <div class="font-medium">
+    {products.totalDocs}
+    {t("products.title")}
   </div>
+  {
+    products.hasPrevPage && (
+      <a class="text-gray-500" href={prevPageUrl.toString()}>
+        {t("products.paginationPrevious")} &larr;
+      </a>
+    )
+  }
+  {
+    products.hasNextPage && (
+      <a class="text-gray-500" href={nextPageUrl.toString()}>
+        {t("products.paginationNext")} &rarr;
+      </a>
+    )
+  }
 </div>
 
 <div
