@@ -30,6 +30,7 @@
     "comments": "Comments",
     "reply": "Reply",
     "new": "new",
+    "select": "Select",
     "credits": "Credits",
     "terms": "Terms & Conditions"
   },
@@ -73,22 +74,30 @@
   },
   "partners": {
     "title": "Partners",
+    "singular": "partner",
     "tagline": "We provide a complete range of products and services for the recycling industry through partnerships with the most important European manufacturers."
   },
   "customers": {
-    "title": "Customers"
+    "title": "Customers",
+    "singular": "client"
   },
   "solutions": {
     "title": "Solutions",
+    "singular": "solution",
     "tagline": "Solutions for all types of materials"
   },
   "products": {
     "title": "Products",
+    "singular": "product",
     "variants": "Variants",
-    "description": ""
+    "description": "",
+    "paginationPrevious": "Previous Page",
+    "paginationNext": "Next Page",
+    "allProducts": "View All Products"
   },
   "categories": {
     "title": "Category",
-    "tagline": "Equipment for all categories of use"
+    "tagline": "Equipment for all categories of use",
+    "singular": "category"
   }
 }
