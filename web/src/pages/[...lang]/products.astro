@@ -5,8 +5,36 @@ import Base from "@/layouts/Base.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import ProductsGrid from "@/layouts/components/ui/ProductsGrid.astro";
 import PageTitle from "@/layouts/components/ui/PageTitle.astro";
-import { useTranslations } from "@/lib/utils/i18nUtils";
 
+import { getPayload } from "payload";
+import { config as payloadConfig, type Media } from "admin";
+
+const payload = await getPayload({ config: payloadConfig });
+
+const all_materials = await payload.find({
+  collection: "materials",
+  depth: 1,
+  pagination: false,
+  limit: 100,
+  sort: "_order",
+});
+const all_partners = await payload.find({
+  collection: "partners",
+  depth: 1,
+  pagination: false,
+  limit: 100,
+  sort: "_order",
+  where: { published: { equals: true } },
+});
+const all_categories = await payload.find({
+  collection: "categories",
+  depth: 1,
+  pagination: false,
+  limit: 100,
+  sort: "_order",
+});
+
+import { useTranslations } from "@/lib/utils/i18nUtils";
 const t = await useTranslations(Astro.currentLocale as string);
 
 const page = await getEntryCTM("products", "-index", Astro.currentLocale);
@@ -15,11 +43,64 @@ const page = await getEntryCTM("products", "-index", Astro.currentLocale);
 <Base {...page?.data} hideOffcanvas={true}>
   <section class="relative">
     <div class="container">
-      <PageTitle title="Demo" />
+      <PageTitle title={t("products.title")} />
       <div class="pb-4 md:text-xl"></div>
-      <div></div>
+      <div class="flex gap-4">
+        <div class="">
+          <select name="material" id="material">
+            <option value="">Select a material</option>
+            {
+              all_materials.docs.map((material) => (
+                <option value={material.code}>{material.name}</option>
+              ))
+            }
+          </select>
+        </div>
+        <div class="">
+          <select name="category" id="category">
+            <option value="">Select a category</option>
+            {
+              all_categories.docs.map((category) => (
+                <option value={category.code}>{category.name}</option>
+              ))
+            }
+          </select>
+        </div>
+        <div class="">
+          <select name="partner" id="partner">
+            <option value="">Select a partner</option>
+            {
+              all_partners.docs.map((partner) => (
+                <option value={partner.code}>{partner.name}</option>
+              ))
+            }
+          </select>
+        </div>
+      </div>
 
       <ProductsGrid />
     </div>
   </section>
 </Base>
+
+<script>
+  const materialSelect = document.getElementById(
+    "material",
+  ) as HTMLSelectElement;
+  const categorySelect = document.getElementById(
+    "category",
+  ) as HTMLSelectElement;
+  const partnerSelect = document.getElementById("partner") as HTMLSelectElement;
+
+  materialSelect!.addEventListener("change", () => {
+    window.location.href = `/solutions/${materialSelect!.value}`;
+  });
+
+  categorySelect!.addEventListener("change", () => {
+    window.location.href = `/categories/${categorySelect!.value}`;
+  });
+
+  partnerSelect!.addEventListener("change", () => {
+    window.location.href = `/partners/${partnerSelect!.value}`;
+  });
+</script>

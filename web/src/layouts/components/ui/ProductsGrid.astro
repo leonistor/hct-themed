@@ -7,6 +7,7 @@ import { useTranslations } from "@/lib/utils/i18nUtils";
 import { getPayload } from "payload";
 import { config as payloadConfig, type Media } from "admin";
 import type { Where } from "payload";
+import { cuid } from "astro:schema";
 const payload = await getPayload({ config: payloadConfig });
 
 interface Props {
@@ -33,11 +34,17 @@ const where: Where = {
     },
   ],
 };
+const currentUrl = Astro.url;
+let page = Number(currentUrl.searchParams.get("page")) ?? 1;
+let limit = Number(currentUrl.searchParams.get("limit")) ?? 9;
+page = page === 0 ? 1 : page;
+limit = limit === 0 ? 9 : limit;
 
 const products = await payload.find({
   collection: "products",
   depth: 1,
-  limit: 30,
+  page,
+  limit,
   sort: "_order",
   where,
   select: {
@@ -45,9 +52,17 @@ const products = await payload.find({
     images: false,
   },
 });
-
 const t = await useTranslations(Astro.currentLocale as string);
+
+const debug = JSON.parse(JSON.stringify(products));
+debug.docs = [];
+currentUrl.searchParams.set("page", String(page + 1));
 ---
+
+<div class="">
+  <a href={currentUrl.toString()}>next page</a>
+</div>
+<div class="">pagination</div>
 
 <div
   class="grid grid-cols-1 gap-x-4 gap-y-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-10">
