@@ -11,9 +11,12 @@
   "scripts": {
     "dev:web": "cd web && bun run dev",
     "dev:admin": "cd admin && bun run dev",
+    "build:web": "cd web && bun run build",
+    "build:admin": "cd admin && bun run build",
     "prod:web": "cd web && bun server/server/entry.mjs",
     "prod:admin": "cd admin && bun run start",
     "dev": "bun run --parallel dev:web dev:admin",
+    "build": "bun run --parallel build:web build:admin",
     "prod": "bun run --parallel prod:web prod:admin"
   },
   "type": "module",
