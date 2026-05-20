@@ -34,7 +34,7 @@ export default defineConfig({
   server: { allowedHosts: true },
   devToolbar: {
     enabled: true,
-    // placement: "bottom-right",
+    placement: "bottom-right",
   },
   outDir: "server",
   adapter: node({

@@ -26,6 +26,8 @@ export default buildConfig({
       level: 'error',
     },
   },
+  telemetry: false,
+
   admin: {
     user: Users.slug,
     importMap: {
