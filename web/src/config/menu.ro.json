@@ -181,7 +181,7 @@
             {
               "enable": true,
               "name": "Tăiere și dezmembrare",
-              "description": "Mașini industriale utilizate pentru tăierea, separarea și dezmembrarea structurilor metalice mari, aparatelor și componentelor industriale în bucăți mai ușor de gestionat, în vederea procesării sau reciclării.",
+              "description": "Mașini care taie și demontează structuri metalice mari și componente pentru reciclare.",
               "url": "/categories/taiere-si-dezmembrare",
               "weight": 0,
               "icon": "/payload/categ_taiere_y0bh74zvrr-5-450x300.jpg"
@@ -189,7 +189,7 @@
             {
               "enable": true,
               "name": "Prese de balotat și compactoare",
-              "description": "Mașini care comprimă materialele reciclabile, precum cartonul, hârtia, plasticul și metalul, în baloți denși și uniformi pentru depozitare, manipulare și transport eficient către centrele de reciclare.",
+              "description": "Echipamente care comprimă carton, plastic și metal în baloți denși pentru transport.",
               "url": "/categories/prese-de-balotat-si-compactoare",
               "weight": 1,
               "icon": "/payload/categ_prese_8dds649ybt-5-450x300.jpg"
@@ -197,7 +197,7 @@
             {
               "enable": true,
               "name": "Tocare, mărunțire și granulare",
-              "description": "Mașini de mare putere concepute pentru reducerea deșeurilor voluminoase în fragmente mai mici, granule sau pulbere, facilitând separarea, procesarea și reutilizarea metalelor, plasticelor și altor materiale.",
+              "description": "Mașini puternice care reduc deșeurile voluminoase în fragmente pentru reutilizarea materialelor.",
               "url": "/categories/tocare-maruntire-si-granulare",
               "weight": 2,
               "icon": "/payload/categ_tocare_c25lgx9y8b-5-200x300.jpg"
@@ -213,7 +213,7 @@
             {
               "enable": true,
               "name": "Dezmembrare vehicule și motoare",
-              "description": "Echipamente și unelte specializate utilizate pentru dezasamblarea sistematică a vehiculelor și motoarelor scoase din uz, permițând recuperarea în siguranță a pieselor reutilizabile și a materiilor prime reciclabile.",
+              "description": "Unelte folosite pentru dezmembrarea vehiculelor scoase din uz în vederea recuperării pieselor și materialelor.",
               "url": "/categories/dezmembrare-vehicule-si-motoare",
               "weight": 3,
               "icon": "/payload/categ_vehicule_8vu3jjs5sb-5-450x300.jpg"
@@ -221,7 +221,7 @@
             {
               "enable": true,
               "name": "Sisteme de sortare",
-              "description": "Echipamente automate sau semiautomate care separă fluxurile de deșeuri mixte după tipul materialului, dimensiune sau compoziție, utilizând tehnologii precum senzori, magneți, jeturi de aer și sisteme transportoare.",
+              "description": "Echipamente care separă deșeurile mixte pe tipuri folosind senzori, magneți și benzi transportoare.",
               "url": "/categories/sisteme-de-sortare",
               "weight": 4,
               "icon": "/payload/categ_sortare_7varlbrukq-5-200x300.jpg"
