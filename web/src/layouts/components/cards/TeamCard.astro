@@ -52,17 +52,18 @@ const socialLinks = social?.filter((link) => link.enable);
             />
           )}
         </div>
-        {socialLinks && (
+        {false && socialLinks && (
           <div class="flex items-center gap-4">
-            {socialLinks.map((link) => (
-              <Button
-                tag="a"
-                variant="text"
-                label={link.label}
-                url={getLocaleUrlCTM(link.url, Astro.currentLocale)}
-                class="hover:border-accent hover:text-accent border-b-transparent leading-5"
-              />
-            ))}
+            {false &&
+              socialLinks!.map((link) => (
+                <Button
+                  tag="a"
+                  variant="text"
+                  label={link.label}
+                  url={getLocaleUrlCTM(link.url, Astro.currentLocale)}
+                  class="hover:border-accent hover:text-accent border-b-transparent leading-5"
+                />
+              ))}
           </div>
         )}
       </div>

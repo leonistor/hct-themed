@@ -50,7 +50,7 @@ const badgeVariant = Astro.props.badgeVariant;
   <div class="container flex flex-col items-center gap-8 lg:gap-14">
     <div class="mx-auto flex max-w-5xl flex-col items-center text-center">
       {
-        badge && (
+        false && badge && (
           <SectionBadge
             title={badge}
             variant={badgeVariant}

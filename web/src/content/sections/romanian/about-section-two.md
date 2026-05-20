@@ -9,7 +9,7 @@ list:
     button:
       enable: true
       label: "Proiecte finalizate"
-      url: "/projects/"
+      url: "/case-studies"
       variant: "fill"
     deocrativeScribble: "/images/decorative/scribble/scribble-2.svg"
     deocrativeScribbleAlt: "Despre noi"
