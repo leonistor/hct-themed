@@ -53,9 +53,6 @@ const products = await payload.find({
 });
 const t = await useTranslations(Astro.currentLocale as string);
 
-const debug = JSON.parse(JSON.stringify(products));
-debug.docs = [];
-
 const nextPageUrl = new URL(currentUrl.toString());
 nextPageUrl.searchParams.set("page", String(page + 1));
 const prevPageUrl = new URL(currentUrl.toString());
@@ -72,7 +69,7 @@ prevPageUrl.searchParams.set("page", String(page - 1));
       <a
         id="prevPageUrl"
         data-active={products.hasPrevPage}
-        data-prev={prevPageUrl.toString()}
+        data-search={prevPageUrl.search.toString()}
         class:list={["text-gray-500", "hidden"]}
         href="/products">
         {t("products.paginationPrevious")} &larr;
@@ -83,7 +80,7 @@ prevPageUrl.searchParams.set("page", String(page - 1));
     (
       <a
         id="nextPageUrl"
-        data-next={nextPageUrl.toString()}
+        data-search={nextPageUrl.search.toString()}
         data-active={products.hasNextPage}
         class:list={["text-gray-500", "hidden"]}
         href="/products">
@@ -103,15 +100,20 @@ prevPageUrl.searchParams.set("page", String(page - 1));
 </div>
 
 <script is:inline>
-  const prevPageUrl = document.getElementById("prevPageUrl");
-  const nextPageUrl = document.getElementById("nextPageUrl");
-  const isPrevPageActive = prevPageUrl.dataset.active === "true";
-  const isNextPageActive = nextPageUrl.dataset.active === "true";
+  const prevPageUrlElement = document.getElementById("prevPageUrl");
+  const nextPageUrlElement = document.getElementById("nextPageUrl");
+  const isPrevPageActive = prevPageUrlElement.dataset.active === "true";
+  const isNextPageActive = nextPageUrlElement.dataset.active === "true";
 
-  prevPageUrl.classList.toggle("hidden", !isPrevPageActive);
-  nextPageUrl.classList.toggle("hidden", !isNextPageActive);
+  prevPageUrlElement.classList.toggle("hidden", !isPrevPageActive);
+  nextPageUrlElement.classList.toggle("hidden", !isNextPageActive);
+  const currentUrl = new URL(window.location.href);
+  const baseUrl = currentUrl.origin + currentUrl.pathname;
+
+  const prevPageUrl = baseUrl + prevPageUrlElement.dataset.search.toString();
+  const nextPageUrl = baseUrl + nextPageUrlElement.dataset.search.toString();
   // @ts-ignore
-  prevPageUrl.href = prevPageUrl.dataset.prev;
+  prevPageUrlElement.href = prevPageUrl.toString();
   // @ts-ignore
-  nextPageUrl.href = nextPageUrl.dataset.next;
+  nextPageUrlElement.href = nextPageUrl.toString();
 </script>

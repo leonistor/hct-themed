@@ -31,11 +31,8 @@ export default defineConfig({
     domains: ["localhost"],
     remotePatterns: [{ port: "4321" }, { port: "3000" }],
   },
-  server: { allowedHosts: true },
-  devToolbar: {
-    enabled: true,
-    placement: "bottom-right",
-  },
+  server: { allowedHosts: true, host: "0.0.0.0" },
+  devToolbar: { enabled: true },
   outDir: "server",
   adapter: node({
     mode: "standalone",
