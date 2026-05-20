@@ -37,7 +37,7 @@ const {
 <section class="relative">
   {
     image && (
-      <div class="bg-light absolute bottom-0 left-0 z-[-1] h-18 w-full sm:h-30 md:h-40 lg:h-52 xl:h-68" />
+      <div class="bg-light absolute bottom-0 left-0 z-[-1] h-14 w-full sm:h-16 md:h-20 lg:h-32 xl:h-36" />
     )
   }
   <div class="container">
@@ -48,7 +48,7 @@ const {
         Astro.props.contentClass,
       ]}>
       {
-        badge && (
+        false && badge && (
           <SectionBadge
             title={badge}
             variant="secondary"

@@ -1,8 +1,8 @@
 ---
-badge: "Our Services"
-title: "We're Give A Full Service About All Your King Of Tax"
-titleSecondary: "We Provide Quality Services."
-metaDescription: "This is a example description"
+badge: "Serviciile noastre"
+title: ""
+titleSecondary: ""
+metaDescription: ""
 draft: false
 image: "/images/page-header/default.png"
 
