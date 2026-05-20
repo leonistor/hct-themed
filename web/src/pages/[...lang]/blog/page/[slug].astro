@@ -74,8 +74,11 @@ let { postIndex } = Astro.props;
 ---
 
 <Base {...postIndex?.data}>
-  <PageHeader content={postIndex?.data} contentClass="max-w-3xl! xl:px-6" />
-  <BlogsHeroSection />
+  <PageHeader
+    content={postIndex?.data}
+    contentClass="max-w-3xl! xl:px-6 lg:pb-14"
+  />
+  <!-- <BlogsHeroSection /> -->
   <LayoutWrapper
     pageType="list"
     hasLightBackground={true}
@@ -89,6 +92,6 @@ let { postIndex } = Astro.props;
     }}
     content={{ ...postIndex, ...postIndex?.data }}
   />
-  <CTAGallerySection />
+  <!-- <CTAGallerySection /> -->
   <CTASection />
 </Base>

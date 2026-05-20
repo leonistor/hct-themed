@@ -59,6 +59,7 @@ const { post, postIndex } = Astro.props;
     content={{
       badge: post?.data?.categories?.[0],
       title: post?.data?.title,
+      image: "",
       postData: {
         date: post?.data?.date,
         comments: post?.data?.comments,
