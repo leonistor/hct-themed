@@ -7,9 +7,6 @@ import { useTranslations } from "@/lib/utils/i18nUtils";
 import { getPayload } from "payload";
 import { config as payloadConfig, type Media } from "admin";
 import type { Where } from "payload";
-import { cuid } from "astro:schema";
-import { a } from "server/server/chunks/server_Ncxv4MlI.mjs";
-import categ_tocare_c25lgx9y8b from "server/server/chunks/categ_tocare_c25lgx9y8b_3Ve1pndq.mjs";
 const payload = await getPayload({ config: payloadConfig });
 
 interface Props {
@@ -71,15 +68,25 @@ prevPageUrl.searchParams.set("page", String(page - 1));
     {t("products.title")}
   </div>
   {
-    products.hasPrevPage && (
-      <a class="text-gray-500" href={prevPageUrl.toString()}>
+    (
+      <a
+        id="prevPageUrl"
+        data-active={products.hasPrevPage}
+        data-prev={prevPageUrl.toString()}
+        class:list={["text-gray-500", "hidden"]}
+        href="/products">
         {t("products.paginationPrevious")} &larr;
       </a>
     )
   }
   {
-    products.hasNextPage && (
-      <a class="text-gray-500" href={nextPageUrl.toString()}>
+    (
+      <a
+        id="nextPageUrl"
+        data-next={nextPageUrl.toString()}
+        data-active={products.hasNextPage}
+        class:list={["text-gray-500", "hidden"]}
+        href="/products">
         {t("products.paginationNext")} &rarr;
       </a>
     )
@@ -94,3 +101,17 @@ prevPageUrl.searchParams.set("page", String(page - 1));
     ))
   }
 </div>
+
+<script is:inline>
+  const prevPageUrl = document.getElementById("prevPageUrl");
+  const nextPageUrl = document.getElementById("nextPageUrl");
+  const isPrevPageActive = prevPageUrl.dataset.active === "true";
+  const isNextPageActive = nextPageUrl.dataset.active === "true";
+
+  prevPageUrl.classList.toggle("hidden", !isPrevPageActive);
+  nextPageUrl.classList.toggle("hidden", !isNextPageActive);
+  // @ts-ignore
+  prevPageUrl.href = prevPageUrl.dataset.prev;
+  // @ts-ignore
+  nextPageUrl.href = nextPageUrl.dataset.next;
+</script>
