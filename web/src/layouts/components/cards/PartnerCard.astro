@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
 import Button from "@/components/Button.astro";
 import type { Media, Partner } from "admin";
 
@@ -22,8 +22,8 @@ let { index = 0, partner } = Astro.props;
     aria-label={partner.name}>
     {
       partner.logo && (
-        <Image
-          src={`http://localhost:3000${(partner.logo! as Media).url}`}
+        <PayloadImage
+          src={`/payload/${(partner.logo as Media).filename!}`}
           alt={partner.name}
           width={360}
           height={100}
