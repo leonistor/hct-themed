@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
 import Icons from "@/helpers/Icons.astro";
 import type { Media, Customer } from "admin";
 
@@ -23,13 +23,11 @@ let { index = 0, customer } = Astro.props;
     aria-label={customer.name}>
     {
       customer.logo && (
-        <Image
-          src={`http://localhost:3000${(customer.logo! as Media).url}`}
+        <PayloadImage
+          src={`/payload/${(customer.logo as Media).filename!}`}
           alt={customer.name}
-          width={150}
-          height={150}
           class:list={[
-            "mx-auto min-h-36 object-scale-down",
+            "mx-auto size-40 object-scale-down",
             "transition-transform duration-700 ease-in-out group-hover:scale-105",
           ]}
         />

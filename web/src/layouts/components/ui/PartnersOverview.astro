@@ -6,7 +6,7 @@ import { config as payloadConfig, type Media } from "admin";
 const payload = await getPayload({ config: payloadConfig });
 
 import { useTranslations } from "@/lib/utils/i18nUtils";
-import PayloadImage from "../utilities/PayloadImage.astro";
+import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
 const t = await useTranslations(Astro.currentLocale as string);
 
 const partners = await payload.find({
