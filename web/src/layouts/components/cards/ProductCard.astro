@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
 import Pill from "@/components/ui/Pill.astro";
 import PillButton from "@/components/ui/PillButton.astro";
 import NewBadge from "@/components/ui/NewBadge.astro";
@@ -40,13 +41,11 @@ const is_promoted = product.promoted ?? false;
     </div>
     {
       product.main_image! && (
-        <Image
-          src={(product.main_image! as Media).url!}
+        <PayloadImage
+          src={`/payload/products/${(product.main_image! as Media).sizes!.large!.filename!}`}
           alt={product.name}
-          width={360}
-          height={100}
           class:list={[
-            "w-full object-cover",
+            "mx-auto size-96 object-scale-down",
             "transition-transform duration-700 ease-in-out group-hover:scale-105",
           ]}
         />
