@@ -1,17 +1,17 @@
 ---
 enable: true # Control the visibility of this section across all pages where it is used
-badge: "Quick Contact"
-title: "Have Questions? Get in Touch!"
-description: "Namo enim ipsam voluptatem quia voluptas sit aspernatur aut odit fugit, sed quia consequuntur magni dolores eos qui ratione"
-contactTitle: "Send A Message"
+badge: ""
+title: ""
+description: ""
+contactTitle: "Mesajul Dumneavoastră"
 list:
-  - title: "Have any question?"
+  - title: "Mobil / WhatsApp"
     icon: "/images/icons/svg/phone-call.svg"
     settingFieldName: "phone"
-  - title: "Write email"
+  - title: "Email"
     icon: "/images/icons/svg/email.svg"
     settingFieldName: "email"
-  - title: "Visit anytime"
+  - title: "Birouri"
     icon: "/images/icons/svg/location.svg"
     settingFieldName: "address"
 
@@ -22,7 +22,7 @@ form:
   submitButton:
     # Refer to the `sharedButton` schema in `src/sections.schema.ts` for all available configuration options (e.g., enable, label, url, hoverEffect, variant, icon, tag, rel, class, target, etc.)
     enable: true
-    label: "Send A Message"
+    label: "Trimite Mesaj"
     # hoverEffect: "" # Optional: text-flip | creative-fill | magnetic | magnetic-text-flip
     # variant: "" # Optional: fill | outline | text | circle
     # rel: "" # Optional
@@ -33,21 +33,21 @@ form:
   #   Your data is safe with us. We respect your privacy and never share your information. <br /> Read our [Privacy Policy](/privacy-policy/).
   inputs:
     - label: ""
-      placeholder: "Full Name *"
-      name: "Full Name" # This is crucial. Its indicate under which name you want to receive this field data
+      placeholder: "Nume *"
+      name: "Nume" # This is crucial. Its indicate under which name you want to receive this field data
       required: true
       halfWidth: true
       defaultValue: ""
     - label: ""
-      placeholder: "Email Address *"
-      name: "Email Address" # This is crucial. Its indicate under which name you want to receive this field data
+      placeholder: "Email *"
+      name: "Email" # This is crucial. Its indicate under which name you want to receive this field data
       required: true
       type: "email"
       halfWidth: true
       defaultValue: ""
     - label: ""
-      placeholder: "Subject *"
-      name: "Subject" # This is crucial. Its indicate under which name you want to receive this field data
+      placeholder: "Subiect *"
+      name: "Subiect" # This is crucial. Its indicate under which name you want to receive this field data
       required: false
       halfWidth: true
       dropdown:

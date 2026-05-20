@@ -1,10 +1,10 @@
 ---
-badge: "Serviciile noastre"
-title: ""
+badge: ""
+title: "Serviciile noastre"
 titleSecondary: ""
 metaDescription: ""
 draft: false
-image: "/images/page-header/default.png"
+image: ""
 
 # Override Default Content of `/sections/services-section.md`
 # Uncomment key values that you want to override
