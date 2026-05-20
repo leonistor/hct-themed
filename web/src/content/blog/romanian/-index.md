@@ -1,7 +1,8 @@
 ---
-badge: "Blog & News"
-title: "Check our inside news & update"
-metaDescription: "This is a example description"
+badge: ""
+title: "Noutăți și articole"
+metaDescription: "Noutăți și articole"
+image: ""
 draft: false
 
 searchSection:
@@ -24,7 +25,7 @@ searchSection:
     # target: "" # Optional
 # Settings of blog list page layout
 options:
-  search: true
+  search: false
   layout: "grid" # creative | grid
   columns: 2 # 1 / 2 / 3
 ---

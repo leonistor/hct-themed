@@ -6,6 +6,7 @@ import { generatePaths } from "@/lib/utils/i18nUtils.ts";
 import CTASection from "@/components/sections/CTASection.astro";
 // import TeamSection from "@/components/sections/TeamSection.astro";
 import BlogSection from "@/components/sections/BlogSection.astro";
+import BlogSectionTwo from "@/components/sections/BlogSectionTwo.astro";
 import HeroSection from "@/components/sections/HeroSection.astro";
 import FeaturesGrid from "@/components/sections/FeaturesGrid.astro";
 import StatsSection from "@/components/sections/StatsSection.astro";
@@ -47,6 +48,7 @@ const page = await getEntryCTM("homepage", "-index", Astro.currentLocale);
     hasSectionSpacingBottom={true}
   /> -->
   <!-- <TeamSection hasSectionSpacingBottom={true} /> -->
-  <BlogSection />
+  <!-- <BlogSection /> -->
+  <BlogSectionTwo />
   <CTASection />
 </Base>

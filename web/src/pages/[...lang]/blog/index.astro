@@ -27,8 +27,11 @@ if (response) return response;
 ---
 
 <Base {...postIndex?.data}>
-  <PageHeader content={postIndex?.data} contentClass="max-w-3xl! xl:px-6" />
-  <BlogsHeroSection />
+  <PageHeader
+    content={postIndex?.data}
+    contentClass="max-w-3xl! xl:px-6 lg:pb-14"
+  />
+  <!-- <BlogsHeroSection /> -->
   <BlogLayout
     pageType="list"
     hasLightBackground={true}
