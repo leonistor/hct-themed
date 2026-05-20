@@ -28,7 +28,8 @@
 }
 
 @utility section-spacing {
-  @apply pt-20 md:pt-32;
+  /*@apply pt-20 md:pt-32;*/
+  @apply pt-6 md:pt-12;
 }
 
 @utility section-spacing-bottom {
@@ -36,7 +37,8 @@
 }
 
 @utility section-spacing-m {
-  @apply mt-20 md:mt-32;
+  /*@apply mt-20 md:mt-32;*/
+  @apply mt-6 md:mt-12;
 }
 
 /* Section Background Shape */
