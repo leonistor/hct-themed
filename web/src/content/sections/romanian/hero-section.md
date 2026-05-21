@@ -5,7 +5,7 @@ subTitle: ""
 titleLine1: "Soluții la cheie pentru"
 titleLine2: "reciclare"
 
-description: "Oferim [soluții](/solutions) și [echipamente de reciclare](/categories) prin [parteneriate](/partners) cu cei mai performanți producători europeni. [&#9655; Despre noi](/about)."
+description: "Oferim [soluții](/solutions) și [echipamente de reciclare](/categories) prin [parteneriate](/partners) cu cei mai performanți producători europeni. [&#9655;&nbsp;Despre noi](/about)."
 
 arrowDecorationImage: ""
 arrowDecorationImageAlt: ""

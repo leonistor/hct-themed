@@ -1,24 +1,24 @@
 ---
 enable: true
 
-subTitle: "Your Trusted Tax Advisor."
-titleLine1: "Trustworthy Tax"
-titleLine2: "Advice."
+subTitle: ""
+titleLine1: "Turnkey Solutions"
+titleLine2: "Recycling"
 
-description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint sunt in culpa qui officia deserunt [&#9655; Discover More](/about/)"
+description: "We offer [solutions](/solutions) and [recycling equipment](/categories) through [partnerships](/partners) with the best European manufacturers. [&#9655;&nbsp;About us](/about)."
 
-arrowDecorationImage: "/images/decorative/shape/shape-5.png"
-arrowDecorationImageAlt: "Decorative shape"
-shapeImage: "/images/decorative/shape/shape-1.png"
-shapeImageAlt: "Decorative shape"
+arrowDecorationImage: ""
+arrowDecorationImageAlt: ""
+shapeImage: ""
+shapeImageAlt: ""
 
 slides:
-  - image: "/images/banner/banner-1.png"
-    alt: "Tax advisory team meeting"
-  - image: "/images/banner/banner-2.png"
-    alt: "Professional tax consultation"
-  - image: "/images/banner/banner-common.png"
-    alt: "Tax advisory services"
+  - image: "/images/unsplash/haberdoedas-ii-owCWMXZwyPw-unsplash.jpg"
+    alt: "Illustration"
+  - image: "/images/unsplash/compagnons-aI4RJ--Mw4I-unsplash.jpg"
+    alt: "Illustration"
+  - image: "/images/unsplash/donald-giannatti-yBVfobfL6SA-unsplash.jpg"
+    alt: "Illustration"
 
 satisfactionClients:
   enable: true
@@ -42,10 +42,10 @@ helpDropdown:
   enable: true
   label: "How can we help you?"
   items:
-    - label: "Tax Planning"
+    - label: "Services"
       url: "/services/"
-    - label: "Business Advisory"
+    - label: "Solutions"
       url: "/services/"
-    - label: "Financial Consulting"
+    - label: "Equipment"
       url: "/services/"
 ---
