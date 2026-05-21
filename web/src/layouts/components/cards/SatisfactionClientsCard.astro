@@ -36,37 +36,16 @@ const {
 
 <div
   class:list={[
-    "bg-body font-secondary flex w-full flex-col items-center gap-5 p-5 py-2 lg:p-9",
+    "bg-body font-secondary flex w-full flex-col items-center gap-3 p-5 lg:p-9",
     className,
   ]}
   {...rest}>
-  <div class="flex w-full items-center gap-4">
-    <div class="flex items-center">
-      {
-        avatars?.map((avatar: string, i: number) => (
-          <div
-            class:list={[
-              "size-12 overflow-hidden rounded-full border-5 border-white shadow-lg md:size-16 lg:size-20",
-              { "-ml-4 md:-ml-5 lg:-ml-6": i > 0 },
-            ]}>
-            <OptimizedImage
-              src={avatar}
-              alt={avatarAlt}
-              width={120}
-              height={120}
-              class="size-20 object-cover"
-            />
-          </div>
-        ))
-      }
-    </div>
-    <div
-      class:list={[
-        "text-dark flex w-full text-sm leading-tight font-bold md:text-base xl:text-xl",
-        classText,
-      ]}>
-      <span class="w-full" set:html={label} />
-    </div>
+  <div
+    class:list={[
+      "text-dark flex w-full text-sm leading-tight font-bold md:text-base xl:text-xl",
+      classText,
+    ]}>
+    <span class="w-full" set:html={label} />
   </div>
   {
     helpDropdown?.enable && (
