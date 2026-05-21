@@ -5,7 +5,7 @@ subTitle: "Your Trusted Tax Advisor."
 titleLine1: "Trustworthy Tax"
 titleLine2: "Advice."
 
-description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint sunt in culpa qui officia deserunt [Discover More](/about/)"
+description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint sunt in culpa qui officia deserunt [&#9655; Discover More](/about/)"
 
 arrowDecorationImage: "/images/decorative/shape/shape-5.png"
 arrowDecorationImageAlt: "Decorative shape"

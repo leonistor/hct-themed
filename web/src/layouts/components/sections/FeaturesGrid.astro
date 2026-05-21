@@ -31,7 +31,7 @@ const { hasLightBackground = false } = Astro.props;
         <div class="flex w-full items-center justify-center text-center">
           {title && (
             <h2
-              class="[&_a]:text-accent [&_a]:border-accent text-lg md:text-2xl lg:text-3xl [&_a]:border-b-2"
+              class="[&_a]:text-accent [&_a]:border-accent text-xl md:text-2xl lg:text-4xl [&_a]:border-b-2"
               set:html={markdownify(title)}
             />
           )}
