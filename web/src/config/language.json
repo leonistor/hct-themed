@@ -2,12 +2,14 @@
   {
     "languageName": "Română",
     "languageCode": "ro",
+    "localeCode": "ro-RO",
     "contentDir": "romanian",
     "weight": 2
   },
   {
     "languageName": "English",
     "languageCode": "en",
+    "localeCode": "en-US",
     "contentDir": "english",
     "weight": 1
   }

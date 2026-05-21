@@ -7,7 +7,11 @@ import {
   toSentenceCase,
 } from "@/lib/utils/textConverter";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
-import { getEntrySlugCTM, useTranslations } from "@/lib/utils/i18nUtils.ts";
+import {
+  getEntrySlugCTM,
+  getSupportedLanguages,
+  useTranslations,
+} from "@/lib/utils/i18nUtils.ts";
 import type { CollectionEntry } from "astro:content";
 import Icons from "@/helpers/Icons.astro";
 
@@ -19,6 +23,13 @@ interface Props {
 }
 
 const t = await useTranslations(Astro.currentLocale as string);
+
+const currentLocale = Astro.currentLocale ?? "en";
+// const supportedLanguages = getSupportedLanguages();
+// const currentLocaleCode =
+//   supportedLanguages.find((lang) => lang.languageCode === currentLocale)
+//     ?.localeCode ?? "en-US";
+// console.log("currentLocaleCode", currentLocaleCode);
 
 let {
   content,
@@ -65,7 +76,7 @@ const HeadingTag = `${tag}` as keyof HTMLElementTagNameMap;
             </>
           ))}
         <span class:list={["bg-dark mt-1 flex size-0.5 rounded-full"]} />
-        <span>{date && dateFormat(date, "dd MMMM yyyy")}</span>
+        <span>{date && dateFormat(date, "dd MMMM yyyy", currentLocale)}</span>
       </div>
       <div class="grid grid-cols-12 gap-4">
         {title && (
@@ -112,7 +123,7 @@ const HeadingTag = `${tag}` as keyof HTMLElementTagNameMap;
               </>
             ))}
           <span class:list={["bg-dark mt-1 flex size-0.5 rounded-full"]} />
-          <span>{date && dateFormat(date, "dd MMMM yyyy")}</span>
+          <span>{date && dateFormat(date, "dd MMMM yyyy", currentLocale)}</span>
         </div>
         {title && (
           <HeadingTag
