@@ -34,7 +34,7 @@ const { hasPaddingBottom = false } = Astro.props;
           {servicesList.map((service, index) => (
             <ServiceCard
               content={service}
-              options={{ layout: "listImage" }}
+              options={{ layout: "horizontal" }}
               index={index}
               tag="h2"
             />
