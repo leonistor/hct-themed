@@ -11,21 +11,16 @@ export async function Overview({ payload }: { payload: Payload }) {
     return { published, unpublished }
   }
 
-  // TODO: show only drafts
   const partners_counts = await getPublishedUnpublished('partners')
-  const partners_published = partners_counts.published
   const partners_unpublished = partners_counts.unpublished
 
   const customers_counts = await getPublishedUnpublished('customers')
-  const customers_published = customers_counts.published
   const customers_unpublished = customers_counts.unpublished
 
   const products_counts = await getPublishedUnpublished('products')
-  const products_published = products_counts.published
   const products_unpublished = products_counts.unpublished
 
   const projects_counts = await getPublishedUnpublished('projects')
-  const projects_published = projects_counts.published
   const projects_unpublished = projects_counts.unpublished
 
   return (
@@ -41,7 +36,7 @@ export async function Overview({ payload }: { payload: Payload }) {
 
 function OverviewButton({ name, count_unpublished }: { name: string; count_unpublished: number }) {
   return (
-    <Button el="link" to={`/collections/${name}`} buttonStyle="pill">
+    <Button el="link" to={`/admin/collections/${name}`} buttonStyle="pill">
       {capitalizeFirstLetter(name)}: {count_unpublished}
     </Button>
   )
