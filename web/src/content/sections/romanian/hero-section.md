@@ -27,8 +27,8 @@ satisfactionClients:
     - "/images/logos/avatar-logo-holcim.png"
     - "/images/logos/avatar-logo-urban.png"
   avatarAlt: "Client avatar"
-  count: "100+"
-  label: "100+ clienți în peste 10 ani de activitate"
+  count: "70+"
+  label: "70+ clienți în peste 15 ani de activitate"
 
 video:
   src: "" # Locally hosted video path (ex: /videos/test-video.mp4), or a YouTube/Vimeo video ID

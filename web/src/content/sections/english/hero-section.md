@@ -27,8 +27,8 @@ satisfactionClients:
     - "/images/customers/avatar/customer-2.png"
     - "/images/customers/avatar/customer-3.png"
   avatarAlt: "Client avatar"
-  count: "240+"
-  label: "Trusted Over 240+ Client Across Country"
+  count: "70+"
+  label: "Trusted by 70+ customers over 15 years"
 
 video:
   src: "bTqVqk7FSmY" # Locally hosted video path (ex: /videos/test-video.mp4), or a YouTube/Vimeo video ID

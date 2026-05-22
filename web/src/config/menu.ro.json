@@ -436,20 +436,20 @@
           "children": [
             {
               "enable": true,
-              "name": "Proiect unu",
-              "url": "/case-studies/case-study-3/",
+              "name": "Panizzolo Polonia",
+              "url": "/panizzolo-polonia",
               "weight": 0
             },
             {
               "enable": true,
-              "name": "Proiect doi",
-              "url": "/case-studies/custom-slug-case-studies-1/",
+              "name": "Utilaje Fagaras",
+              "url": "/utilaje-fagaras",
               "weight": 0
             },
             {
               "enable": true,
-              "name": "Proiect trei",
-              "url": "/case-studies/case-study-3/",
+              "name": "Utilaje Arieseni",
+              "url": "/utilaje-arieseni",
               "weight": 0
             }
           ]
