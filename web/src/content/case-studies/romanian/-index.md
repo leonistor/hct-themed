@@ -1,10 +1,10 @@
 ---
-badge: "Case Studies"
-badgeSecondary: "Project Details"
-title: "Let's See Our Latest Project"
+badge: "Proiecte"
+badgeSecondary: "Detalii proiect"
+title: "Proiecte realizate"
 metaDescription: ""
-image: "/images/page-header/default.png"
+image: ""
 options:
   layout: "card"
-  limit: 6
+  limit: 12
 ---

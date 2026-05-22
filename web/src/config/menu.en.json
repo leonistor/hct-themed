@@ -432,27 +432,7 @@
           "enable": true,
           "name": "Projects",
           "weight": 0,
-          "hasChildren": true,
-          "children": [
-            {
-              "enable": true,
-              "name": "Panizzolo Polonia",
-              "url": "/panizzolo-polonia",
-              "weight": 0
-            },
-            {
-              "enable": true,
-              "name": "Equipment",
-              "url": "/utilaje-fagaras",
-              "weight": 0
-            },
-            {
-              "enable": true,
-              "name": "Equipment Arieseni",
-              "url": "/utilaje-arieseni",
-              "weight": 0
-            }
-          ]
+          "url": "/case-studies"
         },
         {
           "enable": true,
