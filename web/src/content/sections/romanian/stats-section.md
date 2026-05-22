@@ -6,11 +6,11 @@ backgroundImageAlt: "fact-bg"
 
 list:
   - prependValue: ""
-    value: "100"
+    value: "70+"
     appendValue: "+"
     label: "Clienți"
   - prependValue: ""
-    value: "10"
+    value: "15"
     appendValue: "+"
     label: "Ani de experiență"
   - prependValue: ""

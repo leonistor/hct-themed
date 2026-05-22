@@ -1,6 +1,6 @@
 ---
 enable: true
-title: "Peste [10 ani de experiență](/about)<br /> în consultanță, montaj și service<br /> pentru utilaje de reciclare"
+title: "Peste [15 ani de experiență](/about)<br /> în consultanță, montaj și service<br /> pentru utilaje de reciclare"
 
 features:
   - enable: false

@@ -1,6 +1,6 @@
 ---
 enable: true
-title: "We Have Than More [25 Years of Experience](/about/)<br /> in Tax Advisor & Financial <br />Consulting Services"
+title: "We Have Than More [15 Years of Experience](/about/)<br /> in consulting, delivery and services <br />for recycling equipment"
 
 features:
   - enable: true
