@@ -461,7 +461,7 @@
           "weight": 0
         },
         {
-          "enable": true,
+          "enable": false,
           "name": "FAQ",
           "url": "/faq/",
           "weight": 0

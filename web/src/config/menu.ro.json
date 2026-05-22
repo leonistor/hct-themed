@@ -461,7 +461,7 @@
           "weight": 0
         },
         {
-          "enable": true,
+          "enable": false,
           "name": "Întrebări Frecvente",
           "url": "/faq/",
           "weight": 0
