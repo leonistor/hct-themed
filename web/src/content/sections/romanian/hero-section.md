@@ -2,8 +2,8 @@
 enable: true
 
 subTitle: ""
-titleLine1: "Soluții la cheie pentru"
-titleLine2: "reciclare"
+titleLine1: "Soluții la cheie"
+titleLine2: "pentru reciclare"
 
 description: "Oferim [soluții](/solutions) și [echipamente de reciclare](/categories) prin [parteneriate](/partners) cu cei mai performanți producători europeni. [&#9655;&nbsp;Despre noi](/about)."
 

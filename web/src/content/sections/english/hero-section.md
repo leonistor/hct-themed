@@ -2,8 +2,8 @@
 enable: true
 
 subTitle: ""
-titleLine1: "Turnkey Solutions"
-titleLine2: "Recycling"
+titleLine1: "Turnkey Recycling"
+titleLine2: "Solutions"
 
 description: "We offer [solutions](/solutions) and [recycling equipment](/categories) through [partnerships](/partners) with the best European manufacturers. [&#9655;&nbsp;About us](/about)."
 

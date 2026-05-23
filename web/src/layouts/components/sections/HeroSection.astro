@@ -110,8 +110,8 @@ if (!enable) {
       )
     }
     <div
-      class="mt-7 grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
-      <div class="space-y-6 lg:col-span-12 xl:col-span-10">
+      class="mt-7 grid grid-cols-1 items-start gap-6 lg:grid-cols-12 lg:gap-8">
+      <div class="space-y-4 lg:col-span-12 xl:col-span-10">
         <h1
           data-aos="reveal-anim-left"
           data-aos-offset="0"
@@ -125,9 +125,11 @@ if (!enable) {
             </div>
             {
               description && (
-                <div class="space-y-4">
+                <div class="space-y-2">
                   <p
-                    class="text-text-dark/85 font-primary prose-a:text-primary prose-a:font-medium prose-a:border-b prose-a:border-primary text-xs font-normal tracking-[0.06em] md:max-w-lg md:text-sm lg:text-lg"
+                    class:list={["text-text-dark/85 font-primary",
+                      " prose-a:text-primary prose-a:font-medium prose-a:border-b prose-a:border-primary",
+                      "text-base font-medium tracking-[0.06em] md:max-w-lg md:text-lg lg:text-xl",]}
                     set:html={markdownify(description)}
                   />
                 </div>
