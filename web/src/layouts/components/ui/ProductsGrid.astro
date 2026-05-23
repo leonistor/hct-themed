@@ -59,7 +59,7 @@ const prevPageUrl = new URL(currentUrl.toString());
 prevPageUrl.searchParams.set("page", String(page - 1));
 ---
 
-<div class="flex flex-wrap items-center justify-end gap-4 pt-4 pb-6">
+<div class="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 pt-4 pb-6">
   <div class="font-medium">
     {products.totalDocs}
     {t("products.title")}
@@ -91,7 +91,7 @@ prevPageUrl.searchParams.set("page", String(page - 1));
 </div>
 
 <div
-  class="grid grid-cols-1 gap-x-4 gap-y-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-10">
+  class="grid grid-cols-1 gap-x-2 gap-y-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-3 lg:gap-y-5">
   {
     products.docs.map((product, index) => (
       <ProductCard product={product} index={index} />

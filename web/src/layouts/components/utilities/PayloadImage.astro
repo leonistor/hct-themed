@@ -16,8 +16,8 @@ interface InlineSvgProps {
 interface ImageProps {
   src: string;
   alt?: string;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
   layout?: "responsive" | "full-width" | "none" | undefined;
   loading?: "eager" | "lazy" | null | undefined;
   decoding?: "async" | "auto" | "sync" | null | undefined;

@@ -46,8 +46,9 @@ const is_promoted = product.promoted ?? false;
         <PayloadImage
           src={`/payload/products/${(product.main_image! as Media).sizes!.large!.filename!}`}
           alt={product.name}
+          height="300px"
           class:list={[
-            "mx-auto size-96 object-scale-down",
+            "mx-auto object-scale-down",
             "transition-transform duration-700 ease-in-out group-hover:scale-105",
           ]}
         />
