@@ -6,13 +6,13 @@
 
   /* Colors */
   /* === PRIMARY BRAND === */
-  --color-primary: #192F4D;        /* deep green (main brand) */
-  --color-secondary: #f4f1ea;      /* soft beige background */
-  --color-accent: #D0626B;         /* warm orange accent */
-  --color-accent-dark: #EB5C68;    /* darker hover orange */
+  --color-primary: #216869; /* top bar, promo cards*/
+  --color-secondary: #f4f1ea; /* soft beige background ? */
+  --color-accent: #49A078; /* accent */
+  --color-accent-dark: #408C69; /* darker accent */
   /* === BACKGROUNDS === */
-  --color-body: #E2F3F3;           /* main page bg FCF3E7*/
-  --color-body-dark: #092420;      /* dark green sections */
+  --color-body: #D8E8DA; /* main page bg */
+  --color-body-dark: #092420; /* dark green sections ? */
   /* === TEXT === */
   --color-text-dark: #2b2b2b;
   --color-text-light: #FFFFFF;

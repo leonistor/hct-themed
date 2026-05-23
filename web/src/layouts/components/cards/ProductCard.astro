@@ -18,6 +18,8 @@ let { index = 0, product } = Astro.props;
 
 const t = await useTranslations(Astro.currentLocale as string);
 
+const color_variants = "#216869";
+
 const variants_count = product.variants?.length ?? 0;
 const is_promoted = product.promoted ?? false;
 ---
@@ -69,7 +71,7 @@ const is_promoted = product.promoted ?? false;
         <PillButton
           label={`${variants_count} ${t("products.variants")}`}
           link={`/product/${product.code}`}
-          bgColor="#f97316"
+          bgColor={color_variants}
         />
       )
     }

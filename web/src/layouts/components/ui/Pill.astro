@@ -11,11 +11,19 @@ interface Props {
 
 const { partner, material, category, size = "md" } = Astro.props;
 
+const coolors = {
+  sea_green: "408c69",
+  lobster_pink: "ca6b68",
+  cloudy_sky: "499ce9",
+  sandy_brown: "F5A051",
+  tuscan_sun: "f2bf40",
+};
+
 const BG_COLORS = {
   default: "#4b5563",
-  partner: "#CE123E",
-  material: "#048B67",
-  category: "#0E7395",
+  partner: `#${coolors.sea_green}`,
+  material: `#${coolors.lobster_pink}`,
+  category: `#${coolors.cloudy_sky}`,
 };
 
 let bgColor = BG_COLORS.default;
