@@ -50,7 +50,15 @@
               "url": "/solutions/cabluri",
               "weight": 3,
               "icon": "/payload/materiale_cabluri_35dogmwz6h-5-450x300.jpg"
-            },
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "",
+          "description": "",
+          "weight": 1,
+          "children": [
             {
               "enable": true,
               "name": "Refining",
@@ -74,15 +82,7 @@
               "url": "/solutions/motoare-auto",
               "weight": 6,
               "icon": "/payload/materiale_motoare_auto_3i41ep1ogu-5-200x300.jpg"
-            }
-          ]
-        },
-        {
-          "enable": true,
-          "name": "",
-          "description": "",
-          "weight": 1,
-          "children": [
+            },
             {
               "enable": true,
               "name": "Electric Motors",
@@ -98,7 +98,15 @@
               "url": "/solutions/deee",
               "weight": 8,
               "icon": "/payload/materiale_deee_nyx6op9agq-5-225x300.jpg"
-            },
+            }
+          ]
+        },
+        {
+          "enable": true,
+          "name": "",
+          "description": "",
+          "weight": 0,
+          "children": [
             {
               "enable": true,
               "name": "Hydrapulper",
@@ -143,7 +151,7 @@
         }
       ],
       "cta": {
-        "enable": true,
+        "enable": false,
         "eyebrow": "New!",
         "image": "/payload/products/mobile-Flex-500-uai-1440x700-300x300.jpg",
         "title": "Flex mobile hammer mills",
@@ -193,14 +201,6 @@
               "url": "/categories/prese-de-balotat-si-compactoare",
               "weight": 1,
               "icon": "/payload/categ_prese_8dds649ybt-5-450x300.jpg"
-            },
-            {
-              "enable": true,
-              "name": "Shredding, Grinding and Granulation",
-              "description": null,
-              "url": "/categories/tocare-maruntire-si-granulare",
-              "weight": 2,
-              "icon": "/payload/categ_tocare_c25lgx9y8b-5-200x300.jpg"
             }
           ]
         },
@@ -210,6 +210,14 @@
           "description": "",
           "weight": 0,
           "children": [
+            {
+              "enable": true,
+              "name": "Shredding, Grinding and Granulation",
+              "description": null,
+              "url": "/categories/tocare-maruntire-si-granulare",
+              "weight": 2,
+              "icon": "/payload/categ_tocare_c25lgx9y8b-5-200x300.jpg"
+            },
             {
               "enable": true,
               "name": "Vehicle and Engine Dismantling",
@@ -230,7 +238,7 @@
         }
       ],
       "cta": {
-        "enable": true,
+        "enable": false,
         "eyebrow": "New!",
         "image": "/payload/products/Trituratore-PZH-1500-R-uai-1440x617-300x300.jpg",
         "title": "PZ H 1000 Waste shredder",
@@ -291,6 +299,15 @@
               "weight": 2,
               "promoted": false,
               "icon": "/payload/logo_tecnoecology_jb6jtm791p_o2kja8u3s2-9.png"
+            },
+            {
+              "enable": true,
+              "name": "Mistra",
+              "description": "Manual and automatic shears.",
+              "url": "/partners/mistra",
+              "weight": 3,
+              "promoted": false,
+              "icon": "/payload/logo_mistra_hyhaq2x1cy_sawi6hq7q5-9.png"
             }
           ]
         },
@@ -300,15 +317,6 @@
           "description": "",
           "weight": 0,
           "children": [
-            {
-              "enable": true,
-              "name": "Mistra",
-              "description": "Manual and automatic shears.",
-              "url": "/partners/mistra",
-              "weight": 3,
-              "promoted": false,
-              "icon": "/payload/logo_mistra_hyhaq2x1cy_sawi6hq7q5-9.png"
-            },
             {
               "enable": true,
               "name": "Holmatro",
@@ -361,7 +369,7 @@
         }
       ],
       "cta": {
-        "enable": true,
+        "enable": false,
         "eyebrow": "New!",
         "image": "/payload/products/T150-300x300.jpg",
         "title": "Cable Stripper T 150",
