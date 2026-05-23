@@ -25,7 +25,7 @@ const { product } = Astro.props;
       product.variants!.map((variant) => (
         <tr class="tr-class">
           <td class="td-class">{variant.name}</td>
-          <td class="td-class">{variant.feature}</td>
+          <td class="td-class font-medium">{variant.feature}</td>
           <td class="td-class">{variant.description}</td>
           <td class="td-class">
             <a href={variant.url} target="_blank">
