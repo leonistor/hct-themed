@@ -1,6 +1,6 @@
 [
   {
-    "name": "Geist",
+    "name": "Work Sans",
     "variants": [
       {
         "style": "normal",
@@ -23,7 +23,7 @@
     "fallback": "sans-serif"
   },
   {
-    "name": "Raleway",
+    "name": "Syne",
     "variants": [
       {
         "style": "normal",
