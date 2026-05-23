@@ -1,11 +1,10 @@
 ---
-import { Image } from "astro:assets";
-import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
+import NewBadge from "@/components/ui/NewBadge.astro";
 import Pill from "@/components/ui/Pill.astro";
 import PillButton from "@/components/ui/PillButton.astro";
-import NewBadge from "@/components/ui/NewBadge.astro";
+import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
 
-import type { Media, Partner, Product, Category, Material } from "admin";
+import type { Category, Material, Media, Partner, Product } from "admin";
 
 import { useTranslations } from "@/lib/utils/i18nUtils";
 

@@ -8,8 +8,6 @@ import { Image } from "astro:assets";
 
 import { getPayload } from "payload";
 import { config as payloadConfig, type Media } from "admin";
-import Button from "@/layouts/components/Button.astro";
-import Icons from "@/helpers/Icons.astro";
 
 const payload = await getPayload({ config: payloadConfig });
 
