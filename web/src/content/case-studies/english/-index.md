@@ -1,7 +1,7 @@
 ---
 badge: "Projects"
 badgeSecondary: "Project Details"
-title: "Let's See Our Latest Project"
+title: "Our Latest Project"
 metaDescription: ""
 image: ""
 options:

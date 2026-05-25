@@ -1,24 +1,24 @@
 ---
 enable: true # Control the visibility of this section across all pages where it is used
-badge: "Quick Contact"
-title: "Have Questions? Get in Touch!"
-description: "Namo enim ipsam voluptatem quia voluptas sit aspernatur aut odit fugit, sed quia consequuntur magni dolores eos qui ratione"
+badge: ""
+title: ""
+description: ""
 contactTitle: "Send A Message"
 list:
-  - title: "Have any question?"
+  - title: "Mobile / WhatsApp"
     icon: "/images/icons/svg/phone-call.svg"
     settingFieldName: "phone"
   - title: "Write email"
     icon: "/images/icons/svg/email.svg"
     settingFieldName: "email"
-  - title: "Visit anytime"
+  - title: "Office"
     icon: "/images/icons/svg/location.svg"
     settingFieldName: "address"
 
 # Check config.toml file for form action related settings
 # this is also used in the footer of the personal case studies homepage
 form:
-  emailSubject: "New form submission from taxo website" # Customized email subject (applicable when anyone submit form, form submission may receive by email depend on provider)
+  emailSubject: "ew form submission from taxo website" # Customized email subject (applicable when anyone submit form, form submission may receive by email depend on provider)
   submitButton:
     # Refer to the `sharedButton` schema in `src/sections.schema.ts` for all available configuration options (e.g., enable, label, url, hoverEffect, variant, icon, tag, rel, class, target, etc.)
     enable: true
