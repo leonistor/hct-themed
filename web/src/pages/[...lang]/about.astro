@@ -3,7 +3,6 @@ import Base from "@/layouts/Base.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { generatePaths } from "@/lib/utils/i18nUtils.ts";
 import AboutHeroSection from "@/components/sections/AboutHeroSection.astro";
-import FeaturesGrid from "@/components/sections/FeaturesGrid.astro";
 import AboutSectionTwo from "@/components/sections/AboutSectionTwo.astro";
 import StatsSection from "@/components/sections/StatsSection.astro";
 import AboutMetricsSection from "@/components/sections/AboutMetricsSection.astro";
@@ -18,7 +17,7 @@ const page = await getEntryCTM("about-us", "-index", Astro.currentLocale);
 
 <Base {...page?.data} hideOffcanvas={true}>
   <AboutHeroSection />
-  <FeaturesGrid hasLightBackground={true} />
+  <!-- <FeaturesGrid hasLightBackground={true} /> -->
   <AboutSectionTwo />
   <StatsSection hasHalfBackground={true} />
   <!-- <TeamSection badgeVariant="secondary" /> -->

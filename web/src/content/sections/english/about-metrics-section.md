@@ -2,22 +2,22 @@
 enable: true
 list:
   - enable: true
-    image: "/images/about/about-1.png"
-    imageAlt: "About Experience"
-    imageSecondary: "/images/about/about-4.png"
-    imageSecondaryAlt: "About Experience"
-    deocrativeScribble: "/images/decorative/shape/shape-2.png"
+    image: "/images/illustratii/utilaj-after.jpg"
+    imageAlt: "About Us"
+    imageSecondary: "/images/illustratii/utilaj-before.jpg"
+    imageSecondaryAlt: "About Us"
+    deocrativeScribble: ""
     deocrativeScribbleAlt: "About Experience"
 
   - enable: true
-    badge: "About Experience"
-    title: "Helping You Put Systems in Place that Work"
-    description: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,"
+    badge: ""
+    title: "Recycling of scrap metal, aluminum, WEEE, EEE, waste from the paper industry"
+    description: "We follow the trends of the Romanian and European market in the field, a market that is constantly developing. We believe that recycling is one of the simplest ways to protect the planet from pollution."
     services:
-      - title: "Business Consulting"
-        percent: "95%"
-      - title: "Financial Advising"
-        percent: "85%"
-      - title: "Brand Consulting"
-        percent: "75%"
+      - title: ""
+        percent: ""
+      - title: ""
+        percent: ""
+      - title: ""
+        percent: ""
 ---

@@ -2,7 +2,7 @@
 enable: true
 badge: ""
 title: "Servicii complete"
-description: "De la consultanță pentru alegerea echiipamentelor, instalare și montaj, recondiționare, până la accesorii și consumabile."
+description: "De la consultanță pentru alegerea echipamentelor, instalare și montaj, recondiționare, până la accesorii și consumabile."
 image: "/images/unsplash/kenny-nJo5fYZ_OK0-unsplash.jpg"
 imageAlt: "Servicii"
 button:
@@ -10,7 +10,7 @@ button:
   # (e.g., enable, label, url, hoverEffect, variant, icon, tag, rel, class, target, etc.)
   enable: true
   label: "Serviciile noastre"
-  url: "/services/"
+  url: "/services"
   variant: "fill" # Optional: fill | outline | text | circle | white
   hoverEffect: "creative-fill" # Optional: text-flip | creative-fill | magnetic | magnetic-text-flip
   # rel: "" # Optional

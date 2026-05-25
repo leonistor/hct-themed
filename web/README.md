@@ -1,5 +1,4 @@
 TODO: upgrade
-TODO: footer copyright who
 TODO: contact form
 
 

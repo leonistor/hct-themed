@@ -2,30 +2,30 @@
 enable: true
 list:
   - enable: true
-    badge: "About Company"
-    title: "We Are The Best Solution For Your Tax Services"
-    image: "/images/about/about-3.png"
+    badge: "About Us"
+    title: "Complete solutions delivered by experienced specialists"
+    image: "/images/illustratii/linie-rdf.jpg"
     imageAlt: "About Company"
     button:
       enable: true
-      label: "Discover More"
-      url: "/about/"
+      label: "Completed Projects"
+      url: "/case-studies"
       variant: "fill"
     deocrativeScribble: "/images/decorative/scribble/scribble-2.svg"
-    deocrativeScribbleAlt: "About Company"
+    deocrativeScribbleAlt: "About Us"
     testimonial:
-      name: "Jhon Richard"
-      designation: "Founder"
-      image: "/images/customers/avatar/customer-7.png"
-      review: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      name: "Sebastian Hațegan"
+      designation: "Founder, Manager"
+      image: "/images/about/sebastian-hategan.jpeg"
+      review: "We don't compromise on quality: a satisfied customer will come back to us again and again."
 
   - enable: true
-    image: "/images/about/about-1.png"
-    imageAlt: "About Company"
-    description: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable."
+    image: "/images/illustratii/sistem-reciclare-metal.png"
+    imageAlt: "About Us"
+    description: "Our clients are equally valorizers, collectors and final recyclers. For each one we identify the optimal solution required for the investment and deliver them quality equipment from internal or external suppliers."
     services:
-      - title: "Best Taxation Service"
-      - title: "Business Strategy & Growth"
-      - title: "Highly Dedicated Worker"
-      - title: "99.9% Customer Satisfaction"
+      - title: "project consulting"
+      - title: "assembly"
+      - title: "refurbishiment"
+      - title: "parts and supplies"
 ---
