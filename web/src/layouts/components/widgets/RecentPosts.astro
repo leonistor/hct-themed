@@ -17,6 +17,8 @@ let posts = await getCollectionCTM(
 
 const t = await useTranslations(Astro.currentLocale as string);
 
+const currentLocale = Astro.currentLocale ?? "en";
+
 // Posts sorted by date
 posts = sortByDate(posts);
 

@@ -6,6 +6,7 @@ import formatRelativeDate from "@/lib/utils/formatRelativeDate";
 import { useTranslations } from "@/lib/utils/i18nUtils.ts";
 import Icons from "@/helpers/Icons.astro";
 import config from ".astro/config.generated.json";
+import dateFormat from "@/lib/utils/dateFormat";
 
 const t = await useTranslations(Astro.currentLocale as string);
 const { pageHeaderDefaultImage } = config.settings;
@@ -32,6 +33,8 @@ const {
   imageText,
   postData,
 } = Astro.props.content;
+
+const currentLocale = Astro.currentLocale ?? "en";
 ---
 
 <section class="relative">
@@ -75,15 +78,15 @@ const {
                 <Icons icon="Calendar" class="text-primary size-4" />
                 {postData.date &&
                   markdownify(
-                    formatRelativeDate(postData.date, "dd MMM, yyyy"),
+                    dateFormat(postData.date, "dd MMMM yyyy", currentLocale),
                   )}
               </li>
             )}
 
-            <li class="before:bg-dark relative flex items-center gap-2 pe-5 leading-normal">
+            <!-- <li class="before:bg-dark relative flex items-center gap-2 pe-5 leading-normal">
               <Icons icon="MessagesSquare" class="text-primary size-4" />
               {postData.comments} {t("common.comments")}
-            </li>
+            </li> -->
 
             {postData.author && (
               <li class="before:bg-dark relative flex items-center gap-2 leading-normal">

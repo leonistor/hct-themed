@@ -37,8 +37,8 @@
   "widgets": {
     "postSearchFormPlaceholder": "Caută...",
     "categoriesTitle": "Categorii",
-    "tagsTitle": "Etichete",
-    "popularTagsTitle": "Etichete populare",
+    "tagsTitle": "Tag-uri",
+    "popularTagsTitle": "Tag-uri",
     "recentPostsTitle": "Articole recente",
     "haveAnyQuestionsTitle": "Ai întrebări?",
     "haveAnyQuestionsDescription": ""
@@ -66,9 +66,9 @@
   "footer": {
     "menuTitleLinks": "Legături",
     "freeSupport": "Tel/WhatsApp",
-    "description": "",
+    "description": "Web design by [Parsed Wink](https://parsedw.ink/)",
     "contact": "Contact",
-    "copyright": "Copyright ©{{ year }}.",
+    "copyright": "Copyright ©{{ year }} &middot; Web design by [Parsed Wink](https://parsedw.ink/)",
     "_comment": "Apreciem cu amabilitate dacă păstrați dreptul de autor al temei. Vă mulțumim pentru sprijinul Taxo!",
     "since": ""
   },

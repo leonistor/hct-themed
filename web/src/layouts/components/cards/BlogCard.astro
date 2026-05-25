@@ -7,11 +7,7 @@ import {
   toSentenceCase,
 } from "@/lib/utils/textConverter";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
-import {
-  getEntrySlugCTM,
-  getSupportedLanguages,
-  useTranslations,
-} from "@/lib/utils/i18nUtils.ts";
+import { getEntrySlugCTM, useTranslations } from "@/lib/utils/i18nUtils.ts";
 import type { CollectionEntry } from "astro:content";
 import Icons from "@/helpers/Icons.astro";
 
@@ -25,11 +21,6 @@ interface Props {
 const t = await useTranslations(Astro.currentLocale as string);
 
 const currentLocale = Astro.currentLocale ?? "en";
-// const supportedLanguages = getSupportedLanguages();
-// const currentLocaleCode =
-//   supportedLanguages.find((lang) => lang.languageCode === currentLocale)
-//     ?.localeCode ?? "en-US";
-// console.log("currentLocaleCode", currentLocaleCode);
 
 let {
   content,
@@ -195,7 +186,9 @@ const HeadingTag = `${tag}` as keyof HTMLElementTagNameMap;
       )}
       <div class="flex flex-col gap-1">
         {date && (
-          <span class="text-slate-500">{dateFormat(date, "dd MMM, yyyy")}</span>
+          <span class="text-slate-500">
+            {dateFormat(date, "dd MMM, yyyy", currentLocale)}
+          </span>
         )}
         {title && (
           <span

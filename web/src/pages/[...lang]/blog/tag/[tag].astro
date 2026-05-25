@@ -7,8 +7,6 @@ import { supportedLanguages } from "@/lib/utils/i18nUtils.ts";
 import { slugifyyy, titleify } from "@/lib/utils/textConverter";
 import config from ".astro/config.generated.json";
 import BlogLayout from "@/components/BlogLayout.astro";
-import BlogsHeroSection from "@/components/sections/BlogsHeroSection.astro";
-import CTAGallerySection from "@/components/sections/CTAGallerySection.astro";
 import CTASection from "@/components/sections/CTASection.astro";
 
 export async function getStaticPaths() {
@@ -72,7 +70,7 @@ const description = post?.data.description || postIndex?.data.description;
   description={description}
   disableTagline={true}>
   <PageHeader content={postIndex?.data} contentClass="max-w-3xl! xl:px-6" />
-  <BlogsHeroSection />
+  <!-- <BlogsHeroSection /> -->
   <BlogLayout
     pageType="list"
     hasLightBackground={true}
@@ -87,6 +85,6 @@ const description = post?.data.description || postIndex?.data.description;
     }}
     content={{ ...post, ...post?.data }}
   />
-  <CTAGallerySection />
+  <!-- <CTAGallerySection /> -->
   <CTASection />
 </Base>

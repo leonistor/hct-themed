@@ -66,9 +66,9 @@
   "footer": {
     "menuTitleLinks": "Links",
     "freeSupport": "Free Support",
-    "description": "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit minus id quod maxime placeat facere assumenda est omnis dolor repellendus.",
+    "description": "Web design by [Parsed Wink](https://parsedw.ink/)",
     "contact": "Contact",
-    "copyright": "Copyright © {{ year }}. [Taxo](https://taxo-dev.netlify.app/) All Rights Reserved.",
+    "copyright": "Copyright © {{ year }} &middot; Web design by [Parsed Wink](https://parsedw.ink/)",
     "_comment": "We kindly appreciate it if you retain the theme copyright. Thank you for supporting Taxo!",
     "since": "since 1990"
   },
