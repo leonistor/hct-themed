@@ -1,6 +1,18 @@
 TODO: upgrade
 TODO: contact form
 
+TODO: mobile: Max 3 parteneri
+TODO: mobile: Swipe si links pe carousel
+TODO: mobile: Clienti
+TODO: mobile: Logo sizes menu si footer
+TODO: mobile: Contact: hear, terms out
+
+## components
+
+- https://ui.bejamas.com/components/select: Select - bejamas/ui
+- https://free-astro-components.vercel.app/components/select: Free Astro Components - Select
+- https://prebuiltui.com/components/faq-sections: Tailwind CSS FAQ Sections Components - PrebuiltUI
+
 
 ## view transitions
 
@@ -10,6 +22,7 @@ TODO: contact form
 - https://css-tricks.com/cross-document-view-transitions-part-1/
 - https://tympanus.net/codrops/2024/01/19/making-css-view-transitions-easy-with-velvette/
 - https://github.com/evoluteur/isomorphic-table-cards
+
 
 ## wizard
 
