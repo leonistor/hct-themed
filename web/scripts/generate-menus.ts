@@ -1,10 +1,11 @@
-import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
+import { getPayload } from "payload";
+
 const payload = await getPayload({ config: payloadConfig });
 
 // TODO: use translations
 
-let result: {
+const result: {
   partneri: Record<string, any>[];
   solutii: Record<string, any>[];
   echipamente: Record<string, any>[];

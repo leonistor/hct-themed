@@ -1,5 +1,6 @@
 ---
-import config from ".astro/config.generated.json";
+// @ts-ignore
+import config from "/.astro/config.generated.json";
 import type { Section } from "@/types";
 import ContactForm from "../widgets/ContactForm.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
@@ -97,7 +98,7 @@ if (!enable) return null;
                     <div class="">
                       <div>{item.title}</div>
                       <div
-                        class="text-h6-sm sm:text-h5-sm lg:text-h5 font-secondary font-bold break-all"
+                        class="font-secondary text-base/tight font-bold break-all lg:text-xl/tight"
                         set:html={markdownify(
                           (contactInfo as any)[item.settingFieldName],
                         )}

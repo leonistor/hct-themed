@@ -1,7 +1,5 @@
 TODO: contact form
-
 TODO: mobile: Swipe si links pe carousel
-TODO: mobile: Logo sizes menu si footer
 TODO: mobile: Contact: hear, terms out
 
 ## components
