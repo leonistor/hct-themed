@@ -93,7 +93,7 @@
     }
     .nav-link,
     .nav-dropdown-link {
-      @apply font-secondary text-base-sm text-text-dark hover:bg-primary/5 relative flex w-full items-center px-2 py-2 font-bold transition duration-300 md:py-3 md:text-base lg:text-sm xl:px-3 xl:text-base;
+      @apply font-secondary text-text-dark hover:bg-primary/5 md:text-base-sm text-base-sm lg:text-base-sm relative flex w-full items-center px-2 py-2 font-bold transition duration-300 md:py-3 xl:px-3 xl:text-base;
 
       &.nav-link-active,
       &.active,

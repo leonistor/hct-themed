@@ -26,7 +26,7 @@ if (!enable) {
 ---
 
 <div
-  class="bg-light h-screen space-y-10 overflow-auto px-8 pt-20 pb-5 md:px-16 md:pt-32 md:pb-10">
+  class="bg-light h-screen space-y-6 overflow-auto px-8 pt-20 pb-5 md:px-16 md:pt-32 md:pb-10">
   <button
     type="button"
     data-hs-overlay={`#${offcanvas}`}
@@ -36,7 +36,7 @@ if (!enable) {
     <Icons icon="X" class="text-2xl" />
   </button>
 
-  <Logo class="justify-start" />
+  <Logo class="justify-start" width="100px" height="100px" />
   <div class="lg:border-b lg:pb-10">
     {
       (description || t("headerOffcanvas.description")) && (
@@ -57,16 +57,6 @@ if (!enable) {
     {address && <address class="not-italic" set:html={markdownify(address)} />}
     {phone && <p set:html={markdownify(phone)} />}
     {email && <p set:html={markdownify(email)} />}
-  </div>
-
-  <div class="flex items-center">
-    <Social
-      linkType="follow"
-      slug={getLocaleUrlCTM(Astro.url.pathname, Astro.currentLocale)}
-      layout="minimal"
-      list={social.main.filter((social) => social.enable).slice(0, 4)}
-      size="lg"
-    />
   </div>
 
   <Button
