@@ -8,11 +8,8 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "dependencies": {
-    "web": "workspace:*"
-
-  },
   "devDependencies": {
+    "@biomejs/biome": "2.4.16",
     "@playwright/test": "^1.60.0",
     "@types/node": "^25.9.1"
   }
