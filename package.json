@@ -17,11 +17,13 @@
     "prod:admin": "cd admin && bun run start",
     "dev": "bun run --parallel dev:web dev:admin",
     "build": "bun run --parallel build:web build:admin",
-    "prod": "bun run --parallel prod:web prod:admin"
+    "prod": "bun run --parallel prod:web prod:admin",
+    "e2e": "cd e2e && bunx --bun playwright test"
   },
   "type": "module",
   "workspaces": [
     "admin/**",
-    "web/**"
+    "web/**",
+    "e2e/**"
   ]
 }
