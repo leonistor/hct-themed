@@ -35,15 +35,16 @@ let { index = 0, customer } = Astro.props;
     }
   </a>
   <div class="grow"></div>
-  <p class="text-center text-neutral-500">
-    <span class="text-xl font-bold">{customer.name}</span><br />{
-      customer.location!
-    }{
+  <div class="text-center text-neutral-500">
+    <span class="text-xl font-medium">{customer.name}</span><br />
+    {customer.location!}{
       customer.url && (
-        <a href={customer.url} target="_blank">
-          <Icons icon="ArrowUpRight" class="inline-block size-6" />
-        </a>
+        <span>
+          <a href={customer.url} class="text-base" target="_blank">
+            <Icons icon="ArrowUpRight" class="inline-block size-6" />
+          </a>
+        </span>
       )
     }
-  </p>
+  </div>
 </div>
