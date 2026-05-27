@@ -1,7 +1,5 @@
-TODO: upgrade
 TODO: contact form
 
-TODO: mobile: Max 3 parteneri
 TODO: mobile: Swipe si links pe carousel
 TODO: mobile: Clienti
 TODO: mobile: Logo sizes menu si footer
