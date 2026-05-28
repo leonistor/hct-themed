@@ -1,6 +1,5 @@
 TODO: contact form
 TODO: mobile: Swipe si links pe carousel
-TODO: mobile: Contact: hear, terms out
 
 ## components
 
