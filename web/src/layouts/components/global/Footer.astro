@@ -109,9 +109,9 @@ const bg = await bgOptimizedImage(
 </footer>
 
 {/* Copyright Banner */}
-<div class="bg-accent w-full px-4 py-4 text-center">
+<div class="bg-accent w-full px-4 py-4 text-center font-medium text-gray-300">
   <div
-    class="font-secondary font-bold"
+    class="font-secondary font-medium"
     set:html={markdownify(
       t("footer.copyright")?.replace(
         "{{ year }}",

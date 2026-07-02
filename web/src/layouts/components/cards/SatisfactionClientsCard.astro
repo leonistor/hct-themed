@@ -41,7 +41,7 @@ const {
   {...rest}>
   <div
     class:list={[
-      "text-dark flex w-full text-sm leading-tight font-bold md:text-base xl:text-xl",
+      "flex w-full text-sm leading-tight font-bold text-gray-800 md:text-base xl:text-xl",
       classText,
     ]}>
     <span class="w-full" set:html={label} />
@@ -52,7 +52,7 @@ const {
         <div class="hs-dropdown relative w-full [--auto-close:inside] [--strategy:absolute]">
           <button
             type="button"
-            class="hs-dropdown-toggle bg-accent text-dark flex w-full items-center justify-between px-4 py-4 text-base font-bold transition-colors duration-300 hover:brightness-105 max-sm:py-2 md:px-6">
+            class="hs-dropdown-toggle bg-accent flex w-full items-center justify-between px-4 py-4 text-base font-bold text-white transition-colors duration-300 hover:brightness-105 max-sm:py-2 md:px-6">
             {helpDropdown.label && (
               <span set:html={markdownify(helpDropdown.label)} />
             )}
