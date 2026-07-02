@@ -1,6 +1,6 @@
 ---
 import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils.ts";
-import config from ".astro/config.generated.json";
+import config from "../../../config/config.generated.json";
 import { markdownify } from "@/lib/utils/textConverter";
 import { splitProtectedText } from "@/lib/utils/splitProtectedText";
 import SubscriptionForm from "@/components/widgets/SubscriptionForm.astro";
@@ -49,10 +49,7 @@ const copyrightParts = splitProtectedText(copyrightText);
             <div set:html={t("common.callUs") + ":"} />
             {
               phone && (
-                <p
-                  class="text-lg font-bold"
-                  set:html={markdownify(phone)}
-                />
+                <p class="text-lg font-bold" set:html={markdownify(phone)} />
               )
             }
           </div>

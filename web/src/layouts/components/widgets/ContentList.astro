@@ -3,7 +3,7 @@ import Breadcrumbs from "./Breadcrumbs.astro";
 import type { InferEntrySchema } from "astro:content";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 import BlogCard from "@/components/cards/BlogCard.astro";
-import config from ".astro/config.generated.json";
+import config from "../../../config/config.generated.json";
 import { getCollectionCTM } from "@/lib/contentParser.astro";
 import Pagination from "@/components/widgets/Pagination.astro";
 import Search from "./Search.astro";

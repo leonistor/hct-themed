@@ -6,7 +6,7 @@ import PageHeader from "@/components/widgets/PageHeader.astro";
 import { generatePaths } from "@/lib/utils/i18nUtils.ts";
 import CaseStudiesListSection from "@/components/sections/CaseStudiesListSection.astro";
 import CTASection from "@/components/sections/CTASection.astro";
-import config from ".astro/config.generated.json";
+import config from "../../../config/config.generated.json";
 
 export function getStaticPaths() {
   return generatePaths();

@@ -1,4 +1,4 @@
-import config from ".astro/config.generated.json";
+import config from "./config/config.generated.json";
 import { defineCollection } from "astro:content";
 import { button, sectionsSchema } from "./sections.schema";
 import { glob } from "astro/loaders";

@@ -1,6 +1,6 @@
 import type { ChildNavigationLink, NavigationLink } from "@/types";
 import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
-import config from "../../../.astro/config.generated.json";
+import config from "../../config/config.generated.json";
 
 type NavItem = NavigationLink | ChildNavigationLink;
 

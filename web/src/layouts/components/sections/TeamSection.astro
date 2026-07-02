@@ -7,7 +7,7 @@ import SectionBadge from "../global/SectionBadge.astro";
 import SectionTitle from "../global/SectionTitle.astro";
 import type { teamSectionSchema } from "@/sections.schema";
 import type { z } from "astro/zod";
-import config from ".astro/config.generated.json";
+import config from "../../../config/config.generated.json";
 
 // Type for this section data
 type SectionType = Section & z.infer<typeof teamSectionSchema>;

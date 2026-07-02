@@ -5,7 +5,7 @@ import SectionBadge from "../global/SectionBadge.astro";
 import formatRelativeDate from "@/lib/utils/formatRelativeDate";
 import { useTranslations } from "@/lib/utils/i18nUtils.ts";
 import Icons from "@/helpers/Icons.astro";
-import config from ".astro/config.generated.json";
+import config from "../../../config/config.generated.json";
 import dateFormat from "@/lib/utils/dateFormat";
 
 const t = await useTranslations(Astro.currentLocale as string);

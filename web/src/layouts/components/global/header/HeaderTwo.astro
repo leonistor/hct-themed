@@ -1,7 +1,7 @@
 ---
 import Logo from "@/components/global/Logo.astro";
 import Offcanvas from "../../widgets/Offcanvas.astro";
-import config from ".astro/config.generated.json";
+import config from "@/config/config.generated.json";
 import { useTranslations } from "@/lib/utils/i18nUtils.ts";
 import NavbarToggler from "@/layouts/components/global/header/NavbarToggler.astro";
 import HeaderOffcanvasContent from "@/components/widgets/HeaderOffcanvasContent.astro";
@@ -52,7 +52,7 @@ const { position, hideOffcanvas, class: ClassName } = Astro.props;
       {
         (navigationButton.enable || config.settings.multilingual.enable) && (
           <div class="hidden gap-3.5 justify-self-end max-lg:ms-auto max-lg:me-4 lg:items-center xl:flex">
-            <a href="/contact/" class="flex items-center gap-2">
+            <a href="/contact" class="flex items-center gap-2">
               <Icons icon="MessagesSquare" class="stroke-accent size-8" />
               <div>
                 <div class="text-sm opacity-80">{t("common.letsChat")}</div>

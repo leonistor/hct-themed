@@ -5,7 +5,7 @@ import { getEntryCTM } from "@/lib/contentParser.astro";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import type { ctaBarSectionSchema } from "@/sections.schema";
 import Button from "../Button.astro";
-import config from ".astro/config.generated.json";
+import config from "../../../config/config.generated.json";
 import { markdownify } from "@/lib/utils/textConverter";
 
 const { contactInfo } = config.settings;

@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import Icons from "@/helpers/Icons.astro";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import { getCollectionCTM } from "@/lib/contentParser.astro";
-import config from ".astro/config.generated.json";
+import config from "../../../config/config.generated.json";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 import dateFormat from "@/lib/utils/dateFormat";
 import { humanize, markdownify, slugifyyy } from "@/lib/utils/textConverter";

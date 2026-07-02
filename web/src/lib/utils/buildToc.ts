@@ -1,5 +1,5 @@
 import type { TocHeading } from "@/types";
-import config from ".astro/config.generated.json";
+import config from "../../config/config.generated.json";
 import type { MarkdownHeading } from "astro";
 
 interface TocOptions {

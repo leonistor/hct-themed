@@ -18,7 +18,7 @@ const configFilePath = path.resolve(
   "config.toml",
 );
 
-const outputDir = path.resolve(PROJECT_ROOT, ".astro");
+const outputDir = path.resolve(PROJECT_ROOT, "src/config");
 const outputFilePath = path.join(outputDir, "config.generated.json");
 
 // ---------- Helpers ----------

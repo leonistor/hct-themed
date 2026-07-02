@@ -1,7 +1,7 @@
 import path from "node:path";
 import type { CollectionEntry, CollectionKey } from "astro:content";
 import trailingSlashChecker from "./trailingSlashChecker";
-import config from "../../../.astro/config.generated.json";
+import config from "../../config/config.generated.json";
 import languagesJSON from "../../config/language.json";
 
 // Load configuration from TOML file
