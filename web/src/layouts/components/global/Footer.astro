@@ -10,6 +10,8 @@ import { markdownify } from "@/lib/utils/textConverter";
 import Logo from "./Logo.astro";
 import type { NavigationLink } from "@/types";
 import bgOptimizedImage from "@/lib/utils/bgOptimizedImage";
+import WhatsApp from "@/assets/images/WhatsApp.svg";
+
 const t = await useTranslations(Astro.currentLocale as string);
 let footerMenus = t("footerPrimary") as NavigationLink[];
 
@@ -46,13 +48,14 @@ const bg = await bgOptimizedImage(
         </p>
         <hr class="border-border-dark/20 w-full border-t" />
         <div class="flex items-center gap-4">
-          <OptimizedImage
+          <WhatsApp class="stroke-accent size-16" />
+          <!-- <OptimizedImage
             src="/images/icons/svg/phone-icon.svg"
             alt="Phone"
             width={40}
             height={48}
             class="h-12 w-10"
-          />
+          /> -->
           <div class="flex flex-col">
             <span class="font-medium">
               {t("footer.freeSupport")}
