@@ -1,7 +1,7 @@
 # Site Configuration
 [site]
   title            = "Hațegan Consulting & Trading" # Shared title for SEO and OpenGraph
-  description      = "Soluții la cheie pentru reciclare fier vechi, aluminiu, DEEE-uri, VSU-uri, deșeuri din industria hârtiei." # Shared description for SEO and OpenGraph
+  description      = "Soluții la cheie pentru reciclare fier vechi, aluminiu, DEEE-uri, VSU-uri, hârtie, plastic, deșeuri de hidrapulper." # Shared description for SEO and OpenGraph
   tagline          = "Soluții la cheie pentru reciclare"
   taglineSeparator = "" # default is " - "
   baseUrl          = "https://hct.vitrina.promo" # Base URL for the site and used in OpenGraph meta tags.

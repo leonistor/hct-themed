@@ -4,7 +4,7 @@ Products photos and technical information from [partners](/partners).
 
 ### Design
 
-Astro theme by [GetAstroThemes](https://getastrothemes.com/) 
+Design by [Parsed Wink](https://parsedw.ink/) 
 
 ### Photos
 
