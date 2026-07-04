@@ -42,8 +42,13 @@ const { position, hideOffcanvas, class: ClassName } = Astro.props;
     <div
       class="hs-dropdown relative flex flex-wrap items-stretch justify-between [--auto-close:inside] [--gpu-acceleration:false] [--strategy:absolute] lg:justify-center lg:[--strategy:static]">
       <div
-        class="logo-section after:bg-accent relative z-10 flex transform flex-row-reverse items-center justify-center gap-6 py-4 pe-10 after:pointer-events-none after:absolute after:right-0 after:-z-10 after:h-full after:w-screen after:-skew-x-20 after:select-none lg:flex-row lg:py-2 xl:pe-16">
-        <Logo />
+        class:list={["logo-section  after:bg-accent relative z-10 flex transform flex-row-reverse",
+          "items-center justify-center gap-2 py-4 pe-6",
+          "after:pointer-events-none after:absolute after:right-0 after:-z-10 after:h-full after:w-screen after:-skew-x-20 after:select-none",
+          "lg:flex-row lg:py-2 xl:pe-10"]}>
+
+            <Logo />
+        <!-- <div class="x">Hațegan</div><div>Consulting & Trading</div> -->
       </div>
 
       {/* Navbar For Header */}
@@ -55,7 +60,7 @@ const { position, hideOffcanvas, class: ClassName } = Astro.props;
           <div class="hidden gap-3.5 justify-self-end max-lg:ms-auto max-lg:me-4 lg:items-center xl:flex">
             <a href="/contact" class="flex items-center gap-2">
               <!-- <Icons icon="MessagesSquare" class="stroke-accent size-8" /> -->
-              <WhatsApp class="stroke-accent size-9" />
+              <WhatsApp class=" size-9" />
               <div>
                 <div class="text-sm opacity-80">{t("common.letsChat")}</div>
                 <div

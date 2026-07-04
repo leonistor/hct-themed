@@ -7,7 +7,7 @@
   baseUrl          = "https://hct.vitrina.promo" # Base URL for the site and used in OpenGraph meta tags.
   logo             = "/images/hct-logo-2026.svg" # Path to the site's logo
   logoAlternate    = "/images/logo-light.svg" # Path to the site's logo
-  logoText         = "" # Text displayed next to the logo
+  logoText         = "Hațegan Consulting & Trading" # Text displayed next to the logo
   logoWidth        = "" # Width of the logo
   logoHeight       = "70px" # Height of the logo
 
