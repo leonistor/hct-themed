@@ -13,19 +13,19 @@ const partners = await payload.find({
   collection: "partners",
   depth: 2,
   pagination: false,
-  limit: 3,
+  // limit: 3,
   sort: "_order",
   where: { published: { equals: true } },
 });
 ---
 
-<div class="bg-body-dark/10 container px-4 py-12">
+<div class="bg-body-dark/10 container my-8 px-4 py-4">
   <div
-    class="text-text-dark mx-auto mb-6 max-w-4xl text-center text-balance md:text-xl/7">
+    class="text-text-dark mx-auto mb-6 max-w-4xl text-center text-balance md:text-xl/6">
     {t("partners.tagline")}
   </div>
   <div
-    class="grid grid-cols-1 gap-x-4 gap-y-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-10">
+    class="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2 lg:grid-cols-4 lg:gap-x-6 lg:gap-y-4">
     {
       partners.docs.map((partner, index) => (
         <a
@@ -36,8 +36,8 @@ const partners = await payload.find({
             <PayloadImage
               src={"/payload/" + (partner.logo as Media).filename!}
               alt={partner.name}
-              width={360}
-              height={100}
+              width={320}
+              height={80}
               class:list={[
                 "mx-auto overflow-hidden border border-gray-200",
                 "transition-transform duration-700 ease-in-out group-hover:scale-105",
