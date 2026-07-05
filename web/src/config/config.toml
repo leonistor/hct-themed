@@ -9,7 +9,7 @@
   logoAlternate    = "/images/logo-light.svg" # Path to the site's logo
   logoText         = "Hațegan Consulting & Trading" # Text displayed next to the logo
   logoWidth        = "" # Width of the logo
-  logoHeight       = "70px" # Height of the logo
+  logoHeight       = "90px" # Height of the logo
 
   # Add a trailing slash at the end of URLs (e.g., https://example.com/, https://example.com/contact/)˝
   # Note: Manually restart your server when you change this value
