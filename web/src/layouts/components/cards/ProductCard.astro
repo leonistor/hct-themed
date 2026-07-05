@@ -30,7 +30,11 @@ const is_promoted = product.promoted ?? false;
   data-aos-delay={index * 100}>
   <a
     href={`/product/${product.code}`}
-    class:list={["relative mb-3 overflow-hidden xl:mb-6"]}
+    class:list={[
+      "relative mb-3 overflow-hidden xl:mb-6",
+      "grow self-stretch",
+      "flex flex-col justify-between",
+    ]}
     aria-label={product.name}>
     <div
       class:list={[
@@ -55,7 +59,7 @@ const is_promoted = product.promoted ?? false;
     }
   </a>
 
-  <div class="grow"></div>
+  <!-- <div class="grow"></div> -->
   {is_promoted && <NewBadge />}
   <div class="flex flex-wrap gap-2">
     <Pill partner={product.partner as Partner} />
