@@ -59,6 +59,7 @@ const prevPageUrl = new URL(currentUrl.toString());
 prevPageUrl.searchParams.set("page", String(page - 1));
 ---
 
+<!-- pagination -->
 <div class="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 pt-4 pb-6">
   <div class="font-medium">
     {products.totalDocs}
@@ -100,6 +101,7 @@ prevPageUrl.searchParams.set("page", String(page - 1));
 </div>
 
 <script is:inline>
+  // TODO: hack prev/next prods
   const prevPageUrlElement = document.getElementById("prevPageUrl");
   const nextPageUrlElement = document.getElementById("nextPageUrl");
   const isPrevPageActive = prevPageUrlElement.dataset.active === "true";
