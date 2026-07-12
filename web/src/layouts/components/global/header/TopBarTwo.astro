@@ -4,6 +4,7 @@ import { useTranslations } from "@/lib/utils/i18nUtils.ts";
 import { markdownify } from "@/lib/utils/textConverter";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+import Icons from "@/layouts/helpers/Icons.astro";
 import HCT from "./HCT.astro";
 
 const t = await useTranslations(Astro.currentLocale as string);
@@ -24,7 +25,17 @@ const {
       ]}>
       <div class=""><HCT /></div>
       <div
-        class="flex items-center justify-center gap-2 xl:justify-end xl:gap-4">
+        class="flex flex-col items-center justify-center gap-2 md:flex-row xl:justify-end xl:gap-4">
+        <a
+          href="/vsu"
+          class="bg-accent px-4 py-3 text-lg font-medium text-white hover:text-black">
+          <Icons
+            icon="Play"
+            class="-mt-1 ml-2 inline-block size-6 stroke-gray-200"
+          />
+          {t("vsu.headline")}
+        </a>
+
         {
           config.settings.multilingual.enable && (
             <LanguageSwitcher appearance="light" />
