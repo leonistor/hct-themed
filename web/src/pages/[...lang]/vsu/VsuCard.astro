@@ -1,0 +1,47 @@
+---
+import type { Category, Material, Media, Partner, Product } from "admin";
+import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
+
+type Props = {
+  index?: number;
+  product: Product;
+};
+let { index = 0, product } = Astro.props;
+---
+
+<div
+  class="group relative flex flex-col gap-y-1 bg-gray-100 px-4 pt-3 pb-4"
+  data-aos="fade-up-sm"
+  data-aos-duration="700"
+  data-aos-delay={index * 100}>
+  <a
+    href={`/product/${product.code}`}
+    class:list={[
+      "relative mb-3 overflow-hidden xl:mb-6",
+      "grow self-stretch",
+      "flex flex-col justify-between",
+    ]}
+    aria-label={product.name}>
+    <div
+      class:list={[
+        "text-primary text-h6-sm lg:text-h5 xl:text-h4 opacity-80",
+        "pb-2 group-hover:opacity-100",
+        "leading-tight font-medium tracking-tight text-balance",
+      ]}>
+      {product.name}
+    </div>
+    {
+      product.main_image! && (
+        <PayloadImage
+          src={`/payload/products/${(product.main_image! as Media).sizes!.large!.filename!}`}
+          alt={product.name}
+          height="300px"
+          class:list={[
+            "mx-auto object-scale-down",
+            "transition-transform duration-700 ease-in-out group-hover:scale-105",
+          ]}
+        />
+      )
+    }
+  </a>
+</div>

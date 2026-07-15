@@ -2,26 +2,31 @@
 export const prerender = false;
 
 import Base from "@/layouts/Base.astro";
-import { generatePaths } from "@/lib/utils/i18nUtils.ts";
 import { useTranslations } from "@/lib/utils/i18nUtils";
-import PageTitle from "@/layouts/components/ui/PageTitle.astro";
 
 import { Image } from "astro:assets";
 import logo_iris_mec from "@/assets/images/vsu/logo-iris-mec.jpg";
-
 import Accordion from "@/components/bearnie/accordion/Accordion.astro";
-import AccordionItem from "@/components/bearnie/accordion/AccordionItem.astro";
-import AccordionTrigger from "@/components/bearnie/accordion/AccordionTrigger.astro";
-import AccordionContent from "@/components/bearnie/accordion/AccordionContent.astro";
-
 import VsuStage from "./VsuStage.astro";
 import VsuGrid from "./VsuGrid.astro";
-
-export function getStaticPaths() {
-  return generatePaths();
-}
+import VsuCard from "./VsuCard.astro";
 
 const t = await useTranslations(Astro.currentLocale as string);
+
+import { getPayload } from "payload";
+import { config as payloadConfig, type Media } from "admin";
+const payload = await getPayload({ config: payloadConfig });
+
+const vsu_prods = (
+  await payload.find({
+    collection: "products",
+    pagination: false,
+    where: { partner: { equals: 6 } },
+  })
+).docs;
+
+// vsu_map
+const vm = new Map(vsu_prods.map((p) => [p.id, p]));
 ---
 
 <Base metaTitle={t("vsu.headline")} hideOffcanvas={true}>
@@ -64,9 +69,9 @@ const t = await useTranslations(Astro.currentLocale as string);
           </p>
 
           <VsuGrid
-            title="Manevrarea mașinii, extragerea și depozitarea bateriei"
-            >prods</VsuGrid
-          >
+            title="Manevrarea mașinii, extragerea și depozitarea bateriei">
+            <VsuCard product={vm.get(46)!} />
+          </VsuGrid>
           <VsuGrid title="Sisteme complete de drenaj">prods</VsuGrid>
           <VsuGrid title="Recuperarea fluidelor">prods</VsuGrid>
           <VsuGrid title="Recuperarea freonului">prods</VsuGrid>
@@ -86,40 +91,30 @@ const t = await useTranslations(Astro.currentLocale as string);
         <VsuStage
           title="Dezasamblare"
           description="Separarea componentelor și materialelor solide ale vehiculelor scoase din uz, cum ar fi metalul, plasticul și sticla.">
-          <pre>
-            Odată ce activitatea de depoluare a vehiculelor este finalizată, este rândul pieselor mecanice. În această fază de procesare sunt separate toate componentele și materialele solide ale vehiculelor scoase din uz, cum ar fi metalul, plasticul și sticla.
-
-            2.1 Îndepărtarea componentelor din sticlă
-
-            2.2 Demontarea motorului, transmisiei și a axelor
-
-            2.3 Demontarea și îndepărtarea catalizatorilor și a componentelor metalice
-
-            2.4 Separarea anvelopelor de roți
-
-
-          </pre>
+          <VsuGrid title="Îndepărtarea componentelor din sticlă">prods</VsuGrid>
+          <VsuGrid title="Demontarea motorului, transmisiei și a axelor"
+            >prods</VsuGrid
+          >
+          <VsuGrid
+            title="Demontarea și îndepărtarea catalizatorilor și a componentelor metalice"
+            >prods</VsuGrid
+          >
+          <VsuGrid title="Separarea anvelopelor de roți">prods</VsuGrid>
         </VsuStage>
 
         <!-- 3 -->
         <VsuStage
           title="Depozitare"
           description="Estetica și imaginea de ordine, curățenie și organizare reprezintă întotdeauna o valoare pozitivă.">
-          <pre>
-            Pentru o companie care poate fi vizitată de clienți, autorități, organisme de supraveghere, estetica și imaginea de ordine, curățenie și organizare reprezintă întotdeauna o valoare pozitivă.
-
-          </pre>
+          <VsuGrid title="">prods</VsuGrid>
         </VsuStage>
 
         <!-- 4 -->
         <VsuStage
           title="Vehicule electrice și hibride"
           description="Echipamente pentru gestionarea și depozitarea componentelor de înaltă tensiune ale vehiculelor electrice și hibride.">
-          <pre>
-            Demontarea bateriei
-
-            Depozitarea bateriei
-          </pre>
+          <VsuGrid title="Demontarea bateriei">prods</VsuGrid>
+          <VsuGrid title="Depozitarea bateriei">prods</VsuGrid>
         </VsuStage>
       </Accordion>
     </div>
