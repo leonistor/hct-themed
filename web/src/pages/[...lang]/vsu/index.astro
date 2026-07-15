@@ -47,27 +47,63 @@ const t = await useTranslations(Astro.currentLocale as string);
         </h1>
       </div>
 
-      <Accordion type="single" class="space-y-2">
-        <AccordionItem value="item-1" class="rounded-lg border px-4">
-          <AccordionTrigger>Getting Started</AccordionTrigger>
-          <AccordionContent>
-            Follow our quick start guide to set up your first project.
-          </AccordionContent>
+      <Accordion type="multiple" class="space-y-2">
+        <!-- 1 -->
+        <AccordionItem value="item-1" class="border px-4">
+          <AccordionTrigger>
+            <div class="flex flex-col items-start gap-1">
+              <span>Depoluare</span>
+              <span class="text-muted-foreground text-sm font-normal">
+                Îndepărtarea din vehicul a tuturor fluidelor, gazelor sau
+                elementelor care pot fi potențial periculoase pentru siguranță
+                sau pentru mediu.
+              </span>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent> 1 content </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="item-2" class="rounded-lg border px-4">
-          <AccordionTrigger>Configuration</AccordionTrigger>
-          <AccordionContent>
-            Learn how to customize Settings01Icon to fit your needs.
-          </AccordionContent>
+        <!-- 2 -->
+        <AccordionItem value="item-2" class="border px-4">
+          <AccordionTrigger>
+            <div class="flex flex-col items-start gap-1">
+              <span>Dezasamblare</span>
+              <span class="text-muted-foreground text-sm font-normal">
+                Sunt separate toate componentele și materialele solide ale
+                vehiculelor scoase din uz, cum ar fi metalul, plasticul și
+                sticla.
+              </span>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent> 2 content </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="item-3" class="rounded-lg border px-4">
-          <AccordionTrigger>Advanced Usage</AccordionTrigger>
-          <AccordionContent>
-            Explore advanced features and integrations.
-          </AccordionContent>
+        <!-- 3 -->
+        <AccordionItem value="item-3" class="border px-4">
+          <AccordionTrigger>
+            <div class="flex flex-col items-start gap-1">
+              <span>Depozitare</span>
+              <span class="text-muted-foreground text-sm font-normal">
+                Pentru o companie care poate fi vizitată de clienți, autorități,
+                organisme de supraveghere, estetica și imaginea de ordine,
+                curățenie și organizare reprezintă întotdeauna o valoare
+                pozitivă.
+              </span>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent> 3 content </AccordionContent>
+        </AccordionItem>
+        <!-- 4 -->
+        <AccordionItem value="item-4" class="border px-4">
+          <AccordionTrigger>
+            <div class="flex flex-col items-start gap-1">
+              <span>Vehicule electrice și hibride</span>
+              <span class="text-muted-foreground text-sm font-normal">
+                desc hibride
+              </span>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent> 4 content </AccordionContent>
         </AccordionItem>
       </Accordion>
-      <!--  -->
     </div>
   </section>
 </Base>
