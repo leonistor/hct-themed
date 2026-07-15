@@ -1,15 +1,8 @@
 ---
+export const prerender = false;
+
 import Base from "@/layouts/Base.astro";
-import { getEntryCTM } from "@/lib/contentParser.astro";
-import handleDraftPage from "@/lib/utils/handleDraftPage";
 import { generatePaths } from "@/lib/utils/i18nUtils.ts";
-import PageHeader from "@/components/widgets/PageHeader.astro";
-import AboutSectionTwo from "@/components/sections/AboutSectionTwo.astro";
-import TeamSection from "@/components/sections/TeamSection.astro";
-import AboutMetricsSection from "@/components/sections/AboutMetricsSection.astro";
-import StatsMarqueeSection from "@/components/sections/StatsMarqueeSection.astro";
-import CTAGallerySection from "@/components/sections/CTAGallerySection.astro";
-import CTASection from "@/components/sections/CTASection.astro";
 import { useTranslations } from "@/lib/utils/i18nUtils";
 import PageTitle from "@/layouts/components/ui/PageTitle.astro";
 
@@ -20,7 +13,9 @@ import Accordion from "@/components/bearnie/accordion/Accordion.astro";
 import AccordionItem from "@/components/bearnie/accordion/AccordionItem.astro";
 import AccordionTrigger from "@/components/bearnie/accordion/AccordionTrigger.astro";
 import AccordionContent from "@/components/bearnie/accordion/AccordionContent.astro";
+
 import VsuStage from "./VsuStage.astro";
+import VsuGrid from "./VsuGrid.astro";
 
 export function getStaticPaths() {
   return generatePaths();
@@ -46,7 +41,7 @@ const t = await useTranslations(Astro.currentLocale as string);
             class="inline-block rounded-md"
           />
         </h1>
-        <p class="">
+        <p class="text-lg">
           O instalație de reciclare auto este organizată în zone care reflectă
           diferite etape, de la transportul și manipularea vehiculelor până la
           depozitarea și asigurarea transportului diferitelor deșeuri pentru
@@ -58,32 +53,33 @@ const t = await useTranslations(Astro.currentLocale as string);
         <!-- 1 -->
         <VsuStage
           title="Depoluare"
-          description="Îndepărtarea din vehicul a tuturor fluidelor, gazelor sau elementelor care pot fi potențial periculoase pentru siguranță sau pentru mediu.">
-          <pre>
-            Stațiile noastre sunt dotate cu sisteme integrate de aspirație și stocare; oferind posibilitatea de aspirare a fluidelor din 4 până la 5 linii, aspirație a combustibilului din 2 până la 3 linii și stocare internă integrată a fluidelor. Întreaga zonă de lucru este amplasată pe o grilă antiderapantă.
+          description="Îndepărtarea din vehicul a tuturor fluidelor, gazelor sau elementelor care pot fi potențial periculoase pentru siguranță sau pentru mediu."
+          defaultOpen>
+          <p>
+            Stațiile <a class="underline" href="/partners/irismec">Iris-Mec</a> sunt
+            dotate cu sisteme integrate de aspirație și stocare; oferind posibilitatea
+            de aspirare a fluidelor din 4 până la 5 linii, aspirație a combustibilului
+            din 2 până la 3 linii și stocare internă integrată a fluidelor. Întreaga
+            zonă de lucru este amplasată pe o grilă antiderapantă.
+          </p>
 
-            1.1 Activități preliminare
-
-            Manevrarea mașinii
-
-
-            Extragerea și depozitarea bateriei
-
-
-            1.2 Sisteme complete de drenaj
-
-            1.3 Recuperarea fluidelor
-
-            1.4 Recuperarea freonului
-
-            1.5 Golirea combustibilului și reutilizarea benzinei și motorinei
-
-            1.6 Drenarea, depozitarea și arderea GPL și GNC
-
-            1.7 Demontarea și neutralizarea airbagurilor
-
-
-          </pre>
+          <VsuGrid
+            title="Manevrarea mașinii, extragerea și depozitarea bateriei"
+            >prods</VsuGrid
+          >
+          <VsuGrid title="Sisteme complete de drenaj">prods</VsuGrid>
+          <VsuGrid title="Recuperarea fluidelor">prods</VsuGrid>
+          <VsuGrid title="Recuperarea freonului">prods</VsuGrid>
+          <VsuGrid
+            title="Golirea combustibilului și reutilizarea benzinei și motorinei"
+            >prods</VsuGrid
+          >
+          <VsuGrid title="Drenarea, depozitarea și arderea GPL și GNC"
+            >prods</VsuGrid
+          >
+          <VsuGrid title="Demontarea și neutralizarea airbagurilor"
+            >prods</VsuGrid
+          >
         </VsuStage>
 
         <!-- 2 -->
