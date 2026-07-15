@@ -12,8 +12,14 @@ import CTAGallerySection from "@/components/sections/CTAGallerySection.astro";
 import CTASection from "@/components/sections/CTASection.astro";
 import { useTranslations } from "@/lib/utils/i18nUtils";
 import PageTitle from "@/layouts/components/ui/PageTitle.astro";
+
 import { Image } from "astro:assets";
 import logo_iris_mec from "@/assets/images/vsu/logo-iris-mec.jpg";
+
+import Accordion from "@/components/bearnie/accordion/Accordion.astro";
+import AccordionItem from "@/components/bearnie/accordion/AccordionItem.astro";
+import AccordionTrigger from "@/components/bearnie/accordion/AccordionTrigger.astro";
+import AccordionContent from "@/components/bearnie/accordion/AccordionContent.astro";
 
 export function getStaticPaths() {
   return generatePaths();
@@ -41,7 +47,27 @@ const t = await useTranslations(Astro.currentLocale as string);
         </h1>
       </div>
 
-      <p>content vsu</p>
+      <Accordion type="single" class="space-y-2">
+        <AccordionItem value="item-1" class="rounded-lg border px-4">
+          <AccordionTrigger>Getting Started</AccordionTrigger>
+          <AccordionContent>
+            Follow our quick start guide to set up your first project.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-2" class="rounded-lg border px-4">
+          <AccordionTrigger>Configuration</AccordionTrigger>
+          <AccordionContent>
+            Learn how to customize Settings01Icon to fit your needs.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-3" class="rounded-lg border px-4">
+          <AccordionTrigger>Advanced Usage</AccordionTrigger>
+          <AccordionContent>
+            Explore advanced features and integrations.
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+      <!--  -->
     </div>
   </section>
 </Base>

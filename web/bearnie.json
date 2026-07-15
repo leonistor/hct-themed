@@ -1,5 +1,5 @@
 {
-  "componentsDir": "src/components/bearnie",
+  "componentsDir": "src/layouts/components/bearnie",
   "utilsDir": "src/utils",
   "tailwindConfig": "tailwind.config.mjs",
   "typescript": true
