@@ -10,28 +10,38 @@ import AboutMetricsSection from "@/components/sections/AboutMetricsSection.astro
 import StatsMarqueeSection from "@/components/sections/StatsMarqueeSection.astro";
 import CTAGallerySection from "@/components/sections/CTAGallerySection.astro";
 import CTASection from "@/components/sections/CTASection.astro";
+import { useTranslations } from "@/lib/utils/i18nUtils";
+import PageTitle from "@/layouts/components/ui/PageTitle.astro";
+import { Image } from "astro:assets";
+import logo_iris_mec from "@/assets/images/vsu/logo-iris-mec.jpg";
 
 export function getStaticPaths() {
   return generatePaths();
 }
 
-const page = await getEntryCTM("team", "-index", Astro.currentLocale);
-
-// Remove drafts pages in production
-const response = handleDraftPage(page?.data);
-if (response) return response;
+const t = await useTranslations(Astro.currentLocale as string);
 ---
 
-<Base {...page?.data}>
-  <PageHeader content={page?.data} contentClass="max-w-7xl! xl:px-10" />
-  <!-- <AboutSectionTwo hasSectionSpacingBottom={true} /> -->
-  <TeamSection
-    content={page?.data.teamSection}
-    badgeVariant="secondary"
-    hasSectionSpacingBottom={true}
-  />
-  <!-- <AboutMetricsSection hasLightBackground={true} /> -->
-  <!-- <StatsMarqueeSection hasLightBackground={true} /> -->
-  <!-- <CTAGallerySection /> -->
-  <CTASection />
+<Base metaTitle={t("vsu.headline")} hideOffcanvas={true}>
+  <section class="relative">
+    <div class="container">
+      <div class="mb-4">
+        <h1
+          data-aos="reveal-anim-top"
+          data-aos-offset="0"
+          data-aos-duration="400"
+          class:list={["text-h2-sm text-primary lg:text-h1-sm xl:text-h1"]}>
+          {t("vsu.headline")}
+          <Image
+            src={logo_iris_mec}
+            alt="Iris Mec"
+            height={90}
+            class="inline-block rounded-md"
+          />
+        </h1>
+      </div>
+
+      <p>content vsu</p>
+    </div>
+  </section>
 </Base>

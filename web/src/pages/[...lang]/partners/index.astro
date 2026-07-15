@@ -21,11 +21,9 @@ const partners = await payload.find({
 });
 
 const t = await useTranslations(Astro.currentLocale as string);
-
-const page = await getEntryCTM("about-us", "-index", Astro.currentLocale);
 ---
 
-<Base {...page?.data} hideOffcanvas={true}>
+<Base metaTitle={t("partners.title")} hideOffcanvas={true}>
   <section class="relative">
     <div class="container">
       <PageTitle title={t("partners.title")} />

@@ -1,5 +1,5 @@
 ---
 title: "About"
-metaDescription: "This is a example description"
+metaDescription: "Hațegan Consulting & Trading"
 draft: false
 ---
