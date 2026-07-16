@@ -58,8 +58,7 @@ const vm = new Map(vsu_prods.map((p) => [p.id, p]));
         <!-- 1 -->
         <VsuStage
           title="Depoluare"
-          description="Îndepărtarea din vehicul a tuturor fluidelor, gazelor sau elementelor care pot fi potențial periculoase pentru siguranță sau pentru mediu."
-          defaultOpen>
+          description="Îndepărtarea din vehicul a tuturor fluidelor, gazelor sau elementelor care pot fi potențial periculoase pentru siguranță sau pentru mediu.">
           <p>
             Stațiile <a class="underline" href="/partners/irismec">Iris-Mec</a> sunt
             dotate cu sisteme integrate de aspirație și stocare; oferind posibilitatea
@@ -71,50 +70,71 @@ const vm = new Map(vsu_prods.map((p) => [p.id, p]));
           <VsuGrid
             title="Manevrarea mașinii, extragerea și depozitarea bateriei">
             <VsuCard product={vm.get(46)!} />
+            <VsuCard product={vm.get(78)!} />
+            <VsuCard product={vm.get(79)!} />
+            <VsuCard product={vm.get(80)!} />
+            <VsuCard product={vm.get(99)!} />
           </VsuGrid>
-          <VsuGrid title="Sisteme complete de drenaj">prods</VsuGrid>
-          <VsuGrid title="Recuperarea fluidelor">prods</VsuGrid>
-          <VsuGrid title="Recuperarea freonului">prods</VsuGrid>
+          <VsuGrid title="Sisteme complete de drenaj">
+            <VsuCard product={vm.get(40)!} />
+            <VsuCard product={vm.get(35)!} />
+          </VsuGrid>
+          <VsuGrid title="Recuperarea fluidelor">
+            <VsuCard product={vm.get(35)!} />
+          </VsuGrid>
+          <VsuGrid title="Recuperarea freonului">
+            <VsuCard product={vm.get(35)!} />
+          </VsuGrid>
           <VsuGrid
-            title="Golirea combustibilului și reutilizarea benzinei și motorinei"
-            >prods</VsuGrid
-          >
-          <VsuGrid title="Drenarea, depozitarea și arderea GPL și GNC"
-            >prods</VsuGrid
-          >
-          <VsuGrid title="Demontarea și neutralizarea airbagurilor"
-            >prods</VsuGrid
-          >
+            title="Golirea combustibilului și reutilizarea benzinei și motorinei">
+            <VsuCard product={vm.get(40)!} />
+          </VsuGrid>
+          <VsuGrid title="Drenarea, depozitarea și arderea GPL și GNC">
+            <VsuCard product={vm.get(40)!} />
+          </VsuGrid>
+          <VsuGrid title="Demontarea și neutralizarea airbagurilor">
+            <VsuCard product={vm.get(40)!} />
+          </VsuGrid>
         </VsuStage>
 
         <!-- 2 -->
         <VsuStage
           title="Dezasamblare"
           description="Separarea componentelor și materialelor solide ale vehiculelor scoase din uz, cum ar fi metalul, plasticul și sticla.">
-          <VsuGrid title="Îndepărtarea componentelor din sticlă">prods</VsuGrid>
-          <VsuGrid title="Demontarea motorului, transmisiei și a axelor"
-            >prods</VsuGrid
-          >
+          <VsuGrid title="Îndepărtarea componentelor din sticlă">
+            <VsuCard product={vm.get(35)!} />
+          </VsuGrid>
+          <VsuGrid title="Demontarea motorului, transmisiei și a axelor">
+            <VsuCard product={vm.get(40)!} />
+          </VsuGrid>
           <VsuGrid
-            title="Demontarea și îndepărtarea catalizatorilor și a componentelor metalice"
-            >prods</VsuGrid
-          >
-          <VsuGrid title="Separarea anvelopelor de roți">prods</VsuGrid>
+            title="Demontarea și îndepărtarea catalizatorilor și a componentelor metalice">
+            <VsuCard product={vm.get(35)!} />
+          </VsuGrid>
+          <VsuGrid title="Separarea anvelopelor de roți">
+            <VsuCard product={vm.get(35)!} />
+          </VsuGrid>
         </VsuStage>
 
         <!-- 3 -->
         <VsuStage
           title="Depozitare"
           description="Estetica și imaginea de ordine, curățenie și organizare reprezintă întotdeauna o valoare pozitivă.">
-          <VsuGrid title="">prods</VsuGrid>
+          <VsuGrid title="">
+            <VsuCard product={vm.get(35)!} />
+          </VsuGrid>
         </VsuStage>
 
         <!-- 4 -->
         <VsuStage
           title="Vehicule electrice și hibride"
           description="Echipamente pentru gestionarea și depozitarea componentelor de înaltă tensiune ale vehiculelor electrice și hibride.">
-          <VsuGrid title="Demontarea bateriei">prods</VsuGrid>
-          <VsuGrid title="Depozitarea bateriei">prods</VsuGrid>
+          <VsuGrid title="Demontarea bateriei">
+            <VsuCard product={vm.get(35)!} />
+          </VsuGrid>
+          <VsuGrid title="Depozitarea bateriei">
+            <VsuCard product={vm.get(40)!} />
+          </VsuGrid>
         </VsuStage>
       </Accordion>
     </div>
