@@ -1,6 +1,6 @@
 # database
-db/**
-# !db/payload.db
+db/payload.db
+db/*
 # dependencies (bun install)
 node_modules
 
