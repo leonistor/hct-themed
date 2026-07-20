@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-shimmer";
 
 @import "./theme.css";
 @plugin "../plugins/fontTailwindPlugin.js";
