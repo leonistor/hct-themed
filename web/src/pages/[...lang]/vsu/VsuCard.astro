@@ -1,21 +1,45 @@
 ---
 export const prerender = false;
 
+import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
+import type {
+  Category,
+  Material,
+  Media,
+  Partner,
+  Product,
+  ProductImage,
+} from "admin";
+
 type Props = {
   code?: string;
   name?: string;
+  main_image?: number | null | ProductImage;
 };
-let { code, name } = Astro.props;
+let { code, name, main_image } = Astro.props;
 ---
 
 <a
   href={`/product/${code}`}
   class:list={[
-    "text-primary lg:text-h6 xl:text-h5 bg-gray-100 text-lg",
+    "text-primary bg-gray-100 lg:text-xl/2 xl:text-xl",
     "opacity-80 hover:opacity-100",
     "px-3 py-1",
     "leading-tight font-medium tracking-tight text-balance",
   ]}
   aria-label={name}>
   {name?.slice(8)}
+  {
+    main_image && (
+      <PayloadImage
+        src={`/payload/products/${(main_image! as Media).sizes!.large!.filename!}`}
+        alt={name}
+        height="200px"
+        class:list={[
+          "mx-auto object-scale-down",
+          "transition-transform duration-700 ease-in-out group-hover:scale-105",
+        ]}
+      />
+    )
+  }
 </a>

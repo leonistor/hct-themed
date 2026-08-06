@@ -27,7 +27,10 @@ const vsu_prods = (
 
 // vsu_map
 const vm = new Map(
-  vsu_prods.map((p) => [p.id, { code: p.code, name: p.name }]),
+  vsu_prods.map((p) => [
+    p.id,
+    { code: p.code, name: p.name, main_image: p.main_image },
+  ]),
 );
 ---
 
