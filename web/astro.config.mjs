@@ -12,7 +12,7 @@ import { generateAstroFontsConfig } from "./src/lib/utils/AstroFont.ts";
 import { enabledLanguages } from "./src/lib/utils/i18nUtils.ts";
 
 import node from "@astrojs/node";
-import astroInspectClip from "astro-inspect-clip";
+import { unified } from "@astrojs/markdown-remark";
 
 const fonts = generateAstroFontsConfig(fontsJson);
 let {
@@ -65,9 +65,9 @@ export default defineConfig({
       ],
     }),
     mdx(),
-    astroInspectClip(),
   ],
   markdown: {
+    processor: unified(),
     rehypePlugins: [
       [
         rehypeExternalLinks,
