@@ -2,7 +2,11 @@
 import { cn } from "@/utils/cn";
 import type { HTMLAttributes } from "astro/types";
 import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
-import { ArrowDown01Icon, CirclePlusIcon } from "@hugeicons/core-free-icons";
+import {
+  ArrowDown01Icon,
+  CirclePlusIcon,
+  SearchAddIcon,
+} from "@hugeicons/core-free-icons";
 
 export interface Props extends HTMLAttributes<"button"> {
   defaultOpen?: boolean;
@@ -25,7 +29,7 @@ const classes = cn(
   {...props}>
   <slot />
   <HugeIcon
-    icon={CirclePlusIcon}
+    icon={SearchAddIcon}
     size={36}
     class="shrink-0 transition-transform duration-200"
   />
