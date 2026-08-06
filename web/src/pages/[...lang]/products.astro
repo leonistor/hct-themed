@@ -49,8 +49,7 @@ const page = await getEntryCTM("products", "-index", Astro.currentLocale);
         <div class="">
           <select name="material" id="material" class="w-full">
             <option value="">
-              {t("common.select")}
-              {t("products.singular")}
+              {t("common.select") + " " + t("products.singular")}
             </option>
             {
               all_materials.docs.map((material) => (
@@ -62,8 +61,7 @@ const page = await getEntryCTM("products", "-index", Astro.currentLocale);
         <div class="">
           <select name="category" id="category" class="w-full">
             <option value="">
-              {t("common.select")}
-              {t("categories.singular")}
+              {t("common.select") + " " + t("categories.singular")}
             </option>
             {
               all_categories.docs.map((category) => (
@@ -75,8 +73,7 @@ const page = await getEntryCTM("products", "-index", Astro.currentLocale);
         <div class="">
           <select name="partner" id="partner" class="w-full">
             <option value="">
-              {t("common.select")}
-              {t("partners.singular")}
+              {t("common.select") + " " + t("partners.singular")}
             </option>
             {
               all_partners.docs.map((partner) => (
