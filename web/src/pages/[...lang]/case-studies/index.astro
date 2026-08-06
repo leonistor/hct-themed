@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import Base from "@/layouts/Base.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import handleDraftPage from "@/lib/utils/handleDraftPage";
@@ -8,9 +10,28 @@ import CaseStudiesListSection from "@/components/sections/CaseStudiesListSection
 import CTASection from "@/components/sections/CTASection.astro";
 import config from "../../../config/config.generated.json";
 
-export function getStaticPaths() {
-  return generatePaths();
-}
+import { getPayload } from "payload";
+import { config as payloadConfig, type Media } from "admin";
+import ProjectCard from "@/components/cards/ProjectCard.astro";
+
+const payload = await getPayload({ config: payloadConfig });
+
+const media_case_studies = await payload.find({
+  collection: "media",
+  depth: 1,
+  pagination: false,
+  limit: 100,
+  where: {
+    kind: {
+      equals: "projects",
+    },
+  },
+  // sort: "_order",
+});
+
+// export function getStaticPaths() {
+//   return generatePaths();
+// }
 
 const entry = await getEntryCTM(
   config.settings.caseStudiesFolder as "case-studies",
@@ -19,14 +40,22 @@ const entry = await getEntryCTM(
 );
 
 // Remove drafts pages in production
-const response = handleDraftPage(entry.data);
-if (response) return response;
+// const response = handleDraftPage(entry.data);
+// if (response) return response;
 ---
 
 <Base {...entry.data}>
   <PageHeader content={entry.data} contentClass="max-w-2xl! mb-12" />
-  <CaseStudiesListSection content={entry.data} />
+  <!-- <CaseStudiesListSection content={entry.data} /> -->
   <!-- <StatsMarqueeSection hasLightBackground={true} /> -->
   <!-- <CTAGallerySection /> -->
+  <div
+    class="grid grid-cols-1 gap-x-4 gap-y-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-10">
+    {
+      media_case_studies.docs.map((caseStudy, index) => (
+        <ProjectCard index={index} caseStudy={caseStudy} />
+      ))
+    }
+  </div>
   <CTASection />
 </Base>

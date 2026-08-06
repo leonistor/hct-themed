@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+
+import type { Media, Partner, Product, Category, Material } from "admin";
+
+import { useTranslations } from "@/lib/utils/i18nUtils";
+
+type Props = {
+  index?: number;
+  caseStudy: Media;
+};
+
+let { index = 0, caseStudy } = Astro.props;
+let { caption, url: image } = caseStudy;
+
+const t = await useTranslations(Astro.currentLocale as string);
+---
+
+<div
+  class="group relative flex flex-col gap-y-0.5 bg-gray-50 px-4 py-2"
+  data-aos="fade-up-sm"
+  data-aos-duration="700"
+  data-aos-delay={index * 100}>
+  <div
+    class:list={["relative mb-3 overflow-hidden xl:mb-6"]}
+    aria-label={caption}>
+    <div
+      class:list={[
+        "text-primary text-h6-sm lg:text-h5 xl:text-h4 opacity-75",
+        "pb-4 group-hover:opacity-100",
+        "leading-tight font-medium tracking-tight text-balance",
+      ]}>
+    </div>
+    {
+      (
+        <Image
+          src={caseStudy.thumbnailURL!}
+          alt={caseStudy.caption!}
+          width={360}
+          height={100}
+          class:list={[
+            "mx-auto aspect-square object-cover",
+            "transition-transform duration-700 ease-in-out group-hover:scale-105",
+          ]}
+        />
+      )
+    }
+  </div>
+
+  <div class="grow"></div>
+</div>
