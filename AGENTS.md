@@ -1,7 +1,7 @@
 # hct-themed
 
 Marketing site for Hațegan Consulting & Trading. Bun monorepo with three workspaces: `admin`
-(Payload CMS 3.85 + Next.js 16), `web` (Astro 3, the deliverable), `e2e` (Playwright).
+(Payload CMS 3.85 + Next.js 16), `web` (Astro 6, the deliverable), `e2e` (Playwright).
 Use `bun`, never `npm`/`pnpm`/`node`/`vite` (see `.cursor/rules/use-bun-instead-of-node-vite-npm-pnpm.mdc`).
 
 ## Commands
