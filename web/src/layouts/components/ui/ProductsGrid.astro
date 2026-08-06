@@ -2,6 +2,7 @@
 export const prerender = false;
 
 import ProductCard from "@/layouts/components/cards/ProductCard.astro";
+import Pagination from "@/layouts/components/ui/Pagination.astro";
 import { useTranslations } from "@/lib/utils/i18nUtils";
 
 import { getPayload } from "payload";
@@ -57,39 +58,18 @@ const nextPageUrl = new URL(currentUrl.toString());
 nextPageUrl.searchParams.set("page", String(page + 1));
 const prevPageUrl = new URL(currentUrl.toString());
 prevPageUrl.searchParams.set("page", String(page - 1));
+
+const paginationProps = {
+  totalDocs: products.totalDocs,
+  hasPrevPage: products.hasPrevPage,
+  hasNextPage: products.hasNextPage,
+  prevUrl: prevPageUrl.pathname + prevPageUrl.search,
+  nextUrl: nextPageUrl.pathname + nextPageUrl.search,
+  label: t("products.count"),
+};
 ---
 
-<!-- pagination -->
-<div class="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 pt-4 pb-6">
-  <div class="font-medium">
-    {products.totalDocs}
-    {t("products.title")}
-  </div>
-  {
-    (
-      <a
-        id="prevPageUrl"
-        data-active={products.hasPrevPage}
-        data-search={prevPageUrl.search.toString()}
-        class:list={["text-gray-500", "hidden"]}
-        href="/products">
-        {t("products.paginationPrevious")} &larr;
-      </a>
-    )
-  }
-  {
-    (
-      <a
-        id="nextPageUrl"
-        data-search={nextPageUrl.search.toString()}
-        data-active={products.hasNextPage}
-        class:list={["text-gray-500", "hidden"]}
-        href="/products">
-        {t("products.paginationNext")} &rarr;
-      </a>
-    )
-  }
-</div>
+<Pagination {...paginationProps} />
 
 <div
   class="grid grid-cols-1 gap-x-2 gap-y-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-3 lg:gap-y-5">
@@ -100,22 +80,4 @@ prevPageUrl.searchParams.set("page", String(page - 1));
   }
 </div>
 
-<script is:inline>
-  // TODO: hack prev/next prods
-  const prevPageUrlElement = document.getElementById("prevPageUrl");
-  const nextPageUrlElement = document.getElementById("nextPageUrl");
-  const isPrevPageActive = prevPageUrlElement.dataset.active === "true";
-  const isNextPageActive = nextPageUrlElement.dataset.active === "true";
-
-  prevPageUrlElement.classList.toggle("hidden", !isPrevPageActive);
-  nextPageUrlElement.classList.toggle("hidden", !isNextPageActive);
-  const currentUrl = new URL(window.location.href);
-  const baseUrl = currentUrl.origin + currentUrl.pathname;
-
-  const prevPageUrl = baseUrl + prevPageUrlElement.dataset.search.toString();
-  const nextPageUrl = baseUrl + nextPageUrlElement.dataset.search.toString();
-  // @ts-ignore
-  prevPageUrlElement.href = prevPageUrl.toString();
-  // @ts-ignore
-  nextPageUrlElement.href = nextPageUrl.toString();
-</script>
+<Pagination {...paginationProps} />

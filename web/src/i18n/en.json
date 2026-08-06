@@ -91,6 +91,7 @@
     "singular": "product",
     "variants": "Variants",
     "description": "",
+    "count": "products",
     "paginationPrevious": "Previous Page",
     "paginationNext": "Next Page",
     "allProducts": "View All Products"
