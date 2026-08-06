@@ -17,12 +17,12 @@ const t = await useTranslations(Astro.currentLocale as string);
 ---
 
 <div
-  class="group relative flex flex-col gap-y-0.5 bg-gray-50 px-4 py-2"
+  class="group relative flex flex-col gap-y-0.5 bg-gray-50 px-2 py-1"
   data-aos="fade-up-sm"
   data-aos-duration="700"
   data-aos-delay={index * 100}>
   <div
-    class:list={["relative mb-3 overflow-hidden xl:mb-6"]}
+    class:list={["relative mb-2 overflow-hidden xl:mb-4"]}
     aria-label={caption}>
     <div
       class:list={[
@@ -34,7 +34,7 @@ const t = await useTranslations(Astro.currentLocale as string);
     {
       (
         <Image
-          src={caseStudy.thumbnailURL!}
+          src={caseStudy!.sizes!.medium!.url!}
           alt={caseStudy.caption!}
           width={360}
           height={100}
@@ -48,4 +48,5 @@ const t = await useTranslations(Astro.currentLocale as string);
   </div>
 
   <div class="grow"></div>
+  <div class="text-center">{caseStudy.caption}</div>
 </div>
