@@ -15,9 +15,9 @@ reference implementation for admin pages in this repo.
 
 | Path | Role |
 |---|---|
-| `web/src/pages/admin/index.astro` | Page shell: fixed left sidebar, sticky header with a sidebar toggle and theme toggle, per-page `<Select>` (10/50/all), fetches filter option lists (partners/categories/materials) and passes them to the table. `prerender = false`. |
+| `web/src/pages/admin/index.astro` | Page shell: fixed left sidebar, sticky header with a sidebar toggle and theme toggle, fetches filter option lists (partners/categories/materials) and passes them to the table. `prerender = false`. |
 | `web/src/layouts/components/admin/AdminSidebar.astro` | Nav rail: Bearnie `Sidebar` (id `admin-sidebar`) with HCT logo, separator and menu (Products/Categories/Partners/Materials). Products is active on `/admin`; link `href`s for the other sections are `#` placeholders. `currentPath` prop drives the active item. |
-| `web/src/layouts/components/admin/AdminProductsTable.astro` | Fetches products via `getPayload` against `admin` (same connection as the public static routes; needs `admin` + `db/payload.db` running). Renders the filter bar and product table. Accepts `partners`, `categories`, `materials` props for filter dropdowns. |
+| `web/src/layouts/components/admin/AdminProductsTable.astro` | Fetches products via `getPayload` against `admin` (same connection as the public static routes; needs `admin` + `db/payload.db` running). Renders the filter panel (card with distinct background) containing the filter form, product count, and per-page select, then the product table and bottom-right pagination. Accepts `partners`, `categories`, `materials` props for filter dropdowns. |
 | `web/src/styles/admin.css` | Standalone stylesheet: Tailwind + Bearnie tokens only for this page. |
 | `web/src/layouts/components/bearnie/{sidebar,table,select,checkbox,pagination}/` | Bearnie UI components installed for the admin UI. |
 
@@ -25,10 +25,12 @@ reference implementation for admin pages in this repo.
 
 - Two-column flex: the `AdminSidebar` (`h-screen`) on the left, a `flex-1` column on the right.
 - The header is sticky (`z-30`) and holds the `SidebarTrigger` (`for="admin-sidebar"`, matching the
-  sidebar id) plus the page title; the sidebar handles collapse and mobile behavior in its own
-  script.
-- The per-page `<Select>` script is plain, per-page JS living in `index.astro` (not in a shared
-  `<script>` chunk), since the page is standalone.
+  sidebar id) plus the page title and theme toggle; the sidebar handles collapse and mobile
+  behavior in its own script.
+- The filter panel is a `bg-muted/50 rounded-lg border p-4` card containing the filter form,
+  a product count label, and a per-page `<select>` (10/50/all). The panel visually groups all
+  controls above the table.
+- Pagination sits at the bottom right of the page, below the table.
 
 ### Behavior
 
@@ -46,7 +48,9 @@ reference implementation for admin pages in this repo.
   excludes the heavy `folder`/`images` fields via `select`.
 - Pagination links are generated with `makeUrl()` which preserves existing filter params from the
   current URL and only overrides `page`.
-- The per-page `<Select>` navigates on change and resets `page`.
+- The per-page `<select>` (native HTML, `data-per-page`) lives inside the filter panel in
+  `AdminProductsTable` and navigates on change, resetting `page`. Its script is a small inline
+  `<script>` at the bottom of the component.
 - `index.astro` fetches all partners, categories, and materials via `payload.find()` with
   `limit: 0` and `sort: "name"` to populate the filter dropdowns.
 
