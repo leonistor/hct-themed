@@ -1,6 +1,8 @@
 ---
 export const prerender = false;
 import "@/styles/admin.css";
+import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
+import { Moon01Icon, Sun01Icon } from "@/components/bearnie/lib/hugeicons";
 import AdminProductsTable from "@/layouts/components/admin/AdminProductsTable.astro";
 import AdminSidebar from "@/layouts/components/admin/AdminSidebar.astro";
 import SidebarTrigger from "@/components/bearnie/sidebar/SidebarTrigger.astro";
@@ -15,6 +17,12 @@ import SelectOption from "@/components/bearnie/select/SelectOption.astro";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Products · Admin</title>
     <meta name="robots" content="noindex, nofollow" />
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem("theme") || "light";
+        document.documentElement.classList.toggle("dark", stored === "dark");
+      })();
+    </script>
   </head>
   <body>
     <div class="flex min-h-screen">
@@ -25,6 +33,15 @@ import SelectOption from "@/components/bearnie/select/SelectOption.astro";
           <SidebarTrigger for="admin-sidebar" />
           <h1 class="text-2xl font-semibold">Products</h1>
           <p class="text-muted-foreground text-sm">Admin product list</p>
+
+          <button
+            type="button"
+            class="ml-auto cursor-pointer rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            data-theme-toggle
+            aria-label="Toggle theme">
+            <HugeIcon icon={Sun01Icon as never} class="size-5 hidden dark:block" />
+            <HugeIcon icon={Moon01Icon as never} class="size-5 block dark:hidden" />
+          </button>
         </header>
 
         <main class="flex-1 overflow-x-auto px-6 py-6">
@@ -41,6 +58,16 @@ import SelectOption from "@/components/bearnie/select/SelectOption.astro";
       </div>
     </div>
 
+    <script>
+      document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const isDark = document.documentElement.classList.contains("dark");
+          const newTheme = isDark ? "light" : "dark";
+          localStorage.setItem("theme", newTheme);
+          document.documentElement.classList.toggle("dark", newTheme === "dark");
+        });
+      });
+    </script>
     <script>
       const select = document.querySelector(
         "[data-per-page]",
