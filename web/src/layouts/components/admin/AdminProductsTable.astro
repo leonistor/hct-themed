@@ -19,6 +19,18 @@ import Select from "@/components/bearnie/select/Select.astro";
 import SelectOption from "@/components/bearnie/select/SelectOption.astro";
 import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
 import { ArrowUpDownIcon, ArrowUp02Icon, ArrowDown02Icon } from "@/components/bearnie/lib/hugeicons";
+import Sheet from "@/components/bearnie/sheet/Sheet.astro";
+import SheetContent from "@/components/bearnie/sheet/SheetContent.astro";
+import SheetHeader from "@/components/bearnie/sheet/SheetHeader.astro";
+import SheetTitle from "@/components/bearnie/sheet/SheetTitle.astro";
+import SheetFooter from "@/components/bearnie/sheet/SheetFooter.astro";
+import SheetClose from "@/components/bearnie/sheet/SheetClose.astro";
+import SheetOverlay from "@/components/bearnie/sheet/SheetOverlay.astro";
+import SheetTrigger from "@/components/bearnie/sheet/SheetTrigger.astro";
+import Input from "@/components/bearnie/input/Input.astro";
+import Textarea from "@/components/bearnie/textarea/Textarea.astro";
+import Button from "@/components/bearnie/button/Button.astro";
+import Label from "@/components/bearnie/label/Label.astro";
 
 import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
@@ -117,6 +129,21 @@ const showPrev = showPagination && products.hasPrevPage;
 const showNext = showPagination && products.hasNextPage;
 
 const hasActiveFilters = search || filterPartner || filterCategory || filterMaterial || filterPublished || sortParam;
+
+const editId = currentUrl.searchParams.get("edit") ?? "";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let activeProduct: any = null;
+if (editId) {
+  try {
+    activeProduct = await payload.findByID({
+      collection: "products",
+      id: editId,
+      depth: 0,
+    });
+  } catch {
+    activeProduct = null;
+  }
+}
 ---
 
 <div class="mb-6 rounded-lg border bg-muted/50 p-4">
@@ -266,9 +293,12 @@ const hasActiveFilters = search || filterPartner || filterCategory || filterMate
         const category = product.category;
         const materials = (product.materials ?? []) as (Material | number)[];
         const variantsCount = product.variants?.length ?? 0;
+        const isActive = String(product.id) === editId;
 
         return (
-          <TableRow>
+          <TableRow
+            data-product-id={product.id}
+            class:list={["cursor-pointer transition-colors hover:bg-muted/50", isActive && "bg-accent"]}>
             <TableCell>
               {thumbnail ? (
                 <PayloadImage
@@ -282,13 +312,7 @@ const hasActiveFilters = search || filterPartner || filterCategory || filterMate
                 <span class="text-muted-foreground">—</span>
               )}
             </TableCell>
-            <TableCell>
-              <a
-                href={`/product/${product.code}`}
-                class="text-primary font-medium underline">
-                {product.code}
-              </a>
-            </TableCell>
+            <TableCell class="font-medium">{product.code}</TableCell>
             <TableCell>
               <Checkbox checked={product.published ?? false} disabled />
             </TableCell>
@@ -346,6 +370,52 @@ const hasActiveFilters = search || filterPartner || filterCategory || filterMate
   }
 </div>
 
+<Sheet>
+  <SheetOverlay />
+  <SheetTrigger id="sheet-open-trigger" class="hidden" />
+  <SheetContent side="right" class:list={["w-2/3 sm:max-w-2xl", !editId && "hidden"]}>
+    <SheetHeader>
+      <SheetTitle>Edit Product</SheetTitle>
+    </SheetHeader>
+    {activeProduct && (
+      <form id="product-edit-form" class="space-y-4 py-4">
+        <input type="hidden" name="id" value={String(activeProduct.id)} />
+        <div class="space-y-2">
+          <Label for="edit-code">Code</Label>
+          <Input
+            id="edit-code"
+            name="code"
+            value={String(activeProduct.code ?? "")}
+            required
+          />
+        </div>
+        <div class="space-y-2">
+          <Label for="edit-name">Name</Label>
+          <Input
+            id="edit-name"
+            name="name"
+            value={String(activeProduct.name ?? "")}
+            required
+          />
+        </div>
+        <div class="space-y-2">
+          <Label for="edit-description">Description</Label>
+          <Textarea
+            id="edit-description"
+            name="description"
+            value={String(activeProduct.description ?? "")}
+            rows={5}
+          />
+        </div>
+        <SheetFooter>
+          <Button type="submit">Save</Button>
+          <SheetClose>Cancel</SheetClose>
+        </SheetFooter>
+      </form>
+    )}
+  </SheetContent>
+</Sheet>
+
 <script>
   const perPage = document.querySelector("[data-per-page]") as HTMLSelectElement;
   if (perPage) {
@@ -356,4 +426,61 @@ const hasActiveFilters = search || filterPartner || filterCategory || filterMate
       window.location.href = url.pathname + url.search;
     });
   }
+
+  // Auto-open sheet when edit param is present
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has("edit")) {
+    const trigger = document.getElementById("sheet-open-trigger");
+    if (trigger) {
+      // Small delay to ensure Sheet script has initialized
+      setTimeout(() => trigger.click(), 50);
+    }
+  }
+
+  // Row click → open edit sheet
+  document.querySelectorAll("[data-product-id]").forEach((row) => {
+    row.addEventListener("click", (e) => {
+      if ((e.target as HTMLElement).closest("a, button, input, select")) return;
+      const id = row.getAttribute("data-product-id");
+      if (!id) return;
+      const url = new URL(window.location.href);
+      url.searchParams.set("edit", id);
+      window.location.href = url.pathname + url.search;
+    });
+  });
+
+  // Save form
+  const form = document.getElementById("product-edit-form") as HTMLFormElement;
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const id = (form.querySelector("[name=id]") as HTMLInputElement).value;
+      const data = {
+        code: (form.querySelector("[name=code]") as HTMLInputElement).value,
+        name: (form.querySelector("[name=name]") as HTMLInputElement).value,
+        description: (form.querySelector("[name=description]") as HTMLTextAreaElement).value,
+      };
+
+      const res = await fetch(`/api/products/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        const url = new URL(window.location.href);
+        url.searchParams.delete("edit");
+        window.location.href = url.pathname + url.search;
+      }
+    });
+  }
+
+  // Close sheet → remove edit param
+  document.querySelectorAll("[data-sheet-close]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const url = new URL(window.location.href);
+      url.searchParams.delete("edit");
+      window.location.href = url.pathname + url.search;
+    });
+  });
 </script>
