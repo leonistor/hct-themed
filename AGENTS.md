@@ -16,6 +16,7 @@ Use `bun`, never `npm`/`pnpm`/`node`/`vite` (see `.cursor/rules/use-bun-instead-
 - `astro.config.mjs` sets `outDir: "server"` for the Node standalone adapter — build output is `server/`, not `dist/`.
 - Dynamic pages (`products`, `categories`, `partners`, `customer`, `product`, `vsu`, `solutions`) are `prerender = false` and pull data at runtime via `getPayload` from the `admin` workspace against the same SQLite DB — web needs the admin/db present for these.
 - Don't hardcode visible strings or URLs — use `t()` keys (`src/i18n/{en,ro}.json`) and menus (`src/config/menu.{en,ro}.json`).
+- Standalone admin pages (no `Base.astro` layout) are documented in `ADMIN.md`; follow the admin products list at `/admin` as the reference implementation.
 
 ## Testing / checks
 - `admin`: `bun run test` runs vitest then playwright; `bun run lint` (eslint).

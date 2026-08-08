@@ -91,6 +91,8 @@ SQLite database, so the `admin` workspace and `db/` must be present for these ro
 - Dynamic (Payload-backed) routes: `products`, `categories/[code]`, `partners/[code]`,
   `product/[code]`, `solutions`/`solutions/[code]`, `vsu`, `customers`.
 - `api/[...path].ts` proxies the admin Payload REST API by default.
+- `/admin` lists products from the Payload DB in a Bearnie table (standalone page, no site
+  layout). See [ADMIN.md](ADMIN.md) for details.
 
 ### Layout
 
