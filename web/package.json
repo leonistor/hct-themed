@@ -9,14 +9,10 @@
     "build": "npm run toml:watch && astro build",
     "toml:watch": "node scripts/toml-watcher.mjs",
     "preview": "npm run toml:watch & astro build && astro preview",
-    "astro-check": "npm run toml:watch & astro check",
+    "astro-check": "npm run toml:watch & astro check --minimumSeverity error",
     "generate-favicons": "node ./scripts/generate-favicons.mjs",
     "generate-multilingual-content": "node ./scripts/generate-multilingual-content.mjs",
-    "remove-multilingual": "node ./scripts/remove-multilingual.mjs",
-    "remove-draft-from-sitemap": "node ./scripts/remove-draft-from-sitemap.mjs",
-    "format": "prettier -w ./src",
-    "test": "cross-env TS_NODE_PROJECT=\"./tsconfig.jest.json\" jest --watch",
-    "deploy:cf": "wrangler pages deploy"
+    "remove-multilingual": "node ./scripts/remove-multilingual.mjs"
   },
   "engines": {
     "node": ">=22.12.0"

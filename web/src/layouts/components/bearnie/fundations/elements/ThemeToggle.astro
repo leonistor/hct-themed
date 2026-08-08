@@ -1,5 +1,5 @@
 ---
-import Button from "@/components/ui/button/Button.astro";
+import Button from "@/components/bearnie/button/Button.astro";
 
 export interface Props {
   size?: "xs" | "sm" | "default" | "lg";
@@ -13,8 +13,7 @@ const { size = "default" } = Astro.props;
   size={size}
   iconOnly
   data-theme-toggle
-  aria-label="Toggle theme"
->
+  aria-label="Toggle theme">
   <svg
     class="size-7"
     xmlns="http://www.w3.org/2000/svg"
@@ -23,8 +22,7 @@ const { size = "default" } = Astro.props;
     stroke="currentColor"
     stroke-width="2"
     stroke-linecap="round"
-    stroke-linejoin="round"
-  >
+    stroke-linejoin="round">
     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
     <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
     <path d="M12 3l0 18"></path>
