@@ -21,6 +21,7 @@ slide-out sheet. It is the current reference implementation for admin pages in t
 | `web/src/pages/api/products/[id].ts` | PUT endpoint for updating a product. Uses Payload local API to update code, name, and description fields. Returns updated doc as JSON. |
 | `web/src/styles/admin.css` | Standalone stylesheet: Tailwind + Bearnie tokens only for this page. |
 | `web/src/layouts/components/bearnie/{sidebar,table,select,checkbox,pagination,sheet,input,textarea,button,label}/` | Bearnie UI components installed for the admin UI. |
+| `web/src/layouts/components/bearnie/lib/hugeicons.ts` | Barrel re-export of Hugeicons free (stroke-rounded) icons used by admin components. |
 
 ### Layout
 
@@ -43,9 +44,11 @@ slide-out sheet. It is the current reference implementation for admin pages in t
   a published `<Select>` (Any/Yes/No), an Apply button, and a Clear link (shown when any filter
   is active). A hidden `limit` field preserves the current page size across filter submissions.
 - `limit=all` requests `limit: 0` with `pagination: false`; the pager and page count are hidden.
-- Table columns: image thumbnail (via `PayloadImage`, `main_image.sizes.thumbnail`), code (plain
-  text), published (`<Checkbox disabled checked>`), name, variants count, partner name, category
-  name, materials (joined names).
+- Table columns: image (`PayloadImage`, `main_image.sizes.medium`, 300×300), code (plain
+  text), published (`CheckmarkCircle01Icon` header, `<Checkbox disabled checked>` cell), name,
+  variants count (`Layers01Icon` header), partner name, category name, materials (joined names).
+  Column widths are explicit via `style` (12.5%, 8.33%, 4.17%, 20.83%, 4.17%, 8.33%, 20.83%,
+  20.83%; sum 100%). Long text is not truncated.
 - Query uses `depth: 1` so partner/category/materials resolve inline, and excludes the heavy
   `folder`/`images` fields via `select`. Sort defaults to `_order` when no `sort` param is present.
 - Sortable columns: Code, Published, Name, Partner, Category (Materials not sortable — array

@@ -18,7 +18,7 @@ import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
 import Select from "@/components/bearnie/select/Select.astro";
 import SelectOption from "@/components/bearnie/select/SelectOption.astro";
 import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
-import { ArrowUpDownIcon, ArrowUp02Icon, ArrowDown02Icon } from "@/components/bearnie/lib/hugeicons";
+import { ArrowUpDownIcon, ArrowUp02Icon, ArrowDown02Icon, CheckmarkCircle01Icon, Layers01Icon } from "@/components/bearnie/lib/hugeicons";
 import Sheet from "@/components/bearnie/sheet/Sheet.astro";
 import SheetContent from "@/components/bearnie/sheet/SheetContent.astro";
 import SheetHeader from "@/components/bearnie/sheet/SheetHeader.astro";
@@ -242,53 +242,55 @@ if (editId) {
 <Table>
   <TableHeader>
     <TableRow>
-      <TableHead>Image</TableHead>
-      <TableHead>
+      <TableHead style="width: 12.5%">Image</TableHead>
+      <TableHead style="width: 8.33%">
         <a href={makeUrl({ sort: sortField === "code" && sortDir === "asc" ? "code|desc" : sortField === "code" ? "" : "code|asc", page: "1" })}
            class="flex items-center justify-between gap-1 hover:underline">
           <span>Code</span>
           <HugeIcon icon={sortIcon("code")} class:list={["size-3.5", sortIconClass("code")]} />
         </a>
       </TableHead>
-      <TableHead>
+      <TableHead style="width: 4.17%">
         <a href={makeUrl({ sort: sortField === "published" && sortDir === "asc" ? "published|desc" : sortField === "published" ? "" : "published|asc", page: "1" })}
            class="flex items-center justify-between gap-1 hover:underline">
-          <span>Published</span>
+          <HugeIcon icon={CheckmarkCircle01Icon} class="size-4" />
           <HugeIcon icon={sortIcon("published")} class:list={["size-3.5", sortIconClass("published")]} />
         </a>
       </TableHead>
-      <TableHead>
+      <TableHead style="width: 20.83%">
         <a href={makeUrl({ sort: sortField === "name" && sortDir === "asc" ? "name|desc" : sortField === "name" ? "" : "name|asc", page: "1" })}
            class="flex items-center justify-between gap-1 hover:underline">
           <span>Name</span>
           <HugeIcon icon={sortIcon("name")} class:list={["size-3.5", sortIconClass("name")]} />
         </a>
       </TableHead>
-      <TableHead>Variants</TableHead>
-      <TableHead>
+      <TableHead style="width: 4.17%">
+        <HugeIcon icon={Layers01Icon} class="size-4" />
+      </TableHead>
+      <TableHead style="width: 8.33%">
         <a href={makeUrl({ sort: sortField === "partner" && sortDir === "asc" ? "partner|desc" : sortField === "partner" ? "" : "partner|asc", page: "1" })}
            class="flex items-center justify-between gap-1 hover:underline">
           <span>Partner</span>
           <HugeIcon icon={sortIcon("partner")} class:list={["size-3.5", sortIconClass("partner")]} />
         </a>
       </TableHead>
-      <TableHead>
+      <TableHead style="width: 20.83%">
         <a href={makeUrl({ sort: sortField === "category" && sortDir === "asc" ? "category|desc" : sortField === "category" ? "" : "category|asc", page: "1" })}
            class="flex items-center justify-between gap-1 hover:underline">
           <span>Category</span>
           <HugeIcon icon={sortIcon("category")} class:list={["size-3.5", sortIconClass("category")]} />
         </a>
       </TableHead>
-      <TableHead>Materials</TableHead>
+      <TableHead style="width: 20.83%">Materials</TableHead>
     </TableRow>
   </TableHeader>
   <TableBody>
     {
       products.docs.map((product) => {
         const mainImage = product.main_image as unknown as {
-          sizes?: { thumbnail?: { filename?: string } };
+          sizes?: { medium?: { filename?: string } };
         } | null;
-        const thumbnail = mainImage?.sizes?.thumbnail?.filename;
+        const mediumImage = mainImage?.sizes?.medium?.filename;
         const partner = product.partner;
         const category = product.category;
         const materials = (product.materials ?? []) as (Material | number)[];
@@ -300,9 +302,9 @@ if (editId) {
             data-product-id={product.id}
             class:list={["cursor-pointer transition-colors hover:bg-muted/50", isActive && "bg-accent"]}>
             <TableCell>
-              {thumbnail ? (
+              {mediumImage ? (
                 <PayloadImage
-                  src={`/payload/products/${thumbnail}`}
+                  src={`/payload/products/${mediumImage}`}
                   alt={product.name}
                   width={48}
                   height={48}
