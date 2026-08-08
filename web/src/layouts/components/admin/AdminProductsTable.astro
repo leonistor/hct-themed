@@ -51,6 +51,20 @@ const filterCategory = currentUrl.searchParams.get("category") ?? "";
 const filterMaterial = currentUrl.searchParams.get("material") ?? "";
 const filterPublished = currentUrl.searchParams.get("published") ?? "";
 
+const sortParam = currentUrl.searchParams.get("sort") ?? "";
+const SORTABLE_COLUMNS = ["code", "published", "name", "partner", "category"] as const;
+type SortableColumn = (typeof SORTABLE_COLUMNS)[number];
+let sortField: SortableColumn | "" = "";
+let sortDir: "asc" | "desc" = "asc";
+if (sortParam) {
+  const [field, dir] = sortParam.split("|");
+  if (SORTABLE_COLUMNS.includes(field as SortableColumn)) {
+    sortField = field as SortableColumn;
+    sortDir = dir === "desc" ? "desc" : "asc";
+  }
+}
+const sort = sortField ? `${sortDir === "desc" ? "-" : ""}${sortField === "partner" ? "partner.name" : sortField === "category" ? "category.name" : sortField}` : "_order";
+
 const where: Where = {};
 const and: Where[] = [];
 
@@ -68,7 +82,7 @@ const products = await payload.find({
   depth: 1,
   page,
   limit,
-  sort: "_order",
+  sort,
   where,
   select: {
     folder: false,
@@ -93,7 +107,7 @@ const isCurrentPage = (n: number) => showPagination && n === page;
 const showPrev = showPagination && products.hasPrevPage;
 const showNext = showPagination && products.hasNextPage;
 
-const hasActiveFilters = search || filterPartner || filterCategory || filterMaterial || filterPublished;
+const hasActiveFilters = search || filterPartner || filterCategory || filterMaterial || filterPublished || sortParam;
 ---
 
 <div class="mb-6 rounded-lg border bg-muted/50 p-4">
@@ -156,6 +170,7 @@ const hasActiveFilters = search || filterPartner || filterCategory || filterMate
     </div>
 
     <input type="hidden" name="limit" value={rawLimit} />
+    {sortParam && <input type="hidden" name="sort" value={sortParam} />}
 
     <button
       type="submit"
@@ -192,12 +207,42 @@ const hasActiveFilters = search || filterPartner || filterCategory || filterMate
   <TableHeader>
     <TableRow>
       <TableHead>Image</TableHead>
-      <TableHead>Code</TableHead>
-      <TableHead>Published</TableHead>
-      <TableHead>Name</TableHead>
+      <TableHead>
+        <a href={makeUrl({ sort: sortField === "code" && sortDir === "asc" ? "code|desc" : sortField === "code" ? "" : "code|asc", page: "1" })}
+           class="inline-flex items-center gap-1 hover:underline">
+          Code
+          {sortField === "code" && <span class="text-xs">{sortDir === "asc" ? "↑" : "↓"}</span>}
+        </a>
+      </TableHead>
+      <TableHead>
+        <a href={makeUrl({ sort: sortField === "published" && sortDir === "asc" ? "published|desc" : sortField === "published" ? "" : "published|asc", page: "1" })}
+           class="inline-flex items-center gap-1 hover:underline">
+          Published
+          {sortField === "published" && <span class="text-xs">{sortDir === "asc" ? "↑" : "↓"}</span>}
+        </a>
+      </TableHead>
+      <TableHead>
+        <a href={makeUrl({ sort: sortField === "name" && sortDir === "asc" ? "name|desc" : sortField === "name" ? "" : "name|asc", page: "1" })}
+           class="inline-flex items-center gap-1 hover:underline">
+          Name
+          {sortField === "name" && <span class="text-xs">{sortDir === "asc" ? "↑" : "↓"}</span>}
+        </a>
+      </TableHead>
       <TableHead>Variants</TableHead>
-      <TableHead>Partner</TableHead>
-      <TableHead>Category</TableHead>
+      <TableHead>
+        <a href={makeUrl({ sort: sortField === "partner" && sortDir === "asc" ? "partner|desc" : sortField === "partner" ? "" : "partner|asc", page: "1" })}
+           class="inline-flex items-center gap-1 hover:underline">
+          Partner
+          {sortField === "partner" && <span class="text-xs">{sortDir === "asc" ? "↑" : "↓"}</span>}
+        </a>
+      </TableHead>
+      <TableHead>
+        <a href={makeUrl({ sort: sortField === "category" && sortDir === "asc" ? "category|desc" : sortField === "category" ? "" : "category|asc", page: "1" })}
+           class="inline-flex items-center gap-1 hover:underline">
+          Category
+          {sortField === "category" && <span class="text-xs">{sortDir === "asc" ? "↑" : "↓"}</span>}
+        </a>
+      </TableHead>
       <TableHead>Materials</TableHead>
     </TableRow>
   </TableHeader>
