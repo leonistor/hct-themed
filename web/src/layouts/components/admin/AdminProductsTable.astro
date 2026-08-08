@@ -96,80 +96,97 @@ const showNext = showPagination && products.hasNextPage;
 const hasActiveFilters = search || filterPartner || filterCategory || filterMaterial || filterPublished;
 ---
 
-<form method="get" action="/admin" class="mb-6 flex flex-wrap items-end gap-3">
-  <div class="flex flex-col gap-1">
-    <label for="search" class="text-xs font-medium text-muted-foreground">Search</label>
-    <input
-      type="search"
-      id="search"
-      name="search"
-      value={search}
-      placeholder="Product name…"
-      class="h-10 w-48 rounded-lg border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-    />
+<div class="mb-6 rounded-lg border bg-muted/50 p-4">
+  <form method="get" action="/admin" class="mb-3 flex flex-wrap items-end gap-3">
+    <div class="flex flex-col gap-1">
+      <label for="search" class="text-xs font-medium text-muted-foreground">Search</label>
+      <input
+        type="search"
+        id="search"
+        name="search"
+        value={search}
+        placeholder="Product name…"
+        class="h-10 w-48 rounded-lg border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+      />
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label for="partner" class="text-xs font-medium text-muted-foreground">Partner</label>
+      <Select id="partner" name="partner" class="w-44">
+        <SelectOption value="">All partners</SelectOption>
+        {partners.map((p) => (
+          <SelectOption value={String(p.id)} selected={String(p.id) === filterPartner}>
+            {p.name}
+          </SelectOption>
+        ))}
+      </Select>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label for="category" class="text-xs font-medium text-muted-foreground">Category</label>
+      <Select id="category" name="category" class="w-44">
+        <SelectOption value="">All categories</SelectOption>
+        {categories.map((c) => (
+          <SelectOption value={String(c.id)} selected={String(c.id) === filterCategory}>
+            {c.name}
+          </SelectOption>
+        ))}
+      </Select>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label for="material" class="text-xs font-medium text-muted-foreground">Material</label>
+      <Select id="material" name="material" class="w-44">
+        <SelectOption value="">All materials</SelectOption>
+        {materials.map((m) => (
+          <SelectOption value={String(m.id)} selected={String(m.id) === filterMaterial}>
+            {m.name}
+          </SelectOption>
+        ))}
+      </Select>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label for="published" class="text-xs font-medium text-muted-foreground">Published</label>
+      <Select id="published" name="published" class="w-36">
+        <SelectOption value="">Any</SelectOption>
+        <SelectOption value="true" selected={filterPublished === "true"}>Yes</SelectOption>
+        <SelectOption value="false" selected={filterPublished === "false"}>No</SelectOption>
+      </Select>
+    </div>
+
+    <input type="hidden" name="limit" value={rawLimit} />
+
+    <button
+      type="submit"
+      class="h-10 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
+      Apply
+    </button>
+
+    {hasActiveFilters && (
+      <a
+        href="/admin"
+        class="h-10 inline-flex items-center rounded-lg border border-input px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
+        Clear
+      </a>
+    )}
+  </form>
+
+  <div class="flex items-center justify-between border-t border-border pt-3">
+    <p class="text-muted-foreground text-sm">{totalDocs} products</p>
+    <div class="flex items-center gap-2">
+      <label for="per-page" class="text-muted-foreground text-sm">Per page</label>
+      <select
+        id="per-page"
+        class="h-8 w-20 rounded-md border border-input bg-background px-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+        data-per-page>
+        <option value="10" selected={rawLimit === "10"}>10</option>
+        <option value="50" selected={rawLimit === "50"}>50</option>
+        <option value="all" selected={rawLimit === "all"}>All</option>
+      </select>
+    </div>
   </div>
-
-  <div class="flex flex-col gap-1">
-    <label for="partner" class="text-xs font-medium text-muted-foreground">Partner</label>
-    <Select id="partner" name="partner" class="w-44">
-      <SelectOption value="">All partners</SelectOption>
-      {partners.map((p) => (
-        <SelectOption value={String(p.id)} selected={String(p.id) === filterPartner}>
-          {p.name}
-        </SelectOption>
-      ))}
-    </Select>
-  </div>
-
-  <div class="flex flex-col gap-1">
-    <label for="category" class="text-xs font-medium text-muted-foreground">Category</label>
-    <Select id="category" name="category" class="w-44">
-      <SelectOption value="">All categories</SelectOption>
-      {categories.map((c) => (
-        <SelectOption value={String(c.id)} selected={String(c.id) === filterCategory}>
-          {c.name}
-        </SelectOption>
-      ))}
-    </Select>
-  </div>
-
-  <div class="flex flex-col gap-1">
-    <label for="material" class="text-xs font-medium text-muted-foreground">Material</label>
-    <Select id="material" name="material" class="w-44">
-      <SelectOption value="">All materials</SelectOption>
-      {materials.map((m) => (
-        <SelectOption value={String(m.id)} selected={String(m.id) === filterMaterial}>
-          {m.name}
-        </SelectOption>
-      ))}
-    </Select>
-  </div>
-
-  <div class="flex flex-col gap-1">
-    <label for="published" class="text-xs font-medium text-muted-foreground">Published</label>
-    <Select id="published" name="published" class="w-36">
-      <SelectOption value="">Any</SelectOption>
-      <SelectOption value="true" selected={filterPublished === "true"}>Yes</SelectOption>
-      <SelectOption value="false" selected={filterPublished === "false"}>No</SelectOption>
-    </Select>
-  </div>
-
-  <input type="hidden" name="limit" value={rawLimit} />
-
-  <button
-    type="submit"
-    class="h-10 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
-    Apply
-  </button>
-
-  {hasActiveFilters && (
-    <a
-      href="/admin"
-      class="h-10 inline-flex items-center rounded-lg border border-input px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
-      Clear
-    </a>
-  )}
-</form>
+</div>
 
 <Table>
   <TableHeader>
@@ -245,10 +262,7 @@ const hasActiveFilters = search || filterPartner || filterCategory || filterMate
   </TableBody>
 </Table>
 
-<div class="flex items-center justify-between px-2 pt-4">
-  <p class="text-muted-foreground text-sm">
-    {totalDocs} products{showPagination && ` · page ${page} of ${totalPages}`}
-  </p>
+<div class="flex items-center justify-end px-2 pt-4">
   {
     showPagination && (
       <Pagination>
@@ -277,3 +291,15 @@ const hasActiveFilters = search || filterPartner || filterCategory || filterMate
     )
   }
 </div>
+
+<script>
+  const perPage = document.querySelector("[data-per-page]") as HTMLSelectElement;
+  if (perPage) {
+    perPage.addEventListener("change", () => {
+      const url = new URL(window.location.href);
+      url.searchParams.set("limit", perPage.value);
+      url.searchParams.delete("page");
+      window.location.href = url.pathname + url.search;
+    });
+  }
+</script>

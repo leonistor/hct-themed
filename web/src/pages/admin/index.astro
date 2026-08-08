@@ -6,8 +6,6 @@ import { Moon01Icon, Sun01Icon } from "@/components/bearnie/lib/hugeicons";
 import AdminProductsTable from "@/layouts/components/admin/AdminProductsTable.astro";
 import AdminSidebar from "@/layouts/components/admin/AdminSidebar.astro";
 import SidebarTrigger from "@/components/bearnie/sidebar/SidebarTrigger.astro";
-import Select from "@/components/bearnie/select/Select.astro";
-import SelectOption from "@/components/bearnie/select/SelectOption.astro";
 import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
 
@@ -59,14 +57,6 @@ const materialOptions = materialsResult.docs.map((m) => ({ id: m.id, name: m.nam
         </header>
 
         <main class="flex-1 overflow-x-auto px-6 py-6">
-          <div class="mb-4 flex items-center gap-4">
-            <Select name="limit" class="w-40" data-per-page>
-              <SelectOption value="10">10 per page</SelectOption>
-              <SelectOption value="50">50 per page</SelectOption>
-              <SelectOption value="all">All</SelectOption>
-            </Select>
-          </div>
-
           <AdminProductsTable
             partners={partnerOptions}
             categories={categoryOptions}
@@ -84,20 +74,6 @@ const materialOptions = materialsResult.docs.map((m) => ({ id: m.id, name: m.nam
           localStorage.setItem("theme", newTheme);
           document.documentElement.classList.toggle("dark", newTheme === "dark");
         });
-      });
-    </script>
-    <script>
-      const select = document.querySelector(
-        "[data-per-page]",
-      ) as HTMLSelectElement;
-      const current =
-        new URLSearchParams(window.location.search).get("limit") ?? "10";
-      select.value = current;
-      select.addEventListener("change", () => {
-        const url = new URL(window.location.href);
-        url.searchParams.set("limit", select.value);
-        url.searchParams.delete("page");
-        window.location.href = url.pathname + url.search;
       });
     </script>
   </body>
