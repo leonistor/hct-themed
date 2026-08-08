@@ -15,11 +15,25 @@ import TableHead from "@/components/bearnie/table/TableHead.astro";
 import TableCell from "@/components/bearnie/table/TableCell.astro";
 import Checkbox from "@/components/bearnie/checkbox/Checkbox.astro";
 import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
+import Select from "@/components/bearnie/select/Select.astro";
+import SelectOption from "@/components/bearnie/select/SelectOption.astro";
 
 import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
 import type { Category, Material, Partner } from "admin";
 import type { Where } from "payload";
+
+export interface Props {
+  partners?: { id: number | string; name: string }[];
+  categories?: { id: number | string; name: string }[];
+  materials?: { id: number | string; name: string }[];
+}
+
+const {
+  partners = [],
+  categories = [],
+  materials = [],
+} = Astro.props;
 
 const payload = await getPayload({ config: payloadConfig });
 
@@ -31,7 +45,24 @@ page = Number.isFinite(page) && page > 0 ? page : 1;
 const showPagination = rawLimit !== "all";
 const limit = showPagination ? Number(rawLimit) || 10 : 0;
 
+const search = currentUrl.searchParams.get("search") ?? "";
+const filterPartner = currentUrl.searchParams.get("partner") ?? "";
+const filterCategory = currentUrl.searchParams.get("category") ?? "";
+const filterMaterial = currentUrl.searchParams.get("material") ?? "";
+const filterPublished = currentUrl.searchParams.get("published") ?? "";
+
 const where: Where = {};
+const and: Where[] = [];
+
+if (search) and.push({ name: { contains: search } });
+if (filterPartner) and.push({ partner: { equals: filterPartner } });
+if (filterCategory) and.push({ category: { equals: filterCategory } });
+if (filterMaterial) and.push({ materials: { contains: filterMaterial } });
+if (filterPublished) and.push({ published: { equals: filterPublished === "true" } });
+
+if (and.length === 1) Object.assign(where, and[0]);
+else if (and.length > 1) where.and = and;
+
 const products = await payload.find({
   collection: "products",
   depth: 1,
@@ -61,7 +92,84 @@ const isCurrentPage = (n: number) => showPagination && n === page;
 
 const showPrev = showPagination && products.hasPrevPage;
 const showNext = showPagination && products.hasNextPage;
+
+const hasActiveFilters = search || filterPartner || filterCategory || filterMaterial || filterPublished;
 ---
+
+<form method="get" action="/admin" class="mb-6 flex flex-wrap items-end gap-3">
+  <div class="flex flex-col gap-1">
+    <label for="search" class="text-xs font-medium text-muted-foreground">Search</label>
+    <input
+      type="search"
+      id="search"
+      name="search"
+      value={search}
+      placeholder="Product name…"
+      class="h-10 w-48 rounded-lg border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+    />
+  </div>
+
+  <div class="flex flex-col gap-1">
+    <label for="partner" class="text-xs font-medium text-muted-foreground">Partner</label>
+    <Select id="partner" name="partner" class="w-44">
+      <SelectOption value="">All partners</SelectOption>
+      {partners.map((p) => (
+        <SelectOption value={String(p.id)} selected={String(p.id) === filterPartner}>
+          {p.name}
+        </SelectOption>
+      ))}
+    </Select>
+  </div>
+
+  <div class="flex flex-col gap-1">
+    <label for="category" class="text-xs font-medium text-muted-foreground">Category</label>
+    <Select id="category" name="category" class="w-44">
+      <SelectOption value="">All categories</SelectOption>
+      {categories.map((c) => (
+        <SelectOption value={String(c.id)} selected={String(c.id) === filterCategory}>
+          {c.name}
+        </SelectOption>
+      ))}
+    </Select>
+  </div>
+
+  <div class="flex flex-col gap-1">
+    <label for="material" class="text-xs font-medium text-muted-foreground">Material</label>
+    <Select id="material" name="material" class="w-44">
+      <SelectOption value="">All materials</SelectOption>
+      {materials.map((m) => (
+        <SelectOption value={String(m.id)} selected={String(m.id) === filterMaterial}>
+          {m.name}
+        </SelectOption>
+      ))}
+    </Select>
+  </div>
+
+  <div class="flex flex-col gap-1">
+    <label for="published" class="text-xs font-medium text-muted-foreground">Published</label>
+    <Select id="published" name="published" class="w-36">
+      <SelectOption value="">Any</SelectOption>
+      <SelectOption value="true" selected={filterPublished === "true"}>Yes</SelectOption>
+      <SelectOption value="false" selected={filterPublished === "false"}>No</SelectOption>
+    </Select>
+  </div>
+
+  <input type="hidden" name="limit" value={rawLimit} />
+
+  <button
+    type="submit"
+    class="h-10 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
+    Apply
+  </button>
+
+  {hasActiveFilters && (
+    <a
+      href="/admin"
+      class="h-10 inline-flex items-center rounded-lg border border-input px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
+      Clear
+    </a>
+  )}
+</form>
 
 <Table>
   <TableHeader>

@@ -8,6 +8,20 @@ import AdminSidebar from "@/layouts/components/admin/AdminSidebar.astro";
 import SidebarTrigger from "@/components/bearnie/sidebar/SidebarTrigger.astro";
 import Select from "@/components/bearnie/select/Select.astro";
 import SelectOption from "@/components/bearnie/select/SelectOption.astro";
+import { getPayload } from "payload";
+import { config as payloadConfig } from "admin";
+
+const payload = await getPayload({ config: payloadConfig });
+
+const [partnersResult, categoriesResult, materialsResult] = await Promise.all([
+  payload.find({ collection: "partners", limit: 0, sort: "name", select: { name: true } }),
+  payload.find({ collection: "categories", limit: 0, sort: "name", select: { name: true } }),
+  payload.find({ collection: "materials", limit: 0, sort: "name", select: { name: true } }),
+]);
+
+const partnerOptions = partnersResult.docs.map((p) => ({ id: p.id, name: p.name }));
+const categoryOptions = categoriesResult.docs.map((c) => ({ id: c.id, name: c.name }));
+const materialOptions = materialsResult.docs.map((m) => ({ id: m.id, name: m.name }));
 ---
 
 <!doctype html>
@@ -53,7 +67,11 @@ import SelectOption from "@/components/bearnie/select/SelectOption.astro";
             </Select>
           </div>
 
-          <AdminProductsTable />
+          <AdminProductsTable
+            partners={partnerOptions}
+            categories={categoryOptions}
+            materials={materialOptions}
+          />
         </main>
       </div>
     </div>
