@@ -1,6 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import { cn } from "@/utils/cn";
+import HctLogo from "@/assets/images/hct-logo-2026.svg";
 import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
 import {
   PackageIcon,
@@ -54,9 +55,9 @@ const items: { label: string; href: string; icon: unknown; active: boolean }[] =
 
 <Sidebar id="admin-sidebar" class={cn("h-screen", className)} {...props}>
   <SidebarHeader>
-    <div class="flex items-center gap-2 px-2 text-lg font-semibold">
-      <HugeIcon icon={PackageIcon} class="size-5" />
-      <span>Admin</span>
+    <div class="flex items-center gap-2 px-2 py-1">
+      <HctLogo class="size-7.5" role="img" aria-label="HCT logo" />
+      <span class="text-lg font-semibold">Admin</span>
     </div>
   </SidebarHeader>
 
