@@ -17,7 +17,7 @@ reference implementation for admin pages in this repo.
 |---|---|
 | `web/src/pages/admin/index.astro` | Page shell: fixed left sidebar, sticky header with a sidebar toggle and theme toggle, fetches filter option lists (partners/categories/materials) and passes them to the table. `prerender = false`. |
 | `web/src/layouts/components/admin/AdminSidebar.astro` | Nav rail: Bearnie `Sidebar` (id `admin-sidebar`) with HCT logo, separator and menu (Products/Categories/Partners/Materials). Products is active on `/admin`; link `href`s for the other sections are `#` placeholders. `currentPath` prop drives the active item. |
-| `web/src/layouts/components/admin/AdminProductsTable.astro` | Fetches products via `getPayload` against `admin` (same connection as the public static routes; needs `admin` + `db/payload.db` running). Renders the filter panel (card with distinct background) containing the filter form, product count, and per-page select, then the product table and bottom-right pagination. Accepts `partners`, `categories`, `materials` props for filter dropdowns. |
+| `web/src/layouts/components/admin/AdminProductsTable.astro` | Fetches products via `getPayload` against `admin` (same connection as the public static routes; needs `admin` + `db/payload.db` running). Renders the filter panel (card with distinct background) containing the filter form, product count, and per-page select, then the sortable product table and bottom-right pagination. Accepts `partners`, `categories`, `materials` props for filter dropdowns. |
 | `web/src/styles/admin.css` | Standalone stylesheet: Tailwind + Bearnie tokens only for this page. |
 | `web/src/layouts/components/bearnie/{sidebar,table,select,checkbox,pagination}/` | Bearnie UI components installed for the admin UI. |
 
@@ -34,7 +34,8 @@ reference implementation for admin pages in this repo.
 
 ### Behavior
 
-- Query params: `?page=N` (1-based, default 1) and `?limit=10|50|all` (default 10).
+- Query params: `?page=N` (1-based, default 1), `?limit=10|50|all` (default 10), and
+  `?sort=field|dir` (default no sort, Payload `_order`).
 - Filter params: `?search=<text>`, `?partner=<id>`, `?category=<id>`, `?material=<id>`,
   `?published=true|false`. Filters are combined with Payload's `AND` operator.
 - The filter bar renders a search input, three `<Select>` dropdowns (partner, category, material),
@@ -44,10 +45,14 @@ reference implementation for admin pages in this repo.
 - Table columns: image thumbnail (via `PayloadImage`, `main_image.sizes.thumbnail`), code (links
   to the public `/product/{code}` page), published (`<Checkbox disabled checked>`), name,
   variants count, partner name, category name, materials (joined names).
-- Query uses `depth: 1` so partner/category/materials resolve inline, `sort: "_order"`, and
-  excludes the heavy `folder`/`images` fields via `select`.
-- Pagination links are generated with `makeUrl()` which preserves existing filter params from the
-  current URL and only overrides `page`.
+- Query uses `depth: 1` so partner/category/materials resolve inline, and excludes the heavy
+  `folder`/`images` fields via `select`. Sort defaults to `_order` when no `sort` param is present.
+- Sortable columns: Code, Published, Name, Partner, Category (Materials not sortable — array
+  relationship). `sort` param format: `field|asc` or `field|desc`. Clicking a header toggles
+  asc → desc → unsorted (param removed). `↑`/`↓` indicator on active column. Partner and Category
+  sort by their related `name` field via Payload dot notation (`partner.name`, `category.name`).
+- Pagination links are generated with `makeUrl()` which preserves existing filter and sort params
+  from the current URL and only overrides `page`.
 - The per-page `<select>` (native HTML, `data-per-page`) lives inside the filter panel in
   `AdminProductsTable` and navigates on change, resetting `page`. Its script is a small inline
   `<script>` at the bottom of the component.
