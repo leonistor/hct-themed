@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import "../layouts/components/bearnie/styles/bearnie.css";
+
+/* Scaffold: admin page has no Base layout, so give it a minimal document surface */
+.admin-page {
+  font-family: var(--font-sans, sans-serif);
+}

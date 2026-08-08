@@ -1,5 +1,50 @@
 ---
-
+export const prerender = false;
+import "@/styles/admin.css";
+import AdminProductsTable from "@/layouts/components/admin/AdminProductsTable.astro";
+import Select from "@/components/bearnie/select/Select.astro";
+import SelectOption from "@/components/bearnie/select/SelectOption.astro";
 ---
 
-<div>Admin page</div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Products · Admin</title>
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+  <body>
+    <div class="admin-page mx-auto max-w-6xl px-4 py-8">
+      <header class="mb-6">
+        <h1 class="text-foreground text-2xl font-semibold">Products</h1>
+        <p class="text-muted-foreground text-sm">Admin product list</p>
+      </header>
+
+      <div class="mb-4 flex items-center gap-4">
+        <Select name="limit" class="w-40" data-per-page>
+          <SelectOption value="10">10 per page</SelectOption>
+          <SelectOption value="50">50 per page</SelectOption>
+          <SelectOption value="all">All</SelectOption>
+        </Select>
+      </div>
+
+      <AdminProductsTable />
+    </div>
+
+    <script>
+      const select = document.querySelector(
+        "[data-per-page]",
+      ) as HTMLSelectElement;
+      const current =
+        new URLSearchParams(window.location.search).get("limit") ?? "10";
+      select.value = current;
+      select.addEventListener("change", () => {
+        const url = new URL(window.location.href);
+        url.searchParams.set("limit", select.value);
+        url.searchParams.delete("page");
+        window.location.href = url.pathname + url.search;
+      });
+    </script>
+  </body>
+</html>

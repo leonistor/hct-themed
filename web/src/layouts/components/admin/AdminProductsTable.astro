@@ -1,0 +1,171 @@
+---
+export const prerender = false;
+
+import Pagination from "@/components/bearnie/pagination/Pagination.astro";
+import PaginationContent from "@/components/bearnie/pagination/PaginationContent.astro";
+import PaginationItem from "@/components/bearnie/pagination/PaginationItem.astro";
+import PaginationLink from "@/components/bearnie/pagination/PaginationLink.astro";
+import PaginationPrevious from "@/components/bearnie/pagination/PaginationPrevious.astro";
+import PaginationNext from "@/components/bearnie/pagination/PaginationNext.astro";
+import Table from "@/components/bearnie/table/Table.astro";
+import TableHeader from "@/components/bearnie/table/TableHeader.astro";
+import TableBody from "@/components/bearnie/table/TableBody.astro";
+import TableRow from "@/components/bearnie/table/TableRow.astro";
+import TableHead from "@/components/bearnie/table/TableHead.astro";
+import TableCell from "@/components/bearnie/table/TableCell.astro";
+import Checkbox from "@/components/bearnie/checkbox/Checkbox.astro";
+import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
+
+import { getPayload } from "payload";
+import { config as payloadConfig } from "admin";
+import type { Category, Material, Partner } from "admin";
+import type { Where } from "payload";
+
+const payload = await getPayload({ config: payloadConfig });
+
+const currentUrl = Astro.url;
+
+let page = Number(currentUrl.searchParams.get("page"));
+const rawLimit = currentUrl.searchParams.get("limit") ?? "10";
+page = Number.isFinite(page) && page > 0 ? page : 1;
+const showPagination = rawLimit !== "all";
+const limit = showPagination ? Number(rawLimit) || 10 : 0;
+
+const where: Where = {};
+const products = await payload.find({
+  collection: "products",
+  depth: 1,
+  page,
+  limit,
+  sort: "_order",
+  where,
+  select: {
+    folder: false,
+    images: false,
+  },
+});
+
+const totalPages = products.totalPages;
+const totalDocs = products.totalDocs;
+
+const makeUrl = (params: Record<string, string>) => {
+  const url = new URL(currentUrl.toString());
+  for (const [key, value] of Object.entries(params)) {
+    if (value) url.searchParams.set(key, value);
+    else url.searchParams.delete(key);
+  }
+  return url.pathname + url.search;
+};
+
+const isCurrentPage = (n: number) => showPagination && n === page;
+
+const showPrev = showPagination && products.hasPrevPage;
+const showNext = showPagination && products.hasNextPage;
+---
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Image</TableHead>
+      <TableHead>Code</TableHead>
+      <TableHead>Published</TableHead>
+      <TableHead>Name</TableHead>
+      <TableHead>Variants</TableHead>
+      <TableHead>Partner</TableHead>
+      <TableHead>Category</TableHead>
+      <TableHead>Materials</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {
+      products.docs.map((product) => {
+        const mainImage = product.main_image as unknown as {
+          sizes?: { thumbnail?: { filename?: string } };
+        } | null;
+        const thumbnail = mainImage?.sizes?.thumbnail?.filename;
+        const partner = product.partner;
+        const category = product.category;
+        const materials = (product.materials ?? []) as (Material | number)[];
+        const variantsCount = product.variants?.length ?? 0;
+
+        return (
+          <TableRow>
+            <TableCell>
+              {thumbnail ? (
+                <PayloadImage
+                  src={`/payload/products/${thumbnail}`}
+                  alt={product.name}
+                  width={48}
+                  height={48}
+                  class="rounded object-cover"
+                />
+              ) : (
+                <span class="text-muted-foreground">—</span>
+              )}
+            </TableCell>
+            <TableCell>
+              <a
+                href={`/product/${product.code}`}
+                class="text-primary font-medium underline">
+                {product.code}
+              </a>
+            </TableCell>
+            <TableCell>
+              <Checkbox checked={product.published ?? false} disabled />
+            </TableCell>
+            <TableCell class="font-medium">{product.name}</TableCell>
+            <TableCell>{variantsCount}</TableCell>
+            <TableCell>
+              {typeof partner === "object" && partner ? partner.name : "—"}
+            </TableCell>
+            <TableCell>
+              {typeof category === "object" && category ? category.name : "—"}
+            </TableCell>
+            <TableCell>
+              {materials
+                .map((material) =>
+                  typeof material === "object" && material
+                    ? material.name
+                    : "—",
+                )
+                .join(", ")}
+            </TableCell>
+          </TableRow>
+        );
+      })
+    }
+  </TableBody>
+</Table>
+
+<div class="flex items-center justify-between px-2 pt-4">
+  <p class="text-muted-foreground text-sm">
+    {totalDocs} products{showPagination && ` · page ${page} of ${totalPages}`}
+  </p>
+  {
+    showPagination && (
+      <Pagination>
+        <PaginationContent>
+          {showPrev && (
+            <PaginationItem>
+              <PaginationPrevious href={makeUrl({ page: String(page - 1) })} />
+            </PaginationItem>
+          )}
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+            <PaginationItem>
+              <PaginationLink
+                href={makeUrl({ page: String(n) })}
+                isActive={isCurrentPage(n)}>
+                {n}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+          {showNext && (
+            <PaginationItem>
+              <PaginationNext href={makeUrl({ page: String(page + 1) })} />
+            </PaginationItem>
+          )}
+        </PaginationContent>
+      </Pagination>
+    )
+  }
+</div>
