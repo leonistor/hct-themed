@@ -17,6 +17,8 @@ import Checkbox from "@/components/bearnie/checkbox/Checkbox.astro";
 import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
 import Select from "@/components/bearnie/select/Select.astro";
 import SelectOption from "@/components/bearnie/select/SelectOption.astro";
+import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
+import { ArrowUpDownIcon, ArrowUp02Icon, ArrowDown02Icon } from "@/components/bearnie/lib/hugeicons";
 
 import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
@@ -64,6 +66,13 @@ if (sortParam) {
   }
 }
 const sort = sortField ? `${sortDir === "desc" ? "-" : ""}${sortField === "partner" ? "partner.name" : sortField === "category" ? "category.name" : sortField}` : "_order";
+
+const sortIcon = (field: SortableColumn) =>
+  sortField !== field ? ArrowUpDownIcon
+    : sortDir === "asc" ? ArrowUp02Icon
+    : ArrowDown02Icon;
+const sortIconClass = (field: SortableColumn) =>
+  sortField === field ? "text-foreground" : "text-muted-foreground";
 
 const where: Where = {};
 const and: Where[] = [];
@@ -209,38 +218,38 @@ const hasActiveFilters = search || filterPartner || filterCategory || filterMate
       <TableHead>Image</TableHead>
       <TableHead>
         <a href={makeUrl({ sort: sortField === "code" && sortDir === "asc" ? "code|desc" : sortField === "code" ? "" : "code|asc", page: "1" })}
-           class="inline-flex items-center gap-1 hover:underline">
-          Code
-          {sortField === "code" && <span class="text-xs">{sortDir === "asc" ? "↑" : "↓"}</span>}
+           class="flex items-center justify-between gap-1 hover:underline">
+          <span>Code</span>
+          <HugeIcon icon={sortIcon("code")} class:list={["size-3.5", sortIconClass("code")]} />
         </a>
       </TableHead>
       <TableHead>
         <a href={makeUrl({ sort: sortField === "published" && sortDir === "asc" ? "published|desc" : sortField === "published" ? "" : "published|asc", page: "1" })}
-           class="inline-flex items-center gap-1 hover:underline">
-          Published
-          {sortField === "published" && <span class="text-xs">{sortDir === "asc" ? "↑" : "↓"}</span>}
+           class="flex items-center justify-between gap-1 hover:underline">
+          <span>Published</span>
+          <HugeIcon icon={sortIcon("published")} class:list={["size-3.5", sortIconClass("published")]} />
         </a>
       </TableHead>
       <TableHead>
         <a href={makeUrl({ sort: sortField === "name" && sortDir === "asc" ? "name|desc" : sortField === "name" ? "" : "name|asc", page: "1" })}
-           class="inline-flex items-center gap-1 hover:underline">
-          Name
-          {sortField === "name" && <span class="text-xs">{sortDir === "asc" ? "↑" : "↓"}</span>}
+           class="flex items-center justify-between gap-1 hover:underline">
+          <span>Name</span>
+          <HugeIcon icon={sortIcon("name")} class:list={["size-3.5", sortIconClass("name")]} />
         </a>
       </TableHead>
       <TableHead>Variants</TableHead>
       <TableHead>
         <a href={makeUrl({ sort: sortField === "partner" && sortDir === "asc" ? "partner|desc" : sortField === "partner" ? "" : "partner|asc", page: "1" })}
-           class="inline-flex items-center gap-1 hover:underline">
-          Partner
-          {sortField === "partner" && <span class="text-xs">{sortDir === "asc" ? "↑" : "↓"}</span>}
+           class="flex items-center justify-between gap-1 hover:underline">
+          <span>Partner</span>
+          <HugeIcon icon={sortIcon("partner")} class:list={["size-3.5", sortIconClass("partner")]} />
         </a>
       </TableHead>
       <TableHead>
         <a href={makeUrl({ sort: sortField === "category" && sortDir === "asc" ? "category|desc" : sortField === "category" ? "" : "category|asc", page: "1" })}
-           class="inline-flex items-center gap-1 hover:underline">
-          Category
-          {sortField === "category" && <span class="text-xs">{sortDir === "asc" ? "↑" : "↓"}</span>}
+           class="flex items-center justify-between gap-1 hover:underline">
+          <span>Category</span>
+          <HugeIcon icon={sortIcon("category")} class:list={["size-3.5", sortIconClass("category")]} />
         </a>
       </TableHead>
       <TableHead>Materials</TableHead>
