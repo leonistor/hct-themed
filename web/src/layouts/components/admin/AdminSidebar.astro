@@ -1,0 +1,80 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/utils/cn";
+import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
+import {
+  PackageIcon,
+  SquareRoundCornerIcon,
+  UserMultiple02Icon,
+  Settings01Icon,
+} from "@/components/bearnie/lib/hugeicons";
+
+import Sidebar from "@/components/bearnie/sidebar/Sidebar.astro";
+import SidebarContent from "@/components/bearnie/sidebar/SidebarContent.astro";
+import SidebarHeader from "@/components/bearnie/sidebar/SidebarHeader.astro";
+import SidebarMenu from "@/components/bearnie/sidebar/SidebarMenu.astro";
+import SidebarMenuItem from "@/components/bearnie/sidebar/SidebarMenuItem.astro";
+import SidebarMenuButton from "@/components/bearnie/sidebar/SidebarMenuButton.astro";
+import SidebarSeparator from "@/components/bearnie/sidebar/SidebarSeparator.astro";
+
+export interface Props extends HTMLAttributes<"aside"> {
+  currentPath?: string;
+}
+
+const { currentPath = "/admin", class: className, ...props } = Astro.props;
+
+const items: { label: string; href: string; icon: unknown; active: boolean }[] =
+  [
+    {
+      label: "Products",
+      href: "/admin",
+      icon: PackageIcon,
+      active: currentPath === "/admin",
+    },
+    {
+      label: "Categories",
+      href: "#",
+      icon: SquareRoundCornerIcon,
+      active: false,
+    },
+    {
+      label: "Partners",
+      href: "#",
+      icon: UserMultiple02Icon,
+      active: false,
+    },
+    {
+      label: "Materials",
+      href: "#",
+      icon: Settings01Icon,
+      active: false,
+    },
+  ];
+---
+
+<Sidebar id="admin-sidebar" class={cn("h-screen", className)} {...props}>
+  <SidebarHeader>
+    <div class="flex items-center gap-2 px-2 text-lg font-semibold">
+      <HugeIcon icon={PackageIcon} class="size-5" />
+      <span>Admin</span>
+    </div>
+  </SidebarHeader>
+
+  <SidebarSeparator />
+
+  <SidebarContent>
+    <SidebarMenu>
+      {items.map((item) => (
+        <SidebarMenuItem>
+          <SidebarMenuButton
+            href={item.href}
+            isActive={item.active}
+            class="gap-2">
+            <HugeIcon icon={item.icon as never} class="size-4" />
+            <span>{item.label}</span>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      ))}
+    </SidebarMenu>
+  </SidebarContent>
+</Sidebar>

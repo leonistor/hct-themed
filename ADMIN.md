@@ -15,10 +15,20 @@ reference implementation for admin pages in this repo.
 
 | Path | Role |
 |---|---|
-| `web/src/pages/admin/index.astro` | Page shell: title, per-page `<Select>` (10/50/all), renders the table. `prerender = false`. |
-| `web/src/layouts/components/admin/AdminProductsTable.astro` | Fetches products via `getPayload` against `admin` (same connection as the public dynamic routes; needs `admin` + `db/payload.db` running). |
-| `web/src/styles/admin.css` | Standalone stylesheet: imports Tailwind + Bearnie tokens only for this page. |
-| `web/src/layouts/components/bearnie/{table,select,checkbox,pagination}/` | Bearnie UI components installed for the admin UI. |
+| `web/src/pages/admin/index.astro` | Page shell: fixed left sidebar, sticky header with a sidebar toggle, per-page `<Select>` (10/50/all), renders the table. `prerender = false`. |
+| `web/src/layouts/components/admin/AdminSidebar.astro` | Nav rail: Bearnie `Sidebar` (id `admin-sidebar`) with Admin header, separator and menu (Products/Categories/Partners/Materials). Products is active on `/admin`; link `href`s for the other sections are `#` placeholders. `currentPath` prop drives the active item. |
+| `web/src/layouts/components/admin/AdminProductsTable.astro` | Fetches products via `getPayload` against `admin` (same connection as the public static routes; needs `admin` + `db/payload.db` running). |
+| `web/src/styles/admin.css` | Standalone stylesheet: Tailwind + Bearnie tokens only for this page. |
+| `web/src/layouts/components/bearnie/{sidebar,table,select,checkbox,pagination}/` | Bearnie UI components installed for the admin UI. |
+
+### Layout
+
+- Two-column flex: the `AdminSidebar` (`h-screen`) on the left, a `flex-1` column on the right.
+- The header is sticky (`z-30`) and holds the `SidebarTrigger` (`for="admin-sidebar"`, matching the
+  sidebar id) plus the page title; the sidebar handles collapse and mobile behavior in its own
+  script.
+- The per-page `<Select>` script is plain, per-page JS living in `index.astro` (not in a shared
+  `<script>` chunk), since the page is standalone.
 
 ### Behavior
 
