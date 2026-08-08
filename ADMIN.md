@@ -8,8 +8,8 @@ that do not use the public `Base.astro` layout.
 
 Route: `/admin` (`web/src/pages/admin/index.astro`), served on port 4321.
 
-A read-only catalogue table of the `products` collection from Payload. It is the current
-reference implementation for admin pages in this repo.
+A read-only catalogue table of the `products` collection from Payload, with inline editing via a
+slide-out sheet. It is the current reference implementation for admin pages in this repo.
 
 ### Files
 
@@ -17,9 +17,10 @@ reference implementation for admin pages in this repo.
 |---|---|
 | `web/src/pages/admin/index.astro` | Page shell: fixed left sidebar, sticky header with a sidebar toggle and theme toggle, fetches filter option lists (partners/categories/materials) and passes them to the table. `prerender = false`. |
 | `web/src/layouts/components/admin/AdminSidebar.astro` | Nav rail: Bearnie `Sidebar` (id `admin-sidebar`) with HCT logo, separator and menu (Products/Categories/Partners/Materials). Products is active on `/admin`; link `href`s for the other sections are `#` placeholders. `currentPath` prop drives the active item. |
-| `web/src/layouts/components/admin/AdminProductsTable.astro` | Fetches products via `getPayload` against `admin` (same connection as the public static routes; needs `admin` + `db/payload.db` running). Renders the filter panel (card with distinct background) containing the filter form, product count, and per-page select, then the sortable product table and bottom-right pagination. Accepts `partners`, `categories`, `materials` props for filter dropdowns. |
+| `web/src/layouts/components/admin/AdminProductsTable.astro` | Fetches products via `getPayload` against `admin` (same connection as the public static routes; needs `admin` + `db/payload.db` running). Renders the filter panel (card with distinct background) containing the filter form, product count, and per-page select, then the sortable product table and bottom-right pagination. Includes a Bearnie Sheet for editing products (2/3 width, right side). Accepts `partners`, `categories`, `materials` props for filter dropdowns. |
+| `web/src/pages/api/products/[id].ts` | PUT endpoint for updating a product. Uses Payload local API to update code, name, and description fields. Returns updated doc as JSON. |
 | `web/src/styles/admin.css` | Standalone stylesheet: Tailwind + Bearnie tokens only for this page. |
-| `web/src/layouts/components/bearnie/{sidebar,table,select,checkbox,pagination}/` | Bearnie UI components installed for the admin UI. |
+| `web/src/layouts/components/bearnie/{sidebar,table,select,checkbox,pagination,sheet,input,textarea,button,label}/` | Bearnie UI components installed for the admin UI. |
 
 ### Layout
 
@@ -42,14 +43,15 @@ reference implementation for admin pages in this repo.
   a published `<Select>` (Any/Yes/No), an Apply button, and a Clear link (shown when any filter
   is active). A hidden `limit` field preserves the current page size across filter submissions.
 - `limit=all` requests `limit: 0` with `pagination: false`; the pager and page count are hidden.
-- Table columns: image thumbnail (via `PayloadImage`, `main_image.sizes.thumbnail`), code (links
-  to the public `/product/{code}` page), published (`<Checkbox disabled checked>`), name,
-  variants count, partner name, category name, materials (joined names).
+- Table columns: image thumbnail (via `PayloadImage`, `main_image.sizes.thumbnail`), code (plain
+  text), published (`<Checkbox disabled checked>`), name, variants count, partner name, category
+  name, materials (joined names).
 - Query uses `depth: 1` so partner/category/materials resolve inline, and excludes the heavy
   `folder`/`images` fields via `select`. Sort defaults to `_order` when no `sort` param is present.
 - Sortable columns: Code, Published, Name, Partner, Category (Materials not sortable — array
   relationship). `sort` param format: `field|asc` or `field|desc`. Clicking a header toggles
-  asc → desc → unsorted (param removed). `↑`/`↓` indicator on active column. Partner and Category
+  asc → desc → unsorted (param removed). Hugeicons `ArrowUpDown`/`ArrowUp02`/`ArrowDown02`
+  icons on each header (dimmed when unsorted, highlighted when active). Partner and Category
   sort by their related `name` field via Payload dot notation (`partner.name`, `category.name`).
 - Pagination links are generated with `makeUrl()` which preserves existing filter and sort params
   from the current URL and only overrides `page`.
@@ -58,6 +60,13 @@ reference implementation for admin pages in this repo.
   `<script>` at the bottom of the component.
 - `index.astro` fetches all partners, categories, and materials via `payload.find()` with
   `limit: 0` and `sort: "name"` to populate the filter dropdowns.
+- Edit sheet: `?edit=<id>` param opens a Bearnie Sheet (2/3 width, right side) with a form to
+  edit the product's code, name, and description. Clicking a table row navigates to the URL with
+  the `edit` param (preserving filters, sort, pagination). The active row gets `bg-accent`
+  highlighting; all rows have `hover:bg-muted/50`. The Sheet auto-opens on page load when the
+  `edit` param is present. Save calls `PUT /api/products/<id>` and reloads the page. Cancel/close
+  removes the `edit` param and reloads. The PUT endpoint uses Payload local API to update the
+  product and returns the updated doc as JSON.
 
 ### Theming
 
