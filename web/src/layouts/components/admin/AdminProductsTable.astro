@@ -314,12 +314,12 @@ if (editId) {
                 <span class="text-muted-foreground">—</span>
               )}
             </TableCell>
-            <TableCell class="font-medium">{product.code}</TableCell>
+            <TableCell class="font-medium text-muted-foreground">{product.code}</TableCell>
             <TableCell>
               <Checkbox checked={product.published ?? false} disabled />
             </TableCell>
             <TableCell class="font-medium">{product.name}</TableCell>
-            <TableCell>{variantsCount}</TableCell>
+            <TableCell>{variantsCount > 0 ? variantsCount : "—"}</TableCell>
             <TableCell>
               {typeof partner === "object" && partner ? partner.name : "—"}
             </TableCell>
