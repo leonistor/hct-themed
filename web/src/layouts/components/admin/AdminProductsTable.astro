@@ -197,6 +197,13 @@ const activeVariants = (activeProduct?.variants ?? []) as {
   description?: string;
   url?: string;
 }[];
+
+const activeProductTitle =
+  activeProduct &&
+  typeof activeProduct.partner === "object" &&
+  activeProduct.partner
+    ? `${activeProduct.partner.name}: ${activeProduct.name}`
+    : (activeProduct?.name ?? "Edit Product");
 ---
 
 <div class="bg-muted/50 mb-6 rounded-lg border p-4">
@@ -531,9 +538,7 @@ const activeVariants = (activeProduct?.variants ?? []) as {
   </template>
   <SheetContent side="right" class="flex w-2/3 flex-col sm:max-w-2xl">
     <SheetHeader>
-      <SheetTitle id="edit-sheet-title"
-        >{activeProduct?.name ?? "Edit Product"}</SheetTitle
-      >
+      <SheetTitle id="edit-sheet-title">{activeProductTitle}</SheetTitle>
     </SheetHeader>
     <form id="product-edit-form" class="flex-1 space-y-4 overflow-y-auto py-4">
       <input
@@ -831,6 +836,7 @@ const activeVariants = (activeProduct?.variants ?? []) as {
         medium?: { url?: string; filename?: string };
       };
     } | null;
+    partner?: unknown;
   }) {
     const f = document.getElementById("product-edit-form") as HTMLFormElement;
     if (!f) return;
@@ -844,7 +850,16 @@ const activeVariants = (activeProduct?.variants ?? []) as {
       product.name ?? "",
     );
     const titleEl = document.getElementById("edit-sheet-title");
-    if (titleEl) titleEl.textContent = product.name || "Edit Product";
+    if (titleEl) {
+      const partner = product.partner as
+        | { name?: string }
+        | null
+        | undefined;
+      titleEl.textContent =
+        partner?.name
+          ? `${partner.name}: ${product.name ?? ""}`
+          : (product.name || "Edit Product");
+    }
     (f.querySelector("[name=description]") as HTMLTextAreaElement).value =
       String(product.description ?? "");
     (f.querySelector("[name=published]") as HTMLInputElement).checked =
