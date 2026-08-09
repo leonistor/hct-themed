@@ -612,43 +612,40 @@ const activeProductTitle =
               />
               <Label for="edit-promoted">Promoted</Label>
             </div>
-          </div>
-          <div class="space-y-2">
-            <Label>URL</Label>
-            <p
-              data-edit-url
-              class="text-muted-foreground flex items-start gap-1 text-sm">
-              {
-                activeProduct?.url ? (
-                  <a
-                    href={activeProduct.url}
-                    target="_blank"
-                    rel="noopener"
-                    title={activeProduct.url}
-                    class="text-primary inline-flex items-center">
-                    <HugeIcon
-                      icon={ArrowUpRight01Icon}
-                      class="size-4 shrink-0"
-                    />
-                  </a>
-                ) : (
-                  <span class="text-muted-foreground/50">—</span>
-                )
-              }
-            </p>
+            <div class="flex items-center gap-1">
+              <Label class="text-muted-foreground text-sm font-normal">URL</Label>
+              <p data-edit-url class="flex items-center">
+                {
+                  activeProduct?.url ? (
+                    <a
+                      href={activeProduct.url}
+                      target="_blank"
+                      rel="noopener"
+                      title={activeProduct.url}
+                      class="text-primary inline-flex items-center">
+                      <HugeIcon
+                        icon={ArrowUpRight01Icon}
+                        class="size-4 shrink-0"
+                      />
+                    </a>
+                  ) : (
+                    <span class="text-muted-foreground/50">—</span>
+                  )
+                }
+              </p>
+            </div>
           </div>
         </div>
       </div>
       <Accordion type="single" class="w-full">
         <AccordionItem value="category-materials">
           <AccordionTrigger
-            defaultOpen
             icon={PlusSignIcon}
             iconSize="sm"
             class="text-sm font-semibold">
             Category &amp; Materials
           </AccordionTrigger>
-          <AccordionContent defaultOpen>
+          <AccordionContent>
             <div class="space-y-4">
               <div class="space-y-2">
                 <Label for="edit-category">Category</Label>
@@ -734,20 +731,7 @@ const activeProductTitle =
             </div>
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="images">
-          <AccordionTrigger
-            icon={PlusSignIcon}
-            iconSize="sm"
-            class="text-sm font-semibold">
-            Other images
-          </AccordionTrigger>
-          <AccordionContent>
-            <p data-edit-other-images class="text-muted-foreground/50 text-sm">
-              —
-            </p>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+        </Accordion>
       <SheetFooter>
         <Button type="submit">Save</Button>
         <SheetClose>Cancel</SheetClose>
