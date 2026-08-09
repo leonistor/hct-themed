@@ -22,6 +22,7 @@ import {
   ArrowUpDownIcon,
   ArrowUp02Icon,
   ArrowDown02Icon,
+  ArrowUpRight01Icon,
   CheckmarkCircle01Icon,
   Layers01Icon,
 } from "@/components/bearnie/lib/hugeicons";
@@ -520,9 +521,12 @@ const activeVariants = (activeProduct?.variants ?? []) as {
 <Sheet>
   <SheetOverlay />
   <SheetTrigger id="sheet-open-trigger" class="hidden" />
+  <template id="sheet-link-icon">
+    <HugeIcon icon={ArrowUpRight01Icon} class="size-4 shrink-0" />
+  </template>
   <SheetContent side="right" class="flex w-2/3 flex-col sm:max-w-2xl">
     <SheetHeader>
-      <SheetTitle>Edit Product</SheetTitle>
+      <SheetTitle id="edit-sheet-title">{activeProduct?.name ?? "Edit Product"}</SheetTitle>
     </SheetHeader>
     <form id="product-edit-form" class="flex-1 space-y-4 overflow-y-auto py-4">
       <input
@@ -610,9 +614,23 @@ const activeVariants = (activeProduct?.variants ?? []) as {
       </div>
       <div class="space-y-2">
         <Label>URL</Label>
-        <p data-edit-url class="text-muted-foreground text-sm break-all">
+        <p
+          data-edit-url
+          class="text-muted-foreground flex items-start gap-1 text-sm">
           {
-            activeProduct?.url || (
+            activeProduct?.url ? (
+              <a
+                href={activeProduct.url}
+                target="_blank"
+                rel="noopener"
+                class="text-primary inline-flex items-center gap-1 break-all hover:underline">
+                <HugeIcon
+                  icon={ArrowUpRight01Icon}
+                  class="size-4 shrink-0"
+                />
+                <span>{activeProduct.url}</span>
+              </a>
+            ) : (
               <span class="text-muted-foreground/50">—</span>
             )
           }
@@ -642,8 +660,10 @@ const activeVariants = (activeProduct?.variants ?? []) as {
                     <a
                       href={v.url}
                       target="_blank"
-                      class="text-primary mt-1 block hover:underline">
-                      {v.url}
+                      rel="noopener"
+                      class="text-primary mt-1 inline-flex items-center gap-1 break-all hover:underline">
+                      <HugeIcon icon={ArrowUpRight01Icon} class="size-4 shrink-0" />
+                      <span>{v.url}</span>
                     </a>
                   )}
                 </div>
@@ -724,6 +744,23 @@ const activeVariants = (activeProduct?.variants ?? []) as {
       : String(value ?? "");
   }
 
+  function externalUrlLink(url: string): HTMLAnchorElement {
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.className =
+      "inline-flex items-center gap-1 text-primary break-all hover:underline";
+    const tmpl = document.getElementById(
+      "sheet-link-icon",
+    ) as HTMLTemplateElement | null;
+    if (tmpl) a.appendChild(tmpl.content.cloneNode(true));
+    const span = document.createElement("span");
+    span.textContent = url;
+    a.appendChild(span);
+    return a;
+  }
+
   function populateForm(product: {
     id: string | number;
     code?: string;
@@ -758,6 +795,8 @@ const activeVariants = (activeProduct?.variants ?? []) as {
     (f.querySelector("[name=name]") as HTMLInputElement).value = String(
       product.name ?? "",
     );
+    const titleEl = document.getElementById("edit-sheet-title");
+    if (titleEl) titleEl.textContent = product.name || "Edit Product";
     (f.querySelector("[name=description]") as HTMLTextAreaElement).value =
       String(product.description ?? "");
     (f.querySelector("[name=published]") as HTMLInputElement).checked =
@@ -784,8 +823,15 @@ const activeVariants = (activeProduct?.variants ?? []) as {
 
     const urlEl = f.querySelector("[data-edit-url]");
     if (urlEl) {
-      urlEl.textContent = product.url ?? "";
-      if (!product.url) urlEl.textContent = "—";
+      urlEl.textContent = "";
+      if (product.url) {
+        urlEl.appendChild(externalUrlLink(product.url));
+      } else {
+        const span = document.createElement("span");
+        span.className = "text-muted-foreground/50";
+        span.textContent = "—";
+        urlEl.appendChild(span);
+      }
     }
 
     const variantsEl = f.querySelector("[data-edit-variants]");
@@ -818,12 +864,7 @@ const activeVariants = (activeProduct?.variants ?? []) as {
             box.appendChild(desc);
           }
           if (v.url) {
-            const link = document.createElement("a");
-            link.href = v.url;
-            link.target = "_blank";
-            link.className = "mt-1 block text-primary hover:underline";
-            link.textContent = v.url;
-            box.appendChild(link);
+            box.appendChild(externalUrlLink(v.url));
           }
           variantsEl.appendChild(box);
         });

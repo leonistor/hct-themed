@@ -10,6 +10,7 @@ export { default as ArrowDown02Icon } from "@hugeicons/core-free-icons/ArrowDown
 export { default as ArrowLeft02Icon } from "@hugeicons/core-free-icons/ArrowLeft02Icon";
 export { default as ArrowRight02Icon } from "@hugeicons/core-free-icons/ArrowRight02Icon";
 export { default as ArrowUp02Icon } from "@hugeicons/core-free-icons/ArrowUp02Icon";
+export { default as ArrowUpRight01Icon } from "@hugeicons/core-free-icons/ArrowUpRight01Icon";
 export { default as TextFontIcon } from "@hugeicons/core-free-icons/TextFontIcon";
 export { default as Notification01Icon } from "@hugeicons/core-free-icons/Notification01Icon";
 export { default as TextBoldIcon } from "@hugeicons/core-free-icons/TextBoldIcon";

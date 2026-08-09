@@ -64,12 +64,17 @@ slide-out sheet. It is the current reference implementation for admin pages in t
 - `index.astro` fetches all partners, categories, and materials via `payload.find()` with
   `limit: 0` and `sort: "name"` to populate the filter dropdowns.
 - Edit sheet: the sheet form (2/3 width, right side) edits code, name, description, published,
-  promoted (Checkbox), category (single select), and materials (checkbox list). Read-only
-  sections show url, variants (name, feature, description, url), and main image. The main image
-  uses the API returned `main_image.sizes.medium.url` (resolved via `/api/product-images/file/…`,
-  the admin media proxy) rather than the `/payload/products/…` path that only resolves through
-  the server-rendered `PayloadImage` component. The sheet form is always rendered in the DOM; on
-  initial page load with `?edit`, fields are populated server-side. On row click, the URL is
+  promoted (Checkbox), category (single select), and materials (checkbox list). The sheet title
+  shows the product name (falls back to "Edit Product" when no product is loaded); it is set
+  server-side on `?edit` loads and updated client-side in `populateForm`. Read-only sections show
+  url, variants (name, feature, description, url), and main image. Product and variant URLs render
+  as external links (target `_blank`, `rel="noopener"`) with the Hugeicons `ArrowUpRight01Icon`
+  marker; the client reuses a `<template id="sheet-link-icon">`, so the icon markup lives in one
+  place. The main image uses the API returned `main_image.sizes.medium.url` (resolved via
+  `/api/product-images/file/…`, the admin media proxy) rather than the `/payload/products/…` path
+  that only resolves through the server-rendered `PayloadImage` component. The sheet form is always
+  rendered in the DOM; on initial page load with `?edit`, fields are populated server-side. On row
+  click, the URL is
   updated via `history.pushState`, product data is fetched from `GET /api/products/<id>`, the
   form is populated, and the sheet opens client-side. No full page reload, so scroll position is
   preserved. The active row gets `bg-accent` highlighting; all rows have `hover:bg-muted/50`.
