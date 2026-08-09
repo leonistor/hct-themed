@@ -21,7 +21,7 @@ slide-out sheet. It is the current reference implementation for admin pages in t
 | `web/src/pages/api/products/[id].ts` | GET endpoint returning a product as JSON (excludes `folder`/`images` fields). PUT endpoint for updating a product. Uses Payload local API to update code, name, description, published, promoted, category, and materials fields. Both use `depth: 2`. Returns updated doc as JSON. |
 | `web/src/styles/admin.css` | Standalone stylesheet: Tailwind + Bearnie tokens only for this page. |
 | `web/src/layouts/components/bearnie/{sidebar,table,select,checkbox,pagination,sheet,input,textarea,button,label}/` | Bearnie UI components installed for the admin UI. |
-| `web/src/layouts/components/bearnie/lib/hugeicons.ts` | Barrel re-export of Hugeicons free (stroke-rounded) icons used by admin components. |
+| `web/src/layouts/components/bearnie/lib/hugeicons.ts` | Barrel re-export of Hugeicons free (stroke-rounded) icon data with official Hugeicons names (same identifiers as `@hugeicons/core-free-icons` / hugeicons.com), for use with `HugeIcon.astro`. Import icons from here (e.g. `import { ArrowUpRight01Icon } from "@/components/bearnie/lib/hugeicons"`), never from `@hugeicons/core-free-icons` directly. |
 
 ### Layout
 
@@ -101,6 +101,17 @@ keep their brand colors (e.g. `--color-primary: #216869`) unchanged.
 
 `astro.config.mjs` maps `@/components/*` to `src/layouts/components/*`, so admin imports use
 `@/components/bearnie/...` exactly like the public sections.
+
+### Icons
+
+Admin components render icons via the Bearnie `HugeIcon.astro` component. The icon data (Svelte
+components from `@hugeicons/core-free-icons`) is re-exported from the barrel
+`web/src/layouts/components/bearnie/lib/hugeicons.ts`, which maps each official Hugeicons name
+(e.g. `ArrowUpRight01Icon`, `PlusSignIcon`, `Layers01Icon`) to an `HugeIcon`-compatible prop.
+Always import icons from this barrel, never directly from `@hugeicons/core-free-icons`. To add a
+new icon, append its `export { default as <Name>Icon } from "@hugeicons/core-free-icons/<Name>Icon"`
+line to the barrel. Size and color come from the `class` prop on `HugeIcon` (e.g. `size-4`,
+`text-primary`).
 
 ### Usage constraints
 
