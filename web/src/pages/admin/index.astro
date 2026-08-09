@@ -8,8 +8,14 @@ import AdminSidebar from "@/layouts/components/admin/AdminSidebar.astro";
 import SidebarTrigger from "@/components/bearnie/sidebar/SidebarTrigger.astro";
 import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
+import { getAdminUser } from "@/utils/adminAuth";
 
 const payload = await getPayload({ config: payloadConfig });
+
+const currentUser = await getAdminUser(payload, Astro.request);
+if (!currentUser) {
+  return Astro.redirect("/admin/login");
+}
 
 const [partnersResult, categoriesResult, materialsResult] = await Promise.all([
   payload.find({ collection: "partners", limit: 0, sort: "name", select: { name: true } }),
@@ -38,7 +44,7 @@ const materialOptions = materialsResult.docs.map((m) => ({ id: m.id, name: m.nam
   </head>
   <body>
     <div class="flex min-h-screen">
-      <AdminSidebar currentPath={Astro.url.pathname} />
+      <AdminSidebar currentPath={Astro.url.pathname} userEmail={currentUser.email} />
 
       <div class="flex flex-1 flex-col">
         <header class="sticky top-0 z-30 flex items-center gap-3 bg-background px-4 py-3 shadow-sm">

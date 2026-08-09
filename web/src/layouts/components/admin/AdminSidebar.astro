@@ -8,10 +8,12 @@ import {
   SquareRoundCornerIcon,
   UserMultiple02Icon,
   Settings01Icon,
+  Logout01Icon,
 } from "@/components/bearnie/lib/hugeicons";
 
 import Sidebar from "@/components/bearnie/sidebar/Sidebar.astro";
 import SidebarContent from "@/components/bearnie/sidebar/SidebarContent.astro";
+import SidebarFooter from "@/components/bearnie/sidebar/SidebarFooter.astro";
 import SidebarHeader from "@/components/bearnie/sidebar/SidebarHeader.astro";
 import SidebarMenu from "@/components/bearnie/sidebar/SidebarMenu.astro";
 import SidebarMenuItem from "@/components/bearnie/sidebar/SidebarMenuItem.astro";
@@ -20,9 +22,10 @@ import SidebarSeparator from "@/components/bearnie/sidebar/SidebarSeparator.astr
 
 export interface Props extends HTMLAttributes<"aside"> {
   currentPath?: string;
+  userEmail?: string;
 }
 
-const { currentPath = "/admin", class: className, ...props } = Astro.props;
+const { currentPath = "/admin", userEmail, class: className, ...props } = Astro.props;
 
 const items: { label: string; href: string; icon: unknown; active: boolean }[] =
   [
@@ -78,4 +81,38 @@ const items: { label: string; href: string; icon: unknown; active: boolean }[] =
       ))}
     </SidebarMenu>
   </SidebarContent>
+
+  {userEmail && (
+    <SidebarFooter>
+      <div class="flex flex-col items-stretch gap-1">
+        <span class="truncate px-2 text-xs font-medium text-muted-foreground">
+          {userEmail}
+        </span>
+        <button
+          type="button"
+          data-admin-logout
+          class="inline-flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
+          <HugeIcon icon={Logout01Icon as never} class="size-4" />
+          <span>Logout</span>
+        </button>
+      </div>
+    </SidebarFooter>
+  )}
 </Sidebar>
+
+<script>
+  document.querySelectorAll("[data-admin-logout]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      try {
+        await fetch("/api/users/logout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({}),
+        });
+      } catch {
+        /* proceed to login regardless */
+      }
+      window.location.href = "/admin/login";
+    });
+  });
+</script>

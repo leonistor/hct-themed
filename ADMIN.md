@@ -4,6 +4,24 @@ Administrative pages served by `web` (Astro), as opposed to the Payload CMS admi
 the `admin` workspace on port 3000. These live under `web/src/pages/` and are standalone pages
 that do not use the public `Base.astro` layout.
 
+## Authentication
+
+Admin pages and the products API are protected by cookie-based sessions against the Payload
+`users` collection. Login is handled by a dedicated `users` Astro API (which takes precedence over
+the `[...path].ts` proxy) using the Payload Local API:
+
+| Route | Role |
+|---|---|
+| `web/src/pages/api/users/login.ts` | `POST` — `payload.login({ collection: 'users', ... })`, sets an httpOnly `payload-token` cookie (2h, `SameSite=Lax`, `Secure` in prod) and returns `{ user }`. |
+| `web/src/pages/api/users/logout.ts` | `POST` — expires the `payload-token` cookie. |
+| `web/src/pages/api/users/me.ts` | `GET` — returns the current user or 401. |
+| `web/src/pages/admin/login.astro` | Standalone login form (`admin.css`, Bearnie `Input`/`Label`/`Button`), redirects to `/admin` on success. |
+| `web/src/utils/adminAuth.ts` | Shared helpers: `getAdminUser(payload, request)` (verifies via Payload's exported `JWTAuthentication` strategy with `DisableAutologin`), `setAuthCookie`, `clearAuthCookie`. |
+
+Guards: `admin/index.astro` returns `Astro.redirect("/admin/login")` when unauthenticated, and
+`web/src/pages/api/products/[id].ts` (GET + PUT) returns 401. Logout lives in the `AdminSidebar`
+footer (shows the signed-in email, fed by the `userEmail` prop).
+
 ## Admin products list
 
 Route: `/admin` (`web/src/pages/admin/index.astro`), served on port 4321.
@@ -15,14 +33,14 @@ slide-out sheet. It is the current reference implementation for admin pages in t
 
 | Path | Role |
 |---|---|
-| `web/src/pages/admin/index.astro` | Page shell: fixed left sidebar, sticky header with a sidebar toggle and theme toggle, fetches filter option lists (partners/categories/materials) and passes them to the table. `prerender = false`. |
-| `web/src/layouts/components/admin/AdminSidebar.astro` | Nav rail: Bearnie `Sidebar` (id `admin-sidebar`) with HCT logo, separator and menu (Products/Categories/Partners/Materials). Products is active on `/admin`; link `href`s for the other sections are `#` placeholders. `currentPath` prop drives the active item. |
+| `web/src/pages/admin/index.astro` | Page shell: fixed left sidebar, sticky header with a sidebar toggle and theme toggle, fetches filter option lists (partners/categories/materials) and passes them to the table. `prerender = false`. Auth-guarded: redirects to `/admin/login` when unauthenticated, passes `userEmail` to the sidebar. |
+| `web/src/layouts/components/admin/AdminSidebar.astro` | Nav rail: Bearnie `Sidebar` (id `admin-sidebar`) with HCT logo, separator and menu (Products/Categories/Partners/Materials). Products is active on `/admin`; link `href`s for the other sections are `#` placeholders. `currentPath` prop drives the active item. Footer shows the signed-in `userEmail` with a Logout button (POST `/api/users/logout`, then redirect to `/admin/login`); the footer renders only when `userEmail` is passed. |
 | `web/src/layouts/components/admin/AdminProductsTable.astro` | Orchestrator for the products section. Parses URL query/filter/sort params, fetches products and the `?edit` product via `getPayload` against `admin` (same connection as the public static routes; needs `admin` + `db/payload.db` running), derives helpers (`makeUrl`, `sortHref`, `sortIcon`, `sortIconClass`) and renders the four child components. Holds the cross-cutting controller `<script>` (row click → `?edit` URL + fetch + populate → open sheet, `updateRow` on save, `popstate`/Escape/overlay close handling). Accepts `partners`, `categories`, `materials` props. |
 | `web/src/layouts/components/admin/AdminProductsFilters.astro` | Filter panel (card with distinct background): search input, partner/category/material/published `<Select>`s, Apply/Clear, product count, and per-page `<select>` (native HTML, `data-per-page`). Owns its small per-page navigation script; the rest of the inter-page script lives in the parent. |
 | `web/src/layouts/components/admin/AdminProductsGrid.astro` | Sortable product table. Props: `products` (typed `Product[]`), `editId` (active row highlight), `sortHref`, `sortIcon`, `sortIconClass`. No script. |
 | `web/src/layouts/components/admin/AdminProductsPagination.astro` | Bottom-right pager (previous/next + page links). Props: `makeUrl`, `page`, `totalPages`, `showPagination`, `showPrev`, `showNext`, `isCurrentPage`. No script. |
 | `web/src/layouts/components/admin/AdminProductSheet.astro` | Bearnie Sheet for editing products (2/3 width, right side), including the `sheet-link-icon` `<template>` and `#sheet-open-trigger`. Exports the `ProductView` type used by the parent to pass the server-rendered `?edit` product. No script. The sheet form is always rendered in the DOM (empty by default); the parent's client script populates it via the API on row click. |
-| `web/src/pages/api/products/[id].ts` | GET endpoint returning a product as JSON (excludes `folder`/`images` fields). PUT endpoint for updating a product. Uses Payload local API to update code, name, description, published, promoted, category, and materials fields. Both use `depth: 2`. Returns updated doc as JSON. |
+| `web/src/pages/api/products/[id].ts` | GET endpoint returning a product as JSON (excludes `folder`/`images` fields). PUT endpoint for updating a product. Uses Payload local API to update code, name, description, published, promoted, category, and materials fields. Both use `depth: 2` and require a valid session (401 without the cookie). Returns updated doc as JSON. |
 | `web/src/styles/admin.css` | Standalone stylesheet: Tailwind + Bearnie tokens only for this page. |
 | `web/src/layouts/components/bearnie/{sidebar,table,select,checkbox,pagination,sheet,input,textarea,button,label}/` | Bearnie UI components installed for the admin UI. |
 | `web/src/layouts/components/bearnie/lib/hugeicons.ts` | Barrel re-export of Hugeicons free (stroke-rounded) icon data with official Hugeicons names (same identifiers as `@hugeicons/core-free-icons` / hugeicons.com), for use with `HugeIcon.astro`. Import icons from here (e.g. `import { ArrowUpRight01Icon } from "@/components/bearnie/lib/hugeicons"`), never from `@hugeicons/core-free-icons` directly. |

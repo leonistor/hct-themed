@@ -1,0 +1,149 @@
+---
+export const prerender = false;
+import "@/styles/admin.css";
+import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
+import { Moon01Icon, Sun01Icon } from "@/components/bearnie/lib/hugeicons";
+import Button from "@/components/bearnie/button/Button.astro";
+import Input from "@/components/bearnie/input/Input.astro";
+import Label from "@/components/bearnie/label/Label.astro";
+import HctLogo from "@/assets/images/hct-logo-2026.svg";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign in · Admin</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem("theme") || "light";
+        document.documentElement.classList.toggle("dark", stored === "dark");
+      })();
+    </script>
+  </head>
+  <body class="admin-page min-h-screen bg-background">
+    <div class="flex min-h-screen flex-col">
+      <div class="flex justify-end p-4">
+        <button
+          type="button"
+          class="cursor-pointer rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+          data-theme-toggle
+          aria-label="Toggle theme">
+          <HugeIcon icon={Sun01Icon as never} class="size-5 hidden dark:block" />
+          <HugeIcon icon={Moon01Icon as never} class="size-5 block dark:hidden" />
+        </button>
+      </div>
+
+      <main class="flex flex-1 items-center justify-center px-6 pb-16">
+        <div class="w-full max-w-sm">
+          <div class="mb-8 flex flex-col items-center text-center">
+            <div class="flex items-center gap-2">
+              <HctLogo class="size-8" role="img" aria-label="HCT logo" />
+              <span class="text-xl font-semibold">Admin</span>
+            </div>
+            <p class="mt-2 text-sm text-muted-foreground">Sign in to manage content</p>
+          </div>
+
+          <form
+            id="login-form"
+            class="rounded-lg border border-border bg-card p-6 shadow-sm">
+            <div class="space-y-4">
+              <div class="space-y-1.5">
+                <Label for="email">Email</Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+              <div class="space-y-1.5">
+                <Label for="password">Password</Label>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="current-password"
+                  required
+                />
+              </div>
+
+              <p id="login-error" class="hidden text-sm text-destructive"></p>
+
+              <Button id="login-submit" type="submit" class="w-full">
+                Sign in
+              </Button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      function setError(message: string) {
+        const el = document.querySelector("#login-error");
+        if (el) {
+          el.textContent = message;
+          el.classList.toggle("hidden", !message);
+        }
+      }
+
+      async function redirectIfAuthed() {
+        try {
+          const res = await fetch("/api/users/me");
+          if (res.ok) window.location.href = "/admin";
+        } catch {
+          /* offline / server error — stay on login */
+        }
+      }
+
+      const form = document.getElementById("login-form") as HTMLFormElement;
+      if (form) {
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = (form.querySelector("[name=email]") as HTMLInputElement).value;
+          const password = (form.querySelector(
+            "[name=password]",
+          ) as HTMLInputElement).value;
+          const submit = document.getElementById(
+            "login-submit",
+          ) as HTMLButtonElement;
+          setError("");
+          if (submit) submit.disabled = true;
+
+          try {
+            const res = await fetch("/api/users/login", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email, password }),
+            });
+            if (res.ok) {
+              window.location.href = "/admin";
+              return;
+            }
+            const data = await res.json();
+            setError(data?.error || "Invalid credentials");
+          } catch {
+            setError("Something went wrong. Please try again.");
+          } finally {
+            if (submit) submit.disabled = false;
+          }
+        });
+      }
+
+      document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const isDark = document.documentElement.classList.contains("dark");
+          const newTheme = isDark ? "light" : "dark";
+          localStorage.setItem("theme", newTheme);
+          document.documentElement.classList.toggle("dark", newTheme === "dark");
+        });
+      });
+
+      redirectIfAuthed();
+    </script>
+  </body>
+</html>

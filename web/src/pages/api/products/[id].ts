@@ -3,8 +3,15 @@ export const prerender = false;
 import type { APIRoute } from "astro";
 import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
+import { getAdminUser } from "@/utils/adminAuth";
 
-export const GET: APIRoute = async ({ params }) => {
+const unauthorized = () =>
+  new Response(JSON.stringify({ error: "Unauthorized" }), {
+    status: 401,
+    headers: { "Content-Type": "application/json" },
+  });
+
+export const GET: APIRoute = async ({ params, request }) => {
   const id = params.id;
   if (!id) {
     return new Response(JSON.stringify({ error: "Missing product id" }), {
@@ -15,6 +22,8 @@ export const GET: APIRoute = async ({ params }) => {
 
   try {
     const payload = await getPayload({ config: payloadConfig });
+    const user = await getAdminUser(payload, request);
+    if (!user) return unauthorized();
     const product = await payload.findByID({
       collection: "products",
       id,
@@ -40,6 +49,18 @@ export const PUT: APIRoute = async ({ params, request }) => {
   if (!id) {
     return new Response(JSON.stringify({ error: "Missing product id" }), {
       status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
+  try {
+    const payload = await getPayload({ config: payloadConfig });
+    const user = await getAdminUser(payload, request);
+    if (!user) return unauthorized();
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    return new Response(JSON.stringify({ error: message }), {
+      status: 500,
       headers: { "Content-Type": "application/json" },
     });
   }
