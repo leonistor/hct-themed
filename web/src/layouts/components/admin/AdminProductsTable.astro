@@ -18,7 +18,13 @@ import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
 import Select from "@/components/bearnie/select/Select.astro";
 import SelectOption from "@/components/bearnie/select/SelectOption.astro";
 import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
-import { ArrowUpDownIcon, ArrowUp02Icon, ArrowDown02Icon, CheckmarkCircle01Icon, Layers01Icon } from "@/components/bearnie/lib/hugeicons";
+import {
+  ArrowUpDownIcon,
+  ArrowUp02Icon,
+  ArrowDown02Icon,
+  CheckmarkCircle01Icon,
+  Layers01Icon,
+} from "@/components/bearnie/lib/hugeicons";
 import Sheet from "@/components/bearnie/sheet/Sheet.astro";
 import SheetContent from "@/components/bearnie/sheet/SheetContent.astro";
 import SheetHeader from "@/components/bearnie/sheet/SheetHeader.astro";
@@ -43,11 +49,7 @@ export interface Props {
   materials?: { id: number | string; name: string }[];
 }
 
-const {
-  partners = [],
-  categories = [],
-  materials = [],
-} = Astro.props;
+const { partners = [], categories = [], materials = [] } = Astro.props;
 
 const payload = await getPayload({ config: payloadConfig });
 
@@ -66,7 +68,13 @@ const filterMaterial = currentUrl.searchParams.get("material") ?? "";
 const filterPublished = currentUrl.searchParams.get("published") ?? "";
 
 const sortParam = currentUrl.searchParams.get("sort") ?? "";
-const SORTABLE_COLUMNS = ["code", "published", "name", "partner", "category"] as const;
+const SORTABLE_COLUMNS = [
+  "code",
+  "published",
+  "name",
+  "partner",
+  "category",
+] as const;
 type SortableColumn = (typeof SORTABLE_COLUMNS)[number];
 let sortField: SortableColumn | "" = "";
 let sortDir: "asc" | "desc" = "asc";
@@ -77,12 +85,16 @@ if (sortParam) {
     sortDir = dir === "desc" ? "desc" : "asc";
   }
 }
-const sort = sortField ? `${sortDir === "desc" ? "-" : ""}${sortField === "partner" ? "partner.name" : sortField === "category" ? "category.name" : sortField}` : "_order";
+const sort = sortField
+  ? `${sortDir === "desc" ? "-" : ""}${sortField === "partner" ? "partner.name" : sortField === "category" ? "category.name" : sortField}`
+  : "_order";
 
 const sortIcon = (field: SortableColumn) =>
-  sortField !== field ? ArrowUpDownIcon
-    : sortDir === "asc" ? ArrowUp02Icon
-    : ArrowDown02Icon;
+  sortField !== field
+    ? ArrowUpDownIcon
+    : sortDir === "asc"
+      ? ArrowUp02Icon
+      : ArrowDown02Icon;
 const sortIconClass = (field: SortableColumn) =>
   sortField === field ? "text-foreground" : "text-muted-foreground";
 
@@ -93,7 +105,8 @@ if (search) and.push({ name: { contains: search } });
 if (filterPartner) and.push({ partner: { equals: filterPartner } });
 if (filterCategory) and.push({ category: { equals: filterCategory } });
 if (filterMaterial) and.push({ materials: { contains: filterMaterial } });
-if (filterPublished) and.push({ published: { equals: filterPublished === "true" } });
+if (filterPublished)
+  and.push({ published: { equals: filterPublished === "true" } });
 
 if (and.length === 1) Object.assign(where, and[0]);
 else if (and.length > 1) where.and = and;
@@ -128,7 +141,13 @@ const isCurrentPage = (n: number) => showPagination && n === page;
 const showPrev = showPagination && products.hasPrevPage;
 const showNext = showPagination && products.hasNextPage;
 
-const hasActiveFilters = search || filterPartner || filterCategory || filterMaterial || filterPublished || sortParam;
+const hasActiveFilters =
+  search ||
+  filterPartner ||
+  filterCategory ||
+  filterMaterial ||
+  filterPublished ||
+  sortParam;
 
 const editId = currentUrl.searchParams.get("edit") ?? "";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -138,70 +157,127 @@ if (editId) {
     activeProduct = await payload.findByID({
       collection: "products",
       id: editId,
-      depth: 0,
+      depth: 2,
     });
   } catch {
     activeProduct = null;
   }
 }
+
+const activeMainImage = activeProduct?.main_image as
+  | { sizes?: { medium?: { filename?: string } } }
+  | null
+  | undefined;
+
+const activeCategoryId = activeProduct?.category
+  ? String(
+      typeof activeProduct.category === "object"
+        ? activeProduct.category.id
+        : activeProduct.category,
+    )
+  : "";
+
+const activeMaterialIds = new Set<string>(
+  (activeProduct?.materials ?? []).map((m: unknown) => {
+    if (typeof m === "object" && m && "id" in m)
+      return String((m as { id: number | string }).id);
+    return String(m as number | string);
+  }),
+);
+
+const activeVariants = (activeProduct?.variants ?? []) as {
+  name?: string;
+  feature?: string;
+  description?: string;
+  url?: string;
+}[];
 ---
 
-<div class="mb-6 rounded-lg border bg-muted/50 p-4">
-  <form method="get" action="/admin" class="mb-3 flex flex-wrap items-end gap-3">
+<div class="bg-muted/50 mb-6 rounded-lg border p-4">
+  <form
+    method="get"
+    action="/admin"
+    class="mb-3 flex flex-wrap items-end gap-3">
     <div class="flex flex-col gap-1">
-      <label for="search" class="text-xs font-medium text-muted-foreground">Search</label>
+      <label for="search" class="text-muted-foreground text-xs font-medium">
+        Search
+      </label>
       <input
         type="search"
         id="search"
         name="search"
         value={search}
         placeholder="Product name…"
-        class="h-10 w-48 rounded-lg border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+        class="border-input bg-background placeholder:text-muted-foreground focus:ring-ring h-10 w-48 rounded-lg border px-3 py-2 text-sm focus:ring-2 focus:outline-none"
       />
     </div>
 
     <div class="flex flex-col gap-1">
-      <label for="partner" class="text-xs font-medium text-muted-foreground">Partner</label>
+      <label for="partner" class="text-muted-foreground text-xs font-medium">
+        Partner
+      </label>
       <Select id="partner" name="partner" class="w-44">
         <SelectOption value="">All partners</SelectOption>
-        {partners.map((p) => (
-          <SelectOption value={String(p.id)} selected={String(p.id) === filterPartner}>
-            {p.name}
-          </SelectOption>
-        ))}
+        {
+          partners.map((p) => (
+            <SelectOption
+              value={String(p.id)}
+              selected={String(p.id) === filterPartner}>
+              {p.name}
+            </SelectOption>
+          ))
+        }
       </Select>
     </div>
 
     <div class="flex flex-col gap-1">
-      <label for="category" class="text-xs font-medium text-muted-foreground">Category</label>
+      <label for="category" class="text-muted-foreground text-xs font-medium">
+        Category
+      </label>
       <Select id="category" name="category" class="w-44">
         <SelectOption value="">All categories</SelectOption>
-        {categories.map((c) => (
-          <SelectOption value={String(c.id)} selected={String(c.id) === filterCategory}>
-            {c.name}
-          </SelectOption>
-        ))}
+        {
+          categories.map((c) => (
+            <SelectOption
+              value={String(c.id)}
+              selected={String(c.id) === filterCategory}>
+              {c.name}
+            </SelectOption>
+          ))
+        }
       </Select>
     </div>
 
     <div class="flex flex-col gap-1">
-      <label for="material" class="text-xs font-medium text-muted-foreground">Material</label>
+      <label for="material" class="text-muted-foreground text-xs font-medium">
+        Material
+      </label>
       <Select id="material" name="material" class="w-44">
         <SelectOption value="">All materials</SelectOption>
-        {materials.map((m) => (
-          <SelectOption value={String(m.id)} selected={String(m.id) === filterMaterial}>
-            {m.name}
-          </SelectOption>
-        ))}
+        {
+          materials.map((m) => (
+            <SelectOption
+              value={String(m.id)}
+              selected={String(m.id) === filterMaterial}>
+              {m.name}
+            </SelectOption>
+          ))
+        }
       </Select>
     </div>
 
     <div class="flex flex-col gap-1">
-      <label for="published" class="text-xs font-medium text-muted-foreground">Published</label>
+      <label for="published" class="text-muted-foreground text-xs font-medium">
+        Published
+      </label>
       <Select id="published" name="published" class="w-36">
         <SelectOption value="">Any</SelectOption>
-        <SelectOption value="true" selected={filterPublished === "true"}>Yes</SelectOption>
-        <SelectOption value="false" selected={filterPublished === "false"}>No</SelectOption>
+        <SelectOption value="true" selected={filterPublished === "true"}
+          >Yes</SelectOption
+        >
+        <SelectOption value="false" selected={filterPublished === "false"}
+          >No</SelectOption
+        >
       </Select>
     </div>
 
@@ -210,26 +286,30 @@ if (editId) {
 
     <button
       type="submit"
-      class="h-10 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
+      class="bg-primary text-primary-foreground hover:bg-primary/90 h-10 rounded-lg px-4 py-2 text-sm font-medium transition-colors">
       Apply
     </button>
 
-    {hasActiveFilters && (
-      <a
-        href="/admin"
-        class="h-10 inline-flex items-center rounded-lg border border-input px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
-        Clear
-      </a>
-    )}
+    {
+      hasActiveFilters && (
+        <a
+          href="/admin"
+          class="border-input text-muted-foreground hover:bg-accent hover:text-accent-foreground inline-flex h-10 items-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors">
+          Clear
+        </a>
+      )
+    }
   </form>
 
-  <div class="flex items-center justify-between border-t border-border pt-3">
+  <div class="border-border flex items-center justify-between border-t pt-3">
     <p class="text-muted-foreground text-sm">{totalDocs} products</p>
     <div class="flex items-center gap-2">
-      <label for="per-page" class="text-muted-foreground text-sm">Per page</label>
+      <label for="per-page" class="text-muted-foreground text-sm">
+        Per page
+      </label>
       <select
         id="per-page"
-        class="h-8 w-20 rounded-md border border-input bg-background px-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+        class="border-input bg-background focus:ring-ring h-8 w-20 rounded-md border px-2 text-sm focus:ring-2 focus:outline-none"
         data-per-page>
         <option value="10" selected={rawLimit === "10"}>10</option>
         <option value="50" selected={rawLimit === "50"}>50</option>
@@ -244,41 +324,101 @@ if (editId) {
     <TableRow>
       <TableHead style="width: 12.5%">Image</TableHead>
       <TableHead style="width: 8.33%">
-        <a href={makeUrl({ sort: sortField === "code" && sortDir === "asc" ? "code|desc" : sortField === "code" ? "" : "code|asc", page: "1" })}
-           class="flex items-center justify-between gap-1 hover:underline">
+        <a
+          href={makeUrl({
+            sort:
+              sortField === "code" && sortDir === "asc"
+                ? "code|desc"
+                : sortField === "code"
+                  ? ""
+                  : "code|asc",
+            page: "1",
+          })}
+          class="flex items-center justify-between gap-1 hover:underline">
           <span>Code</span>
-          <HugeIcon icon={sortIcon("code")} class:list={["size-3.5", sortIconClass("code")]} />
+          <HugeIcon
+            icon={sortIcon("code")}
+            class:list={["size-3.5", sortIconClass("code")]}
+          />
         </a>
       </TableHead>
       <TableHead style="width: 4.17%">
-        <a href={makeUrl({ sort: sortField === "published" && sortDir === "asc" ? "published|desc" : sortField === "published" ? "" : "published|asc", page: "1" })}
-           class="flex items-center justify-between gap-1 hover:underline">
+        <a
+          href={makeUrl({
+            sort:
+              sortField === "published" && sortDir === "asc"
+                ? "published|desc"
+                : sortField === "published"
+                  ? ""
+                  : "published|asc",
+            page: "1",
+          })}
+          class="flex items-center justify-between gap-1 hover:underline">
           <HugeIcon icon={CheckmarkCircle01Icon} class="size-4" />
-          <HugeIcon icon={sortIcon("published")} class:list={["size-3.5", sortIconClass("published")]} />
+          <HugeIcon
+            icon={sortIcon("published")}
+            class:list={["size-3.5", sortIconClass("published")]}
+          />
         </a>
       </TableHead>
       <TableHead style="width: 20.83%">
-        <a href={makeUrl({ sort: sortField === "name" && sortDir === "asc" ? "name|desc" : sortField === "name" ? "" : "name|asc", page: "1" })}
-           class="flex items-center justify-between gap-1 hover:underline">
+        <a
+          href={makeUrl({
+            sort:
+              sortField === "name" && sortDir === "asc"
+                ? "name|desc"
+                : sortField === "name"
+                  ? ""
+                  : "name|asc",
+            page: "1",
+          })}
+          class="flex items-center justify-between gap-1 hover:underline">
           <span>Name</span>
-          <HugeIcon icon={sortIcon("name")} class:list={["size-3.5", sortIconClass("name")]} />
+          <HugeIcon
+            icon={sortIcon("name")}
+            class:list={["size-3.5", sortIconClass("name")]}
+          />
         </a>
       </TableHead>
       <TableHead style="width: 4.17%">
         <HugeIcon icon={Layers01Icon} class="size-4" />
       </TableHead>
       <TableHead style="width: 8.33%">
-        <a href={makeUrl({ sort: sortField === "partner" && sortDir === "asc" ? "partner|desc" : sortField === "partner" ? "" : "partner|asc", page: "1" })}
-           class="flex items-center justify-between gap-1 hover:underline">
+        <a
+          href={makeUrl({
+            sort:
+              sortField === "partner" && sortDir === "asc"
+                ? "partner|desc"
+                : sortField === "partner"
+                  ? ""
+                  : "partner|asc",
+            page: "1",
+          })}
+          class="flex items-center justify-between gap-1 hover:underline">
           <span>Partner</span>
-          <HugeIcon icon={sortIcon("partner")} class:list={["size-3.5", sortIconClass("partner")]} />
+          <HugeIcon
+            icon={sortIcon("partner")}
+            class:list={["size-3.5", sortIconClass("partner")]}
+          />
         </a>
       </TableHead>
       <TableHead style="width: 20.83%">
-        <a href={makeUrl({ sort: sortField === "category" && sortDir === "asc" ? "category|desc" : sortField === "category" ? "" : "category|asc", page: "1" })}
-           class="flex items-center justify-between gap-1 hover:underline">
+        <a
+          href={makeUrl({
+            sort:
+              sortField === "category" && sortDir === "asc"
+                ? "category|desc"
+                : sortField === "category"
+                  ? ""
+                  : "category|asc",
+            page: "1",
+          })}
+          class="flex items-center justify-between gap-1 hover:underline">
           <span>Category</span>
-          <HugeIcon icon={sortIcon("category")} class:list={["size-3.5", sortIconClass("category")]} />
+          <HugeIcon
+            icon={sortIcon("category")}
+            class:list={["size-3.5", sortIconClass("category")]}
+          />
         </a>
       </TableHead>
       <TableHead style="width: 20.83%">Materials</TableHead>
@@ -300,7 +440,10 @@ if (editId) {
         return (
           <TableRow
             data-product-id={product.id}
-            class:list={["cursor-pointer transition-colors hover:bg-muted/50", isActive && "bg-accent"]}>
+            class:list={[
+              "hover:bg-muted/50 cursor-pointer transition-colors",
+              isActive && "bg-accent",
+            ]}>
             <TableCell>
               {mediumImage ? (
                 <PayloadImage
@@ -308,13 +451,15 @@ if (editId) {
                   alt={product.name}
                   width={48}
                   height={48}
-                  class="w-full h-auto rounded object-cover"
+                  class="h-auto w-full rounded object-cover"
                 />
               ) : (
                 <span class="text-muted-foreground">—</span>
               )}
             </TableCell>
-            <TableCell class="font-medium text-muted-foreground">{product.code}</TableCell>
+            <TableCell class="text-muted-foreground font-medium">
+              {product.code}
+            </TableCell>
             <TableCell>
               <Checkbox checked={product.published ?? false} disabled />
             </TableCell>
@@ -375,12 +520,16 @@ if (editId) {
 <Sheet>
   <SheetOverlay />
   <SheetTrigger id="sheet-open-trigger" class="hidden" />
-  <SheetContent side="right" class="w-2/3 sm:max-w-2xl">
+  <SheetContent side="right" class="flex w-2/3 flex-col sm:max-w-2xl">
     <SheetHeader>
       <SheetTitle>Edit Product</SheetTitle>
     </SheetHeader>
-    <form id="product-edit-form" class="space-y-4 py-4">
-      <input type="hidden" name="id" value={activeProduct ? String(activeProduct.id) : ""} />
+    <form id="product-edit-form" class="flex-1 space-y-4 overflow-y-auto py-4">
+      <input
+        type="hidden"
+        name="id"
+        value={activeProduct ? String(activeProduct.id) : ""}
+      />
       <div class="space-y-2">
         <Label for="edit-code">Code</Label>
         <Input
@@ -408,6 +557,122 @@ if (editId) {
           rows={5}
         />
       </div>
+      <div class="flex items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <Checkbox
+            id="edit-published"
+            name="published"
+            checked={activeProduct?.published ?? false}
+          />
+          <Label for="edit-published">Published</Label>
+        </div>
+        <div class="flex items-center gap-3">
+          <Checkbox
+            id="edit-promoted"
+            name="promoted"
+            checked={activeProduct?.promoted ?? false}
+          />
+          <Label for="edit-promoted">Promoted</Label>
+        </div>
+      </div>
+      <div class="space-y-2">
+        <Label for="edit-category">Category</Label>
+        <Select id="edit-category" name="category" class="w-full">
+          <SelectOption value="">—</SelectOption>
+          {
+            categories.map((c) => (
+              <SelectOption
+                value={String(c.id)}
+                selected={String(c.id) === activeCategoryId}>
+                {c.name}
+              </SelectOption>
+            ))
+          }
+        </Select>
+      </div>
+      <div class="space-y-2">
+        <Label for="edit-materials">Materials</Label>
+        <Select
+          id="edit-materials"
+          name="materials"
+          multiple
+          size={4}
+          class="w-full">
+          {
+            materials.map((m) => (
+              <SelectOption
+                value={String(m.id)}
+                selected={activeMaterialIds.has(String(m.id))}>
+                {m.name}
+              </SelectOption>
+            ))
+          }
+        </Select>
+      </div>
+      <div class="space-y-2">
+        <Label>URL</Label>
+        <p data-edit-url class="text-muted-foreground text-sm break-all">
+          {
+            activeProduct?.url || (
+              <span class="text-muted-foreground/50">—</span>
+            )
+          }
+        </p>
+      </div>
+      <div class="space-y-2">
+        <Label>Variants</Label>
+        <div data-edit-variants class="space-y-2">
+          {
+            activeVariants.length > 0 ? (
+              activeVariants.map((v) => (
+                <div class="border-border rounded-lg border p-3 text-sm">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-medium">{v.name}</span>
+                    {v.feature && (
+                      <span class="text-muted-foreground text-xs">
+                        {v.feature}
+                      </span>
+                    )}
+                  </div>
+                  {v.description && (
+                    <div class="text-muted-foreground mt-1 whitespace-pre-wrap">
+                      {v.description}
+                    </div>
+                  )}
+                  {v.url && (
+                    <a
+                      href={v.url}
+                      target="_blank"
+                      class="text-primary mt-1 block hover:underline">
+                      {v.url}
+                    </a>
+                  )}
+                </div>
+              ))
+            ) : (
+              <p class="text-muted-foreground/50 text-sm">—</p>
+            )
+          }
+        </div>
+      </div>
+      <div class="space-y-2">
+        <Label for="main-image">Main image</Label>
+        <div data-edit-main-image>
+          {
+            activeMainImage?.sizes?.medium?.filename ? (
+              <PayloadImage
+                src={`/payload/products/${activeMainImage.sizes.medium.filename}`}
+                alt={activeProduct?.name ?? ""}
+                width={128}
+                height={128}
+                class="h-auto w-32 rounded object-cover"
+              />
+            ) : (
+              <span class="text-muted-foreground/50 text-sm">—</span>
+            )
+          }
+        </div>
+      </div>
       <SheetFooter>
         <Button type="submit">Save</Button>
         <SheetClose>Cancel</SheetClose>
@@ -417,7 +682,9 @@ if (editId) {
 </Sheet>
 
 <script>
-  const perPage = document.querySelector("[data-per-page]") as HTMLSelectElement;
+  const perPage = document.querySelector(
+    "[data-per-page]",
+  ) as HTMLSelectElement;
   if (perPage) {
     perPage.addEventListener("change", () => {
       const url = new URL(window.location.href);
@@ -439,7 +706,9 @@ if (editId) {
   }
 
   function closeSheet() {
-    const btn = document.querySelector('[data-sheet-content] [data-sheet-close]');
+    const btn = document.querySelector(
+      "[data-sheet-content] [data-sheet-close]",
+    );
     if (btn) (btn as HTMLElement).click();
   }
 
@@ -450,21 +719,167 @@ if (editId) {
     if (trigger) trigger.click();
   }
 
-  function populateForm(product: { id: string | number; code?: string; name?: string; description?: string }) {
-    const f = document.getElementById("product-edit-form") as HTMLFormElement;
-    if (!f) return;
-    (f.querySelector("[name=id]") as HTMLInputElement).value = String(product.id);
-    (f.querySelector("[name=code]") as HTMLInputElement).value = String(product.code ?? "");
-    (f.querySelector("[name=name]") as HTMLInputElement).value = String(product.name ?? "");
-    (f.querySelector("[name=description]") as HTMLTextAreaElement).value = String(product.description ?? "");
+  function relationId(value: unknown): string {
+    return value && typeof value === "object"
+      ? String((value as { id: number | string }).id)
+      : String(value ?? "");
   }
 
-  function updateRow(id: string, data: { code?: string; name?: string }) {
+  function populateForm(product: {
+    id: string | number;
+    code?: string;
+    name?: string;
+    description?: string;
+    published?: boolean;
+    promoted?: boolean;
+    category?: unknown;
+    materials?: unknown[];
+    url?: string;
+    variants?: {
+      name?: string;
+      feature?: string;
+      description?: string;
+      url?: string;
+    }[];
+    main_image?: { sizes?: { medium?: { filename?: string } } } | null;
+  }) {
+    const f = document.getElementById("product-edit-form") as HTMLFormElement;
+    if (!f) return;
+    (f.querySelector("[name=id]") as HTMLInputElement).value = String(
+      product.id,
+    );
+    (f.querySelector("[name=code]") as HTMLInputElement).value = String(
+      product.code ?? "",
+    );
+    (f.querySelector("[name=name]") as HTMLInputElement).value = String(
+      product.name ?? "",
+    );
+    (f.querySelector("[name=description]") as HTMLTextAreaElement).value =
+      String(product.description ?? "");
+    (f.querySelector("[name=published]") as HTMLInputElement).checked =
+      !!product.published;
+    (f.querySelector("[name=promoted]") as HTMLInputElement).checked =
+      !!product.promoted;
+
+    const categorySelect = f.querySelector(
+      "[name=category]",
+    ) as HTMLSelectElement;
+    if (categorySelect) categorySelect.value = relationId(product.category);
+
+    const materialSelect = f.querySelector(
+      "[name=materials]",
+    ) as HTMLSelectElement;
+    if (materialSelect) {
+      const selected = new Set(
+        (product.materials ?? []).map((m) => relationId(m)),
+      );
+      Array.from(materialSelect.options).forEach((opt) => {
+        opt.selected = selected.has(opt.value);
+      });
+    }
+
+    const urlEl = f.querySelector("[data-edit-url]");
+    if (urlEl) {
+      urlEl.textContent = product.url ?? "";
+      if (!product.url) urlEl.textContent = "—";
+    }
+
+    const variantsEl = f.querySelector("[data-edit-variants]");
+    if (variantsEl) {
+      variantsEl.textContent = "";
+      const variants = product.variants ?? [];
+      if (variants.length === 0) {
+        variantsEl.textContent = "—";
+      } else {
+        variants.forEach((v) => {
+          const box = document.createElement("div");
+          box.className = "rounded-lg border border-border p-3 text-sm";
+          const head = document.createElement("div");
+          head.className = "flex items-center justify-between gap-2";
+          const name = document.createElement("span");
+          name.className = "font-medium";
+          name.textContent = v.name ?? "";
+          head.appendChild(name);
+          if (v.feature) {
+            const feat = document.createElement("span");
+            feat.className = "text-muted-foreground text-xs";
+            feat.textContent = v.feature;
+            head.appendChild(feat);
+          }
+          box.appendChild(head);
+          if (v.description) {
+            const desc = document.createElement("div");
+            desc.className = "mt-1 whitespace-pre-wrap text-muted-foreground";
+            desc.textContent = v.description;
+            box.appendChild(desc);
+          }
+          if (v.url) {
+            const link = document.createElement("a");
+            link.href = v.url;
+            link.target = "_blank";
+            link.className = "mt-1 block text-primary hover:underline";
+            link.textContent = v.url;
+            box.appendChild(link);
+          }
+          variantsEl.appendChild(box);
+        });
+      }
+    }
+
+    const imgEl = f.querySelector("[data-edit-main-image]");
+    if (imgEl) {
+      imgEl.textContent = "";
+      const filename = product.main_image?.sizes?.medium?.filename;
+      if (filename) {
+        const img = document.createElement("img");
+        img.src = `/payload/products/${filename}`;
+        img.alt = product.name ?? "";
+        img.width = 128;
+        img.height = 128;
+        img.className = "w-32 h-auto rounded object-cover";
+        imgEl.appendChild(img);
+      } else {
+        const span = document.createElement("span");
+        span.className = "text-sm text-muted-foreground/50";
+        span.textContent = "—";
+        imgEl.appendChild(span);
+      }
+    }
+  }
+
+  function updateRow(
+    id: string,
+    data: {
+      code?: string;
+      name?: string;
+      published?: boolean;
+      category?: { id: number | string; name?: string } | number | string;
+      materials?: ({ id: number | string; name?: string } | number | string)[];
+    },
+  ) {
     const row = document.querySelector(`[data-product-id="${id}"]`);
     if (!row) return;
     const cells = row.querySelectorAll("td");
     if (data.code !== undefined && cells[1]) cells[1].textContent = data.code;
+    if (data.published !== undefined && cells[2]) {
+      const box = cells[2].querySelector("input[type=checkbox]");
+      if (box) (box as HTMLInputElement).checked = !!data.published;
+    }
     if (data.name !== undefined && cells[3]) cells[3].textContent = data.name;
+    if (data.category !== undefined && cells[6]) {
+      const name =
+        data.category && typeof data.category === "object"
+          ? data.category.name
+          : undefined;
+      cells[6].textContent = name ?? "—";
+    }
+    if (data.materials !== undefined && cells[7]) {
+      cells[7].textContent =
+        data.materials
+          .map((m) => (typeof m === "object" ? m.name : undefined))
+          .filter(Boolean)
+          .join(", ") || "—";
+    }
   }
 
   async function openEditSheet(id: string) {
@@ -474,7 +889,9 @@ if (editId) {
       const product = await res.json();
       populateForm(product);
       openSheet();
-    } catch { /* silent */ }
+    } catch {
+      /* silent */
+    }
   }
 
   function removeEditFromUrl() {
@@ -500,10 +917,26 @@ if (editId) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const id = (form.querySelector("[name=id]") as HTMLInputElement).value;
+      const materialSelect = form.querySelector(
+        "[name=materials]",
+      ) as HTMLSelectElement;
+      const materialIds = materialSelect
+        ? Array.from(materialSelect.selectedOptions).map((o) => o.value)
+        : [];
       const data = {
         code: (form.querySelector("[name=code]") as HTMLInputElement).value,
         name: (form.querySelector("[name=name]") as HTMLInputElement).value,
-        description: (form.querySelector("[name=description]") as HTMLTextAreaElement).value,
+        description: (
+          form.querySelector("[name=description]") as HTMLTextAreaElement
+        ).value,
+        published: (form.querySelector("[name=published]") as HTMLInputElement)
+          .checked,
+        promoted: (form.querySelector("[name=promoted]") as HTMLInputElement)
+          .checked,
+        category:
+          (form.querySelector("[name=category]") as HTMLSelectElement).value ||
+          null,
+        materials: materialIds,
       };
 
       const res = await fetch(`/api/products/${id}`, {
@@ -513,9 +946,10 @@ if (editId) {
       });
 
       if (res.ok) {
+        const updated = await res.json();
         history.replaceState({}, "", buildUrl());
         closeSheet();
-        updateRow(id, data);
+        updateRow(id, updated);
       }
     });
   }
@@ -541,8 +975,12 @@ if (editId) {
     const editId = getEditParam();
     if (editId) openEditSheet(editId);
     else {
-      const content = document.querySelector("[data-sheet-content]") as HTMLElement;
-      const overlayEl = document.querySelector("[data-sheet-overlay]") as HTMLElement;
+      const content = document.querySelector(
+        "[data-sheet-content]",
+      ) as HTMLElement;
+      const overlayEl = document.querySelector(
+        "[data-sheet-overlay]",
+      ) as HTMLElement;
       if (content && !content.hidden) closeSheet();
     }
   });

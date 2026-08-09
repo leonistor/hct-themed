@@ -17,8 +17,8 @@ slide-out sheet. It is the current reference implementation for admin pages in t
 |---|---|
 | `web/src/pages/admin/index.astro` | Page shell: fixed left sidebar, sticky header with a sidebar toggle and theme toggle, fetches filter option lists (partners/categories/materials) and passes them to the table. `prerender = false`. |
 | `web/src/layouts/components/admin/AdminSidebar.astro` | Nav rail: Bearnie `Sidebar` (id `admin-sidebar`) with HCT logo, separator and menu (Products/Categories/Partners/Materials). Products is active on `/admin`; link `href`s for the other sections are `#` placeholders. `currentPath` prop drives the active item. |
-| `web/src/layouts/components/admin/AdminProductsTable.astro` | Fetches products via `getPayload` against `admin` (same connection as the public static routes; needs `admin` + `db/payload.db` running). Renders the filter panel (card with distinct background) containing the filter form, product count, and per-page select, then the sortable product table and bottom-right pagination. Includes a Bearnie Sheet for editing products (2/3 width, right side). Accepts `partners`, `categories`, `materials` props for filter dropdowns. |
-| `web/src/pages/api/products/[id].ts` | PUT endpoint for updating a product. Uses Payload local API to update code, name, and description fields. Returns updated doc as JSON. |
+| `web/src/layouts/components/admin/AdminProductsTable.astro` | Fetches products via `getPayload` against `admin` (same connection as the public static routes; needs `admin` + `db/payload.db` running). Renders the filter panel (card with distinct background) containing the filter form, product count, and per-page select, then the sortable product table and bottom-right pagination. Includes a Bearnie Sheet for editing products (2/3 width, right side). The sheet form is always rendered in the DOM (empty by default); the client script populates it via the API on row click. Accepts `partners`, `categories`, `materials` props for filter dropdowns. |
+| `web/src/pages/api/products/[id].ts` | GET endpoint returning a product as JSON (excludes `folder`/`images` fields). PUT endpoint for updating a product. Uses Payload local API to update code, name, description, published, promoted, category, and materials fields. Both use `depth: 2`. Returns updated doc as JSON. |
 | `web/src/styles/admin.css` | Standalone stylesheet: Tailwind + Bearnie tokens only for this page. |
 | `web/src/layouts/components/bearnie/{sidebar,table,select,checkbox,pagination,sheet,input,textarea,button,label}/` | Bearnie UI components installed for the admin UI. |
 | `web/src/layouts/components/bearnie/lib/hugeicons.ts` | Barrel re-export of Hugeicons free (stroke-rounded) icons used by admin components. |
@@ -63,13 +63,20 @@ slide-out sheet. It is the current reference implementation for admin pages in t
   `<script>` at the bottom of the component.
 - `index.astro` fetches all partners, categories, and materials via `payload.find()` with
   `limit: 0` and `sort: "name"` to populate the filter dropdowns.
-- Edit sheet: `?edit=<id>` param opens a Bearnie Sheet (2/3 width, right side) with a form to
-  edit the product's code, name, and description. Clicking a table row navigates to the URL with
-  the `edit` param (preserving filters, sort, pagination). The active row gets `bg-accent`
-  highlighting; all rows have `hover:bg-muted/50`. The Sheet auto-opens on page load when the
-  `edit` param is present. Save calls `PUT /api/products/<id>` and reloads the page. Cancel/close
-  removes the `edit` param and reloads. The PUT endpoint uses Payload local API to update the
-  product and returns the updated doc as JSON.
+- Edit sheet: `?edit=<id>` param controls a Bearnie Sheet (2/3 width, right side) with a form to
+  edit the product's code, name, description, published, promoted, category (single select), and
+  materials (multi-select, `select multiple`). Read-only sections show url, variants (name,
+  feature, description, url), and main image. The sheet form is always rendered in the DOM; on
+  initial page load with `?edit`, fields are populated server-side. On row click, the URL is
+  updated via `history.pushState`, product data is fetched from `GET /api/products/<id>`, the
+  form is populated, and the sheet opens client-side. No full page reload, so scroll position is
+  preserved. The active row gets `bg-accent` highlighting; all rows have `hover:bg-muted/50`.
+  Save calls `PUT /api/products/<id>`, updates the row cells in-place, and closes the sheet.
+  Cancel/close removes the `?edit` param via `history.replaceState` and closes the sheet.
+  Browser back/forward is handled via `popstate` (opens sheet if `?edit` present, closes if
+  not). The PUT endpoint uses Payload local API to update the product and returns the updated
+  doc as JSON. The sheet content is a flex column and the form scrolls (`overflow-y-auto`), so
+  the footer buttons stay reachable with long product data.
 
 ### Theming
 

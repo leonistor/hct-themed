@@ -18,7 +18,7 @@ export const GET: APIRoute = async ({ params }) => {
     const product = await payload.findByID({
       collection: "products",
       id,
-      depth: 0,
+      depth: 2,
       select: { folder: false, images: false },
     });
 
@@ -54,16 +54,25 @@ export const PUT: APIRoute = async ({ params, request }) => {
     });
   }
 
-  const { code, name, description } = body as {
-    code?: string;
-    name?: string;
-    description?: string;
-  };
+  const { code, name, description, published, promoted, category, materials } =
+    body as {
+      code?: string;
+      name?: string;
+      description?: string;
+      published?: boolean;
+      promoted?: boolean;
+      category?: number | string;
+      materials?: (number | string)[];
+    };
 
-  const data: Record<string, string> = {};
+  const data: Record<string, unknown> = {};
   if (code !== undefined) data.code = code;
   if (name !== undefined) data.name = name;
   if (description !== undefined) data.description = description;
+  if (published !== undefined) data.published = Boolean(published);
+  if (promoted !== undefined) data.promoted = Boolean(promoted);
+  if (category !== undefined) data.category = category;
+  if (materials !== undefined) data.materials = materials;
 
   if (Object.keys(data).length === 0) {
     return new Response(JSON.stringify({ error: "No fields to update" }), {
@@ -78,7 +87,7 @@ export const PUT: APIRoute = async ({ params, request }) => {
       collection: "products",
       id,
       data,
-      depth: 0,
+      depth: 2,
     });
 
     return new Response(JSON.stringify(updated), {
