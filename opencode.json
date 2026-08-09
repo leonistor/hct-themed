@@ -10,7 +10,7 @@
     "playwright": {
       "enabled": true,
       "type": "local",
-      "command": ["bunx", "@playwright/mcp@latest"]
+      "command": ["bunx", "@playwright/mcp@latest", "--headless"]
     }
   }
 }
