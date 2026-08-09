@@ -2,10 +2,10 @@ import mdx from "@astrojs/mdx";
 import remarkToc from "remark-toc";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import AutoImport from "astro-auto-import";
 import { defineConfig } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
 import remarkParseContent from "./src/lib/utils/remarkParseContent.ts";
+import patchedAutoImport from "./src/lib/utils/patchedAutoImport.ts";
 import config from "./src/config/config.generated.json";
 import fontsJson from "./src/config/fonts.json";
 import { generateAstroFontsConfig } from "./src/lib/utils/AstroFont.ts";
@@ -47,7 +47,7 @@ export default defineConfig({
   },
   integrations: [
     sitemapConfig.enable ? sitemap() : null,
-    AutoImport({
+    patchedAutoImport({
       imports: [
         "@/components/Button.astro",
         "@/shortcodes/Accordion.astro",
@@ -67,27 +67,27 @@ export default defineConfig({
     mdx(),
   ],
   markdown: {
-    processor: unified(),
-    rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        {
-          rel: "noopener noreferrer nofollow",
-          target: "_blank",
-        },
+    processor: unified({
+      rehypePlugins: [
+        [
+          rehypeExternalLinks,
+          {
+            rel: "noopener noreferrer nofollow",
+            target: "_blank",
+          },
+        ],
       ],
-    ],
-    remarkPlugins: [
-      remarkParseContent, // Parse markdown content and add classes in heading and loading="lazy" to images
-      remarkToc,
-    ],
+      remarkPlugins: [
+        remarkParseContent, // Parse markdown content and add classes in heading and loading="lazy" to images
+        remarkToc,
+      ],
+    }),
 
     // Code Highlighter https://github.com/shikijs/shiki
     shikiConfig: {
       theme: "light-plus", // https://shiki.style/themes
       wrap: false,
     },
-    extendDefaultPlugins: true,
   },
   vite: {
     plugins: [tailwindcss()],
