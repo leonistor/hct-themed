@@ -1,0 +1,156 @@
+---
+import type { Product } from "admin";
+import type { HugeIconData } from "@/components/bearnie/fundations/icons/HugeIcon.astro";
+import Table from "@/components/bearnie/table/Table.astro";
+import TableHeader from "@/components/bearnie/table/TableHeader.astro";
+import TableBody from "@/components/bearnie/table/TableBody.astro";
+import TableRow from "@/components/bearnie/table/TableRow.astro";
+import TableHead from "@/components/bearnie/table/TableHead.astro";
+import TableCell from "@/components/bearnie/table/TableCell.astro";
+import Checkbox from "@/components/bearnie/checkbox/Checkbox.astro";
+import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
+import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
+import {
+  CheckmarkCircle01Icon,
+  Layers01Icon,
+} from "@/components/bearnie/lib/hugeicons";
+
+export interface Props {
+  products?: Product[];
+  editId?: string;
+  sortHref: (field: string) => string;
+  sortIcon: (field: string) => HugeIconData;
+  sortIconClass: (field: string) => string;
+}
+
+const { products = [], editId = "", sortHref, sortIcon, sortIconClass } =
+  Astro.props;
+---
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead style="width: 12.5%">Image</TableHead>
+      <TableHead style="width: 8.33%">
+        <a
+          href={sortHref("code")}
+          class="flex items-center justify-between gap-1 hover:underline">
+          <span>Code</span>
+          <HugeIcon
+            icon={sortIcon("code")}
+            class:list={["size-3.5", sortIconClass("code")]}
+          />
+        </a>
+      </TableHead>
+      <TableHead style="width: 4.17%">
+        <a
+          href={sortHref("published")}
+          class="flex items-center justify-between gap-1 hover:underline">
+          <HugeIcon icon={CheckmarkCircle01Icon} class="size-4" />
+          <HugeIcon
+            icon={sortIcon("published")}
+            class:list={["size-3.5", sortIconClass("published")]}
+          />
+        </a>
+      </TableHead>
+      <TableHead style="width: 20.83%">
+        <a
+          href={sortHref("name")}
+          class="flex items-center justify-between gap-1 hover:underline">
+          <span>Name</span>
+          <HugeIcon
+            icon={sortIcon("name")}
+            class:list={["size-3.5", sortIconClass("name")]}
+          />
+        </a>
+      </TableHead>
+      <TableHead style="width: 4.17%">
+        <HugeIcon icon={Layers01Icon} class="size-4" />
+      </TableHead>
+      <TableHead style="width: 8.33%">
+        <a
+          href={sortHref("partner")}
+          class="flex items-center justify-between gap-1 hover:underline">
+          <span>Partner</span>
+          <HugeIcon
+            icon={sortIcon("partner")}
+            class:list={["size-3.5", sortIconClass("partner")]}
+          />
+        </a>
+      </TableHead>
+      <TableHead style="width: 20.83%">
+        <a
+          href={sortHref("category")}
+          class="flex items-center justify-between gap-1 hover:underline">
+          <span>Category</span>
+          <HugeIcon
+            icon={sortIcon("category")}
+            class:list={["size-3.5", sortIconClass("category")]}
+          />
+        </a>
+      </TableHead>
+      <TableHead style="width: 20.83%">Materials</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {
+      products.map((product) => {
+        const mainImage = product.main_image as unknown as {
+          sizes?: { medium?: { filename?: string } };
+        } | null;
+        const mediumImage = mainImage?.sizes?.medium?.filename;
+        const partner = product.partner;
+        const category = product.category;
+        const materials = product.materials ?? [];
+        const variantsCount = product.variants?.length ?? 0;
+        const isActive = String(product.id) === editId;
+
+        return (
+          <TableRow
+            data-product-id={product.id}
+            class:list={[
+              "hover:bg-muted/50 cursor-pointer transition-colors",
+              isActive && "bg-accent",
+            ]}>
+            <TableCell>
+              {mediumImage ? (
+                <PayloadImage
+                  src={`/payload/products/${mediumImage}`}
+                  alt={product.name}
+                  width={48}
+                  height={48}
+                  class="h-auto w-full rounded object-cover"
+                />
+              ) : (
+                <span class="text-muted-foreground">—</span>
+              )}
+            </TableCell>
+            <TableCell class="text-muted-foreground font-medium">
+              {product.code}
+            </TableCell>
+            <TableCell>
+              <Checkbox checked={product.published ?? false} disabled />
+            </TableCell>
+            <TableCell class="font-medium">{product.name}</TableCell>
+            <TableCell>{variantsCount > 0 ? variantsCount : "—"}</TableCell>
+            <TableCell>
+              {typeof partner === "object" && partner ? partner.name : "—"}
+            </TableCell>
+            <TableCell>
+              {typeof category === "object" && category ? category.name : "—"}
+            </TableCell>
+            <TableCell>
+              {materials
+                .map((material) =>
+                  typeof material === "object" && material
+                    ? material.name
+                    : "—",
+                )
+                .join(", ")}
+            </TableCell>
+          </TableRow>
+        );
+      })
+    }
+  </TableBody>
+</Table>

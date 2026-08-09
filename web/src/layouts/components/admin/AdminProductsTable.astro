@@ -1,53 +1,20 @@
 ---
 export const prerender = false;
 
-import Pagination from "@/components/bearnie/pagination/Pagination.astro";
-import PaginationContent from "@/components/bearnie/pagination/PaginationContent.astro";
-import PaginationItem from "@/components/bearnie/pagination/PaginationItem.astro";
-import PaginationLink from "@/components/bearnie/pagination/PaginationLink.astro";
-import PaginationPrevious from "@/components/bearnie/pagination/PaginationPrevious.astro";
-import PaginationNext from "@/components/bearnie/pagination/PaginationNext.astro";
-import Table from "@/components/bearnie/table/Table.astro";
-import TableHeader from "@/components/bearnie/table/TableHeader.astro";
-import TableBody from "@/components/bearnie/table/TableBody.astro";
-import TableRow from "@/components/bearnie/table/TableRow.astro";
-import TableHead from "@/components/bearnie/table/TableHead.astro";
-import TableCell from "@/components/bearnie/table/TableCell.astro";
-import Checkbox from "@/components/bearnie/checkbox/Checkbox.astro";
-import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
-import Select from "@/components/bearnie/select/Select.astro";
-import SelectOption from "@/components/bearnie/select/SelectOption.astro";
-import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
-import {
-  ArrowUpDownIcon,
-  ArrowUp02Icon,
-  ArrowDown02Icon,
-  ArrowUpRight01Icon,
-  PlusSignIcon,
-  CheckmarkCircle01Icon,
-  Layers01Icon,
-} from "@/components/bearnie/lib/hugeicons";
-import Sheet from "@/components/bearnie/sheet/Sheet.astro";
-import SheetContent from "@/components/bearnie/sheet/SheetContent.astro";
-import SheetHeader from "@/components/bearnie/sheet/SheetHeader.astro";
-import SheetTitle from "@/components/bearnie/sheet/SheetTitle.astro";
-import SheetFooter from "@/components/bearnie/sheet/SheetFooter.astro";
-import SheetClose from "@/components/bearnie/sheet/SheetClose.astro";
-import SheetOverlay from "@/components/bearnie/sheet/SheetOverlay.astro";
-import SheetTrigger from "@/components/bearnie/sheet/SheetTrigger.astro";
-import Input from "@/components/bearnie/input/Input.astro";
-import Textarea from "@/components/bearnie/textarea/Textarea.astro";
-import Button from "@/components/bearnie/button/Button.astro";
-import Label from "@/components/bearnie/label/Label.astro";
-import Accordion from "@/components/bearnie/accordion/Accordion.astro";
-import AccordionItem from "@/components/bearnie/accordion/AccordionItem.astro";
-import AccordionTrigger from "@/components/bearnie/accordion/AccordionTrigger.astro";
-import AccordionContent from "@/components/bearnie/accordion/AccordionContent.astro";
+import AdminProductsFilters from "./AdminProductsFilters.astro";
+import AdminProductsGrid from "./AdminProductsGrid.astro";
+import AdminProductsPagination from "./AdminProductsPagination.astro";
+import AdminProductSheet, { type ProductView } from "./AdminProductSheet.astro";
 
 import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
 import type { Category, Material, Partner } from "admin";
 import type { Where } from "payload";
+import {
+  ArrowUpDownIcon,
+  ArrowUp02Icon,
+  ArrowDown02Icon,
+} from "@/components/bearnie/lib/hugeicons";
 
 export interface Props {
   partners?: { id: number | string; name: string }[];
@@ -95,13 +62,13 @@ const sort = sortField
   ? `${sortDir === "desc" ? "-" : ""}${sortField === "partner" ? "partner.name" : sortField === "category" ? "category.name" : sortField}`
   : "_order";
 
-const sortIcon = (field: SortableColumn) =>
+const sortIcon = (field: string) =>
   sortField !== field
     ? ArrowUpDownIcon
     : sortDir === "asc"
       ? ArrowUp02Icon
       : ArrowDown02Icon;
-const sortIconClass = (field: SortableColumn) =>
+const sortIconClass = (field: string) =>
   sortField === field ? "text-foreground" : "text-muted-foreground";
 
 const where: Where = {};
@@ -142,18 +109,30 @@ const makeUrl = (params: Record<string, string>) => {
   return url.pathname + url.search;
 };
 
+const sortHref = (field: string) =>
+  makeUrl({
+    sort:
+      sortField === field && sortDir === "asc"
+        ? `${field}|desc`
+        : sortField === field
+          ? ""
+          : `${field}|asc`,
+    page: "1",
+  });
+
 const isCurrentPage = (n: number) => showPagination && n === page;
 
 const showPrev = showPagination && products.hasPrevPage;
 const showNext = showPagination && products.hasNextPage;
 
-const hasActiveFilters =
+const hasActiveFilters = Boolean(
   search ||
-  filterPartner ||
-  filterCategory ||
-  filterMaterial ||
-  filterPublished ||
-  sortParam;
+    filterPartner ||
+    filterCategory ||
+    filterMaterial ||
+    filterPublished ||
+    sortParam,
+);
 
 const editId = currentUrl.searchParams.get("edit") ?? "";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -204,555 +183,56 @@ const activeProductTitle =
   activeProduct.partner
     ? `${activeProduct.partner.name}: ${activeProduct.name}`
     : (activeProduct?.name ?? "Edit Product");
+
+const activeProductView: ProductView = {
+  id: activeProduct ? String(activeProduct.id) : "",
+  title: activeProductTitle,
+  name: activeProduct?.name,
+  code: activeProduct?.code,
+  description: activeProduct?.description,
+  url: activeProduct?.url,
+  published: activeProduct?.published ?? false,
+  promoted: activeProduct?.promoted ?? false,
+  mainImageFilename: activeMainImage?.sizes?.medium?.filename,
+  categoryId: activeCategoryId,
+  materialIds: activeMaterialIds,
+  variants: activeVariants,
+};
 ---
 
-<div class="bg-muted/50 mb-6 rounded-lg border p-4">
-  <form
-    method="get"
-    action="/admin"
-    class="mb-3 flex flex-wrap items-end gap-3">
-    <div class="flex flex-col gap-1">
-      <label for="search" class="text-muted-foreground text-xs font-medium">
-        Search
-      </label>
-      <input
-        type="search"
-        id="search"
-        name="search"
-        value={search}
-        placeholder="Product name…"
-        class="border-input bg-background placeholder:text-muted-foreground focus:ring-ring h-10 w-48 rounded-lg border px-3 py-2 text-sm focus:ring-2 focus:outline-none"
-      />
-    </div>
-
-    <div class="flex flex-col gap-1">
-      <label for="partner" class="text-muted-foreground text-xs font-medium">
-        Partner
-      </label>
-      <Select id="partner" name="partner" class="w-44">
-        <SelectOption value="">All partners</SelectOption>
-        {
-          partners.map((p) => (
-            <SelectOption
-              value={String(p.id)}
-              selected={String(p.id) === filterPartner}>
-              {p.name}
-            </SelectOption>
-          ))
-        }
-      </Select>
-    </div>
-
-    <div class="flex flex-col gap-1">
-      <label for="category" class="text-muted-foreground text-xs font-medium">
-        Category
-      </label>
-      <Select id="category" name="category" class="w-44">
-        <SelectOption value="">All categories</SelectOption>
-        {
-          categories.map((c) => (
-            <SelectOption
-              value={String(c.id)}
-              selected={String(c.id) === filterCategory}>
-              {c.name}
-            </SelectOption>
-          ))
-        }
-      </Select>
-    </div>
-
-    <div class="flex flex-col gap-1">
-      <label for="material" class="text-muted-foreground text-xs font-medium">
-        Material
-      </label>
-      <Select id="material" name="material" class="w-44">
-        <SelectOption value="">All materials</SelectOption>
-        {
-          materials.map((m) => (
-            <SelectOption
-              value={String(m.id)}
-              selected={String(m.id) === filterMaterial}>
-              {m.name}
-            </SelectOption>
-          ))
-        }
-      </Select>
-    </div>
-
-    <div class="flex flex-col gap-1">
-      <label for="published" class="text-muted-foreground text-xs font-medium">
-        Published
-      </label>
-      <Select id="published" name="published" class="w-36">
-        <SelectOption value="">Any</SelectOption>
-        <SelectOption value="true" selected={filterPublished === "true"}
-          >Yes</SelectOption
-        >
-        <SelectOption value="false" selected={filterPublished === "false"}
-          >No</SelectOption
-        >
-      </Select>
-    </div>
-
-    <input type="hidden" name="limit" value={rawLimit} />
-    {sortParam && <input type="hidden" name="sort" value={sortParam} />}
-
-    <button
-      type="submit"
-      class="bg-primary text-primary-foreground hover:bg-primary/90 h-10 rounded-lg px-4 py-2 text-sm font-medium transition-colors">
-      Apply
-    </button>
-
-    {
-      hasActiveFilters && (
-        <a
-          href="/admin"
-          class="border-input text-muted-foreground hover:bg-accent hover:text-accent-foreground inline-flex h-10 items-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors">
-          Clear
-        </a>
-      )
-    }
-  </form>
-
-  <div class="border-border flex items-center justify-between border-t pt-3">
-    <p class="text-muted-foreground text-sm">{totalDocs} products</p>
-    <div class="flex items-center gap-2">
-      <label for="per-page" class="text-muted-foreground text-sm">
-        Per page
-      </label>
-      <select
-        id="per-page"
-        class="border-input bg-background focus:ring-ring h-8 w-20 rounded-md border px-2 text-sm focus:ring-2 focus:outline-none"
-        data-per-page>
-        <option value="10" selected={rawLimit === "10"}>10</option>
-        <option value="50" selected={rawLimit === "50"}>50</option>
-        <option value="all" selected={rawLimit === "all"}>All</option>
-      </select>
-    </div>
-  </div>
-</div>
-
-<Table>
-  <TableHeader>
-    <TableRow>
-      <TableHead style="width: 12.5%">Image</TableHead>
-      <TableHead style="width: 8.33%">
-        <a
-          href={makeUrl({
-            sort:
-              sortField === "code" && sortDir === "asc"
-                ? "code|desc"
-                : sortField === "code"
-                  ? ""
-                  : "code|asc",
-            page: "1",
-          })}
-          class="flex items-center justify-between gap-1 hover:underline">
-          <span>Code</span>
-          <HugeIcon
-            icon={sortIcon("code")}
-            class:list={["size-3.5", sortIconClass("code")]}
-          />
-        </a>
-      </TableHead>
-      <TableHead style="width: 4.17%">
-        <a
-          href={makeUrl({
-            sort:
-              sortField === "published" && sortDir === "asc"
-                ? "published|desc"
-                : sortField === "published"
-                  ? ""
-                  : "published|asc",
-            page: "1",
-          })}
-          class="flex items-center justify-between gap-1 hover:underline">
-          <HugeIcon icon={CheckmarkCircle01Icon} class="size-4" />
-          <HugeIcon
-            icon={sortIcon("published")}
-            class:list={["size-3.5", sortIconClass("published")]}
-          />
-        </a>
-      </TableHead>
-      <TableHead style="width: 20.83%">
-        <a
-          href={makeUrl({
-            sort:
-              sortField === "name" && sortDir === "asc"
-                ? "name|desc"
-                : sortField === "name"
-                  ? ""
-                  : "name|asc",
-            page: "1",
-          })}
-          class="flex items-center justify-between gap-1 hover:underline">
-          <span>Name</span>
-          <HugeIcon
-            icon={sortIcon("name")}
-            class:list={["size-3.5", sortIconClass("name")]}
-          />
-        </a>
-      </TableHead>
-      <TableHead style="width: 4.17%">
-        <HugeIcon icon={Layers01Icon} class="size-4" />
-      </TableHead>
-      <TableHead style="width: 8.33%">
-        <a
-          href={makeUrl({
-            sort:
-              sortField === "partner" && sortDir === "asc"
-                ? "partner|desc"
-                : sortField === "partner"
-                  ? ""
-                  : "partner|asc",
-            page: "1",
-          })}
-          class="flex items-center justify-between gap-1 hover:underline">
-          <span>Partner</span>
-          <HugeIcon
-            icon={sortIcon("partner")}
-            class:list={["size-3.5", sortIconClass("partner")]}
-          />
-        </a>
-      </TableHead>
-      <TableHead style="width: 20.83%">
-        <a
-          href={makeUrl({
-            sort:
-              sortField === "category" && sortDir === "asc"
-                ? "category|desc"
-                : sortField === "category"
-                  ? ""
-                  : "category|asc",
-            page: "1",
-          })}
-          class="flex items-center justify-between gap-1 hover:underline">
-          <span>Category</span>
-          <HugeIcon
-            icon={sortIcon("category")}
-            class:list={["size-3.5", sortIconClass("category")]}
-          />
-        </a>
-      </TableHead>
-      <TableHead style="width: 20.83%">Materials</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    {
-      products.docs.map((product) => {
-        const mainImage = product.main_image as unknown as {
-          sizes?: { medium?: { filename?: string } };
-        } | null;
-        const mediumImage = mainImage?.sizes?.medium?.filename;
-        const partner = product.partner;
-        const category = product.category;
-        const materials = (product.materials ?? []) as (Material | number)[];
-        const variantsCount = product.variants?.length ?? 0;
-        const isActive = String(product.id) === editId;
-
-        return (
-          <TableRow
-            data-product-id={product.id}
-            class:list={[
-              "hover:bg-muted/50 cursor-pointer transition-colors",
-              isActive && "bg-accent",
-            ]}>
-            <TableCell>
-              {mediumImage ? (
-                <PayloadImage
-                  src={`/payload/products/${mediumImage}`}
-                  alt={product.name}
-                  width={48}
-                  height={48}
-                  class="h-auto w-full rounded object-cover"
-                />
-              ) : (
-                <span class="text-muted-foreground">—</span>
-              )}
-            </TableCell>
-            <TableCell class="text-muted-foreground font-medium">
-              {product.code}
-            </TableCell>
-            <TableCell>
-              <Checkbox checked={product.published ?? false} disabled />
-            </TableCell>
-            <TableCell class="font-medium">{product.name}</TableCell>
-            <TableCell>{variantsCount > 0 ? variantsCount : "—"}</TableCell>
-            <TableCell>
-              {typeof partner === "object" && partner ? partner.name : "—"}
-            </TableCell>
-            <TableCell>
-              {typeof category === "object" && category ? category.name : "—"}
-            </TableCell>
-            <TableCell>
-              {materials
-                .map((material) =>
-                  typeof material === "object" && material
-                    ? material.name
-                    : "—",
-                )
-                .join(", ")}
-            </TableCell>
-          </TableRow>
-        );
-      })
-    }
-  </TableBody>
-</Table>
-
-<div class="flex items-center justify-end px-2 pt-4">
-  {
-    showPagination && (
-      <Pagination>
-        <PaginationContent>
-          {showPrev && (
-            <PaginationItem>
-              <PaginationPrevious href={makeUrl({ page: String(page - 1) })} />
-            </PaginationItem>
-          )}
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
-            <PaginationItem>
-              <PaginationLink
-                href={makeUrl({ page: String(n) })}
-                isActive={isCurrentPage(n)}>
-                {n}
-              </PaginationLink>
-            </PaginationItem>
-          ))}
-          {showNext && (
-            <PaginationItem>
-              <PaginationNext href={makeUrl({ page: String(page + 1) })} />
-            </PaginationItem>
-          )}
-        </PaginationContent>
-      </Pagination>
-    )
-  }
-</div>
-
-<Sheet>
-  <SheetOverlay />
-  <SheetTrigger id="sheet-open-trigger" class="hidden" />
-  <template id="sheet-link-icon">
-    <HugeIcon icon={ArrowUpRight01Icon} class="size-4 shrink-0" />
-  </template>
-  <SheetContent side="right" class="flex w-2/3 flex-col sm:max-w-2xl">
-    <SheetHeader>
-      <SheetTitle id="edit-sheet-title">{activeProductTitle}</SheetTitle>
-    </SheetHeader>
-    <form id="product-edit-form" class="flex-1 space-y-4 overflow-y-auto py-4">
-      <input
-        type="hidden"
-        name="id"
-        value={activeProduct ? String(activeProduct.id) : ""}
-      />
-      <div class="bg-muted/50 border-border rounded-lg border p-4">
-        <div class="space-y-4">
-          <div class="space-y-2">
-            <Label for="edit-name">Name</Label>
-            <Input
-              id="edit-name"
-              name="name"
-              value={activeProduct ? String(activeProduct.name ?? "") : ""}
-              required
-            />
-          </div>
-          <div class="flex items-end gap-4">
-            <div class="flex-1 space-y-2">
-              <Label for="edit-code">Code</Label>
-              <Input
-                id="edit-code"
-                name="code"
-                value={activeProduct ? String(activeProduct.code ?? "") : ""}
-                required
-              />
-            </div>
-            <div class="space-y-2">
-              <Label for="main-image">Main image</Label>
-              <div data-edit-main-image>
-                {
-                  activeMainImage?.sizes?.medium?.filename ? (
-                    <PayloadImage
-                      src={`/payload/products/${activeMainImage.sizes.medium.filename}`}
-                      alt={activeProduct?.name ?? ""}
-                      width={128}
-                      height={128}
-                      class="h-auto w-32 rounded object-cover"
-                    />
-                  ) : (
-                    <span class="text-muted-foreground/50 text-sm">—</span>
-                  )
-                }
-              </div>
-            </div>
-          </div>
-          <div class="space-y-2">
-            <Label for="edit-description">Description</Label>
-            <Textarea
-              id="edit-description"
-              name="description"
-              value={activeProduct
-                ? String(activeProduct.description ?? "")
-                : ""}
-              rows={5}
-            />
-          </div>
-          <div class="flex items-center justify-between gap-6">
-            <div class="flex items-center gap-3">
-              <Checkbox
-                id="edit-published"
-                name="published"
-                checked={activeProduct?.published ?? false}
-              />
-              <Label for="edit-published">Published</Label>
-            </div>
-            <div class="flex items-center gap-3">
-              <Checkbox
-                id="edit-promoted"
-                name="promoted"
-                checked={activeProduct?.promoted ?? false}
-              />
-              <Label for="edit-promoted">Promoted</Label>
-            </div>
-            <div class="flex items-center gap-1">
-              <Label class="text-muted-foreground text-sm font-normal">URL</Label>
-              <p data-edit-url class="flex items-center">
-                {
-                  activeProduct?.url ? (
-                    <a
-                      href={activeProduct.url}
-                      target="_blank"
-                      rel="noopener"
-                      title={activeProduct.url}
-                      class="text-primary inline-flex items-center">
-                      <HugeIcon
-                        icon={ArrowUpRight01Icon}
-                        class="size-4 shrink-0"
-                      />
-                    </a>
-                  ) : (
-                    <span class="text-muted-foreground/50">—</span>
-                  )
-                }
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <Accordion type="single" class="w-full">
-        <AccordionItem value="category-materials">
-          <AccordionTrigger
-            icon={PlusSignIcon}
-            iconSize="sm"
-            class="text-sm font-semibold">
-            Category &amp; Materials
-          </AccordionTrigger>
-          <AccordionContent>
-            <div class="space-y-4">
-              <div class="space-y-2">
-                <Label for="edit-category">Category</Label>
-                <Select id="edit-category" name="category" class="w-full">
-                  <SelectOption value="">—</SelectOption>
-                  {
-                    categories.map((c) => (
-                      <SelectOption
-                        value={String(c.id)}
-                        selected={String(c.id) === activeCategoryId}>
-                        {c.name}
-                      </SelectOption>
-                    ))
-                  }
-                </Select>
-              </div>
-              <div class="space-y-2">
-                <Label>Materials</Label>
-                <div data-edit-materials class="space-y-2">
-                  {
-                    materials.map((m) => (
-                      <div class="flex items-center gap-3">
-                        <Checkbox
-                          id={`edit-material-${m.id}`}
-                          name="materials"
-                          value={String(m.id)}
-                          checked={activeMaterialIds.has(String(m.id))}
-                        />
-                        <Label for={`edit-material-${m.id}`}>{m.name}</Label>
-                      </div>
-                    ))
-                  }
-                </div>
-              </div>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="variants">
-          <AccordionTrigger
-            id="edit-variants-title"
-            icon={PlusSignIcon}
-            iconSize="sm"
-            class="text-sm font-semibold">
-            {activeVariants.length > 0
-              ? `${activeVariants.length} Variants`
-              : "No Variants"}
-          </AccordionTrigger>
-          <AccordionContent>
-            <div data-edit-variants class="space-y-2">
-              {
-                activeVariants.length > 0 ? (
-                  activeVariants.map((v) => (
-                    <div class="border-border flex items-center justify-between gap-2 rounded-lg border p-3 text-sm">
-                      <p class="whitespace-pre-wrap">
-                        <span class="font-medium">{v.name}</span>
-                        {(v.feature || v.description) && (
-                          <span class="text-muted-foreground">
-                            {`: ${v.feature ?? ""} ${v.description ?? ""}`.trimEnd()}
-                          </span>
-                        )}
-                      </p>
-                      {v.url && (
-                        <a
-                          href={v.url}
-                          target="_blank"
-                          rel="noopener"
-                          title={v.url}
-                          class="text-primary inline-flex shrink-0 items-center">
-                          <HugeIcon
-                            icon={ArrowUpRight01Icon}
-                            class="size-4 shrink-0"
-                          />
-                        </a>
-                      )}
-                    </div>
-                  ))
-                ) : (
-                  <p class="text-muted-foreground/50 text-sm">—</p>
-                )
-              }
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-        </Accordion>
-      <SheetFooter>
-        <Button type="submit">Save</Button>
-        <SheetClose>Cancel</SheetClose>
-      </SheetFooter>
-    </form>
-  </SheetContent>
-</Sheet>
+<AdminProductsFilters
+  partners={partners}
+  categories={categories}
+  materials={materials}
+  search={search}
+  filterPartner={filterPartner}
+  filterCategory={filterCategory}
+  filterMaterial={filterMaterial}
+  filterPublished={filterPublished}
+  rawLimit={rawLimit}
+  sortParam={sortParam}
+  hasActiveFilters={hasActiveFilters}
+  totalDocs={totalDocs}
+/>
+<AdminProductsGrid
+  products={products.docs}
+  editId={editId}
+  sortHref={sortHref}
+  sortIcon={sortIcon}
+  sortIconClass={sortIconClass}
+/>
+<AdminProductsPagination
+  makeUrl={makeUrl}
+  page={page}
+  totalPages={totalPages}
+  showPagination={showPagination}
+  showPrev={showPrev}
+  showNext={showNext}
+  isCurrentPage={isCurrentPage}
+/>
+<AdminProductSheet product={activeProductView} categories={categories} materials={materials} />
 
 <script>
-  const perPage = document.querySelector(
-    "[data-per-page]",
-  ) as HTMLSelectElement;
-  if (perPage) {
-    perPage.addEventListener("change", () => {
-      const url = new URL(window.location.href);
-      url.searchParams.set("limit", perPage.value);
-      url.searchParams.delete("page");
-      window.location.href = url.pathname + url.search;
-    });
-  }
-
   function buildUrl(editId?: string) {
     const url = new URL(window.location.href);
     if (editId) url.searchParams.set("edit", editId);
@@ -1070,9 +550,6 @@ const activeProductTitle =
     else {
       const content = document.querySelector(
         "[data-sheet-content]",
-      ) as HTMLElement;
-      const overlayEl = document.querySelector(
-        "[data-sheet-overlay]",
       ) as HTMLElement;
       if (content && !content.hidden) closeSheet();
     }

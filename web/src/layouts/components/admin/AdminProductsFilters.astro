@@ -1,0 +1,174 @@
+---
+import Select from "@/components/bearnie/select/Select.astro";
+import SelectOption from "@/components/bearnie/select/SelectOption.astro";
+
+export interface Props {
+  partners?: { id: number | string; name: string }[];
+  categories?: { id: number | string; name: string }[];
+  materials?: { id: number | string; name: string }[];
+  search?: string;
+  filterPartner?: string;
+  filterCategory?: string;
+  filterMaterial?: string;
+  filterPublished?: string;
+  rawLimit?: string;
+  sortParam?: string;
+  hasActiveFilters?: boolean;
+  totalDocs?: number;
+}
+
+const {
+  partners = [],
+  categories = [],
+  materials = [],
+  search = "",
+  filterPartner = "",
+  filterCategory = "",
+  filterMaterial = "",
+  filterPublished = "",
+  rawLimit = "10",
+  sortParam = "",
+  hasActiveFilters = false,
+  totalDocs = 0,
+} = Astro.props;
+---
+
+<div class="bg-muted/50 mb-6 rounded-lg border p-4">
+  <form
+    method="get"
+    action="/admin"
+    class="mb-3 flex flex-wrap items-end gap-3">
+    <div class="flex flex-col gap-1">
+      <label for="search" class="text-muted-foreground text-xs font-medium">
+        Search
+      </label>
+      <input
+        type="search"
+        id="search"
+        name="search"
+        value={search}
+        placeholder="Product name…"
+        class="border-input bg-background placeholder:text-muted-foreground focus:ring-ring h-10 w-48 rounded-lg border px-3 py-2 text-sm focus:ring-2 focus:outline-none"
+      />
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label for="partner" class="text-muted-foreground text-xs font-medium">
+        Partner
+      </label>
+      <Select id="partner" name="partner" class="w-44">
+        <SelectOption value="">All partners</SelectOption>
+        {
+          partners.map((p) => (
+            <SelectOption
+              value={String(p.id)}
+              selected={String(p.id) === filterPartner}>
+              {p.name}
+            </SelectOption>
+          ))
+        }
+      </Select>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label for="category" class="text-muted-foreground text-xs font-medium">
+        Category
+      </label>
+      <Select id="category" name="category" class="w-44">
+        <SelectOption value="">All categories</SelectOption>
+        {
+          categories.map((c) => (
+            <SelectOption
+              value={String(c.id)}
+              selected={String(c.id) === filterCategory}>
+              {c.name}
+            </SelectOption>
+          ))
+        }
+      </Select>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label for="material" class="text-muted-foreground text-xs font-medium">
+        Material
+      </label>
+      <Select id="material" name="material" class="w-44">
+        <SelectOption value="">All materials</SelectOption>
+        {
+          materials.map((m) => (
+            <SelectOption
+              value={String(m.id)}
+              selected={String(m.id) === filterMaterial}>
+              {m.name}
+            </SelectOption>
+          ))
+        }
+      </Select>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label for="published" class="text-muted-foreground text-xs font-medium">
+        Published
+      </label>
+      <Select id="published" name="published" class="w-36">
+        <SelectOption value="">Any</SelectOption>
+        <SelectOption value="true" selected={filterPublished === "true"}
+          >Yes</SelectOption
+        >
+        <SelectOption value="false" selected={filterPublished === "false"}
+          >No</SelectOption
+        >
+      </Select>
+    </div>
+
+    <input type="hidden" name="limit" value={rawLimit} />
+    {sortParam && <input type="hidden" name="sort" value={sortParam} />}
+
+    <button
+      type="submit"
+      class="bg-primary text-primary-foreground hover:bg-primary/90 h-10 rounded-lg px-4 py-2 text-sm font-medium transition-colors">
+      Apply
+    </button>
+
+    {
+      hasActiveFilters && (
+        <a
+          href="/admin"
+          class="border-input text-muted-foreground hover:bg-accent hover:text-accent-foreground inline-flex h-10 items-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors">
+          Clear
+        </a>
+      )
+    }
+  </form>
+
+  <div class="border-border flex items-center justify-between border-t pt-3">
+    <p class="text-muted-foreground text-sm">{totalDocs} products</p>
+    <div class="flex items-center gap-2">
+      <label for="per-page" class="text-muted-foreground text-sm">
+        Per page
+      </label>
+      <select
+        id="per-page"
+        class="border-input bg-background focus:ring-ring h-8 w-20 rounded-md border px-2 text-sm focus:ring-2 focus:outline-none"
+        data-per-page>
+        <option value="10" selected={rawLimit === "10"}>10</option>
+        <option value="50" selected={rawLimit === "50"}>50</option>
+        <option value="all" selected={rawLimit === "all"}>All</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<script>
+  const perPage = document.querySelector(
+    "[data-per-page]",
+  ) as HTMLSelectElement;
+  if (perPage) {
+    perPage.addEventListener("change", () => {
+      const url = new URL(window.location.href);
+      url.searchParams.set("limit", perPage.value);
+      url.searchParams.delete("page");
+      window.location.href = url.pathname + url.search;
+    });
+  }
+</script>

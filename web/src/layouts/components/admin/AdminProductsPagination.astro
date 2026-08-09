@@ -1,0 +1,57 @@
+---
+import Pagination from "@/components/bearnie/pagination/Pagination.astro";
+import PaginationContent from "@/components/bearnie/pagination/PaginationContent.astro";
+import PaginationItem from "@/components/bearnie/pagination/PaginationItem.astro";
+import PaginationLink from "@/components/bearnie/pagination/PaginationLink.astro";
+import PaginationPrevious from "@/components/bearnie/pagination/PaginationPrevious.astro";
+import PaginationNext from "@/components/bearnie/pagination/PaginationNext.astro";
+
+export interface Props {
+  makeUrl: (params: Record<string, string>) => string;
+  page?: number;
+  totalPages?: number;
+  showPagination?: boolean;
+  showPrev?: boolean;
+  showNext?: boolean;
+  isCurrentPage: (n: number) => boolean;
+}
+
+const {
+  makeUrl,
+  page = 1,
+  totalPages = 1,
+  showPagination = true,
+  showPrev = false,
+  showNext = false,
+  isCurrentPage,
+} = Astro.props;
+---
+
+<div class="flex items-center justify-end px-2 pt-4">
+  {
+    showPagination && (
+      <Pagination>
+        <PaginationContent>
+          {showPrev && (
+            <PaginationItem>
+              <PaginationPrevious href={makeUrl({ page: String(page - 1) })} />
+            </PaginationItem>
+          )}
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+            <PaginationItem>
+              <PaginationLink href={makeUrl({ page: String(n) })}
+                isActive={isCurrentPage(n)}>
+                {n}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+          {showNext && (
+            <PaginationItem>
+              <PaginationNext href={makeUrl({ page: String(page + 1) })} />
+            </PaginationItem>
+          )}
+        </PaginationContent>
+      </Pagination>
+    )
+  }
+</div>
