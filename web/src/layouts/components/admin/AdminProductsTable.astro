@@ -23,6 +23,7 @@ import {
   ArrowUp02Icon,
   ArrowDown02Icon,
   ArrowUpRight01Icon,
+  PlusSignIcon,
   CheckmarkCircle01Icon,
   Layers01Icon,
 } from "@/components/bearnie/lib/hugeicons";
@@ -38,6 +39,10 @@ import Input from "@/components/bearnie/input/Input.astro";
 import Textarea from "@/components/bearnie/textarea/Textarea.astro";
 import Button from "@/components/bearnie/button/Button.astro";
 import Label from "@/components/bearnie/label/Label.astro";
+import Accordion from "@/components/bearnie/accordion/Accordion.astro";
+import AccordionItem from "@/components/bearnie/accordion/AccordionItem.astro";
+import AccordionTrigger from "@/components/bearnie/accordion/AccordionTrigger.astro";
+import AccordionContent from "@/components/bearnie/accordion/AccordionContent.astro";
 
 import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
@@ -526,7 +531,9 @@ const activeVariants = (activeProduct?.variants ?? []) as {
   </template>
   <SheetContent side="right" class="flex w-2/3 flex-col sm:max-w-2xl">
     <SheetHeader>
-      <SheetTitle id="edit-sheet-title">{activeProduct?.name ?? "Edit Product"}</SheetTitle>
+      <SheetTitle id="edit-sheet-title"
+        >{activeProduct?.name ?? "Edit Product"}</SheetTitle
+      >
     </SheetHeader>
     <form id="product-edit-form" class="flex-1 space-y-4 overflow-y-auto py-4">
       <input
@@ -534,161 +541,208 @@ const activeVariants = (activeProduct?.variants ?? []) as {
         name="id"
         value={activeProduct ? String(activeProduct.id) : ""}
       />
-      <div class="space-y-2">
-        <Label for="edit-code">Code</Label>
-        <Input
-          id="edit-code"
-          name="code"
-          value={activeProduct ? String(activeProduct.code ?? "") : ""}
-          required
-        />
-      </div>
-      <div class="space-y-2">
-        <Label for="edit-name">Name</Label>
-        <Input
-          id="edit-name"
-          name="name"
-          value={activeProduct ? String(activeProduct.name ?? "") : ""}
-          required
-        />
-      </div>
-      <div class="space-y-2">
-        <Label for="edit-description">Description</Label>
-        <Textarea
-          id="edit-description"
-          name="description"
-          value={activeProduct ? String(activeProduct.description ?? "") : ""}
-          rows={5}
-        />
-      </div>
-      <div class="flex items-center justify-between gap-6">
-        <div class="flex items-center gap-3">
-          <Checkbox
-            id="edit-published"
-            name="published"
-            checked={activeProduct?.published ?? false}
-          />
-          <Label for="edit-published">Published</Label>
-        </div>
-        <div class="flex items-center gap-3">
-          <Checkbox
-            id="edit-promoted"
-            name="promoted"
-            checked={activeProduct?.promoted ?? false}
-          />
-          <Label for="edit-promoted">Promoted</Label>
-        </div>
-      </div>
-      <div class="space-y-2">
-        <Label for="edit-category">Category</Label>
-        <Select id="edit-category" name="category" class="w-full">
-          <SelectOption value="">—</SelectOption>
-          {
-            categories.map((c) => (
-              <SelectOption
-                value={String(c.id)}
-                selected={String(c.id) === activeCategoryId}>
-                {c.name}
-              </SelectOption>
-            ))
-          }
-        </Select>
-      </div>
-      <div class="space-y-2">
-        <Label>Materials</Label>
-        <div data-edit-materials class="space-y-2">
-          {
-            materials.map((m) => (
-              <div class="flex items-center gap-3">
-                <Checkbox
-                  id={`edit-material-${m.id}`}
-                  name="materials"
-                  value={String(m.id)}
-                  checked={activeMaterialIds.has(String(m.id))}
-                />
-                <Label for={`edit-material-${m.id}`}>{m.name}</Label>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-      <div class="space-y-2">
-        <Label>URL</Label>
-        <p
-          data-edit-url
-          class="text-muted-foreground flex items-start gap-1 text-sm">
-          {
-            activeProduct?.url ? (
-              <a
-                href={activeProduct.url}
-                target="_blank"
-                rel="noopener"
-                title={activeProduct.url}
-                class="text-primary inline-flex items-center">
-                <HugeIcon icon={ArrowUpRight01Icon} class="size-4 shrink-0" />
-              </a>
-            ) : (
-              <span class="text-muted-foreground/50">—</span>
-            )
-          }
-        </p>
-      </div>
-      <div class="space-y-2">
-        <Label>Variants</Label>
-        <div data-edit-variants class="space-y-2">
-          {
-            activeVariants.length > 0 ? (
-              activeVariants.map((v) => (
-                <div class="border-border rounded-lg border p-3 text-sm">
-                  <div class="flex items-center justify-between gap-2">
-                    <span class="font-medium">{v.name}</span>
-                    {v.feature && (
-                      <span class="text-muted-foreground text-xs">
-                        {v.feature}
-                      </span>
-                    )}
-                  </div>
-                  {v.description && (
-                    <div class="text-muted-foreground mt-1 whitespace-pre-wrap">
-                      {v.description}
-                    </div>
-                  )}
-                  {v.url && (
-                    <a
-                      href={v.url}
-                      target="_blank"
-                      rel="noopener"
-                      title={v.url}
-                      class="text-primary mt-1 inline-flex items-center">
-                      <HugeIcon icon={ArrowUpRight01Icon} class="size-4 shrink-0" />
-                    </a>
-                  )}
-                </div>
-              ))
-            ) : (
-              <p class="text-muted-foreground/50 text-sm">—</p>
-            )
-          }
-        </div>
-      </div>
-      <div class="space-y-2">
-        <Label for="main-image">Main image</Label>
-        <div data-edit-main-image>
-          {
-            activeMainImage?.sizes?.medium?.filename ? (
-              <PayloadImage
-                src={`/payload/products/${activeMainImage.sizes.medium.filename}`}
-                alt={activeProduct?.name ?? ""}
-                width={128}
-                height={128}
-                class="h-auto w-32 rounded object-cover"
+      <div class="bg-muted/50 border-border rounded-lg border p-4">
+        <div class="space-y-4">
+          <div class="space-y-2">
+            <Label for="edit-code">Code</Label>
+            <Input
+              id="edit-code"
+              name="code"
+              value={activeProduct ? String(activeProduct.code ?? "") : ""}
+              required
+            />
+          </div>
+          <div class="space-y-2">
+            <Label for="edit-name">Name</Label>
+            <Input
+              id="edit-name"
+              name="name"
+              value={activeProduct ? String(activeProduct.name ?? "") : ""}
+              required
+            />
+          </div>
+          <div class="space-y-2">
+            <Label for="main-image">Main image</Label>
+            <div data-edit-main-image>
+              {
+                activeMainImage?.sizes?.medium?.filename ? (
+                  <PayloadImage
+                    src={`/payload/products/${activeMainImage.sizes.medium.filename}`}
+                    alt={activeProduct?.name ?? ""}
+                    width={128}
+                    height={128}
+                    class="h-auto w-32 rounded object-cover"
+                  />
+                ) : (
+                  <span class="text-muted-foreground/50 text-sm">—</span>
+                )
+              }
+            </div>
+          </div>
+          <div class="space-y-2">
+            <Label for="edit-description">Description</Label>
+            <Textarea
+              id="edit-description"
+              name="description"
+              value={activeProduct
+                ? String(activeProduct.description ?? "")
+                : ""}
+              rows={5}
+            />
+          </div>
+          <div class="flex items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+              <Checkbox
+                id="edit-published"
+                name="published"
+                checked={activeProduct?.published ?? false}
               />
-            ) : (
-              <span class="text-muted-foreground/50 text-sm">—</span>
-            )
-          }
+              <Label for="edit-published">Published</Label>
+            </div>
+            <div class="flex items-center gap-3">
+              <Checkbox
+                id="edit-promoted"
+                name="promoted"
+                checked={activeProduct?.promoted ?? false}
+              />
+              <Label for="edit-promoted">Promoted</Label>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <Label>URL</Label>
+            <p
+              data-edit-url
+              class="text-muted-foreground flex items-start gap-1 text-sm">
+              {
+                activeProduct?.url ? (
+                  <a
+                    href={activeProduct.url}
+                    target="_blank"
+                    rel="noopener"
+                    title={activeProduct.url}
+                    class="text-primary inline-flex items-center">
+                    <HugeIcon
+                      icon={ArrowUpRight01Icon}
+                      class="size-4 shrink-0"
+                    />
+                  </a>
+                ) : (
+                  <span class="text-muted-foreground/50">—</span>
+                )
+              }
+            </p>
+          </div>
         </div>
       </div>
+      <Accordion type="single" class="w-full">
+        <AccordionItem value="category-materials">
+          <AccordionTrigger
+            defaultOpen
+            icon={PlusSignIcon}
+            iconSize="sm"
+            class="text-sm font-semibold">
+            Category &amp; Materials
+          </AccordionTrigger>
+          <AccordionContent defaultOpen>
+            <div class="space-y-4">
+              <div class="space-y-2">
+                <Label for="edit-category">Category</Label>
+                <Select id="edit-category" name="category" class="w-full">
+                  <SelectOption value="">—</SelectOption>
+                  {
+                    categories.map((c) => (
+                      <SelectOption
+                        value={String(c.id)}
+                        selected={String(c.id) === activeCategoryId}>
+                        {c.name}
+                      </SelectOption>
+                    ))
+                  }
+                </Select>
+              </div>
+              <div class="space-y-2">
+                <Label>Materials</Label>
+                <div data-edit-materials class="space-y-2">
+                  {
+                    materials.map((m) => (
+                      <div class="flex items-center gap-3">
+                        <Checkbox
+                          id={`edit-material-${m.id}`}
+                          name="materials"
+                          value={String(m.id)}
+                          checked={activeMaterialIds.has(String(m.id))}
+                        />
+                        <Label for={`edit-material-${m.id}`}>{m.name}</Label>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="variants">
+          <AccordionTrigger
+            icon={PlusSignIcon}
+            iconSize="sm"
+            class="text-sm font-semibold">
+            Variants
+          </AccordionTrigger>
+          <AccordionContent>
+            <div data-edit-variants class="space-y-2">
+              {
+                activeVariants.length > 0 ? (
+                  activeVariants.map((v) => (
+                    <div class="border-border rounded-lg border p-3 text-sm">
+                      <div class="flex items-center justify-between gap-2">
+                        <span class="font-medium">{v.name}</span>
+                        {v.feature && (
+                          <span class="text-muted-foreground text-xs">
+                            {v.feature}
+                          </span>
+                        )}
+                      </div>
+                      {v.description && (
+                        <div class="text-muted-foreground mt-1 whitespace-pre-wrap">
+                          {v.description}
+                        </div>
+                      )}
+                      {v.url && (
+                        <a
+                          href={v.url}
+                          target="_blank"
+                          rel="noopener"
+                          title={v.url}
+                          class="text-primary mt-1 inline-flex items-center">
+                          <HugeIcon
+                            icon={ArrowUpRight01Icon}
+                            class="size-4 shrink-0"
+                          />
+                        </a>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <p class="text-muted-foreground/50 text-sm">—</p>
+                )
+              }
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="images">
+          <AccordionTrigger
+            icon={PlusSignIcon}
+            iconSize="sm"
+            class="text-sm font-semibold">
+            Other images
+          </AccordionTrigger>
+          <AccordionContent>
+            <p data-edit-other-images class="text-muted-foreground/50 text-sm">
+              —
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
       <SheetFooter>
         <Button type="submit">Save</Button>
         <SheetClose>Cancel</SheetClose>

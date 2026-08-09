@@ -2,17 +2,22 @@
 import { cn } from "@/utils/cn";
 import type { HTMLAttributes } from "astro/types";
 import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
-import {
-  ArrowDown01Icon,
-  CirclePlusIcon,
-  SearchAddIcon,
-} from "@hugeicons/core-free-icons";
+import type { HugeIconData } from "@/components/bearnie/fundations/icons/HugeIcon.astro";
+import { SearchAddIcon } from "@hugeicons/core-free-icons";
 
 export interface Props extends HTMLAttributes<"button"> {
   defaultOpen?: boolean;
+  icon?: HugeIconData;
+  iconSize?: "xs" | "sm" | "base" | "md" | "lg" | "xl" | number;
 }
 
-const { defaultOpen = false, class: className, ...props } = Astro.props;
+const {
+  defaultOpen = false,
+  icon = SearchAddIcon,
+  iconSize = 36,
+  class: className,
+  ...props
+} = Astro.props;
 
 const classes = cn(
   "flex w-full flex-1 items-center justify-between py-4 font-medium transition-all hover:TextUnderlineIcon [&[data-state=open]>svg]:rotate-45",
@@ -29,8 +34,8 @@ const classes = cn(
   {...props}>
   <slot />
   <HugeIcon
-    icon={SearchAddIcon}
-    size={36}
-    class="shrink-0 transition-transform duration-200"
+    icon={icon}
+    size={iconSize}
+    class="text-muted-foreground shrink-0 transition-transform duration-200"
   />
 </button>

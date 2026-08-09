@@ -66,11 +66,16 @@ slide-out sheet. It is the current reference implementation for admin pages in t
 - Edit sheet: the sheet form (2/3 width, right side) edits code, name, description, published,
   promoted (Checkbox), category (single select), and materials (checkbox list). The sheet title
   shows the product name (falls back to "Edit Product" when no product is loaded); it is set
-  server-side on `?edit` loads and updated client-side in `populateForm`. Read-only sections show
+  server-side on `?edit` loads and updated client-side in `populateForm`. The form is grouped: a
+  `bg-muted/50` panel card at the top holds code, name, main image, description, published,
+  promoted, and url; a Bearnie `Accordion` (single-open) below groups the rest into "Category &
+  Materials", "Variants", and "Other images" (empty placeholder for now). Read-only sections show
   url, variants (name, feature, description, url), and main image. Product and variant URLs render
   as external link icons only (Hugeicons `ArrowUpRight01Icon` in an `<a>` with `target="_blank"`,
   `rel="noopener"` and a `title` holding the URL); the client reuses a
-  `<template id="sheet-link-icon">`, so the icon markup lives in one place. The main image uses the
+  `<template id="sheet-link-icon">`, so the icon markup lives in one place. Accordion triggers use a
+  compact `PlusSignIcon` via the `icon`/`iconSize` props on `AccordionTrigger` (defaults unchanged
+  for the public VSU accordions). The main image uses the
   API returned `main_image.sizes.medium.url` (resolved via
   `/api/product-images/file/…`, the admin media proxy) rather than the `/payload/products/…` path
   that only resolves through the server-rendered `PayloadImage` component. The sheet form is always
