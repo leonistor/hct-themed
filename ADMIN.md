@@ -63,10 +63,12 @@ slide-out sheet. It is the current reference implementation for admin pages in t
   `<script>` at the bottom of the component.
 - `index.astro` fetches all partners, categories, and materials via `payload.find()` with
   `limit: 0` and `sort: "name"` to populate the filter dropdowns.
-- Edit sheet: `?edit=<id>` param controls a Bearnie Sheet (2/3 width, right side) with a form to
-  edit the product's code, name, description, published, promoted, category (single select), and
-  materials (multi-select, `select multiple`). Read-only sections show url, variants (name,
-  feature, description, url), and main image. The sheet form is always rendered in the DOM; on
+- Edit sheet: the sheet form (2/3 width, right side) edits code, name, description, published,
+  promoted (Checkbox), category (single select), and materials (checkbox list). Read-only
+  sections show url, variants (name, feature, description, url), and main image. The main image
+  uses the API returned `main_image.sizes.medium.url` (resolved via `/api/product-images/file/…`,
+  the admin media proxy) rather than the `/payload/products/…` path that only resolves through
+  the server-rendered `PayloadImage` component. The sheet form is always rendered in the DOM; on
   initial page load with `?edit`, fields are populated server-side. On row click, the URL is
   updated via `history.pushState`, product data is fetched from `GET /api/products/<id>`, the
   form is populated, and the sheet opens client-side. No full page reload, so scroll position is

@@ -591,23 +591,22 @@ const activeVariants = (activeProduct?.variants ?? []) as {
         </Select>
       </div>
       <div class="space-y-2">
-        <Label for="edit-materials">Materials</Label>
-        <Select
-          id="edit-materials"
-          name="materials"
-          multiple
-          size={4}
-          class="w-full">
+        <Label>Materials</Label>
+        <div data-edit-materials class="space-y-2">
           {
             materials.map((m) => (
-              <SelectOption
-                value={String(m.id)}
-                selected={activeMaterialIds.has(String(m.id))}>
-                {m.name}
-              </SelectOption>
+              <div class="flex items-center gap-3">
+                <Checkbox
+                  id={`edit-material-${m.id}`}
+                  name="materials"
+                  value={String(m.id)}
+                  checked={activeMaterialIds.has(String(m.id))}
+                />
+                <Label for={`edit-material-${m.id}`}>{m.name}</Label>
+              </div>
             ))
           }
-        </Select>
+        </div>
       </div>
       <div class="space-y-2">
         <Label>URL</Label>
@@ -741,7 +740,12 @@ const activeVariants = (activeProduct?.variants ?? []) as {
       description?: string;
       url?: string;
     }[];
-    main_image?: { sizes?: { medium?: { filename?: string } } } | null;
+    main_image?: {
+      url?: string;
+      sizes?: {
+        medium?: { url?: string; filename?: string };
+      };
+    } | null;
   }) {
     const f = document.getElementById("product-edit-form") as HTMLFormElement;
     if (!f) return;
@@ -766,17 +770,17 @@ const activeVariants = (activeProduct?.variants ?? []) as {
     ) as HTMLSelectElement;
     if (categorySelect) categorySelect.value = relationId(product.category);
 
-    const materialSelect = f.querySelector(
-      "[name=materials]",
-    ) as HTMLSelectElement;
-    if (materialSelect) {
-      const selected = new Set(
-        (product.materials ?? []).map((m) => relationId(m)),
+    const materialCheckboxes = f.querySelectorAll(
+      "[data-edit-materials] input[name=materials]",
+    );
+    const selectedMaterials = new Set(
+      (product.materials ?? []).map((m) => relationId(m)),
+    );
+    materialCheckboxes.forEach((box) => {
+      (box as HTMLInputElement).checked = selectedMaterials.has(
+        (box as HTMLInputElement).value,
       );
-      Array.from(materialSelect.options).forEach((opt) => {
-        opt.selected = selected.has(opt.value);
-      });
-    }
+    });
 
     const urlEl = f.querySelector("[data-edit-url]");
     if (urlEl) {
@@ -829,18 +833,19 @@ const activeVariants = (activeProduct?.variants ?? []) as {
     const imgEl = f.querySelector("[data-edit-main-image]");
     if (imgEl) {
       imgEl.textContent = "";
-      const filename = product.main_image?.sizes?.medium?.filename;
-      if (filename) {
+      const url =
+        product.main_image?.sizes?.medium?.url ?? product.main_image?.url;
+      if (url) {
         const img = document.createElement("img");
-        img.src = `/payload/products/${filename}`;
+        img.src = url;
         img.alt = product.name ?? "";
         img.width = 128;
         img.height = 128;
-        img.className = "w-32 h-auto rounded object-cover";
+        img.className = "h-auto w-32 rounded object-cover";
         imgEl.appendChild(img);
       } else {
         const span = document.createElement("span");
-        span.className = "text-sm text-muted-foreground/50";
+        span.className = "text-muted-foreground/50 text-sm";
         span.textContent = "—";
         imgEl.appendChild(span);
       }
@@ -917,12 +922,12 @@ const activeVariants = (activeProduct?.variants ?? []) as {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const id = (form.querySelector("[name=id]") as HTMLInputElement).value;
-      const materialSelect = form.querySelector(
-        "[name=materials]",
-      ) as HTMLSelectElement;
-      const materialIds = materialSelect
-        ? Array.from(materialSelect.selectedOptions).map((o) => o.value)
-        : [];
+      const materialInputs = Array.from(
+        form.querySelectorAll("[data-edit-materials] input[name=materials]"),
+      ) as HTMLInputElement[];
+      const materialIds = materialInputs
+        .filter((box) => box.checked)
+        .map((box) => box.value);
       const data = {
         code: (form.querySelector("[name=code]") as HTMLInputElement).value,
         name: (form.querySelector("[name=name]") as HTMLInputElement).value,
