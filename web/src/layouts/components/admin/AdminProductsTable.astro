@@ -375,46 +375,44 @@ if (editId) {
 <Sheet>
   <SheetOverlay />
   <SheetTrigger id="sheet-open-trigger" class="hidden" />
-  <SheetContent side="right" class:list={["w-2/3 sm:max-w-2xl", !editId && "hidden"]}>
+  <SheetContent side="right" class="w-2/3 sm:max-w-2xl">
     <SheetHeader>
       <SheetTitle>Edit Product</SheetTitle>
     </SheetHeader>
-    {activeProduct && (
-      <form id="product-edit-form" class="space-y-4 py-4">
-        <input type="hidden" name="id" value={String(activeProduct.id)} />
-        <div class="space-y-2">
-          <Label for="edit-code">Code</Label>
-          <Input
-            id="edit-code"
-            name="code"
-            value={String(activeProduct.code ?? "")}
-            required
-          />
-        </div>
-        <div class="space-y-2">
-          <Label for="edit-name">Name</Label>
-          <Input
-            id="edit-name"
-            name="name"
-            value={String(activeProduct.name ?? "")}
-            required
-          />
-        </div>
-        <div class="space-y-2">
-          <Label for="edit-description">Description</Label>
-          <Textarea
-            id="edit-description"
-            name="description"
-            value={String(activeProduct.description ?? "")}
-            rows={5}
-          />
-        </div>
-        <SheetFooter>
-          <Button type="submit">Save</Button>
-          <SheetClose>Cancel</SheetClose>
-        </SheetFooter>
-      </form>
-    )}
+    <form id="product-edit-form" class="space-y-4 py-4">
+      <input type="hidden" name="id" value={activeProduct ? String(activeProduct.id) : ""} />
+      <div class="space-y-2">
+        <Label for="edit-code">Code</Label>
+        <Input
+          id="edit-code"
+          name="code"
+          value={activeProduct ? String(activeProduct.code ?? "") : ""}
+          required
+        />
+      </div>
+      <div class="space-y-2">
+        <Label for="edit-name">Name</Label>
+        <Input
+          id="edit-name"
+          name="name"
+          value={activeProduct ? String(activeProduct.name ?? "") : ""}
+          required
+        />
+      </div>
+      <div class="space-y-2">
+        <Label for="edit-description">Description</Label>
+        <Textarea
+          id="edit-description"
+          name="description"
+          value={activeProduct ? String(activeProduct.description ?? "") : ""}
+          rows={5}
+        />
+      </div>
+      <SheetFooter>
+        <Button type="submit">Save</Button>
+        <SheetClose>Cancel</SheetClose>
+      </SheetFooter>
+    </form>
   </SheetContent>
 </Sheet>
 
@@ -429,25 +427,70 @@ if (editId) {
     });
   }
 
-  // Auto-open sheet when edit param is present
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.has("edit")) {
+  function buildUrl(editId?: string) {
+    const url = new URL(window.location.href);
+    if (editId) url.searchParams.set("edit", editId);
+    else url.searchParams.delete("edit");
+    return url.pathname + url.search;
+  }
+
+  function getEditParam() {
+    return new URLSearchParams(window.location.search).get("edit") ?? "";
+  }
+
+  function closeSheet() {
+    const btn = document.querySelector('[data-sheet-content] [data-sheet-close]');
+    if (btn) (btn as HTMLElement).click();
+  }
+
+  function openSheet() {
+    const content = document.querySelector("[data-sheet-content]");
+    if (content) content.classList.remove("hidden");
     const trigger = document.getElementById("sheet-open-trigger");
-    if (trigger) {
-      // Small delay to ensure Sheet script has initialized
-      setTimeout(() => trigger.click(), 50);
+    if (trigger) trigger.click();
+  }
+
+  function populateForm(product: { id: string | number; code?: string; name?: string; description?: string }) {
+    const f = document.getElementById("product-edit-form") as HTMLFormElement;
+    if (!f) return;
+    (f.querySelector("[name=id]") as HTMLInputElement).value = String(product.id);
+    (f.querySelector("[name=code]") as HTMLInputElement).value = String(product.code ?? "");
+    (f.querySelector("[name=name]") as HTMLInputElement).value = String(product.name ?? "");
+    (f.querySelector("[name=description]") as HTMLTextAreaElement).value = String(product.description ?? "");
+  }
+
+  function updateRow(id: string, data: { code?: string; name?: string }) {
+    const row = document.querySelector(`[data-product-id="${id}"]`);
+    if (!row) return;
+    const cells = row.querySelectorAll("td");
+    if (data.code !== undefined && cells[1]) cells[1].textContent = data.code;
+    if (data.name !== undefined && cells[3]) cells[3].textContent = data.name;
+  }
+
+  async function openEditSheet(id: string) {
+    try {
+      const res = await fetch(`/api/products/${id}`);
+      if (!res.ok) return;
+      const product = await res.json();
+      populateForm(product);
+      openSheet();
+    } catch { /* silent */ }
+  }
+
+  function removeEditFromUrl() {
+    if (getEditParam()) {
+      history.replaceState({}, "", buildUrl());
     }
   }
 
-  // Row click → open edit sheet
+  // Row click → open edit sheet without page reload
   document.querySelectorAll("[data-product-id]").forEach((row) => {
     row.addEventListener("click", (e) => {
       if ((e.target as HTMLElement).closest("a, button, input, select")) return;
       const id = row.getAttribute("data-product-id");
       if (!id) return;
-      const url = new URL(window.location.href);
-      url.searchParams.set("edit", id);
-      window.location.href = url.pathname + url.search;
+      history.pushState({ editId: id }, "", buildUrl(id));
+      openEditSheet(id);
     });
   });
 
@@ -470,19 +513,46 @@ if (editId) {
       });
 
       if (res.ok) {
-        const url = new URL(window.location.href);
-        url.searchParams.delete("edit");
-        window.location.href = url.pathname + url.search;
+        history.replaceState({}, "", buildUrl());
+        closeSheet();
+        updateRow(id, data);
       }
     });
   }
 
-  // Close sheet → remove edit param
+  // Close sheet buttons → remove edit param from URL
   document.querySelectorAll("[data-sheet-close]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const url = new URL(window.location.href);
-      url.searchParams.delete("edit");
-      window.location.href = url.pathname + url.search;
-    });
+    btn.addEventListener("click", removeEditFromUrl);
   });
+
+  // Overlay click → remove edit param from URL
+  const overlay = document.querySelector("[data-sheet-overlay]");
+  if (overlay) {
+    overlay.addEventListener("click", removeEditFromUrl);
+  }
+
+  // Escape key → remove edit param from URL
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") removeEditFromUrl();
+  });
+
+  // Browser back/forward
+  window.addEventListener("popstate", () => {
+    const editId = getEditParam();
+    if (editId) openEditSheet(editId);
+    else {
+      const content = document.querySelector("[data-sheet-content]") as HTMLElement;
+      const overlayEl = document.querySelector("[data-sheet-overlay]") as HTMLElement;
+      if (content && !content.hidden) closeSheet();
+    }
+  });
+
+  // Auto-open sheet on initial page load when edit param is present
+  const initialEditId = getEditParam();
+  if (initialEditId) {
+    const trigger = document.getElementById("sheet-open-trigger");
+    if (trigger) {
+      setTimeout(() => trigger.click(), 50);
+    }
+  }
 </script>

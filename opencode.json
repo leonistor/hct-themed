@@ -5,7 +5,12 @@
     "bearnie": {
       "enabled": true,
       "type": "local",
-      "command": ["npx", "@bearnie/mcp"]
+      "command": ["bunx", "@bearnie/mcp"]
+    },
+    "playwright": {
+      "enabled": true,
+      "type": "local",
+      "command": ["bunx", "@playwright/mcp@latest"]
     }
   }
 }
