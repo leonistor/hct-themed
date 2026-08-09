@@ -68,9 +68,10 @@ slide-out sheet. It is the current reference implementation for admin pages in t
   shows the product name (falls back to "Edit Product" when no product is loaded); it is set
   server-side on `?edit` loads and updated client-side in `populateForm`. Read-only sections show
   url, variants (name, feature, description, url), and main image. Product and variant URLs render
-  as external links (target `_blank`, `rel="noopener"`) with the Hugeicons `ArrowUpRight01Icon`
-  marker; the client reuses a `<template id="sheet-link-icon">`, so the icon markup lives in one
-  place. The main image uses the API returned `main_image.sizes.medium.url` (resolved via
+  as external link icons only (Hugeicons `ArrowUpRight01Icon` in an `<a>` with `target="_blank"`,
+  `rel="noopener"` and a `title` holding the URL); the client reuses a
+  `<template id="sheet-link-icon">`, so the icon markup lives in one place. The main image uses the
+  API returned `main_image.sizes.medium.url` (resolved via
   `/api/product-images/file/…`, the admin media proxy) rather than the `/payload/products/…` path
   that only resolves through the server-rendered `PayloadImage` component. The sheet form is always
   rendered in the DOM; on initial page load with `?edit`, fields are populated server-side. On row

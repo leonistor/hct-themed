@@ -623,12 +623,9 @@ const activeVariants = (activeProduct?.variants ?? []) as {
                 href={activeProduct.url}
                 target="_blank"
                 rel="noopener"
-                class="text-primary inline-flex items-center gap-1 break-all hover:underline">
-                <HugeIcon
-                  icon={ArrowUpRight01Icon}
-                  class="size-4 shrink-0"
-                />
-                <span>{activeProduct.url}</span>
+                title={activeProduct.url}
+                class="text-primary inline-flex items-center">
+                <HugeIcon icon={ArrowUpRight01Icon} class="size-4 shrink-0" />
               </a>
             ) : (
               <span class="text-muted-foreground/50">—</span>
@@ -661,9 +658,9 @@ const activeVariants = (activeProduct?.variants ?? []) as {
                       href={v.url}
                       target="_blank"
                       rel="noopener"
-                      class="text-primary mt-1 inline-flex items-center gap-1 break-all hover:underline">
+                      title={v.url}
+                      class="text-primary mt-1 inline-flex items-center">
                       <HugeIcon icon={ArrowUpRight01Icon} class="size-4 shrink-0" />
-                      <span>{v.url}</span>
                     </a>
                   )}
                 </div>
@@ -749,15 +746,12 @@ const activeVariants = (activeProduct?.variants ?? []) as {
     a.href = url;
     a.target = "_blank";
     a.rel = "noopener";
-    a.className =
-      "inline-flex items-center gap-1 text-primary break-all hover:underline";
+    a.title = url;
+    a.className = "inline-flex items-center text-primary";
     const tmpl = document.getElementById(
       "sheet-link-icon",
     ) as HTMLTemplateElement | null;
     if (tmpl) a.appendChild(tmpl.content.cloneNode(true));
-    const span = document.createElement("span");
-    span.textContent = url;
-    a.appendChild(span);
     return a;
   }
 
