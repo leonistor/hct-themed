@@ -549,15 +549,6 @@ const activeProductTitle =
       <div class="bg-muted/50 border-border rounded-lg border p-4">
         <div class="space-y-4">
           <div class="space-y-2">
-            <Label for="edit-code">Code</Label>
-            <Input
-              id="edit-code"
-              name="code"
-              value={activeProduct ? String(activeProduct.code ?? "") : ""}
-              required
-            />
-          </div>
-          <div class="space-y-2">
             <Label for="edit-name">Name</Label>
             <Input
               id="edit-name"
@@ -566,22 +557,33 @@ const activeProductTitle =
               required
             />
           </div>
-          <div class="space-y-2">
-            <Label for="main-image">Main image</Label>
-            <div data-edit-main-image>
-              {
-                activeMainImage?.sizes?.medium?.filename ? (
-                  <PayloadImage
-                    src={`/payload/products/${activeMainImage.sizes.medium.filename}`}
-                    alt={activeProduct?.name ?? ""}
-                    width={128}
-                    height={128}
-                    class="h-auto w-32 rounded object-cover"
-                  />
-                ) : (
-                  <span class="text-muted-foreground/50 text-sm">—</span>
-                )
-              }
+          <div class="flex items-end gap-4">
+            <div class="flex-1 space-y-2">
+              <Label for="edit-code">Code</Label>
+              <Input
+                id="edit-code"
+                name="code"
+                value={activeProduct ? String(activeProduct.code ?? "") : ""}
+                required
+              />
+            </div>
+            <div class="space-y-2">
+              <Label for="main-image">Main image</Label>
+              <div data-edit-main-image>
+                {
+                  activeMainImage?.sizes?.medium?.filename ? (
+                    <PayloadImage
+                      src={`/payload/products/${activeMainImage.sizes.medium.filename}`}
+                      alt={activeProduct?.name ?? ""}
+                      width={128}
+                      height={128}
+                      class="h-auto w-32 rounded object-cover"
+                    />
+                  ) : (
+                    <span class="text-muted-foreground/50 text-sm">—</span>
+                  )
+                }
+              </div>
             </div>
           </div>
           <div class="space-y-2">
@@ -685,37 +687,35 @@ const activeProductTitle =
         </AccordionItem>
         <AccordionItem value="variants">
           <AccordionTrigger
+            id="edit-variants-title"
             icon={PlusSignIcon}
             iconSize="sm"
             class="text-sm font-semibold">
-            Variants
+            {activeVariants.length > 0
+              ? `${activeVariants.length} Variants`
+              : "No Variants"}
           </AccordionTrigger>
           <AccordionContent>
             <div data-edit-variants class="space-y-2">
               {
                 activeVariants.length > 0 ? (
                   activeVariants.map((v) => (
-                    <div class="border-border rounded-lg border p-3 text-sm">
-                      <div class="flex items-center justify-between gap-2">
+                    <div class="border-border flex items-center justify-between gap-2 rounded-lg border p-3 text-sm">
+                      <p class="whitespace-pre-wrap">
                         <span class="font-medium">{v.name}</span>
-                        {v.feature && (
-                          <span class="text-muted-foreground text-xs">
-                            {v.feature}
+                        {(v.feature || v.description) && (
+                          <span class="text-muted-foreground">
+                            {`: ${v.feature ?? ""} ${v.description ?? ""}`.trimEnd()}
                           </span>
                         )}
-                      </div>
-                      {v.description && (
-                        <div class="text-muted-foreground mt-1 whitespace-pre-wrap">
-                          {v.description}
-                        </div>
-                      )}
+                      </p>
                       {v.url && (
                         <a
                           href={v.url}
                           target="_blank"
                           rel="noopener"
                           title={v.url}
-                          class="text-primary mt-1 inline-flex items-center">
+                          class="text-primary inline-flex shrink-0 items-center">
                           <HugeIcon
                             icon={ArrowUpRight01Icon}
                             class="size-4 shrink-0"
@@ -885,31 +885,31 @@ const activeProductTitle =
     if (variantsEl) {
       variantsEl.textContent = "";
       const variants = product.variants ?? [];
+      const variantsTitle = document.getElementById("edit-variants-title");
+      if (variantsTitle) {
+        variantsTitle.textContent =
+          variants.length > 0 ? `${variants.length} Variants` : "No Variants";
+      }
       if (variants.length === 0) {
         variantsEl.textContent = "—";
       } else {
         variants.forEach((v) => {
           const box = document.createElement("div");
-          box.className = "rounded-lg border border-border p-3 text-sm";
-          const head = document.createElement("div");
-          head.className = "flex items-center justify-between gap-2";
+          box.className =
+            "flex items-center justify-between gap-2 rounded-lg border border-border p-3 text-sm";
+          const text = document.createElement("p");
+          text.className = "whitespace-pre-wrap";
           const name = document.createElement("span");
           name.className = "font-medium";
           name.textContent = v.name ?? "";
-          head.appendChild(name);
-          if (v.feature) {
-            const feat = document.createElement("span");
-            feat.className = "text-muted-foreground text-xs";
-            feat.textContent = v.feature;
-            head.appendChild(feat);
+          text.appendChild(name);
+          if (v.feature || v.description) {
+            const rest = document.createElement("span");
+            rest.className = "text-muted-foreground";
+            rest.textContent = `: ${v.feature ?? ""} ${v.description ?? ""}`.trimEnd();
+            text.appendChild(rest);
           }
-          box.appendChild(head);
-          if (v.description) {
-            const desc = document.createElement("div");
-            desc.className = "mt-1 whitespace-pre-wrap text-muted-foreground";
-            desc.textContent = v.description;
-            box.appendChild(desc);
-          }
+          box.appendChild(text);
           if (v.url) {
             box.appendChild(externalUrlLink(v.url));
           }
