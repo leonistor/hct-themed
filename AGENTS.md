@@ -1,7 +1,7 @@
 # hct-themed
 
 Marketing site for Hațegan Consulting & Trading. Bun monorepo with three workspaces: `admin`
-(Payload CMS 3.85 + Next.js 16), `web` (Astro 6, the deliverable), `e2e` (Playwright).
+(Payload CMS 3.87 + Next.js 16), `web` (Astro 7, the deliverable), `e2e` (Playwright).
 Use `bun`, never `npm`/`pnpm`/`node`/`vite` (see `.cursor/rules/use-bun-instead-of-node-vite-npm-pnpm.mdc`).
 
 ## Commands
@@ -20,5 +20,5 @@ Use `bun`, never `npm`/`pnpm`/`node`/`vite` (see `.cursor/rules/use-bun-instead-
 
 ## Testing / checks
 - `admin`: `bun run test` runs vitest then playwright; `bun run lint` (eslint).
-- `web`: `bun run test` runs jest (watch), `bun run astro-check`, `cspell`.
+  - `web`: `bun run astro-check`. (No `test`/`format` scripts in `web/package.json`; jest + cspell are installed but not wired.)
 - `e2e`: playwright baseURL targets production `https://hct.vitrina.promo`; it has its own nested `e2e/node_modules`.
