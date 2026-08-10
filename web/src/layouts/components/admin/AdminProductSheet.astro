@@ -77,14 +77,14 @@ const {
       <SheetTitle id="edit-sheet-title">{product.title}</SheetTitle>
     </SheetHeader>
     <form id="product-edit-form" class="flex-1 space-y-4 overflow-y-auto py-4">
-      <input type="hidden" name="id" value={product.id} />
+      <input type="hidden" name="edit_id" value={product.id} />
       <div class="bg-muted/50 border-border rounded-lg border p-4">
         <div class="space-y-4">
           <div class="space-y-2">
             <Label for="edit-name">Name</Label>
             <Input
               id="edit-name"
-              name="name"
+              name="edit_name"
               value={String(product.name ?? "")}
               required
             />
@@ -94,7 +94,7 @@ const {
               <Label for="edit-code">Code</Label>
               <Input
                 id="edit-code"
-                name="code"
+                name="edit_code"
                 value={String(product.code ?? "")}
                 required
               />
@@ -122,7 +122,7 @@ const {
             <Label for="edit-description">Description</Label>
             <Textarea
               id="edit-description"
-              name="description"
+              name="edit_description"
               value={String(product.description ?? "")}
               rows={5}
             />
@@ -131,7 +131,7 @@ const {
             <div class="flex items-center gap-3">
               <Checkbox
                 id="edit-published"
-                name="published"
+                name="edit_published"
                 checked={product.published ?? false}
               />
               <Label for="edit-published">Published</Label>
@@ -139,7 +139,7 @@ const {
             <div class="flex items-center gap-3">
               <Checkbox
                 id="edit-promoted"
-                name="promoted"
+                name="edit_promoted"
                 checked={product.promoted ?? false}
               />
               <Label for="edit-promoted">Promoted</Label>
@@ -181,7 +181,7 @@ const {
             <div class="space-y-4">
               <div class="space-y-2">
                 <Label for="edit-category">Category</Label>
-                <Select id="edit-category" name="category" class="w-full">
+                <Select id="edit-category" name="edit_category" class="w-full">
                   <SelectOption value="">—</SelectOption>
                   {
                     categories.map((c) => (
@@ -202,7 +202,7 @@ const {
                       <div class="flex items-center gap-3">
                         <Checkbox
                           id={`edit-material-${m.id}`}
-                          name="materials"
+                          name="edit_materials"
                           value={String(m.id)}
                           checked={product.materialIds.has(String(m.id))}
                         />

@@ -304,13 +304,13 @@ const activeProductView: ProductView = {
   }) {
     const f = document.getElementById("product-edit-form") as HTMLFormElement;
     if (!f) return;
-    (f.querySelector("[name=id]") as HTMLInputElement).value = String(
+    (f.querySelector("[name=edit_id]") as HTMLInputElement).value = String(
       product.id,
     );
-    (f.querySelector("[name=code]") as HTMLInputElement).value = String(
+    (f.querySelector("[name=edit_code]") as HTMLInputElement).value = String(
       product.code ?? "",
     );
-    (f.querySelector("[name=name]") as HTMLInputElement).value = String(
+    (f.querySelector("[name=edit_name]") as HTMLInputElement).value = String(
       product.name ?? "",
     );
     const titleEl = document.getElementById("edit-sheet-title");
@@ -324,20 +324,20 @@ const activeProductView: ProductView = {
           ? `${partner.name}: ${product.name ?? ""}`
           : (product.name || "Edit Product");
     }
-    (f.querySelector("[name=description]") as HTMLTextAreaElement).value =
+    (f.querySelector("[name=edit_description]") as HTMLTextAreaElement).value =
       String(product.description ?? "");
-    (f.querySelector("[name=published]") as HTMLInputElement).checked =
+    (f.querySelector("[name=edit_published]") as HTMLInputElement).checked =
       !!product.published;
-    (f.querySelector("[name=promoted]") as HTMLInputElement).checked =
+    (f.querySelector("[name=edit_promoted]") as HTMLInputElement).checked =
       !!product.promoted;
 
     const categorySelect = f.querySelector(
-      "[name=category]",
+      "[name=edit_category]",
     ) as HTMLSelectElement;
     if (categorySelect) categorySelect.value = relationId(product.category);
 
     const materialCheckboxes = f.querySelectorAll(
-      "[data-edit-materials] input[name=materials]",
+      "[data-edit-materials] input[name=edit_materials]",
     );
     const selectedMaterials = new Set(
       (product.materials ?? []).map((m) => relationId(m)),
@@ -489,25 +489,25 @@ const activeProductView: ProductView = {
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const id = (form.querySelector("[name=id]") as HTMLInputElement).value;
+      const id = (form.querySelector("[name=edit_id]") as HTMLInputElement).value;
       const materialInputs = Array.from(
-        form.querySelectorAll("[data-edit-materials] input[name=materials]"),
+        form.querySelectorAll("[data-edit-materials] input[name=edit_materials]"),
       ) as HTMLInputElement[];
       const materialIds = materialInputs
         .filter((box) => box.checked)
         .map((box) => box.value);
       const data = {
-        code: (form.querySelector("[name=code]") as HTMLInputElement).value,
-        name: (form.querySelector("[name=name]") as HTMLInputElement).value,
+        code: (form.querySelector("[name=edit_code]") as HTMLInputElement).value,
+        name: (form.querySelector("[name=edit_name]") as HTMLInputElement).value,
         description: (
-          form.querySelector("[name=description]") as HTMLTextAreaElement
+          form.querySelector("[name=edit_description]") as HTMLTextAreaElement
         ).value,
-        published: (form.querySelector("[name=published]") as HTMLInputElement)
+        published: (form.querySelector("[name=edit_published]") as HTMLInputElement)
           .checked,
-        promoted: (form.querySelector("[name=promoted]") as HTMLInputElement)
+        promoted: (form.querySelector("[name=edit_promoted]") as HTMLInputElement)
           .checked,
         category:
-          (form.querySelector("[name=category]") as HTMLSelectElement).value ||
+          (form.querySelector("[name=edit_category]") as HTMLSelectElement).value ||
           null,
         materials: materialIds,
       };
