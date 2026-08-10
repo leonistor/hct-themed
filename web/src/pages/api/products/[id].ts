@@ -82,7 +82,7 @@ export const PUT: APIRoute = async ({ params, request }) => {
       description?: string;
       published?: boolean;
       promoted?: boolean;
-      category?: number | string;
+      category?: number | string | null;
       materials?: (number | string)[];
     };
 
@@ -92,8 +92,14 @@ export const PUT: APIRoute = async ({ params, request }) => {
   if (description !== undefined) data.description = description;
   if (published !== undefined) data.published = Boolean(published);
   if (promoted !== undefined) data.promoted = Boolean(promoted);
-  if (category !== undefined) data.category = category;
-  if (materials !== undefined) data.materials = materials;
+  if (category !== undefined && category !== null) {
+    data.category = Number(category);
+  } else if (category !== undefined) {
+    data.category = null;
+  }
+  if (materials !== undefined) {
+    data.materials = materials.map((m) => Number(m));
+  }
 
   if (Object.keys(data).length === 0) {
     return new Response(JSON.stringify({ error: "No fields to update" }), {
