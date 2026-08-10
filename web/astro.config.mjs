@@ -32,7 +32,7 @@ export default defineConfig({
     remotePatterns: [{ port: "4321" }, { port: "3000" }],
   },
   server: { allowedHosts: true, host: "0.0.0.0" },
-  devToolbar: { enabled: true },
+  devToolbar: { enabled: false },
   outDir: "server",
   adapter: node({
     mode: "standalone",
