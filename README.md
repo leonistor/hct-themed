@@ -17,7 +17,7 @@ products and services catalogue. Built as a Bun monorepo with three workspaces:
 ### admin (Payload CMS)
 
 Payload config lives in `admin/src/payload.config.ts`. Content is stored in SQLite at
-`db/payload.db` (dev auto-login `admin@test.com` / `test1234`). The admin UI is served on
+`db/hct.db` (dev auto-login `admin@test.com` / `test1234`). The admin UI is served on
 port 3000 and also exposes the Payload REST API that the web site consumes at runtime.
 
 Generated Payload TypeScript types are emitted to `admin/src/payload-types.ts`. After
@@ -91,7 +91,7 @@ SQLite database, so the `admin` workspace and `db/` must be present for these ro
 - Dynamic (Payload-backed) routes: `products`, `categories/[code]`, `partners/[code]`,
   `product/[code]`, `solutions`/`solutions/[code]`, `vsu`, `customers`.
 - `api/[...path].ts` proxies the admin Payload REST API by default.
-- `/admin` lists products from the Payload DB in a Bearnie table (standalone page, no site
+- `/admin` lists products from the hct.db in a Bearnie table (standalone page, no site
   layout). See [ADMIN.md](ADMIN.md) for details.
 
 ### Layout

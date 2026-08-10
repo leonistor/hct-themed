@@ -40,7 +40,7 @@ import { sqliteAdapter } from '@payloadcms/db-sqlite'
 export default buildConfig({
   db: sqliteAdapter({
     client: {
-      url: 'file:./payload.db',
+      url: 'file:./hct.db',
     },
     transactionOptions: {}, // Enable transactions (disabled by default)
   }),
@@ -64,7 +64,7 @@ const afterChange: CollectionAfterChangeHook = async ({ req, doc }) => {
 }
 
 // Manual transaction control
-const transactionID = await payload.db.beginTransaction()
+const transactionID = await hct.db.beginTransaction()
 try {
   await payload.create({
     collection: 'orders',
@@ -77,9 +77,9 @@ try {
     data: { stock: newStock },
     req: { transactionID },
   })
-  await payload.db.commitTransaction(transactionID)
+  await hct.db.commitTransaction(transactionID)
 } catch (error) {
-  await payload.db.rollbackTransaction(transactionID)
+  await hct.db.rollbackTransaction(transactionID)
   throw error
 }
 ```

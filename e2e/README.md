@@ -47,7 +47,7 @@ server is already up.
   ```
 
   The config boots (or reuses) the local dev servers with `bun run dev`, so the
-  `db/payload.db` must be present.
+  `db/hct.db` must be present.
 
 ## Console error coverage
 

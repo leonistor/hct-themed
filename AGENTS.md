@@ -10,7 +10,7 @@ Use `bun`, never `npm`/`pnpm`/`node`/`vite` (see `.cursor/rules/use-bun-instead-
 - web: `bun run dev` (runs toml-watcher + astro dev), `bun run build`, `bun run astro-check`, `bun run format`. package.json scripts call `npm run`/`astro` directly, so always invoke via `bun run <script>`.
 
 ## Architecture
-- `admin`: Payload CMS + SQLite at `../db/payload.db` (src `payload.config.ts`). Dev auto-login `admin@test.com`/`test1234`.
+- `admin`: Payload CMS + SQLite at `../db/hct.db` (src `payload.config.ts`). Dev auto-login `admin@test.com`/`test1234`.
 - `web` (Astro): config-driven — `src/config/config.toml` regenerates `src/config/config.generated.json` via the toml-watcher on dev/build; many modules import the generated JSON. Bilingual: `ro` is default, `en` second, configured in `src/config/language.json`.
 - Content is stored in `web/src/content/<collection>/{english,romanian}/`.
 - `astro.config.mjs` sets `outDir: "server"` for the Node standalone adapter — build output is `server/`, not `dist/`.

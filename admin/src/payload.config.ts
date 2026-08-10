@@ -88,7 +88,7 @@ export default buildConfig({
   },
   db: sqliteAdapter({
     client: {
-      url: process.env.DATABASE_URL || 'file:../db/payload.db',
+      url: process.env.DATABASE_URL || 'file:../db/hct.db',
     },
     wal: true,
     transactionOptions: {},
