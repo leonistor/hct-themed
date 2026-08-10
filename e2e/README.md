@@ -37,6 +37,17 @@ server is already up.
 - `tests/homepage-links.spec.ts`: loads the homepage, collects all internal
   links from the rendered DOM (`utils/menuLinks.ts`), then checks each via
   `page.request.get` without rendering each page, keeping the suite fast.
+- `tests/admin-login.spec.ts`: signs in to the Astro admin
+  (`web/src/pages/admin/`) at `http://localhost:4321` with the `test@test.com`
+  test user and asserts the products page renders. Run via the dedicated admin
+  config:
+
+  ```sh
+  bun run e2e:admin
+  ```
+
+  The config boots (or reuses) the local dev servers with `bun run dev`, so the
+  `db/payload.db` must be present.
 
 ## Console error coverage
 

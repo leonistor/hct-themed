@@ -18,7 +18,8 @@
     "dev": "bun run --parallel dev:web dev:admin",
     "build": "bun run --parallel build:web build:admin",
     "prod": "bun run --parallel prod:web prod:admin",
-    "e2e": "cd e2e && bunx --bun playwright test"
+    "e2e": "cd e2e && bunx --bun playwright test",
+    "e2e:admin": "cd e2e && bunx --bun playwright test --config=playwright.admin.config.ts"
   },
   "type": "module",
   "workspaces": [
