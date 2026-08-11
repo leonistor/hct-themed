@@ -92,6 +92,7 @@
     "variants": "Variants",
     "description": "",
     "count": "products",
+    "paginationInfo": "Page {current} of {total}",
     "paginationPrevious": "Previous Page",
     "paginationNext": "Next Page",
     "allProducts": "View All Products"

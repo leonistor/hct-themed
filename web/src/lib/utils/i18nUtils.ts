@@ -33,7 +33,8 @@ export const enabledLanguages = getEnabledLocales();
  * or not found, it defaults to the configured default language.
  *
  * @param {string} lang - The language code to fetch translations for.
- * @returns {Promise<Function>} A function `t(key)` that can be used to retrieve translated strings.
+ * @returns {Promise<Function>} A function `t(key, values?)` that can be used to retrieve translated strings;
+ *   when `values` is provided, `{placeholder}` tokens in the resolved string are interpolated.
  */
 const translationCache: Record<string, any> = {}; // Simple in-memory cache
 export const useTranslations = async (lang: string): Promise<Function> => {
@@ -89,23 +90,34 @@ export const useTranslations = async (lang: string): Promise<Function> => {
       }[keyof T & string]
     : never;
 
-  const t = <T extends NestedObject>(key: DotNotationKeys<T>): string | any => {
-    // Split the key by dots to form the path
-    const keys = key.split(".");
+   const t = <T extends NestedObject>(
+     key: DotNotationKeys<T>,
+     values?: Record<string, string | number>,
+   ): string | any => {
+     // Split the key by dots to form the path
+     const keys = key.split(".");
 
-    // Traverse the object using the path
-    let value: any = translations;
-    for (const k of keys) {
-      if (value && typeof value === "object" && k in value) {
-        value = value[k];
-      } else {
-        return "Not Found";
-      }
-    }
+     // Traverse the object using the path
+     let value: any = translations;
+     for (const k of keys) {
+       if (value && typeof value === "object" && k in value) {
+         value = value[k];
+       } else {
+         return "Not Found";
+       }
+     }
 
-    // Return the resolved value
-    return value;
-  };
+     // Interpolate provided values into placeholder tokens (e.g. {current})
+     if (typeof value === "string" && values) {
+       return value.replace(
+         /\{(\w+)\}/g,
+         (_, name: string) => String(values[name] ?? ""),
+       );
+     }
+
+     // Return the resolved value
+     return value;
+   };
 
   // Cache the translations
   translationCache[resolvedLang] = Object.assign(t, translations);

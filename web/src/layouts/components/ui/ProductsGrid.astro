@@ -59,14 +59,16 @@ nextPageUrl.searchParams.set("page", String(page + 1));
 const prevPageUrl = new URL(currentUrl.toString());
 prevPageUrl.searchParams.set("page", String(page - 1));
 
-const paginationProps = {
-  totalDocs: products.totalDocs,
-  hasPrevPage: products.hasPrevPage,
-  hasNextPage: products.hasNextPage,
-  prevUrl: prevPageUrl.pathname + prevPageUrl.search,
-  nextUrl: nextPageUrl.pathname + nextPageUrl.search,
-  label: t("products.count"),
-};
+  const paginationProps = {
+    totalDocs: products.totalDocs,
+    hasPrevPage: products.hasPrevPage,
+    hasNextPage: products.hasNextPage,
+    prevUrl: prevPageUrl.pathname + prevPageUrl.search,
+    nextUrl: nextPageUrl.pathname + nextPageUrl.search,
+    label: t("products.count"),
+    currentPage: products.page,
+    totalPages: products.totalPages,
+  };
 ---
 
 <Pagination {...paginationProps} />

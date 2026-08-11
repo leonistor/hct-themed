@@ -8,10 +8,20 @@ interface Props {
   prevUrl: string;
   nextUrl: string;
   label: string;
+  currentPage?: number;
+  totalPages?: number;
 }
 
-const { totalDocs, hasPrevPage, hasNextPage, prevUrl, nextUrl, label } =
-  Astro.props;
+const {
+  totalDocs,
+  hasPrevPage,
+  hasNextPage,
+  prevUrl,
+  nextUrl,
+  label,
+  currentPage,
+  totalPages,
+} = Astro.props;
 
 const t = await useTranslations(Astro.currentLocale as string);
 ---
@@ -34,4 +44,9 @@ const t = await useTranslations(Astro.currentLocale as string);
       </a>
     )
   }
+  {currentPage && totalPages && (
+    <span class="text-muted-foreground text-sm">
+      {t("products.paginationInfo", { current: currentPage, total: totalPages })}
+    </span>
+  )}
 </div>

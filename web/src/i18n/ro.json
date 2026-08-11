@@ -92,6 +92,7 @@
     "variants": "Variante",
     "description": "",
     "count": "produse",
+    "paginationInfo": "Pagina {current} din {total}",
     "paginationPrevious": "Pagina anterioară",
     "paginationNext": "Pagina următoare",
     "allProducts": "Vezi toate produsele"
