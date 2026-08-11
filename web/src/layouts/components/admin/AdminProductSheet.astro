@@ -76,10 +76,10 @@ const {
     <SheetHeader>
       <SheetTitle id="edit-sheet-title">{product.title}</SheetTitle>
     </SheetHeader>
-    <form id="product-edit-form" class="flex-1 space-y-4 overflow-y-auto py-4">
+    <form id="product-edit-form" class="flex-1 space-y-2 overflow-y-auto py-2">
       <input type="hidden" name="edit_id" value={product.id} />
-      <div class="bg-muted/50 border-border rounded-lg border p-4">
-        <div class="space-y-4">
+      <div class="bg-muted/50 border-border rounded-lg border p-2">
+        <div class="space-y-2">
           <div class="space-y-2">
             <Label for="edit-name">Name</Label>
             <Input
@@ -89,7 +89,7 @@ const {
               required
             />
           </div>
-          <div class="flex items-end gap-4">
+          <div class="flex items-start gap-4">
             <div class="flex-1 space-y-2">
               <Label for="edit-code">Code</Label>
               <Input
@@ -145,7 +145,9 @@ const {
               <Label for="edit-promoted">Promoted</Label>
             </div>
             <div class="flex items-center gap-1">
-              <Label class="text-muted-foreground text-sm font-normal">URL</Label>
+              <Label class="text-muted-foreground text-sm font-normal"
+                >URL</Label
+              >
               <p data-edit-url class="flex items-center">
                 {
                   product.url ? (
@@ -221,9 +223,11 @@ const {
             icon={PlusSignIcon}
             iconSize="sm"
             class="text-sm font-semibold">
-            {product.variants.length > 0
-              ? `${product.variants.length} Variants`
-              : "No Variants"}
+            {
+              product.variants.length > 0
+                ? `${product.variants.length} Variants`
+                : "No Variants"
+            }
           </AccordionTrigger>
           <AccordionContent>
             <div data-edit-variants class="space-y-2">
