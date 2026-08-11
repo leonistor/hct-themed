@@ -327,6 +327,10 @@ const activeProductView: ProductView = {
     ) as HTMLAnchorElement | null;
     if (previewLink) {
       previewLink.href = `/product/${product.code ?? ""}`;
+      previewLink.onclick = (e: MouseEvent) => {
+        e.preventDefault();
+        window.open(previewLink.href, "product-preview");
+      };
     }
 
     const categorySelect = f.querySelector(
