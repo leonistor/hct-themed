@@ -322,6 +322,13 @@ const activeProductView: ProductView = {
     (f.querySelector("[name=edit_promoted]") as HTMLInputElement).checked =
       !!product.promoted;
 
+    const previewLink = f.querySelector(
+      "[data-edit-preview]",
+    ) as HTMLAnchorElement | null;
+    if (previewLink) {
+      previewLink.href = `/product/${product.code ?? ""}`;
+    }
+
     const categorySelect = f.querySelector(
       "[name=edit_category]",
     ) as HTMLSelectElement;

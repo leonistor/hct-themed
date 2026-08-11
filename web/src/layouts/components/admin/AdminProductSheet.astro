@@ -257,7 +257,11 @@ const {
       </Accordion>
       <SheetFooter class="gap-2">
         <Button type="submit">Save</Button>
-        <Button type="button" variant="link" href={`/product/${product.code}`}
+        <Button
+          type="button"
+          variant="link"
+          data-edit-preview
+          href={`/product/${product.code ?? ""}`}
           >Preview</Button
         >
         <SheetClose>Cancel</SheetClose>
