@@ -7,10 +7,21 @@
       "type": "local",
       "command": ["bunx", "@bearnie/mcp"]
     },
+    "astro": {
+      "type": "remote",
+      "enabled": true,
+      "url": "https://mcp.docs.astro.build/mcp"
+    },
     "playwright": {
       "enabled": true,
       "type": "local",
-      "command": ["bunx", "@playwright/mcp@latest", "--headless", "--browser", "chromium"]
+      "command": [
+        "bunx",
+        "@playwright/mcp@latest",
+        "--headless",
+        "--browser",
+        "chromium"
+      ]
     }
   }
 }

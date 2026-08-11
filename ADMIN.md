@@ -40,7 +40,7 @@ slide-out sheet. It is the current reference implementation for admin pages in t
 | `web/src/layouts/components/admin/AdminProductsGrid.astro` | Sortable product table. Props: `products` (typed `Product[]`), `editId` (active row highlight), `sortHref`, `sortIcon`, `sortIconClass`. No script. |
 | `web/src/layouts/components/admin/AdminProductsPagination.astro` | Bottom-right pager (previous/next + page links). Props: `makeUrl`, `page`, `totalPages`, `showPagination`, `showPrev`, `showNext`, `isCurrentPage`. No script. |
 | `web/src/layouts/components/admin/AdminProductSheet.astro` | Bearnie Sheet for editing products (2/3 width, right side), including the `sheet-link-icon` `<template>` and `#sheet-open-trigger`. Exports the `ProductView` type used by the parent to pass the server-rendered `?edit` product. No script. The sheet form is always rendered in the DOM (empty by default); the parent's client script populates it via the API on row click. |
-| `web/src/pages/api/products/[id].ts` | GET endpoint returning a product as JSON (excludes `folder`/`images` fields). PUT endpoint for updating a product. Uses Payload local API to update code, name, description, published, promoted, category, and materials fields. Both use `depth: 2` and require a valid session (401 without the cookie). Returns updated doc as JSON. |
+| `web/src/pages/api/products/[id].ts` | GET endpoint returning a product as JSON (excludes `folder`/`images` fields). PUT endpoint for updating a product. Uses Payload local API to update name, description, published, promoted, category, and materials fields. Both use `depth: 2` and require a valid session (401 without the cookie). Returns updated doc as JSON. |
 | `web/src/styles/admin.css` | Standalone stylesheet: Tailwind + Bearnie tokens only for this page. |
 | `web/src/layouts/components/bearnie/{sidebar,table,select,checkbox,pagination,sheet,input,textarea,button,label}/` | Bearnie UI components installed for the admin UI. |
 | `web/src/layouts/components/bearnie/lib/hugeicons.ts` | Barrel re-export of Hugeicons free (stroke-rounded) icon data with official Hugeicons names (same identifiers as `@hugeicons/core-free-icons` / hugeicons.com), for use with `HugeIcon.astro`. Import icons from here (e.g. `import { ArrowUpRight01Icon } from "@/components/bearnie/lib/hugeicons"`), never from `@hugeicons/core-free-icons` directly. |
@@ -66,14 +66,14 @@ slide-out sheet. It is the current reference implementation for admin pages in t
   a published `<Select>` (Any/Yes/No), an Apply button, and a Clear link (shown when any filter
   is active). A hidden `limit` field preserves the current page size across filter submissions.
 - `limit=all` requests `limit: 0` with `pagination: false`; the pager and page count are hidden.
-- Table columns: image (`PayloadImage`, `main_image.sizes.medium`, 300×300), code (plain
-  text), published (`CheckmarkCircle01Icon` header, `<Checkbox disabled checked>` cell), name,
-  variants count (`Layers01Icon` header), partner name, category name, materials (joined names).
-  Column widths are explicit via `style` (12.5%, 8.33%, 4.17%, 20.83%, 4.17%, 8.33%, 20.83%,
-  20.83%; sum 100%). Long text is not truncated.
+- Table columns: image (`PayloadImage`, `main_image.sizes.medium`, 300×300), published
+  (`CheckmarkCircle01Icon` header, `<Checkbox disabled checked>` cell), name, variants count
+  (`Layers01Icon` header), partner name, category name, materials (joined names). Column widths
+  are explicit via `style` (12.5%, 4.17%, 29.16%, 4.17%, 8.33%, 20.83%, 20.83%; sum 100%).
+  Long text is not truncated.
 - Query uses `depth: 1` so partner/category/materials resolve inline, and excludes the heavy
   `folder`/`images` fields via `select`. Sort defaults to `_order` when no `sort` param is present.
-- Sortable columns: Code, Published, Name, Partner, Category (Materials not sortable — array
+- Sortable columns: Published, Name, Partner, Category (Materials not sortable — array
   relationship). `sort` param format: `field|asc` or `field|desc`. Clicking a header toggles
   asc → desc → unsorted (param removed). Hugeicons `ArrowUpDown`/`ArrowUp02`/`ArrowDown02`
   icons on each header (dimmed when unsorted, highlighted when active). Partner and Category
@@ -85,11 +85,11 @@ slide-out sheet. It is the current reference implementation for admin pages in t
   `<script>` at the bottom of the component.
 - `index.astro` fetches all partners, categories, and materials via `payload.find()` with
   `limit: 0` and `sort: "name"` to populate the filter dropdowns.
-- Edit sheet: the sheet form (2/3 width, right side) edits code, name, description, published,
+- Edit sheet: the sheet form (2/3 width, right side) edits name, description, published,
   promoted (Checkbox), category (single select), and materials (checkbox list). The sheet title
   shows the product name (falls back to "Edit Product" when no product is loaded); it is set
   server-side on `?edit` loads and updated client-side in `populateForm`. The form is grouped: a
-  `bg-muted/50` panel card at the top holds code, name, main image, description, published,
+  `bg-muted/50` panel card at the top holds name, main image, description, published,
   promoted, and url; a Bearnie `Accordion` (single-open) below groups the rest into "Category &
   Materials", "Variants", and "Other images" (empty placeholder for now). Read-only sections show
   url, variants (name, feature, description, url), and main image. Product and variant URLs render

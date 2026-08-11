@@ -75,9 +75,8 @@ export const PUT: APIRoute = async ({ params, request }) => {
     });
   }
 
-  const { code, name, description, published, promoted, category, materials } =
+  const { name, description, published, promoted, category, materials } =
     body as {
-      code?: string;
       name?: string;
       description?: string;
       published?: boolean;
@@ -87,7 +86,6 @@ export const PUT: APIRoute = async ({ params, request }) => {
     };
 
   const data: Record<string, unknown> = {};
-  if (code !== undefined) data.code = code;
   if (name !== undefined) data.name = name;
   if (description !== undefined) data.description = description;
   if (published !== undefined) data.published = Boolean(published);

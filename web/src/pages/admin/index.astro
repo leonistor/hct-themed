@@ -3,6 +3,7 @@ export const prerender = false;
 import "@/styles/admin.css";
 import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
 import { Moon01Icon, Sun01Icon } from "@/components/bearnie/lib/hugeicons";
+import Favicons from "@/components/seo/Favicons.astro";
 import AdminProductsTable from "@/layouts/components/admin/AdminProductsTable.astro";
 import AdminSidebar from "@/layouts/components/admin/AdminSidebar.astro";
 import SidebarTrigger from "@/components/bearnie/sidebar/SidebarTrigger.astro";
@@ -18,14 +19,38 @@ if (!currentUser) {
 }
 
 const [partnersResult, categoriesResult, materialsResult] = await Promise.all([
-  payload.find({ collection: "partners", limit: 0, sort: "name", select: { name: true } }),
-  payload.find({ collection: "categories", limit: 0, sort: "name", select: { name: true } }),
-  payload.find({ collection: "materials", limit: 0, sort: "name", select: { name: true } }),
+  payload.find({
+    collection: "partners",
+    limit: 0,
+    sort: "name",
+    select: { name: true },
+  }),
+  payload.find({
+    collection: "categories",
+    limit: 0,
+    sort: "name",
+    select: { name: true },
+  }),
+  payload.find({
+    collection: "materials",
+    limit: 0,
+    sort: "name",
+    select: { name: true },
+  }),
 ]);
 
-const partnerOptions = partnersResult.docs.map((p) => ({ id: p.id, name: p.name }));
-const categoryOptions = categoriesResult.docs.map((c) => ({ id: c.id, name: c.name }));
-const materialOptions = materialsResult.docs.map((m) => ({ id: m.id, name: m.name }));
+const partnerOptions = partnersResult.docs.map((p) => ({
+  id: p.id,
+  name: p.name,
+}));
+const categoryOptions = categoriesResult.docs.map((c) => ({
+  id: c.id,
+  name: c.name,
+}));
+const materialOptions = materialsResult.docs.map((m) => ({
+  id: m.id,
+  name: m.name,
+}));
 ---
 
 <!doctype html>
@@ -34,6 +59,7 @@ const materialOptions = materialsResult.docs.map((m) => ({ id: m.id, name: m.nam
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Products · Admin</title>
+    <Favicons />
     <meta name="robots" content="noindex, nofollow" />
     <script is:inline>
       (function () {
@@ -44,21 +70,31 @@ const materialOptions = materialsResult.docs.map((m) => ({ id: m.id, name: m.nam
   </head>
   <body>
     <div class="flex min-h-screen">
-      <AdminSidebar currentPath={Astro.url.pathname} userEmail={currentUser.email} />
+      <AdminSidebar
+        currentPath={Astro.url.pathname}
+        userEmail={currentUser.email}
+      />
 
       <div class="flex flex-1 flex-col">
-        <header class="sticky top-0 z-30 flex items-center gap-3 bg-background px-4 py-3 shadow-sm">
+        <header
+          class="bg-background sticky top-0 z-30 flex items-center gap-3 px-4 py-3 shadow-sm">
           <SidebarTrigger for="admin-sidebar" />
           <h1 class="text-2xl font-semibold">Products</h1>
           <p class="text-muted-foreground text-sm">Admin product list</p>
 
           <button
             type="button"
-            class="ml-auto cursor-pointer rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            class="text-muted-foreground hover:bg-accent hover:text-accent-foreground ml-auto cursor-pointer rounded-md p-2 transition-colors"
             data-theme-toggle
             aria-label="Toggle theme">
-            <HugeIcon icon={Sun01Icon as never} class="size-5 hidden dark:block" />
-            <HugeIcon icon={Moon01Icon as never} class="size-5 block dark:hidden" />
+            <HugeIcon
+              icon={Sun01Icon as never}
+              class="hidden size-5 dark:block"
+            />
+            <HugeIcon
+              icon={Moon01Icon as never}
+              class="block size-5 dark:hidden"
+            />
           </button>
         </header>
 
@@ -78,7 +114,10 @@ const materialOptions = materialsResult.docs.map((m) => ({ id: m.id, name: m.nam
           const isDark = document.documentElement.classList.contains("dark");
           const newTheme = isDark ? "light" : "dark";
           localStorage.setItem("theme", newTheme);
-          document.documentElement.classList.toggle("dark", newTheme === "dark");
+          document.documentElement.classList.toggle(
+            "dark",
+            newTheme === "dark",
+          );
         });
       });
     </script>

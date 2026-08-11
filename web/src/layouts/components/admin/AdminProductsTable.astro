@@ -41,13 +41,7 @@ const filterMaterial = currentUrl.searchParams.get("material") ?? "";
 const filterPublished = currentUrl.searchParams.get("published") ?? "";
 
 const sortParam = currentUrl.searchParams.get("sort") ?? "";
-const SORTABLE_COLUMNS = [
-  "code",
-  "published",
-  "name",
-  "partner",
-  "category",
-] as const;
+const SORTABLE_COLUMNS = ["published", "name", "partner", "category"] as const;
 type SortableColumn = (typeof SORTABLE_COLUMNS)[number];
 let sortField: SortableColumn | "" = "";
 let sortDir: "asc" | "desc" = "asc";
@@ -127,11 +121,11 @@ const showNext = showPagination && products.hasNextPage;
 
 const hasActiveFilters = Boolean(
   search ||
-    filterPartner ||
-    filterCategory ||
-    filterMaterial ||
-    filterPublished ||
-    sortParam,
+  filterPartner ||
+  filterCategory ||
+  filterMaterial ||
+  filterPublished ||
+  sortParam,
 );
 
 const editId = currentUrl.searchParams.get("edit") ?? "";
@@ -187,8 +181,8 @@ const activeProductTitle =
 const activeProductView: ProductView = {
   id: activeProduct ? String(activeProduct.id) : "",
   title: activeProductTitle,
-  name: activeProduct?.name,
   code: activeProduct?.code,
+  name: activeProduct?.name,
   description: activeProduct?.description,
   url: activeProduct?.url,
   published: activeProduct?.published ?? false,
@@ -230,7 +224,11 @@ const activeProductView: ProductView = {
   showNext={showNext}
   isCurrentPage={isCurrentPage}
 />
-<AdminProductSheet product={activeProductView} categories={categories} materials={materials} />
+<AdminProductSheet
+  product={activeProductView}
+  categories={categories}
+  materials={materials}
+/>
 
 <script>
   function buildUrl(editId?: string) {
@@ -280,7 +278,6 @@ const activeProductView: ProductView = {
 
   function populateForm(product: {
     id: string | number;
-    code?: string;
     name?: string;
     description?: string;
     published?: boolean;
@@ -307,22 +304,15 @@ const activeProductView: ProductView = {
     (f.querySelector("[name=edit_id]") as HTMLInputElement).value = String(
       product.id,
     );
-    (f.querySelector("[name=edit_code]") as HTMLInputElement).value = String(
-      product.code ?? "",
-    );
     (f.querySelector("[name=edit_name]") as HTMLInputElement).value = String(
       product.name ?? "",
     );
     const titleEl = document.getElementById("edit-sheet-title");
     if (titleEl) {
-      const partner = product.partner as
-        | { name?: string }
-        | null
-        | undefined;
-      titleEl.textContent =
-        partner?.name
-          ? `${partner.name}: ${product.name ?? ""}`
-          : (product.name || "Edit Product");
+      const partner = product.partner as { name?: string } | null | undefined;
+      titleEl.textContent = partner?.name
+        ? `${partner.name}: ${product.name ?? ""}`
+        : product.name || "Edit Product";
     }
     (f.querySelector("[name=edit_description]") as HTMLTextAreaElement).value =
       String(product.description ?? "");
@@ -386,7 +376,8 @@ const activeProductView: ProductView = {
           if (v.feature || v.description) {
             const rest = document.createElement("span");
             rest.className = "text-muted-foreground";
-            rest.textContent = `: ${v.feature ?? ""} ${v.description ?? ""}`.trimEnd();
+            rest.textContent =
+              `: ${v.feature ?? ""} ${v.description ?? ""}`.trimEnd();
             text.appendChild(rest);
           }
           box.appendChild(text);
@@ -423,7 +414,6 @@ const activeProductView: ProductView = {
   function updateRow(
     id: string,
     data: {
-      code?: string;
       name?: string;
       published?: boolean;
       category?: { id: number | string; name?: string } | number | string;
@@ -433,21 +423,20 @@ const activeProductView: ProductView = {
     const row = document.querySelector(`[data-product-id="${id}"]`);
     if (!row) return;
     const cells = row.querySelectorAll("td");
-    if (data.code !== undefined && cells[1]) cells[1].textContent = data.code;
-    if (data.published !== undefined && cells[2]) {
-      const box = cells[2].querySelector("input[type=checkbox]");
+    if (data.published !== undefined && cells[1]) {
+      const box = cells[1].querySelector("input[type=checkbox]");
       if (box) (box as HTMLInputElement).checked = !!data.published;
     }
-    if (data.name !== undefined && cells[3]) cells[3].textContent = data.name;
-    if (data.category !== undefined && cells[6]) {
+    if (data.name !== undefined && cells[2]) cells[2].textContent = data.name;
+    if (data.category !== undefined && cells[5]) {
       const name =
         data.category && typeof data.category === "object"
           ? data.category.name
           : undefined;
-      cells[6].textContent = name ?? "—";
+      cells[5].textContent = name ?? "—";
     }
-    if (data.materials !== undefined && cells[7]) {
-      cells[7].textContent =
+    if (data.materials !== undefined && cells[6]) {
+      cells[6].textContent =
         data.materials
           .map((m) => (typeof m === "object" ? m.name : undefined))
           .filter(Boolean)
@@ -489,26 +478,31 @@ const activeProductView: ProductView = {
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const id = (form.querySelector("[name=edit_id]") as HTMLInputElement).value;
+      const id = (form.querySelector("[name=edit_id]") as HTMLInputElement)
+        .value;
       const materialInputs = Array.from(
-        form.querySelectorAll("[data-edit-materials] input[name=edit_materials]"),
+        form.querySelectorAll(
+          "[data-edit-materials] input[name=edit_materials]",
+        ),
       ) as HTMLInputElement[];
       const materialIds = materialInputs
         .filter((box) => box.checked)
         .map((box) => box.value);
       const data = {
-        code: (form.querySelector("[name=edit_code]") as HTMLInputElement).value,
-        name: (form.querySelector("[name=edit_name]") as HTMLInputElement).value,
+        name: (form.querySelector("[name=edit_name]") as HTMLInputElement)
+          .value,
         description: (
           form.querySelector("[name=edit_description]") as HTMLTextAreaElement
         ).value,
-        published: (form.querySelector("[name=edit_published]") as HTMLInputElement)
-          .checked,
-        promoted: (form.querySelector("[name=edit_promoted]") as HTMLInputElement)
-          .checked,
+        published: (
+          form.querySelector("[name=edit_published]") as HTMLInputElement
+        ).checked,
+        promoted: (
+          form.querySelector("[name=edit_promoted]") as HTMLInputElement
+        ).checked,
         category:
-          (form.querySelector("[name=edit_category]") as HTMLSelectElement).value ||
-          null,
+          (form.querySelector("[name=edit_category]") as HTMLSelectElement)
+            .value || null,
         materials: materialIds,
       };
 
