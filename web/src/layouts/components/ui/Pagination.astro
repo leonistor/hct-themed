@@ -26,28 +26,32 @@ const {
 const t = await useTranslations(Astro.currentLocale as string);
 ---
 
-<div class="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 pt-4 pb-6">
-  <div class="font-medium">
+<div
+  class="flex flex-wrap items-baseline justify-end gap-x-4 gap-y-2 pt-4 pb-6 text-sm">
+  <div class="font-semibold">
     {totalDocs + " " + label}
   </div>
   {
     hasPrevPage && (
-      <a href={prevUrl} class="btn" data-variant="ghost" data-size="sm">
+      <a href={prevUrl} class="">
         &larr; {t("products.paginationPrevious")}
       </a>
     )
   }
   {
     hasNextPage && (
-      <a href={nextUrl} class="btn" data-variant="ghost" data-size="sm">
+      <a href={nextUrl} class="">
         {t("products.paginationNext")} &rarr;
       </a>
     )
   }
   {
     currentPage && totalPages && (
-      <span class="text-muted-foreground text-sm">
-        {t("products.paginationInfo", { current: currentPage, total: totalPages })}
+      <span class="font-semibold">
+        {t("products.paginationInfo", {
+          current: currentPage,
+          total: totalPages,
+        })}
       </span>
     )
   }
