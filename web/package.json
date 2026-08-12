@@ -29,6 +29,7 @@
     "@preline/tabs": "^4.1.3",
     "@preline/tooltip": "^4.1.3",
     "admin": "workspace:*",
+    "shared": "workspace:*",
     "aos": "^2.3.4",
     "astro-leaflet": "^1.12.0",
     "astro-swiper": "^2.9.0",

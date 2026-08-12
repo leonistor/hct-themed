@@ -2,7 +2,8 @@
 export const prerender = false;
 
 import { getPayload } from "payload";
-import { config as payloadConfig, type Media } from "admin";
+import { config as payloadConfig } from "admin";
+import type { Media } from "shared";
 const payload = await getPayload({ config: payloadConfig });
 
 import { useTranslations } from "@/lib/utils/i18nUtils";

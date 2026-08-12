@@ -6,7 +6,8 @@ import Pagination from "@/layouts/components/ui/Pagination.astro";
 import { useTranslations } from "@/lib/utils/i18nUtils";
 
 import { getPayload } from "payload";
-import { config as payloadConfig, type Media } from "admin";
+import { config as payloadConfig } from "admin";
+import type { Media } from "shared";
 import type { Where } from "payload";
 const payload = await getPayload({ config: payloadConfig });
 

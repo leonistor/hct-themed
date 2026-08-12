@@ -11,7 +11,7 @@ import IconButton from "@/layouts/components/ui/IconButton.astro";
 
 import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
-import type { Media, Partner, Category, Material, Product } from "admin";
+import type { Media, Partner, Category, Material, Product } from "shared";
 const payload = await getPayload({ config: payloadConfig });
 
 import { useTranslations } from "@/lib/utils/i18nUtils";

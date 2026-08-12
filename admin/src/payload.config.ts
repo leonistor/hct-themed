@@ -84,7 +84,7 @@ export default buildConfig({
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '22db8265bed0b27620bba651',
   typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
+    outputFile: path.resolve(dirname, '../../shared/types/payload-types.ts'),
   },
   db: sqliteAdapter({
     client: {
