@@ -9,7 +9,7 @@ The repo currently works as a monorepo with three workspaces (`admin`, `web`, `e
 | Item | Description | Benefit |
 |------|-------------|---------|
 | **Root ESLint / Prettier** | Add `eslint.config.mjs`, `prettier.config.mjs` at the repo root and have each workspace `extends` them. | Consistent linting/formatting across workspaces, single source of truth. |
-| **Root TypeScript base config** | Create `tsconfig.base.json` with common `compilerOptions` (strict mode, `moduleResolution: "bundler"`, path aliases, etc.). Each workspace `extends` this file. | Guarantees identical TypeScript behaviour, reduces duplication. |
+| **Root TypeScript base config** | Create `tsconfig.base.json` with common `compilerOptions` (strict mode, `moduleResolution: "bundler"`, path aliases, etc.). `admin/tsconfig.json` extends this file; `web/tsconfig.json` keeps `astro/tsconfigs/strict` (no change). | Guarantees identical TypeScript behaviour, reduces duplication. **✅ Done** (commit `3bdb89b`). |
 | **Unified npm scripts** | In the root `package.json` add scripts that forward to workspaces using `bun run --filter <workspace> <script>`. Example: `"lint": "bun run --filter admin lint && bun run --filter web lint"`. | One place to run lint/type‑check/tests for the whole monorepo. |
 
 ---
@@ -21,6 +21,12 @@ The repo currently works as a monorepo with three workspaces (`admin`, `web`, `e
 
 *Why*: Prevents type drift when collections change; a single source of truth for collection shapes.
 
+**✅ Done** (branch `feat/shared-payload-types`, merged to `main` at `7c99cd3`). Implementation notes:
+- New `shared/` workspace (`shared/package.json`, exports `./types/payload-types.ts`; `payload@3.88.0` as a devDependency so the generated `declare module 'payload'` augmentation resolves). It is registered in the root `workspaces` array and added as a `workspace:*` dependency in `admin` and `web`.
+- The file was `git mv`'d from `admin/src/payload-types.ts` to `shared/types/payload-types.ts`. `admin/src/payload.config.ts` `outputFile` points there, and `admin/src/index.ts` does `export * from 'shared'`.
+- Web type imports now read from `shared`; **runtime `config` imports stay `from "admin"`** (they pull the live Payload config, not just types).
+- Regenerate after collection changes with `bun run generate:types` in `admin` (writes into `shared/types`).
+
 ---
 
 ## 3. Core utilities package
@@ -31,6 +37,8 @@ Create a lightweight package (e.g. `packages/core` or `libs/common`) that provid
 - Any other small reusable helpers (e.g., logging utility).
 
 All data‑generation scripts (`toml-watcher.mjs`, `generate‑menus.ts`, multilingual generators, etc.) should import from this core package instead of duplicating code.
+
+*Adjustment*: A `shared/` workspace now exists (Task 2) and already owns the generated Payload types. Prefer adding the core utilities as exports of `shared` (e.g. `shared/payloadClient.ts`, `shared/fs.ts`) rather than creating a separate `packages/core`/`libs/common` workspace, to avoid extra workspace sprawl. Update Quick win #3 accordingly.
 
 ---
 
@@ -108,9 +116,9 @@ Create `.github/workflows/ci.yml` that runs on push/PR:
 ## High‑impact quick wins (≤30 min each)
 | # | Quick win | Steps |
 |---|-----------|-------|
-| 1 | **Root tsconfig.base.json** | Create `tsconfig.base.json` with common compiler options, add `extends` in `admin/tsconfig.json` and `web/tsconfig.json`. |
-| 2 | **Move payload types** | Create `shared/types/payload-types.ts`, move the file, update imports in both workspaces. |
-| 3 | **Core payload client** | Add `packages/core/src/payloadClient.ts` containing the bootstrap code, replace the three scripts to import it. |
+| 1 | **Root tsconfig.base.json** | Create `tsconfig.base.json` with common compiler options, add `extends` in `admin/tsconfig.json` (web keeps `astro/tsconfigs/strict`). | ✅ Done (`3bdb89b`) |
+| 2 | **Move payload types** | Create `shared/types/payload-types.ts` as a `shared` workspace, move the file, update imports in both workspaces (runtime `config` stays `from "admin"`). | ✅ Done (`7c99cd3`) |
+| 3 | **Core payload client** | Add `shared/payloadClient.ts` (see Task 3 adjustment) containing the bootstrap code, replace the three scripts to import it. |
 | 4 | **Component registry** | Add `src/lib/componentRegistry.ts` (JSON array), adjust `astro.config.mjs` to read it. |
 | 5 | **Add Vitest test for toml‑watcher** | Write a test that feeds a sample `config.toml` and asserts the generated JSON matches a fixture. |
 | 6 | **Create DEVELOPER.md** | Summarise the monorepo workflow, commands, and how to add new workspaces. |
