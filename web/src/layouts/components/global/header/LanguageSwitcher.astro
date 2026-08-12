@@ -1,12 +1,15 @@
 ---
 import Icons from "@/helpers/Icons.astro";
-import { getLocaleUrlCTM, supportedLanguages } from "@/lib/utils/i18nUtils.ts";
+import {
+  localizedPath,
+  supportedLanguages,
+  getLanguageName,
+} from "@/lib/i18n";
 import trailingSlashChecker from "@/lib/utils/trailingSlashChecker";
-import languagesJSON from "@/config/language.json";
 
 const currentLocale = Astro.currentLocale;
 const languages = supportedLanguages.map((lang) => {
-  const href = getLocaleUrlCTM(Astro.url.pathname, lang.languageCode as string);
+  const href = localizedPath(Astro.url.pathname, lang.languageCode as string);
 
   // Don't include current locale in url
   if (href === trailingSlashChecker(Astro.url.pathname)) {
@@ -18,11 +21,6 @@ const languages = supportedLanguages.map((lang) => {
     ...lang,
   };
 });
-
-function getLanguageName(locale: string): string {
-  const foundLang = languagesJSON.find((lang) => lang.languageCode === locale);
-  return foundLang?.languageName ?? locale;
-}
 ---
 
 <div

@@ -4,7 +4,7 @@ import { getCollectionCTM } from "@/lib/contentParser.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import config from "../../../../config/config.generated.json";
 import PageHeader from "@/components/widgets/PageHeader.astro";
-import { supportedLanguages } from "@/lib/utils/i18nUtils.ts";
+import { supportedLanguages, langParam } from "@/lib/i18n";
 import LayoutWrapper from "@/components/BlogLayout.astro";
 import CTASection from "@/components/sections/CTASection.astro";
 
@@ -12,8 +12,6 @@ export async function getStaticPaths() {
   const paths = await Promise.all(
     supportedLanguages.map(async (lang) => {
       const blogFolder = config.settings.blogFolder as "blog";
-      const { defaultLanguage, showDefaultLangInUrl } =
-        config.settings.multilingual;
 
       const postIndex = await getEntryCTM(
         blogFolder as "blog",
@@ -49,10 +47,7 @@ export async function getStaticPaths() {
       return paths.map((path) => ({
         params: {
           slug: path.params.slug,
-          lang:
-            lang.languageCode === defaultLanguage && !showDefaultLangInUrl
-              ? undefined
-              : lang.languageCode,
+          lang: langParam(lang.languageCode),
         },
         props: {
           postIndex,
