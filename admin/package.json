@@ -25,6 +25,7 @@
     "test:int": "NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
   },
   "dependencies": {
+    "shared": "workspace:*",
     "@payloadcms/db-sqlite": "3.88.0",
     "@payloadcms/next": "3.88.0",
     "@payloadcms/plugin-import-export": "^3.88.0",

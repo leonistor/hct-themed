@@ -25,7 +25,8 @@
   "workspaces": [
     "admin/**",
     "web/**",
-    "e2e/**"
+    "e2e/**",
+    "shared"
   ],
   "dependencies": {
     "@hugeicons/core-free-icons": "^4.2.2"

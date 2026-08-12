@@ -14,7 +14,8 @@ import VsuCard from "./VsuCard.astro";
 const t = await useTranslations(Astro.currentLocale as string);
 
 import { getPayload } from "payload";
-import { config as payloadConfig, type Media } from "admin";
+import { config as payloadConfig } from "admin";
+import type { Media } from "shared";
 const payload = await getPayload({ config: payloadConfig });
 
 const vsu_prods = (
