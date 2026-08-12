@@ -108,7 +108,15 @@
 
   /* Dropdown List Styles */
   .nav-dropdown-list {
-    @apply hs-dropdown-open:pointer-events-auto hs-dropdown-open:opacity-100 hs-dropdown-open:block border-border-dark pointer-events-none absolute top-0 z-10 mt-4 hidden min-w-72 border bg-white p-1 opacity-0 transition-[opacity,margin] max-lg:static! max-lg:transform-none! lg:inset-s-1/2 lg:mx-2! lg:-translate-x-1/2;
+    @apply border-border-dark pointer-events-none absolute top-0 z-10 mt-4 hidden min-w-72 border bg-white p-1 opacity-0 transition-[opacity,margin] max-lg:static! max-lg:transform-none! lg:inset-s-1/2 lg:mx-2! lg:-translate-x-1/2;
+
+    /* Reveal only when this panel itself is open (the `hs-dropdown-open`
+       class is set on the panel by the nav script), not when any ancestor
+       dropdown is open. Using a self-based selector prevents a parent menu
+       from force-expanding every nested submenu below it. */
+    &.hs-dropdown-open {
+      @apply pointer-events-auto opacity-100 block;
+    }
   }
 
   .nav-dropdown-link {

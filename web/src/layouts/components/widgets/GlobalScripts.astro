@@ -280,20 +280,25 @@
     // submenus (no `hidden` class) keep working via the variant alone.
     const hiddenMenus = new WeakSet<HTMLElement>();
     items.forEach((item) => {
-      const menu = item.querySelector<HTMLElement>(".hs-dropdown-menu");
+      // Bind to the dropdown's own panel only, never a nested one.
+      const menu = item.querySelector<HTMLElement>(":scope > .hs-dropdown-menu");
       if (menu?.classList.contains("hidden")) hiddenMenus.add(menu);
     });
 
     const setState = (item: HTMLElement, open: boolean) => {
+      // Toggle `hs-dropdown-open` on the dropdown itself, its direct toggle
+      // button and its direct panel only. Using `:scope >` (instead of a
+      // descendant query) is what stops a container dropdown (the header
+      // wrapper) from also flipping every nested menu when it opens.
       const targets = [
         item,
-        ...item.querySelectorAll<HTMLElement>(
-          ".hs-dropdown-toggle, .hs-dropdown-menu, .nav-toggle-icon",
-        ),
-      ];
+        item.querySelector<HTMLElement>(":scope > .hs-dropdown-toggle"),
+        item.querySelector<HTMLElement>(":scope > .hs-dropdown-menu"),
+        ...item.querySelectorAll<HTMLElement>(".nav-toggle-icon"),
+      ].filter((el): el is HTMLElement => Boolean(el));
       targets.forEach((el) => el.classList.toggle("hs-dropdown-open", open));
 
-      const menu = item.querySelector<HTMLElement>(".hs-dropdown-menu");
+      const menu = item.querySelector<HTMLElement>(":scope > .hs-dropdown-menu");
       if (menu && hiddenMenus.has(menu)) {
         menu.classList.toggle("hidden", !open);
         menu.classList.toggle("block", open);
@@ -321,7 +326,11 @@
     };
 
     items.forEach((item) => {
-      const toggle = item.querySelector<HTMLElement>(".hs-dropdown-toggle");
+      // Only the dropdown's own direct toggle opens it. Without `:scope >` a
+      // container dropdown (e.g. the header wrapper) would grab the first
+      // descendant toggle and every top-level menu click would also toggle the
+      // whole navigation open.
+      const toggle = item.querySelector<HTMLElement>(":scope > .hs-dropdown-toggle");
 
       // Toggle on click for both desktop and mobile. We deliberately avoid
       // hover-to-open: the mega menu panel sits ~header-height below the toggle,
