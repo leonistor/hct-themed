@@ -1,10 +1,6 @@
 ---
 import Icons from "@/helpers/Icons.astro";
-import {
-  localizedPath,
-  supportedLanguages,
-  getLanguageName,
-} from "@/lib/i18n";
+import { localizedPath, supportedLanguages, getLanguageName } from "@/lib/i18n";
 import trailingSlashChecker from "@/lib/utils/trailingSlashChecker";
 
 const currentLocale = Astro.currentLocale;
@@ -55,7 +51,7 @@ const languages = supportedLanguages.map((lang) => {
                   {
                     active: language.languageCode === currentLocale,
                   },
-                  "text-base font-normal capitalize",
+                  "text-md font-normal capitalize",
                 ]}
                 href={language.slug}
                 set:html={language.contentDir}
