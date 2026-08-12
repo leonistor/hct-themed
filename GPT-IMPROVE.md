@@ -8,9 +8,9 @@ The repo currently works as a monorepo with three workspaces (`admin`, `web`, `e
 ## 1. Centralised tooling & configuration
 | Item | Description | Benefit |
 |------|-------------|---------|
-| **Root ESLint / Prettier** | Add `eslint.config.mjs`, `prettier.config.mjs` at the repo root and have each workspace `extends` them. | Consistent linting/formatting across workspaces, single source of truth. |
+| **Root ESLint / Prettier** | Add `eslint.config.mjs`, `prettier.config.mjs` at the repo root and have each workspace `extends` them. | Consistent linting/formatting across workspaces, single source of truth. | ❌ Postponed, closed |
 | **Root TypeScript base config** | Create `tsconfig.base.json` with common `compilerOptions` (strict mode, `moduleResolution: "bundler"`, path aliases, etc.). `admin/tsconfig.json` extends this file; `web/tsconfig.json` keeps `astro/tsconfigs/strict` (no change). | Guarantees identical TypeScript behaviour, reduces duplication. **✅ Done** (commit `3bdb89b`). |
-| **Unified npm scripts** | In the root `package.json` add scripts that forward to workspaces using `bun run --filter <workspace> <script>`. Example: `"lint": "bun run --filter admin lint && bun run --filter web lint"`. | One place to run lint/type‑check/tests for the whole monorepo. |
+| **Unified npm scripts** | In the root `package.json` add scripts that forward to workspaces using `bun run --filter <workspace> <script>`. Example: `"lint": "bun run --filter admin lint && bun run --filter web lint"`. | One place to run lint/type‑check/tests for the whole monorepo. | ❌ Postponed, closed |
 
 ---
 
@@ -87,6 +87,8 @@ All data‑generation scripts (`toml-watcher.mjs`, `generate‑menus.ts`, multil
 ---
 
 ## 7. Web‑side testing
+**❌ Postponed, closed.** No web test runner is wired up and there is no current demand for unit tests on the utility modules; revisit if the web codebase grows or regressions appear.
+
 1. Add a Vitest config in `web/vitest.config.ts`.
 2. Write unit tests for core utilities:
    - `toml-watcher` conversion logic
@@ -98,6 +100,8 @@ All data‑generation scripts (`toml-watcher.mjs`, `generate‑menus.ts`, multil
 ---
 
 ## 8. Unified CLI entry point
+**❌ Postponed, closed.** The existing `bun run` scripts per workspace are sufficient for current workflows; a unified CLI adds indirection without clear near-term benefit.
+
 - Add `scripts/cli.ts` using `commander` (or `yargs`).
 - Expose commands such as:
   - `generate:menus`
@@ -110,6 +114,8 @@ All data‑generation scripts (`toml-watcher.mjs`, `generate‑menus.ts`, multil
 ---
 
 ## 9. CI / GitHub Actions
+**❌ Postponed, closed.** No CI pipeline is configured for this repo yet and there is no immediate need; the local `astro-check` + `build` steps cover the current verification needs.
+
 Create `.github/workflows/ci.yml` that runs on push/PR:
 - `bun install`
 - `bun run lint`
@@ -136,7 +142,7 @@ Create `.github/workflows/ci.yml` that runs on push/PR:
 | 2 | **Move payload types** | Create `shared/types/payload-types.ts` as a `shared` workspace, move the file, update imports in both workspaces (runtime `config` stays `from "admin"`). | ✅ Done (`7c99cd3`) |
 | 3 | **Core payload client** | Add `shared/payloadClient.ts` (see Task 3 adjustment) containing the bootstrap code, replace the three scripts to import it. | ✅ Done (see Task 3) |
 | 4 | **Component registry** | Add `src/lib/componentRegistry.ts` (JSON array), adjust `astro.config.mjs` to read it. | ✅ Done (`feat/component-registry`) |
-| 5 | **Add Vitest test for toml‑watcher** | Write a test that feeds a sample `config.toml` and asserts the generated JSON matches a fixture. |
+| 5 | **Add Vitest test for toml‑watcher** | Write a test that feeds a sample `config.toml` and asserts the generated JSON matches a fixture. | ❌ Postponed, closed (see Task 7) |
 | 6 | **Create DEVELOPER.md** | Summarise the monorepo workflow, commands, and how to add new workspaces. |
 
 ---
