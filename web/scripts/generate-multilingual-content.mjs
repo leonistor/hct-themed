@@ -2,6 +2,7 @@
 import path from "node:path";
 import { promises as fs } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { pathExists } from "shared/fs";
 
 // --- Cross-platform __dirname / project root ---
 const __filename = fileURLToPath(import.meta.url);
@@ -34,16 +35,6 @@ const colors = {
 const log = (msg, color= "reset") => {
   console.log(`${colors[color]}${msg}${colors.reset}`);
 };
-
-// ---------------- Helpers ----------------
-async function pathExists(p) {
-  try {
-    await fs.access(p);
-    return true;
-  } catch {
-    return false;
-  }
-}
 
 async function readJsonFile(filePath){
   // 1) Try native JSON import (Node 20+ typically)

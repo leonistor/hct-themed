@@ -4,6 +4,9 @@ import * as toml from "toml";
 import { promises as fs } from "node:fs";
 import { watch } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { pathExists, atomicWrite, ensureDir } from "shared/fs";
+import { debounce } from "shared/debounce";
+import { log, warn, error } from "shared/logger";
 
 // ---------- Cross-platform root ----------
 const __filename = fileURLToPath(import.meta.url);
@@ -21,42 +24,19 @@ const configFilePath = path.resolve(
 const outputDir = path.resolve(PROJECT_ROOT, "src/config");
 const outputFilePath = path.join(outputDir, "config.generated.json");
 
-// ---------- Helpers ----------
-async function pathExists(p) {
-  try {
-    await fs.access(p);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-// ---------- Debounce ----------
-function debounce(fn, delay = 150) {
-  let timer;
-  return () => {
-    clearTimeout(timer);
-    timer = setTimeout(fn, delay);
-  };
-}
-
 // ---------- Core conversion ----------
 async function convertTomlToJson() {
   try {
     const content = await fs.readFile(configFilePath, "utf8");
     const parsed = toml.parse(content);
 
-    await fs.mkdir(outputDir, { recursive: true });
+    await ensureDir(outputDir);
 
-    // atomic write (important for Vite)
-    const tempFile = outputFilePath + ".tmp";
+    await atomicWrite(outputFilePath, JSON.stringify(parsed, null, 2));
 
-    await fs.writeFile(tempFile, JSON.stringify(parsed, null, 2), "utf8");
-    await fs.rename(tempFile, outputFilePath);
-
-    console.log(`[toml-watcher] ✓ Generated ${outputFilePath}`);
+    log(`✓ Generated ${outputFilePath}`);
   } catch (err) {
-    console.error("[toml-watcher] ✖ Conversion failed:", err?.message ?? err);
+    error("✖ Conversion failed:", err?.message ?? err);
   }
 }
 
@@ -64,13 +44,13 @@ const debouncedConvert = debounce(convertTomlToJson, 150);
 
 // ---------- Watch mode ----------
 async function watchFile() {
-  console.log("[toml-watcher] Watching config.toml for changes...");
+  log("Watching config.toml for changes...");
 
   let watcher;
 
   const startWatcher = async () => {
     if (!(await pathExists(configFilePath))) {
-      console.warn("[toml-watcher] Waiting for config.toml...");
+      warn("Waiting for config.toml...");
       setTimeout(startWatcher, 1000);
       return;
     }
@@ -83,14 +63,14 @@ async function watchFile() {
 
       // rename happens when editors replace the file
       if (eventType === "rename") {
-        console.log("[toml-watcher] File replaced, restarting watcher...");
+        log("File replaced, restarting watcher...");
         watcher.close();
         startWatcher();
       }
     });
 
     watcher.on("error", (err) => {
-      console.error("[toml-watcher] Watch error:", err);
+      error("Watch error:", err);
       watcher.close();
       setTimeout(startWatcher, 1000);
     });

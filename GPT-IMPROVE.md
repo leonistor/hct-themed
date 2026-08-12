@@ -40,6 +40,12 @@ All data‑generation scripts (`toml-watcher.mjs`, `generate‑menus.ts`, multil
 
 *Adjustment*: A `shared/` workspace now exists (Task 2) and already owns the generated Payload types. Prefer adding the core utilities as exports of `shared` (e.g. `shared/payloadClient.ts`, `shared/fs.ts`) rather than creating a separate `packages/core`/`libs/common` workspace, to avoid extra workspace sprawl. Update Quick win #3 accordingly.
 
+**✅ Done** (branch `feat/core-utils`). Implementation:
+- Core utilities live in `shared/src/` as Node- and Bun-compatible `*.mjs` + `*.d.mts` pairs (so they load both under the `node`-invoked `toml-watcher`/multilingual scripts and the Bun/tsx-run `.ts` data scripts). Exposed via `shared/package.json` subpath exports: `shared/fs` (`pathExists`, `ensureDir`, `atomicWrite`), `shared/debounce`, `shared/payload` (`getPayloadClient(config)`), `shared/logger`.
+- `getPayloadClient` takes `config` as a parameter (callers still `import { config as payloadConfig } from "admin"`) to avoid a `shared` → `admin` circular import.
+- Refactored: `toml-watcher.mjs`, `generate-multilingual-content.mjs`, `remove-multilingual.mjs`, `remove-draft-from-sitemap.mjs` (drop local `pathExists`/`debounce`/atomic-write), and `generate-menus.ts` / `generate-prods-ctas.ts` (use `getPayloadClient`).
+- Web API routes and admin seed scripts were left untouched (out of scope).
+
 ---
 
 ## 4. I18n utilities
@@ -118,7 +124,7 @@ Create `.github/workflows/ci.yml` that runs on push/PR:
 |---|-----------|-------|
 | 1 | **Root tsconfig.base.json** | Create `tsconfig.base.json` with common compiler options, add `extends` in `admin/tsconfig.json` (web keeps `astro/tsconfigs/strict`). | ✅ Done (`3bdb89b`) |
 | 2 | **Move payload types** | Create `shared/types/payload-types.ts` as a `shared` workspace, move the file, update imports in both workspaces (runtime `config` stays `from "admin"`). | ✅ Done (`7c99cd3`) |
-| 3 | **Core payload client** | Add `shared/payloadClient.ts` (see Task 3 adjustment) containing the bootstrap code, replace the three scripts to import it. |
+| 3 | **Core payload client** | Add `shared/payloadClient.ts` (see Task 3 adjustment) containing the bootstrap code, replace the three scripts to import it. | ✅ Done (see Task 3) |
 | 4 | **Component registry** | Add `src/lib/componentRegistry.ts` (JSON array), adjust `astro.config.mjs` to read it. |
 | 5 | **Add Vitest test for toml‑watcher** | Write a test that feeds a sample `config.toml` and asserts the generated JSON matches a fixture. |
 | 6 | **Create DEVELOPER.md** | Summarise the monorepo workflow, commands, and how to add new workspaces. |

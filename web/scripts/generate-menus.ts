@@ -1,7 +1,7 @@
 import { config as payloadConfig } from "admin";
-import { getPayload } from "payload";
+import { getPayloadClient } from "shared/payload";
 
-const payload = await getPayload({ config: payloadConfig });
+const payload = await getPayloadClient(payloadConfig);
 
 // TODO: use translations
 

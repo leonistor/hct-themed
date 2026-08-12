@@ -4,6 +4,7 @@ import { promises as fs } from "node:fs";
 import { fileURLToPath } from "node:url";
 import matter from "gray-matter";
 import { parseStringPromise, Builder } from "xml2js";
+import { pathExists } from "shared/fs";
 
 // --------- Cross-platform root ----------
 const __filename = fileURLToPath(import.meta.url);
@@ -36,16 +37,6 @@ async function readJsonFile(filePath) {
       const raw = await fs.readFile(filePath, "utf8");
       return JSON.parse(raw);
     }
-  }
-}
-
-// --------- Helpers ----------
-async function pathExists(p) {
-  try {
-    await fs.access(p);
-    return true;
-  } catch {
-    return false;
   }
 }
 

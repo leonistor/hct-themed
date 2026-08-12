@@ -1,6 +1,7 @@
-import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
-const payload = await getPayload({ config: payloadConfig });
+import { getPayloadClient } from "shared/payload";
+
+const payload = await getPayloadClient(payloadConfig);
 
 let result: Record<string, any>[] = [];
 

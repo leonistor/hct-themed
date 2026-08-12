@@ -4,9 +4,25 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./types/payload-types.ts"
+    ".": "./types/payload-types.ts",
+    "./fs": {
+      "import": "./src/fs.mjs",
+      "types": "./src/fs.d.mts"
+    },
+    "./debounce": {
+      "import": "./src/debounce.mjs",
+      "types": "./src/debounce.d.mts"
+    },
+    "./payload": {
+      "import": "./src/payload.mjs",
+      "types": "./src/payload.d.mts"
+    },
+    "./logger": {
+      "import": "./src/logger.mjs",
+      "types": "./src/logger.d.mts"
+    }
   },
-  "devDependencies": {
+  "dependencies": {
     "payload": "3.88.0"
   }
 }

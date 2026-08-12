@@ -2,6 +2,7 @@
 import path from "node:path";
 import { promises as fs } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { pathExists } from "shared/fs";
 
 // --------- Cross-platform root ----------
 const __filename = fileURLToPath(import.meta.url);
@@ -34,15 +35,6 @@ async function readJsonFile(filePath) {
       const raw = await fs.readFile(filePath, "utf8");
       return JSON.parse(raw);
     }
-  }
-}
-
-async function pathExists(p) {
-  try {
-    await fs.access(p);
-    return true;
-  } catch {
-    return false;
   }
 }
 
