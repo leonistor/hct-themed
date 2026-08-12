@@ -49,6 +49,11 @@ All data‑generation scripts (`toml-watcher.mjs`, `generate‑menus.ts`, multil
 ---
 
 ## 4. I18n utilities
+**✅ Done** (branch `feat/i18n-utilities`, merged to `main` at `f69b8fe`). Implementation:
+- New `web/src/lib/i18n.ts` facade exposing `defaultLocale`, `supportedLocales` (codes array), `localeFromPath`, `localizedPath`, `langParam`, `getLanguageName`, and re-exporting `useTranslations`/`getLocaleUrlCTM` from `i18nUtils.ts` (which stays the single source of truth). Reading `language.json` and `config.settings.multilingual` keeps locale config in one place.
+- Replaced the duplicated `lang.languageCode === defaultLanguage && !showDefaultLangInUrl ? undefined : lang.languageCode` `getStaticPaths` expression in the six `[single]`/`[tag]`/`[category]`/`[slug]` routes with `langParam(...)`, and switched `LanguageSwitcher.astro` to `localizedPath` + `getLanguageName`.
+- Adding a language remains a config-only change (edit `language.json` + add the per-locale JSON files).
+
 1. Add `src/lib/i18n.ts` exposing:
    - `supportedLocales`, `defaultLocale`
    - `localeFromPath(path: string): string`
