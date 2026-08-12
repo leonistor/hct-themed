@@ -3,7 +3,7 @@ import "@/components/widgets/VideoModal.astro";
 import Base from "@/layouts/Base.astro";
 import { getCollectionCTM } from "@/lib/contentParser.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
-import { supportedLanguages } from "@/lib/utils/i18nUtils.ts";
+import { supportedLanguages, langParam } from "@/lib/i18n";
 import config from "../../../config/config.generated.json";
 import CaseStudiesSingle from "@/components/CaseStudiesSingle.astro";
 import extractSlug from "@/lib/utils/extractSlug";
@@ -15,8 +15,6 @@ export async function getStaticPaths() {
     supportedLanguages.map(async (lang) => {
       const caseStudiesFolder = config.settings
         .caseStudiesFolder as "case-studies";
-      const { defaultLanguage, showDefaultLangInUrl } =
-        config.settings.multilingual;
 
       const caseStudiesIndex = await getEntryCTM(
         caseStudiesFolder as "case-studies",
@@ -36,10 +34,7 @@ export async function getStaticPaths() {
 
       return caseStudiess.map((caseStudies) => ({
         params: {
-          lang:
-            lang.languageCode === defaultLanguage && !showDefaultLangInUrl
-              ? undefined
-              : lang.languageCode,
+          lang: langParam(lang.languageCode),
           single: extractSlug(caseStudies).split("/").pop(),
         },
         props: {

@@ -3,7 +3,7 @@ import Base from "@/layouts/Base.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import PageHeader from "@/components/widgets/PageHeader.astro";
 import { getTaxonomy } from "@/lib/taxonomyParser.astro";
-import { supportedLanguages } from "@/lib/utils/i18nUtils.ts";
+import { supportedLanguages, langParam } from "@/lib/i18n";
 import { slugifyyy, titleify } from "@/lib/utils/textConverter";
 import config from "../../../../config/config.generated.json";
 import BlogLayout from "@/components/BlogLayout.astro";
@@ -12,10 +12,7 @@ import CTASection from "@/components/sections/CTASection.astro";
 export async function getStaticPaths() {
   const paths = await Promise.all(
     supportedLanguages.map(async (lang) => {
-      const {
-        blogFolder: blogFolder,
-        multilingual: { defaultLanguage, showDefaultLangInUrl },
-      } = config.settings;
+      const { blogFolder } = config.settings;
 
       const postIndex = await getEntryCTM(
         blogFolder as "blog",
@@ -31,10 +28,7 @@ export async function getStaticPaths() {
       const paths = categories.map((category) => ({
         params: {
           category: slugifyyy(category.slug),
-          lang:
-            lang.languageCode === defaultLanguage && !showDefaultLangInUrl
-              ? undefined
-              : lang.languageCode,
+          lang: langParam(lang.languageCode),
         },
         props: { category, postIndex, blogFolder },
       }));
