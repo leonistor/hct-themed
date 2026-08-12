@@ -6,6 +6,7 @@ import { defineConfig } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
 import remarkParseContent from "./src/lib/utils/remarkParseContent.ts";
 import patchedAutoImport from "./src/lib/utils/patchedAutoImport.ts";
+import { componentRegistry } from "./src/lib/componentRegistry.ts";
 import config from "./src/config/config.generated.json";
 import fontsJson from "./src/config/fonts.json";
 import { generateAstroFontsConfig } from "./src/lib/utils/AstroFont.ts";
@@ -49,21 +50,7 @@ export default defineConfig({
   integrations: [
     sitemapConfig.enable ? sitemap() : null,
     patchedAutoImport({
-      imports: [
-        "@/components/Button.astro",
-        "@/shortcodes/Accordion.astro",
-        "@/shortcodes/Notice.astro",
-        "@/shortcodes/Tabs.astro",
-        "@/shortcodes/Tab.astro",
-        "@/shortcodes/Testimonial.astro",
-        "@/shortcodes/ListCheck.astro",
-        "@/shortcodes/ImageList.astro",
-        "@/shortcodes/ImageItem.astro",
-        "@/shortcodes/VideoInline.astro",
-        "@/shortcodes/CardWrapper.astro",
-        "@/shortcodes/Card.astro",
-        "@/shortcodes/BlockQuoteCard.astro",
-      ],
+      imports: componentRegistry,
     }),
     mdx(),
   ],

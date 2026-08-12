@@ -66,7 +66,10 @@ All data‑generation scripts (`toml-watcher.mjs`, `generate‑menus.ts`, multil
 ---
 
 ## 5. Component registry
-**❌ Not implemented — too little value.** The `patchedAutoImport` list in `astro.config.mjs` is short and changes rarely; extracting it into a separate registry file would add indirection without meaningful benefit. Revisit only if the auto‑import list grows substantially.
+**✅ Done** (branch `feat/component-registry`, see `web/src/lib/componentRegistry.ts`). Implementation:
+- New `web/src/lib/componentRegistry.ts` exports `componentRegistry: string[]` listing every auto‑imported component.
+- `astro.config.mjs` imports it and passes `imports: componentRegistry` to `patchedAutoImport`, removing the inline list.
+- Adding a new UI component is now a one‑line addition to the registry file instead of editing the Astro config.
 
 1. Create `src/lib/componentRegistry.ts` (or JSON) that lists Bearnie components to be auto‑imported.
 2. Update `astro.config.mjs` to import this registry and pass it to `patchedAutoImport`.
@@ -132,7 +135,7 @@ Create `.github/workflows/ci.yml` that runs on push/PR:
 | 1 | **Root tsconfig.base.json** | Create `tsconfig.base.json` with common compiler options, add `extends` in `admin/tsconfig.json` (web keeps `astro/tsconfigs/strict`). | ✅ Done (`3bdb89b`) |
 | 2 | **Move payload types** | Create `shared/types/payload-types.ts` as a `shared` workspace, move the file, update imports in both workspaces (runtime `config` stays `from "admin"`). | ✅ Done (`7c99cd3`) |
 | 3 | **Core payload client** | Add `shared/payloadClient.ts` (see Task 3 adjustment) containing the bootstrap code, replace the three scripts to import it. | ✅ Done (see Task 3) |
-| 4 | **Component registry** | Add `src/lib/componentRegistry.ts` (JSON array), adjust `astro.config.mjs` to read it. | ❌ Not implemented (too little value) |
+| 4 | **Component registry** | Add `src/lib/componentRegistry.ts` (JSON array), adjust `astro.config.mjs` to read it. | ✅ Done (`feat/component-registry`) |
 | 5 | **Add Vitest test for toml‑watcher** | Write a test that feeds a sample `config.toml` and asserts the generated JSON matches a fixture. |
 | 6 | **Create DEVELOPER.md** | Summarise the monorepo workflow, commands, and how to add new workspaces. |
 
