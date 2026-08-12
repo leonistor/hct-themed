@@ -87,7 +87,7 @@ All data‑generation scripts (`toml-watcher.mjs`, `generate‑menus.ts`, multil
 
 *Result*: One canonical Tailwind entry for the site, no duplicate framework imports, and component styles now resolve against the site's real breakpoint theme.
 
-*Note*: `bun run build` currently fails at a **pre-existing, unrelated** MDX step (`ImageItem` shortcode not mapped for blog posts). This is present on `main`/baseline too and is out of scope for this task.
+*Note*: The earlier build failure on the `ImageItem` MDX shortcode was caused by `componentRegistry.ts` (Task 5) dropping `@/shortcodes/ImageItem.astro` / `@/shortcodes/ImageList.astro` that the previous inline auto‑import list contained. Re‑added them to the registry; `bun run build` now passes.
 
 ---
 

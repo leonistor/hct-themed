@@ -19,4 +19,6 @@ export const componentRegistry: string[] = [
   "@/shortcodes/CardWrapper.astro",
   "@/shortcodes/Card.astro",
   "@/shortcodes/BlockQuoteCard.astro",
+  "@/shortcodes/ImageList.astro",
+  "@/shortcodes/ImageItem.astro",
 ];
