@@ -34,6 +34,7 @@
   --text-base: 1rem; /* 16px */
   --text-base-scale: 1.23;
   --text-base-sm: calc(var(--text-base) * 0.9); /* 14.4px */
+  --text-md: 1.125rem; /* 18px -- aliases Tailwind's text-lg for legacy components */
 
   /* === DISPLAY === */
   --text-display-1: calc(var(--text-base) * pow(var(--text-base-scale), 8.8)); /* ≈114px */

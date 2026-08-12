@@ -4,7 +4,6 @@ import Button from "@/components/Button.astro";
 import type { z } from "astro/zod";
 import type { contactFormSchema } from "@/sections.schema";
 import type { inputFieldSchema } from "@/sections.schema";
-import { getPrelineSelectConfig } from "@/lib/utils/preline";
 import config from "../../../config/config.generated.json";
 
 interface Props {
@@ -136,16 +135,13 @@ const noteStyles = {
           <div id="validation-target">
             <select
               {...(input.id && { id: input.id })}
+              name={input.name || input.label || "Please set name value"}
               data-name={input.name || input.label || "Please set name value"}
-              data-hs-select={JSON.stringify(
-                getPrelineSelectConfig({
-                  placeholder: input.placeholder || "Please set placeholder",
-                  searchPlaceholder: input.dropdown?.search?.placeholder,
-                  hasSearch: input.dropdown?.type === "search",
-                }),
-              )}
-              class="hidden">
-              <option value="">Choose</option>
+              class="form-input"
+              {...(input.required && { required: true })}>
+              <option value="" disabled selected>
+                {input.placeholder || "Please set placeholder"}
+              </option>
               {input.dropdown?.items?.map((option) => (
                 <option
                   {...(option.selected && { selected: true })}
@@ -154,10 +150,10 @@ const noteStyles = {
                 </option>
               ))}
             </select>
-            <p class="hs-error:block mt-2 hidden text-sm text-red-600">
+            <p class="error-msg mt-2 hidden text-sm text-red-600">
               Please select a valid state.
             </p>
-            <p class="hs-success:flex text-dark mt-2 hidden text-sm">
+            <p class="success-msg mt-2 hidden text-sm text-dark">
               Perfect!
             </p>
           </div>
@@ -293,20 +289,8 @@ const noteStyles = {
     ) as HTMLFormElement | null;
 
     let selectTags = form?.querySelectorAll(
-      "[input-wrapper]:not(.hidden) select[data-hs-select]",
+      "[input-wrapper]:not(.hidden) select[data-name]",
     ) as NodeListOf<HTMLSelectElement>;
-
-    function isSelectStatus(items: HTMLSelectElement[]) {
-      items.forEach((item) => {
-        if (item.value !== "") {
-          item.classList.add("hs-select-active");
-        } else {
-          item.classList.remove("hs-select-active");
-        }
-      });
-    }
-
-    isSelectStatus(Array.from(selectTags));
 
     selectTags.forEach((tag) => {
       tag.addEventListener("change", () => {
@@ -317,8 +301,6 @@ const noteStyles = {
         });
 
         validateSelectTag(tag);
-
-        isSelectStatus(Array.from(selectTags));
       });
     });
 
@@ -329,10 +311,10 @@ const noteStyles = {
       const action = form?.getAttribute("data-action") || "";
 
       selectTags = form?.querySelectorAll(
-        "[input-wrapper]:not(.hidden) select[data-hs-select]",
+        "[input-wrapper]:not(.hidden) select[data-name]",
       ) as NodeListOf<HTMLSelectElement>;
 
-      // Validate all preline select tags
+      // Validate all select tags
       selectTags.forEach(validateSelectTag);
 
       if (isFormFilled(form)) {

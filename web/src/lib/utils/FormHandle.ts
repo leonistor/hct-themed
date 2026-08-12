@@ -18,17 +18,13 @@ export function formReset(form: HTMLFormElement) {
   });
 
   const selectTags = form?.querySelectorAll(
-    "[input-wrapper]:not(.hidden) select[data-hs-select]",
+    "[input-wrapper]:not(.hidden) select[data-name]",
   );
 
   selectTags?.forEach((tag) => {
     const selectElement = tag as HTMLSelectElement;
-    const select = window.HSSelect.getInstance(tag);
     selectElement.selectedIndex = 0;
-
-    if (select) {
-      select.setValue("");
-    }
+    selectElement.value = "";
   });
 }
 
@@ -59,7 +55,7 @@ export const validateSelectTag = (tag: HTMLSelectElement) => {
  */
 export function isFormFilled(form: HTMLFormElement): boolean {
   const elements = form.querySelectorAll(
-    "input[name], [input-wrapper]:not(.hidden) select[data-hs-select], textarea[name]",
+    "input[name], [input-wrapper]:not(.hidden) select[data-name], textarea[name]",
   );
   type element = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 

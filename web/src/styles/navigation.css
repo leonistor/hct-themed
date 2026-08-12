@@ -89,11 +89,11 @@
     }
 
     .nav-link {
-      @apply hover:lg:border-primary/5 lg:border lg:border-transparent;
+      @apply lg:border lg:border-transparent;
     }
     .nav-link,
     .nav-dropdown-link {
-      @apply font-secondary text-text-dark hover:bg-primary/5 md:text-base-sm text-base-sm lg:text-base-sm relative flex w-full items-center px-2 py-2 font-bold transition duration-300 md:py-3 xl:px-3 xl:text-base;
+      @apply font-secondary text-text-dark md:text-base-sm text-base-sm lg:text-base-sm relative flex w-full items-center px-2 py-2 font-bold transition duration-300 md:py-3 xl:px-3 xl:text-base;
 
       &.nav-link-active,
       &.active,
@@ -108,7 +108,7 @@
 
   /* Dropdown List Styles */
   .nav-dropdown-list {
-    @apply hs-dropdown-open:pointer-events-auto hs-dropdown-open:opacity-100 border-border-dark pointer-events-none absolute top-0 z-10 mt-4 hidden min-w-72 border bg-white p-1 opacity-0 transition-[opacity,margin] max-lg:static! max-lg:transform-none! lg:inset-s-1/2 lg:mx-2! lg:-translate-x-1/2;
+    @apply hs-dropdown-open:pointer-events-auto hs-dropdown-open:opacity-100 hs-dropdown-open:block border-border-dark pointer-events-none absolute top-0 z-10 mt-4 hidden min-w-72 border bg-white p-1 opacity-0 transition-[opacity,margin] max-lg:static! max-lg:transform-none! lg:inset-s-1/2 lg:mx-2! lg:-translate-x-1/2;
   }
 
   .nav-dropdown-link {

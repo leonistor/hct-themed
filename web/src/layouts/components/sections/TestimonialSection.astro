@@ -4,6 +4,7 @@ import { getEntryCTM } from "@/lib/contentParser.astro";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import type { testimonialSectionSchema } from "@/sections.schema";
+import Button from "@/components/Button.astro";
 import SectionTitle from "../global/SectionTitle.astro";
 import TestimonialCard from "@/layouts/components/cards/TestimonialCard.astro";
 import config from "../../../config/config.generated.json";
@@ -68,7 +69,7 @@ const list = pageData.list?.filter((item) => item.enable !== false) ?? [];
         class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4">
         {
           list?.map((item, i) => (
-            <button
+            <Button
               type="button"
               data-index={i}
               class:list={[
@@ -100,7 +101,7 @@ const list = pageData.list?.filter((item) => item.enable !== false) ?? [];
                   set:html={markdownify(item.customer?.role)}
                 />
               </div>
-            </button>
+            </Button>
           ))
         }
       </div>

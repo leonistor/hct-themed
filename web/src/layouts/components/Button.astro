@@ -32,7 +32,11 @@ import ButtonContent from "./ButtonContent.astro";
 import type { sharedButton, sharedButtonTag } from "@/sections.schema";
 import type { z } from "astro/zod";
 
-type Props = z.infer<typeof sharedButton | typeof sharedButtonTag> & {
+type Props = Omit<
+  z.infer<typeof sharedButton | typeof sharedButtonTag>,
+  "label"
+> & {
+  label?: string;
   [key: string]: any;
 };
 
@@ -47,11 +51,16 @@ const {
   target,
   hoverEffect,
   icon,
-  variant = "fill",
+  variant,
   class: className,
+  "class:list": classList,
   buttonType,
   ...rest
 } = Astro.props;
+
+// `variant` is optional: the rich (label/icon) path defaults to "fill", while
+// slot-based custom wrappers stay unstyled unless a variant is explicitly set.
+const resolvedVariant = variant ?? "fill";
 
 if (!enable) return;
 
@@ -69,17 +78,17 @@ const resolvedTarget = url.startsWith("http")
 
 const buttonClasses = [
   "flex items-center gap-1",
-  variant !== "circle" && "btn",
+  resolvedVariant !== "circle" && "btn",
   {
-    "btn-circle": variant === "circle",
+    "btn-circle": resolvedVariant === "circle",
     "creative-hover-anim": isCreativeHoverEffect,
-    "btn-outline btn-outline-primary": variant === "outline",
+    "btn-outline btn-outline-primary": resolvedVariant === "outline",
     "btn-primary":
-      (variant === "circle" || variant === "fill") &&
+      (resolvedVariant === "circle" || resolvedVariant === "fill") &&
       !className?.includes("btn-"),
-    "btn-text no-underline": variant === "text",
+    "btn-text no-underline": resolvedVariant === "text",
   },
-  (isCreativeHoverEffect || variant === "circle" || variant === "text") &&
+  (isCreativeHoverEffect || resolvedVariant === "circle" || resolvedVariant === "text") &&
     "has-icon-moving-animation",
 
   (isTextFlipHoverEffect || isMagneticTextFlipHoverEffect) &&
@@ -88,10 +97,22 @@ const buttonClasses = [
     "magnetic-hover-anim",
   className,
 ];
+
+// When callers pass their own markup (e.g. a custom icon), render it via the
+// default slot instead of the label/icon-driven ButtonContent. Slot-based
+// wrappers render a plain <button> and skip the `.btn` base/variant styles
+// unless a `variant` was explicitly requested, so existing custom buttons keep
+// their own styling.
+const hasSlot = Astro.slots.has("default");
+const slotClasses = variant ? buttonClasses : className;
 ---
 
 {
-  tag === "a" ? (
+  hasSlot ? (
+    <button class:list={[slotClasses, classList]} {...rest}>
+      <slot />
+    </button>
+  ) : tag === "a" ? (
     <a
       rel={resolvedRel}
       target={resolvedTarget}
@@ -104,7 +125,7 @@ const buttonClasses = [
           label,
           title,
           srOnly,
-          variant,
+          variant: resolvedVariant,
           icon,
           isCreativeHoverEffect,
           isTextFlipHoverEffect,
@@ -125,7 +146,7 @@ const buttonClasses = [
           label,
           title,
           srOnly,
-          variant,
+          variant: resolvedVariant,
           icon,
           isCreativeHoverEffect,
           isTextFlipHoverEffect,

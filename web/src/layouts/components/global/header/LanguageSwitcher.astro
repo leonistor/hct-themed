@@ -2,6 +2,7 @@
 import Icons from "@/helpers/Icons.astro";
 import { localizedPath, supportedLanguages, getLanguageName } from "@/lib/i18n";
 import trailingSlashChecker from "@/lib/utils/trailingSlashChecker";
+import DropdownMenu from "@/layouts/components/ui/basecoat/DropdownMenu.astro";
 
 const currentLocale = Astro.currentLocale;
 const languages = supportedLanguages.map((lang) => {
@@ -19,28 +20,20 @@ const languages = supportedLanguages.map((lang) => {
 });
 ---
 
-<div
-  class:list={[
-    "language-switcher hs-dropdown relative [--auto-close:inside] [--gpu-acceleration:false] [--strategy:absolute]",
-    Astro.props.appearance === "light" && "language-switcher-light",
-  ]}>
-  <button
-    type="button"
-    id="language-switcher-dropdown-toggle"
-    class="language-switcher-button hs-dropdown-toggle flex items-center gap-1.5 bg-transparent"
-    aria-expanded="false"
-    aria-label="Menu">
-    <span class="text">
-      {getLanguageName(currentLocale!)}
-    </span>
-    <Icons
-      icon="ChevronDown"
-      class="hs-dropdown-open:rotate-180 w-3.5 transition-transform duration-300"
-    />
-  </button>
-  <ul
-    class="language-switcher-dropdown hs-dropdown-menu hs-dropdown-open:mt-0 hs-dropdown-open:opacity-100 hs-dropdown-open:visible top-0 z-60 mt-2 hidden w-24 min-w-32 opacity-0 [--placement:right-start]"
-    aria-labelledby="language-switcher-dropdown-toggle">
+<DropdownMenu
+  id="language-switcher"
+  buttonVariant="ghost"
+  triggerClass="language-switcher-button flex items-center gap-1.5 bg-transparent"
+>
+  <span slot="trigger" class="text">
+    {getLanguageName(currentLocale!)}
+  </span>
+  <Icons
+    slot="trigger"
+    icon="ChevronDown"
+    class="chevron w-3.5 transition-transform duration-300"
+  />
+  <ul class="min-w-32">
     {
       languages.map(
         (language) =>
@@ -54,6 +47,7 @@ const languages = supportedLanguages.map((lang) => {
                   "text-md font-normal capitalize",
                 ]}
                 href={language.slug}
+                role="menuitem"
                 set:html={language.contentDir}
               />
             </li>
@@ -61,4 +55,4 @@ const languages = supportedLanguages.map((lang) => {
       )
     }
   </ul>
-</div>
+</DropdownMenu>

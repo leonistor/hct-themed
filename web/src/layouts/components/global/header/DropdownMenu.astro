@@ -3,6 +3,7 @@ import type { NavigationLink } from "@/types";
 import NavMegaMenu from "@/layouts/components/global/header/MegaMenu.astro";
 import Icons from "@/helpers/Icons.astro";
 import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils.ts";
+import Button from "@/components/Button.astro";
 
 const { recursive } = Astro.props;
 const menu = Astro.props.menu as NavigationLink;
@@ -26,7 +27,7 @@ const { pathname } = Astro.url;
         : "",
   ]}
   role="none">
-  <button
+  <Button
     type="button"
     aria-haspopup="menu"
     aria-expanded="false"
@@ -43,7 +44,7 @@ const { pathname } = Astro.url;
     {menu.name}
 
     <Icons class="nav-toggle-icon" icon="ChevronDown" />
-  </button>
+  </Button>
   {
     !menu.hasMegaMenu && menu.hasChildren && (
       <ul

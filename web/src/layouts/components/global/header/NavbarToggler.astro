@@ -1,4 +1,6 @@
 ---
+import Button from "@/components/Button.astro";
+
 interface Props {
   class?: string;
   isOffcanvasToggler?: boolean;
@@ -16,7 +18,7 @@ const {
 const isLightToggler = appearance === "light";
 ---
 
-<button
+<Button
   aria-label="Toggle navigation"
   class:list={[
     "group nav-toggler ms-2 lg:ms-4",
@@ -90,4 +92,4 @@ const isLightToggler = appearance === "light";
       </div>
     </div>
   </div>
-</button>
+  </Button>

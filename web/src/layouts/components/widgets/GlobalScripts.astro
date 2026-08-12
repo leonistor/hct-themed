@@ -92,8 +92,13 @@
     runIdle(async () => {
       await initLucide();
 
-      // Dynamic Preline imports
-      await loadPrelineComponents();
+      // Basecoat UI: register component modules, then initialize on the page
+      await initBasecoat();
+
+      // Header navigation dropdowns. Replaces Preline's HSDropdown: toggles the
+      // same `hs-dropdown-open` class the CSS already keys off of (click on both
+      // desktop and mobile), so the existing nav styles keep working.
+      initNavDropdowns();
 
       const canHover = window.matchMedia("(hover: hover)").matches;
       const finePointer = window.matchMedia("(pointer: fine)").matches;
@@ -233,101 +238,115 @@
     return svg;
   }
 
-  // Load Preline components dynamically based on DOM content
-  async function loadPrelineComponents() {
-    const hasComponent = (selectors: string[]) =>
-      selectors.some((selector) => document.querySelector(selector));
-
-    const tasks: Promise<void>[] = [];
-
-    if (hasComponent([".hs-overlay"])) {
-      tasks.push(
-        loadDynamicModule(
-          "@preline/overlay",
-          () => import("@preline/overlay"),
-        ).then((module) => {
-          if (!module) return;
-          const { default: HSOverlay } = module;
-          HSOverlay.autoInit();
-        }),
+  // Initialize Basecoat interactive components. Importing each module registers
+  // it; initAll() wires up any present in the DOM. Re-run on Astro view
+  // transitions so swapped content stays interactive.
+  async function initBasecoat() {
+    try {
+      // `basecoat-css/basecoat` is a side-effect module: it sets
+      // `window.basecoat` and registers nothing on its own. The individual
+      // component modules register themselves onto that global, then we wire up
+      // whatever is present in the DOM.
+      await import("basecoat-css/basecoat");
+      await Promise.all([
+        import("basecoat-css/dropdown-menu"),
+        import("basecoat-css/drawer"),
+        import("basecoat-css/accordion"),
+        import("basecoat-css/tabs"),
+        import("basecoat-css/select"),
+      ]);
+      window.basecoat?.initAll();
+      document.addEventListener("astro:page-load", () =>
+        window.basecoat?.initAll({ force: true }),
       );
-    }
-
-    if (hasComponent([".hs-select", "[data-hs-select]"])) {
-      tasks.push(
-        loadDynamicModule(
-          "@preline/select",
-          () => import("@preline/select"),
-        ).then((module) => {
-          if (!module) return;
-          const { default: HSSelect } = module;
-          HSSelect.autoInit();
-        }),
-      );
-    }
-
-    if (
-      hasComponent([
-        "[data-hs-tab]",
-        ".hs-tab",
-        '[role="tablist"] [data-hs-tab]',
-      ])
-    ) {
-      tasks.push(
-        loadDynamicModule("@preline/tabs", () => import("@preline/tabs")).then(
-          (module) => {
-            if (!module) return;
-            const { default: HSTabs } = module;
-            HSTabs.autoInit();
-          },
-        ),
-      );
-    }
-
-    if (hasComponent([".hs-accordion"])) {
-      tasks.push(
-        loadDynamicModule(
-          "@preline/accordion",
-          () => import("@preline/accordion"),
-        ).then((module) => {
-          if (!module) return;
-          const { default: HSAccordion } = module;
-          HSAccordion.autoInit();
-        }),
-      );
-    }
-
-    if (hasComponent([".hs-collapse", "[data-hs-collapse]"])) {
-      tasks.push(
-        loadDynamicModule(
-          "@preline/collapse",
-          () => import("@preline/collapse"),
-        ).then((module) => {
-          if (!module) return;
-          const { default: HSCollapse } = module;
-          HSCollapse.autoInit();
-        }),
-      );
-    }
-
-    if (hasComponent([".hs-tooltip", "[data-hs-tooltip]"])) {
-      tasks.push(
-        loadDynamicModule(
-          "@preline/tooltip",
-          () => import("@preline/tooltip"),
-        ).then((module) => {
-          if (!module) return;
-          const { default: HSTooltip } = module;
-          HSTooltip.autoInit();
-        }),
-      );
-    }
-
-    if (tasks.length) {
-      await Promise.all(tasks);
+    } catch (error) {
+      console.error("Basecoat init failed", error);
     }
   }
 
+  // Header navigation dropdowns (replaces Preline HSDropdown).
+  // Toggles `hs-dropdown-open` on the dropdown, its toggle, menu panel and icon
+  // so the existing `hs-dropdown-open:` CSS variants reveal the panel, and
+  // swaps `hidden`/`block` on menus that start hidden (mirrors Preline's
+  // open()/close() display handling). Click on both desktop and mobile, with
+  // outside-click / Escape to close.
+  function initNavDropdowns() {
+    const items = Array.from(
+      document.querySelectorAll<HTMLElement>(".hs-dropdown"),
+    );
+    if (items.length === 0) return;
+
+    // Only manage display for menus that start hidden, so opacity-only
+    // submenus (no `hidden` class) keep working via the variant alone.
+    const hiddenMenus = new WeakSet<HTMLElement>();
+    items.forEach((item) => {
+      const menu = item.querySelector<HTMLElement>(".hs-dropdown-menu");
+      if (menu?.classList.contains("hidden")) hiddenMenus.add(menu);
+    });
+
+    const setState = (item: HTMLElement, open: boolean) => {
+      const targets = [
+        item,
+        ...item.querySelectorAll<HTMLElement>(
+          ".hs-dropdown-toggle, .hs-dropdown-menu, .nav-toggle-icon",
+        ),
+      ];
+      targets.forEach((el) => el.classList.toggle("hs-dropdown-open", open));
+
+      const menu = item.querySelector<HTMLElement>(".hs-dropdown-menu");
+      if (menu && hiddenMenus.has(menu)) {
+        menu.classList.toggle("hidden", !open);
+        menu.classList.toggle("block", open);
+      }
+    };
+
+    // Only close items that are not the clicked item and not one of its
+    // ancestors, so nested dropdowns (e.g. "Servicii" inside "Companie") keep
+    // their parent open while openning.
+    const isAncestor = (ancestor: HTMLElement, node: HTMLElement) => {
+      let el: HTMLElement | null = node;
+      while (el) {
+        if (el === ancestor) return true;
+        el = el.parentElement;
+      }
+      return false;
+    };
+
+    const closeAll = (except?: HTMLElement) => {
+      items.forEach((item) => {
+        if (item === except) return;
+        if (except && isAncestor(item, except)) return;
+        setState(item, false);
+      });
+    };
+
+    items.forEach((item) => {
+      const toggle = item.querySelector<HTMLElement>(".hs-dropdown-toggle");
+
+      // Toggle on click for both desktop and mobile. We deliberately avoid
+      // hover-to-open: the mega menu panel sits ~header-height below the toggle,
+      // so moving the pointer down to the panel triggered a hover-close.
+      if (toggle) {
+        toggle.addEventListener("click", (event) => {
+          event.preventDefault();
+          const willOpen = !item.classList.contains("hs-dropdown-open");
+          closeAll(item);
+          setState(item, willOpen);
+        });
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!(event.target as Node)?.closest?.(".hs-dropdown")) {
+        closeAll();
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeAll();
+    });
+  }
+
+  // Load Preline components dynamically based on DOM content
   // Horizontal scroll with shift + wheel
   function initHorizontalScroll() {
     document.addEventListener(

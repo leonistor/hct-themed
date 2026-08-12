@@ -4,6 +4,7 @@ import Icons from "@/helpers/Icons.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import config from "../../config/config.generated.json";
 import { useTranslations } from "@/lib/utils/i18nUtils";
+import Button from "@/components/Button.astro";
 import OptimizedImage from "./utilities/OptimizedImage.astro";
 import PaginationForSingle from "./widgets/PaginationForSingle.astro";
 import { render } from "astro:content";
@@ -112,18 +113,18 @@ if (Array.isArray(information)) {
               ))}
             </div>
             {/* <!-- Left Arrow --> */}
-            <button
+            <Button
               class="case-studies-slider-btn-prev hover:bg-accent hover:text-dark bg-primary absolute inset-s-0 top-1/2 z-10 flex min-h-16 min-w-16 -translate-y-1/2 items-center justify-center transition duration-300 [--swiper-navigation-size:1.25rem]"
               aria-label="Previous slide">
               <Icons icon="ArrowLeft" class="size-7" />
-            </button>
+            </Button>
 
             {/* <!-- Right Arrow --> */}
-            <button
+            <Button
               class="case-studies-slider-btn-next hover:bg-accent hover:text-dark bg-primary absolute inset-e-0 top-1/2 z-10 flex min-h-16 min-w-16 -translate-y-1/2 items-center justify-center transition duration-300 [--swiper-navigation-size:1.25rem]"
               aria-label="Next slide">
               <Icons icon="ArrowRight" class="size-7" />
-            </button>
+            </Button>
           </div>
         )
       }

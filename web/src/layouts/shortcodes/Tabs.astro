@@ -17,6 +17,7 @@
 
  */
 import { parseHTML } from "linkedom";
+import Button from "@/components/Button.astro";
 
 // Render all the slot content
 const slotContent = await Astro.slots.render("default");
@@ -26,23 +27,23 @@ const { document } = parseHTML(slotContent);
 const tabElements = Array.from(document.children) as Element[];
 ---
 
-<div class="border-border-dark flex flex-col">
+<div class="border-border-dark tabs flex flex-col">
   <nav
     class="inline-flex flex-wrap divide-x border-x border-inherit"
     aria-label="Tabs"
     role="tablist">
     {
       tabElements.map((tab, index) => (
-        <button
+        <Button
           type="button"
-          class={`tab-button [&.active]:bg-primary w-fit flex-1 border-t border-inherit px-8 py-2.5 [&.active]:text-white ${index === 0 ? "active" : ""}`}
+          class="tab-button w-fit flex-1 border-t border-inherit px-8 py-2.5 text-md font-normal"
           id={`tab-${index}`}
           aria-controls={`panel-${index}`}
           role="tab"
           aria-selected={index === 0 ? "true" : "false"}
-          data-hs-tab={`#panel-${index}`}>
+          tabindex={index === 0 ? "0" : "-1"}>
           {(tab as Element).getAttribute("data-name") || `Tab ${index + 1}`}
-        </button>
+        </Button>
       ))
     }
   </nav>
@@ -52,9 +53,11 @@ const tabElements = Array.from(document.children) as Element[];
       tabElements.map((tab, index) => (
         <div
           id={`panel-${index}`}
-          class={`prose-styles tab-panel ${index === 0 ? "" : "hidden"}`}
+          class="prose-styles tab-panel"
           role="tabpanel"
           aria-labelledby={`tab-${index}`}
+          tabindex="-1"
+          hidden={index !== 0}
           set:html={(tab as Element).innerHTML}
         />
       ))

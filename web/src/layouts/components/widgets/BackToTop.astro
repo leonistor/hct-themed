@@ -1,15 +1,16 @@
 ---
 import Icons from "@/helpers/Icons.astro";
+import Button from "@/components/Button.astro";
 import { useTranslations } from "@/lib/utils/i18nUtils";
 const t = await useTranslations(Astro.currentLocale as string);
 ---
 
-<button
+<Button
   id="back-to-top"
   aria-label={t("aria.backToTop")}
   class="bg-primary pointer-events-none fixed right-5 bottom-48 z-50 flex h-12 w-10 translate-y-12 items-center justify-center rounded text-white opacity-0 transition-all duration-300 hover:opacity-90">
   <Icons icon="ArrowUp" class="text-lg" />
-</button>
+</Button>
 
 <script>
   const backToTopBtn = document.getElementById("back-to-top");

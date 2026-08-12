@@ -4,6 +4,7 @@ import Icons from "@/helpers/Icons.astro";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import { getCollectionCTM } from "@/lib/contentParser.astro";
 import config from "../../../config/config.generated.json";
+import Button from "@/components/Button.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 import dateFormat from "@/lib/utils/dateFormat";
 import { humanize, markdownify, slugifyyy } from "@/lib/utils/textConverter";
@@ -89,18 +90,18 @@ if (sliderPosts.length < 1) return null;
       </div>
 
       {/* Left Arrow */}
-      <button
+      <Button
         class="blog-slider-btn-prev hover:bg-accent hover:text-dark bg-primary text-text-light absolute inset-s-0 top-1/2 z-10 flex min-h-16 min-w-16 -translate-y-1/2 items-center justify-center transition duration-300 [--swiper-navigation-size:1.25rem]"
         aria-label="Previous slide">
         <Icons icon="ArrowLeft" class="size-7" />
-      </button>
+      </Button>
 
       {/* Right Arrow */}
-      <button
+      <Button
         class="blog-slider-btn-next hover:bg-accent text-text-light hover:text-dark bg-primary absolute inset-e-0 top-1/2 z-10 flex min-h-16 min-w-16 -translate-y-1/2 items-center justify-center transition duration-300 [--swiper-navigation-size:1.25rem]"
         aria-label="Next slide">
         <Icons icon="ArrowRight" class="size-7" />
-      </button>
+      </Button>
     </div>
   </div>
 

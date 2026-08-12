@@ -258,7 +258,7 @@ const hasSectionSpacingBottom = Astro.props.hasSectionSpacingBottom ?? false;
 
       // Get all accordion items within the FAQ content area
       const accordionItems = contentArea.querySelectorAll(
-        ".hs-accordion",
+        ".accordion-item",
       ) as NodeListOf<HTMLElement>;
 
       function performSearch(term: string) {
@@ -277,7 +277,7 @@ const hasSectionSpacingBottom = Astro.props.hasSectionSpacingBottom ?? false;
 
         accordionItems.forEach((item) => {
           const titleEl = item.querySelector("h3");
-          const contentEl = item.querySelector("[role='region'] div div");
+          const contentEl = item.querySelector(".accordion-content");
           const titleText = titleEl?.textContent?.toLowerCase() || "";
           const contentText = contentEl?.textContent?.toLowerCase() || "";
 

@@ -1,0 +1,110 @@
+---
+export interface Props {
+  id: string;
+  side?: "top" | "right" | "bottom" | "left";
+  title?: string;
+  description?: string;
+  class?: string;
+  /** Panel max-width token, mapped to a max-w utility on the sliding panel. */
+  size?: "sm" | "md" | "lg" | "2xl";
+  /** Render the built-in trigger button. Disable when an external element (e.g. a
+   *  nav toggler) opens the dialog by id. */
+  withTrigger?: boolean;
+  /** Render the built-in close button. Disable when the slotted content provides
+   *  its own close control. */
+  showClose?: boolean;
+  /** Classes for the trigger button */
+  triggerClass?: string;
+  triggerVariant?: "default" | "outline" | "ghost" | "secondary" | "destructive" | "link";
+  triggerSize?: "xs" | "sm" | "base" | "md" | "lg" | "xl" | "icon" | "icon-sm";
+}
+
+const {
+  id,
+  side = "right",
+  title,
+  description,
+  class: className,
+  size = "md",
+  withTrigger = true,
+  showClose = true,
+  triggerClass,
+  triggerVariant = "outline",
+  triggerSize,
+} = Astro.props;
+
+const titleId = title ? `${id}-title` : undefined;
+const descId = description ? `${id}-description` : undefined;
+
+// The theme ships no `.drawer` panel styling, so the sliding panel carries its
+// own background, sizing and scroll behaviour (mirrors the old `Offcanvas`).
+const sizeClass = {
+  sm: "max-w-sm",
+  md: "max-w-md",
+  lg: "max-w-lg",
+  "2xl": "max-w-2xl",
+}[size];
+---
+
+{
+  withTrigger && (
+    <button
+      type="button"
+      class:list={["btn", triggerClass]}
+      data-variant={triggerVariant === "default" ? undefined : triggerVariant}
+      data-size={triggerSize}
+      onclick={`document.getElementById('${id}').showModal()`}
+    >
+      <slot name="trigger" />
+    </button>
+  )
+}
+
+<dialog
+  id={id}
+  class:list={["drawer", className]}
+  data-side={side}
+  aria-labelledby={titleId}
+  aria-describedby={descId}
+>
+  <div class:list={["bg-light flex h-full w-full flex-col overflow-auto", sizeClass]}>
+    {
+      showClose && (
+        <button
+          type="button"
+          class="btn"
+          data-variant="ghost"
+          data-size="icon-sm"
+          aria-label="Close"
+          onclick={`this.closest('dialog').close()`}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      )
+    }
+    {
+      (title || description) && (
+        <header class="px-4 pt-4">
+          {title && <h2 id={titleId}>{title}</h2>}
+          {description && <p id={descId}>{description}</p>}
+        </header>
+      )
+    }
+    <section class="px-4"><slot /></section>
+    {Astro.slots.has("footer") && <footer class="px-4 pb-4"><slot name="footer" /></footer>}
+  </div>
+</dialog>

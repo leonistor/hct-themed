@@ -6,12 +6,18 @@
 @import "tailwindcss";
 @import "tw-shimmer";
 
-@import "./theme.css";
-@plugin "../plugins/fontTailwindPlugin.js";
+/* `hs-dropdown-open` was previously supplied by Preline's variants.css.
+   It is toggled by our Basecoat dropdown handler (GlobalScripts) and used by
+   header/mega-menu/card markup, so define it as a local variant. */
+@custom-variant hs-dropdown-open (&:where(.hs-dropdown-open, .hs-dropdown-open *));
 
-/* Preline UI */
-@source "../../node_modules/preline/dist/*.js";
-@import "../../node_modules/preline/variants.css";
+@import "./theme.css";
+
+/* Basecoat UI (single framework for public + admin; replaces Preline) */
+@import "basecoat-css/vega";
+@import "./basecoat-theme.css";
+
+@plugin "../plugins/fontTailwindPlugin.js";
 
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";

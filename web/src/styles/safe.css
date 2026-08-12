@@ -8,23 +8,23 @@ form {
   @apply prose-a:text-primary prose-a:underline prose-a:underline-offset-2;
 }
 
-/* Selected state style for Preline select component */
-.hs-select select:not(.hs-select-active) + button span[data-title] {
-  @apply opacity-70;
+/* Form select validation messages (toggled via .error/.success on the wrapper) */
+[input-wrapper].error .error-msg {
+  @apply block!;
+}
+
+[input-wrapper].success .success-msg {
+  @apply block!;
 }
 
 /* ----------------------------
    Input Field Styles
 ----------------------------- */
-.form-input,
-.hs-select input.form-input,
-.hs-select button.form-input {
+.form-input {
   @apply text-dark placeholder:text-dark bg-body focus:bg-body h-full w-full border-transparent p-4 outline-0 [--tw-ring-offset-shadow:none] placeholder:opacity-70 focus:shadow-none! focus:ring-0!;
   @apply **:data-title:text-dark;
 }
-.section-two .form-input,
-.section-two .hs-select input.form-input,
-.section-two .hs-select button.form-input {
+.section-two .form-input {
   @apply border-border-dark/20 bg-transparent;
 }
 /* Focus styles for input types */
@@ -84,38 +84,41 @@ select:focus {
 }
 
 /* ----------------------------
-   Dropdown Base Styles
+   Basecoat dropdown menu items
 ----------------------------- */
-[data-hs-select-dropdown] {
-  @apply bg-primary border-transparent p-1;
+.dropdown-menu [role="menu"] {
+  @apply min-w-32 rounded-lg border border-border-light bg-card p-1 shadow-lg;
 }
 
-/* Dropdown Option Item Styles */
-[data-hs-select-dropdown] > div[data-value] {
-  @apply text-light hover:text-light px-3 py-1 hover:bg-white/15 focus:bg-white/15 focus:outline-none;
+.dropdown-menu [role="menuitem"] {
+  @apply text-dark block w-full cursor-pointer rounded-md px-3 py-2 text-start text-md font-normal no-underline transition-colors hover:bg-primary/10;
 }
 
-/* Dropdown Search Input Wrapper */
-.dropdown-search-input-wrapper {
-  @apply p-0 focus:shadow-none focus:ring-0 focus:outline-none;
+.dropdown-menu [role="menuitem"].active {
+  @apply bg-primary/15 text-primary;
 }
 
-.dropdown-search-input-wrapper input {
-  @apply placeholder:text-base-sm border-border-light p-2! ps-3! placeholder:opacity-50 placeholder:md:text-base;
+/* ----------------------------
+   Basecoat tabs
+----------------------------- */
+.tabs [role="tab"][aria-selected="true"] {
+  @apply bg-primary text-white;
 }
 
-/* Dropdown 'Not Found' Message */
-[data-hs-select-dropdown] > span {
-  @apply text-light text-base-sm block px-3 py-2.5 opacity-80 md:text-base;
+.tabs [role="tab"] {
+  @apply cursor-pointer;
 }
 
-/* Dropdown Icons */
-.dropdown-icon {
-  @apply text-dark;
+/* ----------------------------
+   Native <details> accordions
+   Remove default disclosure marker; rotation handled via group-open
+----------------------------- */
+details > summary {
+  list-style: none;
 }
 
-.dropdown-selected-icon {
-  @apply text-light;
+details > summary::-webkit-details-marker {
+  display: none;
 }
 
 /* ----------------------------

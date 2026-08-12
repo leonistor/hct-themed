@@ -1,0 +1,55 @@
+---
+import { cn } from "@/utils/cn";
+
+export interface Props {
+  id?: string;
+  class?: string;
+  /** Classes for the trigger button */
+  triggerClass?: string;
+  buttonVariant?: "default" | "outline" | "ghost" | "secondary" | "destructive" | "link";
+  buttonSize?: "xs" | "sm" | "base" | "md" | "lg" | "xl" | "icon" | "icon-sm";
+  side?: "top" | "bottom" | "left" | "right" | "inline-start" | "inline-end";
+  align?: "start" | "center" | "end";
+}
+
+const {
+  id = `dropdown-${Math.random().toString(36).slice(2)}`,
+  class: className,
+  triggerClass,
+  buttonVariant = "ghost",
+  buttonSize,
+  side = "bottom",
+  align = "end",
+} = Astro.props;
+
+const triggerId = `${id}-trigger`;
+const menuId = `${id}-menu`;
+const popoverId = `${id}-popover`;
+---
+
+<div class:list={["dropdown-menu", className]}>
+  <button
+    type="button"
+    id={triggerId}
+    aria-haspopup="menu"
+    aria-controls={menuId}
+    aria-expanded="false"
+    class:list={["btn", triggerClass]}
+    data-variant={buttonVariant === "default" ? undefined : buttonVariant}
+    data-size={buttonSize}
+  >
+    <slot name="trigger" />
+  </button>
+  <div
+    id={popoverId}
+    data-popover
+    aria-hidden="true"
+    data-side={side}
+    data-align={align}
+    class="z-50"
+  >
+    <div role="menu" id={menuId} aria-labelledby={triggerId}>
+      <slot />
+    </div>
+  </div>
+</div>

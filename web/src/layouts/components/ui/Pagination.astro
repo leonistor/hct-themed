@@ -32,21 +32,23 @@ const t = await useTranslations(Astro.currentLocale as string);
   </div>
   {
     hasPrevPage && (
-      <a href={prevUrl} class="text-gray-500">
-        {t("products.paginationPrevious")} &larr;
+      <a href={prevUrl} class="btn" data-variant="ghost" data-size="sm">
+        &larr; {t("products.paginationPrevious")}
       </a>
     )
   }
   {
     hasNextPage && (
-      <a href={nextUrl} class="text-gray-500">
+      <a href={nextUrl} class="btn" data-variant="ghost" data-size="sm">
         {t("products.paginationNext")} &rarr;
       </a>
     )
   }
-  {currentPage && totalPages && (
-    <span class="text-muted-foreground text-sm">
-      {t("products.paginationInfo", { current: currentPage, total: totalPages })}
-    </span>
-  )}
+  {
+    currentPage && totalPages && (
+      <span class="text-muted-foreground text-sm">
+        {t("products.paginationInfo", { current: currentPage, total: totalPages })}
+      </span>
+    )
+  }
 </div>

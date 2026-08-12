@@ -1,6 +1,6 @@
 ---
 import Logo from "@/components/global/Logo.astro";
-import Offcanvas from "../../widgets/Offcanvas.astro";
+import Drawer from "../../ui/basecoat/Drawer.astro";
 import config from "../../../../config/config.generated.json";
 import { useTranslations } from "@/lib/utils/i18nUtils.ts";
 import NavbarToggler from "@/layouts/components/global/header/NavbarToggler.astro";
@@ -71,8 +71,7 @@ const { position, hideOffcanvas, class: ClassName } = Astro.props;
             aria-haspopup="dialog"
             aria-expanded="false"
             aria-controls="offcanvas-main"
-            data-hs-overlay="#offcanvas-main"
-            data-hs-overlay-options='{"emulateScrollbarSpace": true}'
+            onclick="document.getElementById('offcanvas-main')?.showModal()"
           />
         )
       }
@@ -80,29 +79,22 @@ const { position, hideOffcanvas, class: ClassName } = Astro.props;
   </div>
 </header>
 
-{/* Desktop Sidebar Offcanvas */}
+{/* Desktop Sidebar Offcanvas (Basecoat Drawer) */}
 {
   headerOffcanvas?.enable && (
-    <Offcanvas
+    <Drawer
       class={hideOffcanvas ? "lg:hidden" : ""}
       id="offcanvas-main"
-      direction="right"
-      size="md">
+      side="right"
+      size="md"
+      withTrigger={false}
+      showClose={false}
+    >
       <HeaderOffcanvasContent offcanvas={"offcanvas-main"} />
-    </Offcanvas>
+    </Drawer>
   )
 }
 <script>
-  import { HSDropdown } from "preline";
-
-  if (
-    [".hs-dropdown", "[data-hs-dropdown]"].some((selector) =>
-      document.querySelector(selector),
-    )
-  ) {
-    HSDropdown?.autoInit();
-  }
-
   function updateMegaMenuOffset(): void {
     const header = document.querySelector(".header") as HTMLElement | null;
     if (!header) return;

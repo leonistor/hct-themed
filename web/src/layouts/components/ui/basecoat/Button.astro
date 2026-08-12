@@ -1,0 +1,33 @@
+---
+import { cn } from "@/utils/cn";
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"button"> {
+  variant?: "default" | "outline" | "ghost" | "secondary" | "destructive" | "link";
+  size?: "xs" | "sm" | "base" | "md" | "lg" | "xl" | "icon" | "icon-sm";
+  /** Render as a link when provided */
+  href?: string;
+  target?: string;
+  rel?: string;
+}
+
+const {
+  variant = "default",
+  size,
+  class: className,
+  href,
+  ...rest
+} = Astro.props;
+
+const Tag = href ? "a" : "button";
+---
+
+<Tag
+  class:list={["btn", className]}
+  data-variant={variant === "default" ? undefined : variant}
+  data-size={size}
+  href={href}
+  {...rest}
+>
+  <slot />
+</Tag>

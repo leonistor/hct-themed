@@ -1,0 +1,56 @@
+/* Basecoat theme overrides.
+   Basecoat uses shadcn/ui-compatible tokens. We re-map them to the HCT brand
+   palette (see src/styles/theme.css for the source of truth) and set the body
+   font to Work Sans (already loaded by Astro). Imported AFTER basecoat-css so
+   these :root values win over the defaults in basecoat's base/base.css. */
+
+:root {
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+  --radius: 0.5rem;
+
+  /* Page and surface colors */
+  --background: #d8e8da; /* --color-body */
+  --foreground: #2b2b2b; /* --color-text-dark */
+  --card: #ffffff;
+  --card-foreground: #2b2b2b;
+  --popover: #ffffff;
+  --popover-foreground: #2b2b2b;
+
+  /* Brand */
+  --primary: #216869;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f1ea;
+  --secondary-foreground: #2b2b2b;
+  --muted: #f4f1ea;
+  --muted-foreground: #5b6b66;
+  --accent: #216869;
+  --accent-foreground: #ffffff;
+  --destructive: #d4443a;
+
+  /* Borders / focus */
+  --border: #e6e2da; /* --color-border-light */
+  --input: #e6e2da;
+  --ring: #216869;
+}
+
+.dark {
+  --background: #092420; /* --color-body-dark */
+  --foreground: #d8e8da;
+  --card: #0f3029;
+  --card-foreground: #d8e8da;
+  --popover: #0f3029;
+  --popover-foreground: #d8e8da;
+  --primary: #216869;
+  --primary-foreground: #ffffff;
+  --secondary: #143a33;
+  --secondary-foreground: #d8e8da;
+  --muted: #143a33;
+  --muted-foreground: #9bb3ac;
+  --accent: #408c69;
+  --accent-foreground: #ffffff;
+  --destructive: #e0645a;
+  --border: #1f4d3b; /* --color-border-dark */
+  --input: #1f4d3b;
+  --ring: #408c69;
+}

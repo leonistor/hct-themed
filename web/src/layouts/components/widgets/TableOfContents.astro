@@ -17,46 +17,43 @@ const { tableOfContents } = config.settings.markup;
 
 const { toc, className, marker = true, ...rest } = Astro.props;
 if (!toc) return;
+const isExpanded = tableOfContents?.expanded !== false;
 ---
 
 <div
-  class:list={[
-    "hs-accordion",
-    { active: tableOfContents?.expanded },
-    className,
-  ]}
+  class:list={["accordion", className]}
   {...rest}>
-  <button
-    class="hs-accordion-toggle border-border-dark/25 text-dark mb-2 flex w-full items-center justify-between border-b pb-2"
-    aria-expanded="true"
-    aria-controls="toc-collapse">
-    <span
-      class="text-base-sm font-primary font-normal tracking-widest uppercase md:text-base">
-      Table of Contents
-    </span>
-    <span
-      class="hs-accordion-active:rotate-180 flex h-9 w-9 items-center justify-center rounded-full transition duration-300">
-      <Icons icon="ChevronDown" />
-    </span>
-  </button>
-  <nav
-    id="toc-collapse"
-    class:list={[
-      "hs-accordion-content toc prose-styles prose-a:text-text-dark prose-ul:ps-0 overflow-hidden transition-[height] duration-300",
-      marker && "scroll-menu",
-      { hidden: tableOfContents?.expanded === false },
-    ]}>
-    <ol class="has-customized-scrollbar max-h-60 overflow-auto">
-      {
-        toc.map((heading) => (
-          <li>
-            <a href={`#${heading.slug}`}>{heading.text}</a>
-            <RecursiveToc toc={heading.subheadings} />
-          </li>
-        ))
-      }
-    </ol>
-  </nav>
+  <details
+    class="group accordion-item"
+    open={isExpanded}>
+    <summary
+      class="border-border-dark/25 text-dark mb-2 flex w-full cursor-pointer list-none items-center justify-between border-b pb-2">
+      <span
+        class="text-base-sm font-primary font-normal tracking-widest uppercase md:text-base">
+        Table of Contents
+      </span>
+      <span
+        class="flex h-9 w-9 items-center justify-center rounded-full transition duration-300 group-open:rotate-180">
+        <Icons icon="ChevronDown" />
+      </span>
+    </summary>
+    <nav
+      class:list={[
+        "toc prose-styles prose-a:text-text-dark prose-ul:ps-0 overflow-hidden",
+        marker && "scroll-menu",
+      ]}>
+      <ol class="has-customized-scrollbar max-h-60 overflow-auto">
+        {
+          toc.map((heading) => (
+            <li>
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+              <RecursiveToc toc={heading.subheadings} />
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+  </details>
   <script>
     import { ScrollMenu } from "@/plugins/scroll-menu.ts";
 

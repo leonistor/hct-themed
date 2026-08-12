@@ -50,7 +50,7 @@ const {
     helpDropdown?.enable && (
       <div class="w-full">
         <div class="hs-dropdown relative w-full [--auto-close:inside] [--strategy:absolute]">
-          <button
+          <Button
             type="button"
             class="hs-dropdown-toggle bg-accent flex w-full items-center justify-between px-4 py-4 text-base font-bold text-white transition-colors duration-300 hover:brightness-105 max-sm:py-2 md:px-6">
             {helpDropdown.label && (
@@ -60,7 +60,7 @@ const {
               icon="ChevronDown"
               class="hs-dropdown-open:rotate-180 h-5 w-5 transition-transform duration-300"
             />
-          </button>
+          </Button>
           <ul class="hs-dropdown-menu hs-dropdown-open:opacity-100 z-50 mt-1 hidden w-full bg-white py-2 opacity-0 shadow-xl">
             {helpDropdown.items?.map((item) => (
               <li>
