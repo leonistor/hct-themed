@@ -1,0 +1,127 @@
+# GPT‑IMPROVE – Roadmap for Repository Refactoring
+
+## Overview
+The repo currently works as a monorepo with three workspaces (`admin`, `web`, `e2e`).  Several areas are duplicated or loosely coupled, making new feature work harder than necessary.  The following roadmap groups improvements by impact and effort.  All items are **planned**; implementation can happen incrementally.
+
+---
+
+## 1. Centralised tooling & configuration
+| Item | Description | Benefit |
+|------|-------------|---------|
+| **Root ESLint / Prettier** | Add `eslint.config.mjs`, `prettier.config.mjs` at the repo root and have each workspace `extends` them. | Consistent linting/formatting across workspaces, single source of truth. |
+| **Root TypeScript base config** | Create `tsconfig.base.json` with common `compilerOptions` (strict mode, `moduleResolution: "bundler"`, path aliases, etc.). Each workspace `extends` this file. | Guarantees identical TypeScript behaviour, reduces duplication. |
+| **Unified npm scripts** | In the root `package.json` add scripts that forward to workspaces using `bun run --filter <workspace> <script>`. Example: `"lint": "bun run --filter admin lint && bun run --filter web lint"`. | One place to run lint/type‑check/tests for the whole monorepo. |
+
+---
+
+## 2. Shared payload typings
+1. Move `admin/src/payload-types.ts` to a new shared package, e.g. `shared/types/payload-types.ts`.
+2. Export the types from that location.
+3. Update imports in **admin** (`admin/src/...`) and **web** (`web/src/...`) to reference the shared types.
+
+*Why*: Prevents type drift when collections change; a single source of truth for collection shapes.
+
+---
+
+## 3. Core utilities package
+Create a lightweight package (e.g. `packages/core` or `libs/common`) that provides:
+- `getPayloadClient()` – the bootstrap used by scripts (`import { config as payloadConfig } from "admin"; const payload = await getPayload({ config: payloadConfig })`).
+- Helpers for file‑system ops (`pathExists`, `atomicWrite`).
+- Debounce implementation used by the TOML watcher.
+- Any other small reusable helpers (e.g., logging utility).
+
+All data‑generation scripts (`toml-watcher.mjs`, `generate‑menus.ts`, multilingual generators, etc.) should import from this core package instead of duplicating code.
+
+---
+
+## 4. I18n utilities
+1. Add `src/lib/i18n.ts` exposing:
+   - `supportedLocales`, `defaultLocale`
+   - `localeFromPath(path: string): string`
+   - `localizedPath(base: string, locale: string): string`
+2. Replace ad‑hoc locale handling in page routes (`[...lang]/*.astro`) with calls to this module.
+3. Centralise translation loading so new language JSON files can be added without touching page code.
+
+*Why*: Adding a new language or changing routing rules will be a one‑line change in the utility module.
+
+---
+
+## 5. Component registry
+1. Create `src/lib/componentRegistry.ts` (or JSON) that lists Bearnie components to be auto‑imported.
+2. Update `astro.config.mjs` to import this registry and pass it to `patchedAutoImport`.
+3. Adding a new UI component becomes a simple entry in the registry file rather than editing the Astro config.
+
+---
+
+## 6. Styling strategy
+- Migrate custom global CSS (`admin.css`, `animation.css`, `safe.css`, …) into Tailwind `@layer` blocks or reusable Tailwind plugins.
+- Keep only a single Tailwind entry point (`src/styles/tailwind.css`) that is imported once in the root layout.
+- Prefer Tailwind utility classes directly in components/ASTRO pages.
+
+*Result*: Smaller CSS bundle, fewer cascade surprises, easier to reason about styles when adding components.
+
+---
+
+## 7. Web‑side testing
+1. Add a Vitest config in `web/vitest.config.ts`.
+2. Write unit tests for core utilities:
+   - `toml-watcher` conversion logic
+   - i18n helper functions
+   - component registry generation
+3. Add a root script `"test:web": "cd web && bun run test"`.
+4. Include web tests in CI.
+
+---
+
+## 8. Unified CLI entry point
+- Add `scripts/cli.ts` using `commander` (or `yargs`).
+- Expose commands such as:
+  - `generate:menus`
+  - `generate:config --watch`
+  - `watch:config`
+- The CLI consumes the core utilities package, so each command stays tiny.
+
+*Benefit*: No more ad‑hoc `node ./script.ts` calls; developers get `bun run cli -- help`.
+
+---
+
+## 9. CI / GitHub Actions
+Create `.github/workflows/ci.yml` that runs on push/PR:
+- `bun install`
+- `bun run lint`
+- `bun run typecheck` (via `tsc --noEmit` using the shared tsconfig)
+- `bun run test` (admin & web)
+- `bun run astro-check` (web) and a quick production build check.
+
+---
+
+## 10. Documentation
+- Add `DEVELOPMENT.md` at the repo root covering:
+  - Workspace layout & shared packages.
+  - How to add a new Payload collection (including type propagation).
+  - How to add a new UI component (registry flow).
+  - How to run scripts via the unified CLI.
+  - How to run the full test suite and CI locally.
+
+---
+
+## High‑impact quick wins (≤30 min each)
+| # | Quick win | Steps |
+|---|-----------|-------|
+| 1 | **Root tsconfig.base.json** | Create `tsconfig.base.json` with common compiler options, add `extends` in `admin/tsconfig.json` and `web/tsconfig.json`. |
+| 2 | **Move payload types** | Create `shared/types/payload-types.ts`, move the file, update imports in both workspaces. |
+| 3 | **Core payload client** | Add `packages/core/src/payloadClient.ts` containing the bootstrap code, replace the three scripts to import it. |
+| 4 | **Component registry** | Add `src/lib/componentRegistry.ts` (JSON array), adjust `astro.config.mjs` to read it. |
+| 5 | **Add Vitest test for toml‑watcher** | Write a test that feeds a sample `config.toml` and asserts the generated JSON matches a fixture. |
+| 6 | **Create DEVELOPER.md** | Summarise the monorepo workflow, commands, and how to add new workspaces. |
+
+---
+
+## Next steps
+1. Open a PR titled **"Add GPT‑IMPROVE roadmap"** containing this `GPT-IMPROVE.md` file.
+2. Prioritise the quick‑win items in the PR description.
+3. After the PR lands, start implementing items in the order of impact (centralised tooling → shared types → core utilities).
+
+---
+
+*This document serves as a living backlog; each action can be turned into an issue or a task in the project board.*
