@@ -1,3 +1,8 @@
+/* Single Tailwind entry point for the web site.
+   Imported once in `src/layouts/Base.astro`. All global styles are composed
+   here from Tailwind layers and partials; components should use utility
+   classes directly instead of adding new global CSS files. */
+
 @import "tailwindcss";
 @import "tw-shimmer";
 
@@ -22,4 +27,8 @@
   @import "./components.css";
 }
 
+/* Bearnie component library styles are intentionally NOT part of this entry:
+   the public site defines its own theme tokens in `theme.css`. Admin scaffold
+   pages import `admin.css` (which pulls bearnie styles) because they bypass
+   `Base.astro`. */
 /*@import "../components/bearnie/styles/bearnie.css"*/

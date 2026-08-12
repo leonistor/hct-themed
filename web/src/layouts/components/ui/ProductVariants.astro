@@ -23,11 +23,11 @@ const { product } = Astro.props;
   <tbody>
     {
       product.variants!.map((variant) => (
-        <tr class="tr-class">
-          <td class="td-class">{variant.name}</td>
-          <td class="td-class font-medium">{variant.feature}</td>
-          <td class="td-class">{variant.description}</td>
-          <td class="td-class">
+        <tr class="mb-4 flex flex-col sm:table-row">
+          <td class="bg-white px-4 py-3 first:rounded-t-lg last:rounded-b-lg sm:first:rounded-t-none sm:first:rounded-tl-lg sm:first:rounded-bl-lg sm:last:rounded-tr-lg sm:last:rounded-b-none sm:last:rounded-br-lg">{variant.name}</td>
+          <td class="bg-white px-4 py-3 font-medium first:rounded-t-lg last:rounded-b-lg sm:first:rounded-t-none sm:first:rounded-tl-lg sm:first:rounded-bl-lg sm:last:rounded-tr-lg sm:last:rounded-b-none sm:last:rounded-br-lg">{variant.feature}</td>
+          <td class="bg-white px-4 py-3 first:rounded-t-lg last:rounded-b-lg sm:first:rounded-t-none sm:first:rounded-tl-lg sm:first:rounded-bl-lg sm:last:rounded-tr-lg sm:last:rounded-b-none sm:last:rounded-br-lg">{variant.description}</td>
+          <td class="bg-white px-4 py-3 first:rounded-t-lg last:rounded-b-lg sm:first:rounded-t-none sm:first:rounded-tl-lg sm:first:rounded-bl-lg sm:last:rounded-tr-lg sm:last:rounded-b-none sm:last:rounded-br-lg">
             <a href={variant.url} target="_blank">
               <Icons icon="ArrowUpRight" class="size-6 text-gray-400" />
             </a>
@@ -39,15 +39,3 @@ const { product } = Astro.props;
 </table>
 
 <div class="divide-y divide-gray-400"></div>
-
-<style lang="scss">
-  @import "tailwindcss";
-
-  .td-class {
-    @apply bg-white px-4 py-3 first:rounded-t-lg last:rounded-b-lg sm:first:rounded-t-none sm:first:rounded-tl-lg sm:first:rounded-bl-lg sm:last:rounded-tr-lg sm:last:rounded-b-none sm:last:rounded-br-lg;
-  }
-
-  .tr-class {
-    @apply mb-4 flex flex-col sm:table-row;
-  }
-</style>

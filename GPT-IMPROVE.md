@@ -78,11 +78,16 @@ All data‑generation scripts (`toml-watcher.mjs`, `generate‑menus.ts`, multil
 ---
 
 ## 6. Styling strategy
-- Migrate custom global CSS (`admin.css`, `animation.css`, `safe.css`, …) into Tailwind `@layer` blocks or reusable Tailwind plugins.
-- Keep only a single Tailwind entry point (`src/styles/tailwind.css`) that is imported once in the root layout.
-- Prefer Tailwind utility classes directly in components/ASTRO pages.
+**✅ Done** (branch `feat/styling-strategy`). Implementation:
+- Renamed the single web entry `src/styles/global.css` → `src/styles/tailwind.css` and updated `Base.astro` to import it once (matches the planned single entry point).
+- `tailwind.css` composes everything from Tailwind `@layer` partials (`base.css`, `animation.css`, `navigation.css`, `components.css` via `@layer components`, plus `safe.css` → `buttons.css`/`utilities.css` which already use `@utility`), the site theme (`theme.css` `@theme inline`), and the required plugins. A header comment documents its role as the single entry.
+- Removed a stray duplicate `@import "tailwindcss";` inside `ProductVariants.astro`'s scoped `<style>`. That style relied on the import to supply the `sm` variant, which diverged from the site's custom breakpoints in `theme.css`. Replaced the custom `.td-class`/`.tr-class` with Tailwind utility classes applied directly to the table markup (aligns with "prefer utility classes directly").
+- `admin.css` is intentionally retained as a separate minimal entry for the standalone admin scaffold pages (`/admin`, `/admin/login`), which bypass `Base.astro` and need the Bearnie theme tokens. It is excluded from the "single entry point" scope (the public web site).
+- `bearnie.css` remains commented out of the web entry on purpose (the public site defines its own theme tokens in `theme.css`).
 
-*Result*: Smaller CSS bundle, fewer cascade surprises, easier to reason about styles when adding components.
+*Result*: One canonical Tailwind entry for the site, no duplicate framework imports, and component styles now resolve against the site's real breakpoint theme.
+
+*Note*: `bun run build` currently fails at a **pre-existing, unrelated** MDX step (`ImageItem` shortcode not mapped for blog posts). This is present on `main`/baseline too and is out of scope for this task.
 
 ---
 
