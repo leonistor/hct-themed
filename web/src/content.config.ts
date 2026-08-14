@@ -233,10 +233,6 @@ export const collections = {
     loader: contentLoader("./src/content/faq"),
   }),
 
-  pricing: defineCollection({
-    loader: contentLoader("./src/content/pricing"),
-  }),
-
   author: defineCollection({
     loader: contentLoader("./src/content/author"),
   }),
