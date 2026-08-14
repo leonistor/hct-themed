@@ -5,11 +5,11 @@
   "author": "getastrothemes",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "npm run toml:watch -- --watch & astro dev",
-    "build": "npm run toml:watch && astro build",
+    "dev": "astro dev",
+    "build": "astro build",
     "toml:watch": "node scripts/toml-watcher.mjs",
-    "preview": "npm run toml:watch & astro build && astro preview",
-    "astro-check": "npm run toml:watch & astro check --minimumSeverity error",
+    "preview": "astro preview",
+    "astro-check": "astro check --minimumSeverity error",
     "generate-favicons": "node ./scripts/generate-favicons.mjs",
     "generate-multilingual-content": "node ./scripts/generate-multilingual-content.mjs",
     "remove-multilingual": "node ./scripts/remove-multilingual.mjs"
