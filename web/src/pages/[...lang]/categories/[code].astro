@@ -7,7 +7,6 @@ import ProductsGrid from "@/layouts/components/ui/ProductsGrid.astro";
 
 import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
-import type { Media } from "shared";
 const payload = await getPayload({ config: payloadConfig });
 
 const { code } = Astro.params;
