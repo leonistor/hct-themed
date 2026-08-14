@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "screenshot": "bun scripts/screenshot.js"
+    "screenshot": "bun scripts/screenshot.js",
+    "generate:ci-links": "bun utils/generate-ci-links.ts",
+    "test:ci-links": "playwright test ci-links"
   },
   "keywords": [],
   "author": "",
