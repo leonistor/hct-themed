@@ -2,6 +2,7 @@
 import PayloadImage from "@/layouts/components/utilities/PayloadImage.astro";
 import Button from "@/components/Button.astro";
 import type { Media, Partner } from "shared";
+import PillButton from "@/layouts/components/ui/PillButton.astro";
 
 type Props = {
   index?: number;
@@ -38,17 +39,13 @@ let { index = 0, partner } = Astro.props;
 
   <div class="">
     <div class="flex flex-col gap-2">
-      <h3 class="flex">
-        <Button
-          tag="a"
-          variant="text"
-          url={`/partners/${partner.code}`}
-          label={partner.name}
-          aria-label={partner.name}
-          class="text-text-dark group-hover:text-primary text-h5-sm lg:text-h6 xl:text-h5 group-hover:border-b-primary! min-w-0 border-transparent whitespace-normal"
-        />
-      </h3>
-      <p class="text-neutral-500">{partner.description}</p>
+      <!-- <h3 class="flex"> -->
+      <!-- <PillButton label={partner.name} link={`/partners/${partner.code}`} /> -->
+      <!-- <Button tag="a" variant="text" url={`/partners/${partner.code}`} label={partner.name} aria-label={partner.name} class="text-text-dark group-hover:text-primary text-h5-sm lg:text-h6 xl:text-h5 group-hover:border-b-primary! min-w-0 border-transparent whitespace-normal" /> -->
+      <!-- </h3> -->
+      <p class="text-center text-balance text-neutral-500">
+        {partner.description}
+      </p>
     </div>
   </div>
 </div>
