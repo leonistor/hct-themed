@@ -7,10 +7,10 @@ import { useTranslations } from "@/lib/utils/i18nUtils";
 
 type Props = {
   index?: number;
-  material: Material;
+  category: Category;
 };
 
-let { index = 0, material } = Astro.props;
+let { index = 0, category } = Astro.props;
 
 const t = await useTranslations(Astro.currentLocale as string);
 ---
@@ -21,22 +21,22 @@ const t = await useTranslations(Astro.currentLocale as string);
   data-aos-duration="700"
   data-aos-delay={index * 100}>
   <a
-    href={`/solutions/${material.code}`}
+    href={`/categories/${category.code}`}
     class:list={["relative mb-3 overflow-hidden xl:mb-6"]}
-    aria-label={material.name}>
+    aria-label={category.name}>
     <div
       class:list={[
         "text-primary text-h6-sm lg:text-h5 xl:text-h4 opacity-75",
         "pb-4 group-hover:opacity-100",
         "leading-tight font-medium tracking-tight text-balance",
       ]}>
-      {material.name}
+      {category.name}
     </div>
     {
-      material.illustration && (
+      category.illustration && (
         <Image
-          src={(material.illustration as Media).url!}
-          alt={material.name}
+          src={(category.illustration as Media).url!}
+          alt={category.name}
           width={360}
           height={100}
           class:list={[
@@ -49,5 +49,5 @@ const t = await useTranslations(Astro.currentLocale as string);
   </a>
 
   <div class="grow"></div>
-  <div class="text-lg text-gray-700">{material.description}</div>
+  <div class="text-lg text-gray-700">{category.description}</div>
 </div>

@@ -3,7 +3,7 @@
   "lsp": true,
   "mcp": {
     "bearnie": {
-      "enabled": true,
+      "enabled": false,
       "type": "local",
       "command": ["bunx", "@bearnie/mcp"]
     },
