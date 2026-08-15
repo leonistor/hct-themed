@@ -43,3 +43,6 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 # backups
 backups/*
 !backups/.gitkeep
+
+# hivemind local memory store
+.hive/
