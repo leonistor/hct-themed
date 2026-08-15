@@ -24,10 +24,12 @@ const product_docs = await payload.find({
   depth: 2,
   pagination: false,
   limit: 1,
-  where: { code: { equals: code } },
+  where: {
+    and: [{ code: { equals: code } }, { published: { equals: true } }],
+  },
 });
 
-if (!product_docs) {
+if (!product_docs?.docs?.length) {
   return Astro.redirect("/404");
 }
 

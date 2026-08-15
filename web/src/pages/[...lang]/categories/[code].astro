@@ -18,7 +18,7 @@ const category_docs = await payload.find({
   where: { code: { equals: code } },
 });
 
-if (!category_docs.docs) {
+if (!category_docs?.docs?.length) {
   return Astro.redirect("/404");
 }
 

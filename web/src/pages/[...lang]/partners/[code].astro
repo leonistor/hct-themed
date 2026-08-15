@@ -18,10 +18,12 @@ const partner_docs = await payload.find({
   collection: "partners",
   pagination: false,
   limit: 1,
-  where: { code: { equals: code } },
+  where: {
+    and: [{ code: { equals: code } }, { published: { equals: true } }],
+  },
 });
 
-if (!partner_docs) {
+if (!partner_docs?.docs?.length) {
   return Astro.redirect("/404");
 }
 

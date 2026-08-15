@@ -21,7 +21,9 @@ const vsu_prods = (
   await payload.find({
     collection: "products",
     pagination: false,
-    where: { partner: { equals: 6 } },
+    where: {
+      and: [{ partner: { equals: 6 } }, { published: { equals: true } }],
+    },
   })
 ).docs;
 

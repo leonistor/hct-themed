@@ -16,7 +16,7 @@ const products = await payload.find({
   limit: 3,
   sort: "_order",
   where: {
-    promoted: { equals: true },
+    and: [{ promoted: { equals: true } }, { published: { equals: true } }],
   },
   select: {
     folder: false,
