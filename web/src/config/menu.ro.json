@@ -349,21 +349,6 @@
               "weight": 6,
               "promoted": false,
               "icon": "/payload/logo_husmann_i57gpkaohl_o1t2k3zjd0-9.png"
-            },
-            {
-              "enable": true,
-              "name": "Wolf Shredders",
-              "description": "Tocătoare robuste pentru multiple domenii de utilizare.",
-              "url": "/partners/wolf",
-              "weight": 7,
-              "promoted": true,
-              "icon": "/payload/logo_wolf_ih3cbmdvyq-9.png",
-              "badge": {
-                "enable": true,
-                "label": "Nou",
-                "color": "info",
-                "type": "text"
-              }
             }
           ]
         }
