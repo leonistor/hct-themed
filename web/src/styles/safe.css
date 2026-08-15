@@ -98,6 +98,50 @@ select:focus {
   @apply bg-primary/15 text-primary;
 }
 
+/* ----------------------------------------------------------------------------
+   Basecoat popover show/hide + positioning
+   These structural rules normally ship in basecoat's base layer
+   (`basecoat-base.cdn.css`), which we intentionally don't import to avoid its
+   ~104KB duplicate Tailwind build. Without them, every basecoat popover
+   (e.g. the language switcher dropdown) stays visible at all times, because
+   nothing hides `[data-popover][aria-hidden="true"]`. Re-add the minimal
+   needed rules so popovers open/close and overlay their trigger.
+   -------------------------------------------------------------------------- */
+.dropdown-menu,
+.popover,
+.select {
+  position: relative;
+}
+
+[data-popover] {
+  position: absolute;
+  z-index: 50;
+}
+
+[data-popover][aria-hidden="true"] {
+  display: none;
+}
+
+[data-popover][data-align="end"] {
+  inset-inline-end: 0;
+  top: 100%;
+}
+
+[data-popover][data-align="start"] {
+  inset-inline-start: 0;
+  top: 100%;
+}
+
+[data-popover][data-side="top"][data-align="end"] {
+  inset-inline-end: 0;
+  bottom: 100%;
+}
+
+[data-popover][data-side="top"][data-align="start"] {
+  inset-inline-start: 0;
+  bottom: 100%;
+}
+
 /* ----------------------------
    Basecoat tabs
 ----------------------------- */
