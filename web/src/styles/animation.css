@@ -13,6 +13,21 @@
   }
 }
 
+/* Generic AOS fades/zooms (fade-up, fade-up-sm, fade-right, fade-left,
+   zoom-in-right, ...). The reveal used to come from aos.css
+   (`[data-aos^=fade].aos-animate { opacity: 1 }`), which the mobile homepage
+   commit removed to slim the global stylesheet. AOS only toggles the
+   `.aos-animate` class on scroll; the actual show/hide is pure CSS, so without
+   this rule every generic [data-aos] element stayed at opacity:0 on desktop
+   (mobile was unaffected thanks to the override below). Mirror aos.css here so
+   these animations still resolve, keeping the mobile perf win (no aos.css). */
+[data-aos^="fade"].aos-animate,
+[data-aos^="zoom"].aos-animate {
+  opacity: 1;
+  transform: none;
+  transition: opacity 600ms ease-out, transform 600ms ease-out;
+}
+
 [data-aos="reveal-anim-right"] {
   opacity: 0;
   clip-path: inset(0 0 0 100%);
@@ -78,6 +93,22 @@
 
 /* Mobile Overrides (Disable AOS Initial States) */
 @media (max-width: 767px) {
+  [data-aos],
+  [data-aos*="reveal-anim"] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    filter: none !important;
+    clip-path: inset(0 0 0 0) !important;
+    will-change: auto !important;
+  }
+}
+
+/* Reduced-motion: AOS JS bails out (GlobalScripts initAOS returns early), so
+   `.aos-animate` is never added and [data-aos] would stay at opacity:0. Reveal
+   content immediately for users who prefer reduced motion. Mirrors the mobile
+   override above. */
+@media (prefers-reduced-motion: reduce) {
   [data-aos],
   [data-aos*="reveal-anim"] {
     opacity: 1 !important;
