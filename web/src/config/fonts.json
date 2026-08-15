@@ -4,10 +4,6 @@
     "variants": [
       {
         "style": "normal",
-        "weight": "300"
-      },
-      {
-        "style": "normal",
         "weight": "400"
       },
       {

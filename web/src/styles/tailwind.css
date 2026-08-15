@@ -13,9 +13,54 @@
 
 @import "./theme.css";
 
-/* Basecoat UI (single framework for public + admin; replaces Preline) */
-@import "basecoat-css/vega";
+/* Basecoat UI (single framework for public + admin; replaces Preline).
+   Import ONLY the component styles (`styles/vega`) instead of the whole
+   `basecoat-css/vega` library. The full library also bundles a second,
+   pre-compiled Tailwind build (`basecoat-base.cdn.css`: preflight + every
+   utility + theme tokens, ~104KB) which duplicated our own Tailwind output and
+   was the bulk of the render-blocking global stylesheet. The `--color-*` aliases
+   below (mirrored from Basecoat's base layer) map Basecoat's component utilities
+   onto the brand tokens already defined in basecoat-theme.css, so no component
+   styling is lost. */
+@import "basecoat-css/styles/vega";
 @import "./basecoat-theme.css";
+
+/* Basecoat's component styles (`styles/vega`) use `@apply` for colour utilities
+   like `text-primary-foreground`, `bg-card`, `border-input`, `bg-sidebar`, etc.
+   Previously those utilities existed only as pre-compiled rules inside
+   `basecoat-base.cdn.css` (the ~104KB duplicate Tailwind build we no longer
+   import). Without that file, Tailwind must generate them from theme tokens, so
+   we mirror Basecoat's full `--color-*` palette here, mapping each to the brand
+   tokens already defined in basecoat-theme.css. Plain `@theme` (not inline) so
+   the variables are also emitted to :root for direct `var(--color-*)` references
+   used by our own CSS (buttons.css, safe.css, theme.css). Sidebar tokens aren't
+   used on the public site, so they map to analogous brand surfaces. */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--popover);
+  --color-sidebar-foreground: var(--popover-foreground);
+  --color-sidebar-accent: var(--accent);
+  --color-sidebar-accent-foreground: var(--accent-foreground);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-ring: var(--ring);
+}
 
 @plugin "../plugins/fontTailwindPlugin.js";
 

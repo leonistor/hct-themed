@@ -45,8 +45,8 @@ if (!enable) {
 }
 ---
 
-<section class:list={[!Astro.props.hasNoLightBackground && "bg-light"]}>
-  <div class="container">
+<section class:list={[!Astro.props.hasNoLightBackground && "bg-light", "section-spacing"]}>
+  <div class="container px-4 sm:px-6">
     <div
       class="relative -mb-36 overflow-hidden rounded-xl max-sm:px-4 lg:-mb-48">
       {
@@ -76,7 +76,7 @@ if (!enable) {
                 title={title}
                 dataAos="reveal-anim-top"
                 variant="dark"
-                className="sm:text-h4 md:text-h2-sm lg:text-h2"
+                className="text-h4-sm sm:text-h4 md:text-h2-sm lg:text-h2"
               />
             )
           }

@@ -65,3 +65,16 @@
   --shadow-contact: 8px 8px 0px 0px var(--color-dark);
 
 }
+
+/* Hero banner: explicit aspect-ratio so layout no longer depends on the
+   empty, heavily-padded video container. 16/9 on mobile, wider (2/1) on
+   desktop where the banner is half-width. */
+.banner-slider-track {
+  aspect-ratio: 16 / 9;
+}
+
+@media (min-width: 1024px) {
+  .banner-slider-track {
+    aspect-ratio: 2 / 1;
+  }
+}

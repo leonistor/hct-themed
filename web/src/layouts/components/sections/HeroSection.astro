@@ -181,22 +181,6 @@ if (!enable) {
 
               <!-- <div class="bg-dark/70 pointer-events-none absolute inset-0 z-2" /> -->
 
-              {video && (
-                <div class="relative inset-0 z-2 flex items-center justify-center pt-30 pb-50 max-sm:mr-3 sm:py-40 md:py-63 lg:py-75.5 xl:py-88">
-                  <!-- <Button
-                    tag="button"
-                    variant="circle"
-                    label={t("common.play")}
-                    class="video-modal-toggle border-border-light size-24 border bg-transparent text-lg font-bold transition-all duration-300 hover:scale-105 hover:bg-white/10"
-                    aria-haspopup="dialog"
-                    aria-expanded="false"
-                    aria-controls={`#${video.id}`}
-                    data-hs-overlay={`#${video.id}`}
-                    data-hs-overlay-options='{"emulateScrollbarSpace": true}'
-                    title={t("common.play")}
-                  /> -->
-                </div>
-              )}
             </div>
             {decorativeImage && (
               <div
@@ -247,7 +231,7 @@ if (!enable) {
                     variant="outline"
                     label={""}
                     class:list={[
-                      "banner-dot relative size-5 border-none p-0 transition-all duration-300 md:size-3.5",
+                      "banner-dot relative size-6 border-none p-0 transition-all duration-300 md:size-3.5",
                       i === 0 ? "bg-accent" : "bg-white",
                     ]}
                     data-dot={i}

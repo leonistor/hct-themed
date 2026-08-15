@@ -47,7 +47,9 @@ const { position, hideOffcanvas, class: ClassName } = Astro.props;
           "after:pointer-events-none after:absolute after:right-0 after:-z-10 after:h-full after:w-screen after:-skew-x-20 after:select-none",
           "lg:flex-row lg:py-2 xl:pe-10"]}>
 
-            <Logo class="w-32.5 h-22.5" />
+            {/* shrink-0 keeps the logo from being squeezed on narrow phones;
+                the logo link already provides a comfortable >=44px tap target */}
+            <Logo class="w-32.5 h-22.5 shrink-0" />
 
       </div>
 
@@ -80,7 +82,9 @@ const { position, hideOffcanvas, class: ClassName } = Astro.props;
             title="Open sidebar content"
             isOffcanvasToggler={true}
             class:list={[
-              "ring-primary/25 rounded-full duration-500 ease-out",
+              // min-h-11/min-w-11 (44px) guarantee a compliant tap target
+              // even though the parent flex stretches it vertically
+              "ring-primary/25 rounded-full duration-500 ease-out min-h-11 min-w-11 focus-visible:ring-2 focus-visible:ring-primary",
               hideOffcanvas ? "lg:hidden" : "",
             ]}
             aria-haspopup="dialog"
@@ -165,6 +169,30 @@ const { position, hideOffcanvas, class: ClassName } = Astro.props;
       });
     }
 
-    stickyHeader();
-  </script>
+      function offcanvasToggle(): void {
+        const toggler = document.querySelector<HTMLButtonElement>(
+          '[aria-controls="offcanvas-main"]',
+        );
+        const dialog = document.getElementById(
+          "offcanvas-main",
+        ) as HTMLDialogElement | null;
+        if (!toggler || !dialog) return;
+
+        // Keep the trigger's aria-expanded in sync with the dialog state so
+        // assistive tech reflects whether the offcanvas is open.
+        const sync = () =>
+          toggler.setAttribute("aria-expanded", String(dialog.open));
+        dialog.addEventListener("close", sync);
+        toggler.addEventListener("click", sync);
+
+        // Close when the backdrop (area outside the panel) is clicked for a
+        // smoother mobile experience.
+        dialog.addEventListener("click", (event: MouseEvent) => {
+          if (event.target === dialog) dialog.close();
+        });
+      }
+
+      offcanvasToggle();
+      stickyHeader();
+    </script>
 </div>

@@ -4,7 +4,6 @@
 
 <script>
   // @ts-nocheck
-  import AOS from "aos";
 
   const runIdle = (cb) => {
     if ("requestIdleCallback" in window) {
@@ -60,7 +59,7 @@
     }
   };
 
-  const initAOS = () => {
+  const initAOS = async () => {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -74,6 +73,10 @@
       return;
     }
 
+    // Defer the AOS bundle: only fetch and init it on non-mobile viewports.
+    // On mobile, animations are disabled via animation.css overrides, so AOS is
+    // dead weight there. This keeps the JS off the critical path for phones.
+    const { default: AOS } = await import("aos");
     AOS.init({
       duration: 750,
       easing: "cubic-bezier(0.22, 1, 0.36, 1)",
@@ -87,7 +90,7 @@
   };
 
   const boot = () => {
-    initAOS();
+    void initAOS();
 
     runIdle(async () => {
       await initLucide();

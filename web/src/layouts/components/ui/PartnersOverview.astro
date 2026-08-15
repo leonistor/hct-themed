@@ -32,7 +32,7 @@ const partners = await payload.find({
         <a
           href={`/partners/${partner.code}`}
           aria-label={partner.name}
-          class="">
+          class="group flex justify-center">
           {partner.logo && (
             <PayloadImage
               src={"/payload/" + (partner.logo as Media).filename!}
@@ -40,7 +40,7 @@ const partners = await payload.find({
               width={320}
               height={80}
               class:list={[
-                "mx-auto overflow-hidden border border-gray-200",
+                "mx-auto h-auto w-full max-w-[180px] overflow-hidden border border-gray-200 md:max-w-[320px]",
                 "transition-transform duration-700 ease-in-out group-hover:scale-105",
               ]}
             />

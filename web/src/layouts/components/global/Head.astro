@@ -41,5 +41,18 @@ const fontVariables = fontsJson.map((font) => font.cssVariable) as any[];
   <!------------------
     Fonts
 -------------------->
-  {fontVariables.map((font) => <Font cssVariable={font} />)}
+  {fontVariables.map((font) =>
+    // Preload the critical above-the-fold face (Work Sans 400/500, latin subset).
+    // latin-ext is intentionally NOT preloaded: it only covers Romanian diacritics
+    // (ă/ș/ț) which are below the fold / non-critical, and keeping the preload to
+    // the common `latin` subset avoids wasting mobile bandwidth.
+    font === "--font-primary" ? (
+      <Font
+        cssVariable={font}
+        preload={[{ weight: "400", subset: "latin" }, { weight: "500", subset: "latin" }]}
+      />
+    ) : (
+      <Font cssVariable={font} />
+    )
+  )}
 </head>
