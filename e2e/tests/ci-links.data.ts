@@ -22,7 +22,6 @@ export const ciLinks: string[] = [
   "/partners/mistra",
   "/partners/panizzolo",
   "/partners/tecnoecology",
-  "/partners/wolf",
   "/product/bronneberg--forfex-200",
   "/product/bronneberg--kab-w",
   "/product/bronneberg-car-cf",
@@ -42,7 +41,6 @@ export const ciLinks: string[] = [
   "/product/mistra-breaker",
   "/product/panizzolo--compakt-240",
   "/product/panizzolo-pz-h-1000",
-  "/product/wolf--shredders",
   "/services/",
   "/services/installation",
   "/services/parts-supplies",
@@ -66,7 +64,7 @@ export const ciLinks: string[] = [
 ];
 
 export const ciLinksMeta = {
-  generatedAt: "2026-08-14T09:34:39.164Z",
-  baseURL: "https://hct.vitrina.promo",
-  count: 62,
+  generatedAt: "2026-08-16T23:52:17.229Z",
+  baseURL: "http://localhost:4321",
+  count: 60,
 };
