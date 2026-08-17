@@ -20,16 +20,12 @@ export async function Overview({ payload }: { payload: Payload }) {
   const products_counts = await getPublishedUnpublished('products')
   const products_unpublished = products_counts.unpublished
 
-  const projects_counts = await getPublishedUnpublished('projects')
-  const projects_unpublished = projects_counts.unpublished
-
   return (
     <div className="overview">
       Unpublished:
       <OverviewButton name="partners" count_unpublished={partners_unpublished.totalDocs} />
       <OverviewButton name="customers" count_unpublished={customers_unpublished.totalDocs} />
       <OverviewButton name="products" count_unpublished={products_unpublished.totalDocs} />
-      <OverviewButton name="projects" count_unpublished={projects_unpublished.totalDocs} />
     </div>
   )
 }

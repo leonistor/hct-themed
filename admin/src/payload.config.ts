@@ -14,8 +14,6 @@ import { Customers } from './collections/Customers'
 import { Materials } from './collections/Materials'
 import { ProductImages } from './collections/ProductImages'
 import { Products } from './collections/Products'
-import { Projects } from './collections/Projects'
-import { Pages } from './collections/Pages'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -58,8 +56,6 @@ export default buildConfig({
     Materials,
     Products,
     ProductImages,
-    Projects,
-    Pages,
   ],
   defaultDepth: 2,
   folders: {
@@ -76,8 +72,6 @@ export default buildConfig({
         { slug: 'categories', export: { disableJobsQueue: true, format: 'json' } },
         { slug: 'customers', export: { disableJobsQueue: true, format: 'json' } },
         { slug: 'materials', export: { disableJobsQueue: true, format: 'json' } },
-        { slug: 'projects', export: { disableJobsQueue: true, format: 'json' } },
-        { slug: 'pages', export: { disableJobsQueue: true, format: 'json' } },
       ],
     }),
   ],
