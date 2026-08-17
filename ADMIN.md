@@ -20,19 +20,19 @@ through a Basecoat drawer dialog.
 
 ### Files
 
-| Path | Role |
-|---|---|
-| `web/src/pages/admin/index.astro` | Authenticated page shell, Basecoat sidebar toggle, theme toggle, and Payload filter options. `prerender = false`. |
-| `web/src/pages/admin/login.astro` | Standalone Basecoat-styled login form. |
-| `web/src/layouts/components/admin/AdminSidebar.astro` | Native Basecoat sidebar with HCT branding, navigation, active route, account email, and logout. |
-| `web/src/layouts/components/admin/AdminProductsTable.astro` | Payload query orchestration, URL filters/sorting/pagination, and the client-side drawer controller. |
-| `web/src/layouts/components/admin/AdminProductsFilters.astro` | Filter form, native Basecoat selects, product count, and page-size control. |
-| `web/src/layouts/components/admin/AdminProductsGrid.astro` | Basecoat-styled semantic product table. |
-| `web/src/layouts/components/admin/AdminProductsPagination.astro` | Semantic pagination links using Basecoat button styles. |
-| `web/src/layouts/components/admin/AdminProductSheet.astro` | Basecoat native `<dialog class="drawer">` for editing products. |
-| `web/src/pages/api/products/[id].ts` | Authenticated product GET and PUT endpoints. |
-| `web/src/styles/admin.css` | Standalone entry that imports the shared Tailwind/Basecoat stylesheet. |
-| `web/src/layouts/components/ui/basecoat/` | Basecoat wrappers, icon renderer, and Hugeicons barrel. |
+| Path                                                             | Role                                                                                                              |
+| ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `web/src/pages/admin/index.astro`                                | Authenticated page shell, Basecoat sidebar toggle, theme toggle, and Payload filter options. `prerender = false`. |
+| `web/src/pages/admin/login.astro`                                | Standalone Basecoat-styled login form.                                                                            |
+| `web/src/layouts/components/admin/AdminSidebar.astro`            | Native Basecoat sidebar with HCT branding, navigation, active route, account email, and logout.                   |
+| `web/src/layouts/components/admin/AdminProductsTable.astro`      | Payload query orchestration, URL filters/sorting/pagination, and the client-side drawer controller.               |
+| `web/src/layouts/components/admin/AdminProductsFilters.astro`    | Filter form, native Basecoat selects, product count, and page-size control.                                       |
+| `web/src/layouts/components/admin/AdminProductsGrid.astro`       | Basecoat-styled semantic product table.                                                                           |
+| `web/src/layouts/components/admin/AdminProductsPagination.astro` | Semantic pagination links using Basecoat button styles.                                                           |
+| `web/src/layouts/components/admin/AdminProductSheet.astro`       | Basecoat native `<dialog class="drawer">` for editing products.                                                   |
+| `web/src/pages/api/products/[id].ts`                             | Authenticated product GET and PUT endpoints.                                                                      |
+| `web/src/styles/admin.css`                                       | Standalone Tailwind/Basecoat entry, isolated from public website styles.                                         |
+| `web/src/layouts/components/ui/basecoat/`                        | Basecoat wrappers, icon renderer, and Hugeicons barrel.                                                           |
 
 ### Behavior
 
@@ -47,9 +47,10 @@ through a Basecoat drawer dialog.
 
 ## Theming And Runtime
 
-Standalone admin pages import `web/src/styles/admin.css`, which uses the same Tailwind and Basecoat
-entry as the public site. Basecoat runtime modules are initialized for standalone pages and the
-public layout, including sidebar, drawer, accordion, select, dropdown, and tabs.
+Standalone admin pages import `web/src/styles/admin.css`, a separate Tailwind/Basecoat entry that
+does not import the public site's theme, navigation, forms, or component styles. Basecoat runtime
+modules are initialized for standalone pages and the public layout, including sidebar, drawer,
+accordion, select, dropdown, and tabs.
 
 Icons are rendered with `web/src/layouts/components/ui/basecoat/Icon.astro`. Icon data is imported
 from `web/src/layouts/components/ui/basecoat/hugeicons.ts`, never directly from the Hugeicons package.

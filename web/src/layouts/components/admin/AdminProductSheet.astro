@@ -62,36 +62,40 @@ const {
 
 <dialog
   id="product-edit-sheet"
-  class="drawer m-0 ml-auto h-full max-h-none w-full max-w-2xl border-0 p-0 backdrop:bg-black/40">
+  class="drawer m-0 ml-auto h-full max-h-none w-full max-w-2xl border-0 p-0 backdrop:bg-black/40"
+  data-side="right"
+  aria-labelledby="edit-sheet-title">
   <article class="bg-background flex h-full flex-col overflow-hidden shadow-xl">
-    <div class="flex items-center justify-between border-b px-6 py-4">
+    <header class="flex items-center justify-between border-b px-6 py-4">
       <h2 id="edit-sheet-title" class="text-lg font-semibold">
         {product.title}
       </h2>
       <button
         type="button"
         data-sheet-close
-        class="text-muted-foreground hover:bg-accent rounded-md p-2"
+        class="btn"
+        data-variant="ghost"
+        data-size="icon-sm"
         aria-label="Close"
         onclick="this.closest('dialog')?.close()">
         <Icon icon={Cancel01Icon} class="size-5" />
       </button>
-    </div>
+    </header>
     <form id="product-edit-form" class="flex-1 space-y-4 overflow-y-auto p-6">
       <input type="hidden" name="edit_id" value={product.id} />
-      <div class="bg-muted/50 border-border rounded border p-3">
-        <div class="space-y-2">
-          <label for="edit-name" class="text-sm font-medium">Name</label>
+      <section class="card p-4">
+        <div class="field">
+          <label for="edit-name">Name</label>
           <input
             id="edit-name"
             name="edit_name"
             value={String(product.name ?? "")}
             required
-            class="border-input bg-background h-10 w-full rounded-md border px-3 py-2 text-sm"
+            class="input"
           />
         </div>
-        <div class="mt-3 space-y-2">
-          <label class="text-sm font-medium">Main image</label>
+        <div class="field mt-4">
+          <label>Main image</label>
           <div data-edit-main-image>
             {
               product.mainImageFilename ? (
@@ -108,19 +112,17 @@ const {
             }
           </div>
         </div>
-        <div class="mt-3 space-y-2">
-          <label for="edit-description" class="text-sm font-medium">
-            Description
-          </label>
+        <div class="field mt-4">
+          <label for="edit-description">Description</label>
           <textarea
             id="edit-description"
             name="edit_description"
             rows={5}
-            class="border-input bg-background w-full rounded-md border px-3 py-2 text-sm">
+            class="textarea">
             {String(product.description ?? "")}
           </textarea>
         </div>
-        <div class="mt-3 flex flex-wrap items-center justify-between gap-4">
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-4">
           <label class="inline-flex items-center gap-2 text-sm">
             <input
               id="edit-published"
@@ -156,113 +158,111 @@ const {
             </span>
           </span>
         </div>
-      </div>
+      </section>
 
-      <details open class="border-border rounded border">
-        <summary
-          class="flex cursor-pointer items-center gap-2 px-3 py-3 text-sm font-semibold">
-          <Icon icon={PlusSignIcon} class="size-4" /> Category &amp; Materials
-        </summary>
-        <div class="space-y-4 border-t p-3">
-          <div class="space-y-2">
-            <label for="edit-category" class="text-sm font-medium">
-              Category
-            </label>
-            <select
-              id="edit-category"
-              name="edit_category"
-              class="border-input bg-background h-10 w-full rounded-md border px-3 py-2 text-sm">
-              <option value="">—</option>{
-                categories.map((c) => (
-                  <option
-                    value={String(c.id)}
-                    selected={String(c.id) === product.categoryId}>
-                    {c.name}
-                  </option>
-                ))
-              }
-            </select>
-          </div>
-          <div class="space-y-2">
-            <span class="text-sm font-medium">Materials</span><div
-              data-edit-materials
-              class="space-y-2">
-              {
-                materials.map((m) => (
-                  <label class="flex items-center gap-3 text-sm">
-                    <input
-                      id={`edit-material-${m.id}`}
-                      name="edit_materials"
-                      type="checkbox"
-                      value={String(m.id)}
-                      checked={product.materialIds.has(String(m.id))}
-                    />{" "}
-                    {m.name}
-                  </label>
-                ))
-              }
+      <section class="accordion" data-multiple>
+        <details open>
+          <summary
+            class="flex cursor-pointer items-center gap-2 px-3 py-3 text-sm font-semibold">
+            <Icon icon={PlusSignIcon} class="size-4" /> Category &amp; Materials
+          </summary>
+          <section class="space-y-4">
+            <div class="field">
+              <label for="edit-category">Category</label>
+              <select
+                id="edit-category"
+                name="edit_category"
+                class="select w-full">
+                <option value="">—</option>{
+                  categories.map((c) => (
+                    <option
+                      value={String(c.id)}
+                      selected={String(c.id) === product.categoryId}>
+                      {c.name}
+                    </option>
+                  ))
+                }
+              </select>
             </div>
-          </div>
-        </div>
-      </details>
-      <details class="border-border rounded border">
-        <summary
-          id="edit-variants-title"
-          class="flex cursor-pointer items-center gap-2 px-3 py-3 text-sm font-semibold">
-          <Icon icon={PlusSignIcon} class="size-4" />
-          {
-            product.variants.length > 0
-              ? `${product.variants.length} Variants`
-              : "No Variants"
-          }
-        </summary>
-        <div data-edit-variants class="space-y-2 border-t p-3">
-          {
-            product.variants.length > 0 ? (
-              product.variants.map((v) => (
-                <div class="border-border flex items-center justify-between gap-2 rounded border p-3 text-sm">
-                  <p class="whitespace-pre-wrap">
-                    <span class="font-medium">{v.name}</span>
-                    {(v.feature || v.description) && (
-                      <span class="text-muted-foreground">
-                        {`: ${v.feature ?? ""} ${v.description ?? ""}`.trimEnd()}
-                      </span>
+            <div class="field">
+              <span class="font-medium">Materials</span><div
+                data-edit-materials
+                class="space-y-2">
+                {
+                  materials.map((m) => (
+                    <label class="flex items-center gap-3 text-sm">
+                      <input
+                        id={`edit-material-${m.id}`}
+                        name="edit_materials"
+                        type="checkbox"
+                        value={String(m.id)}
+                        checked={product.materialIds.has(String(m.id))}
+                      />{" "}
+                      {m.name}
+                    </label>
+                  ))
+                }
+              </div>
+            </div>
+          </section>
+        </details>
+        <details>
+          <summary
+            id="edit-variants-title"
+            class="flex cursor-pointer items-center gap-2 px-3 py-3 text-sm font-semibold">
+            <Icon icon={PlusSignIcon} class="size-4" />
+            {
+              product.variants.length > 0
+                ? `${product.variants.length} Variants`
+                : "No Variants"
+            }
+          </summary>
+          <section data-edit-variants class="space-y-2">
+            {
+              product.variants.length > 0 ? (
+                product.variants.map((v) => (
+                  <div class="border-border flex items-center justify-between gap-2 rounded border p-3 text-sm">
+                    <p class="whitespace-pre-wrap">
+                      <span class="font-medium">{v.name}</span>
+                      {(v.feature || v.description) && (
+                        <span class="text-muted-foreground">
+                          {`: ${v.feature ?? ""} ${v.description ?? ""}`.trimEnd()}
+                        </span>
+                      )}
+                    </p>
+                    {v.url && (
+                      <a
+                        href={v.url}
+                        target="_blank"
+                        rel="noopener"
+                        title={v.url}
+                        class="text-primary inline-flex">
+                        <Icon icon={ArrowUpRight01Icon} class="size-4" />
+                      </a>
                     )}
-                  </p>
-                  {v.url && (
-                    <a
-                      href={v.url}
-                      target="_blank"
-                      rel="noopener"
-                      title={v.url}
-                      class="text-primary inline-flex">
-                      <Icon icon={ArrowUpRight01Icon} class="size-4" />
-                    </a>
-                  )}
-                </div>
-              ))
-            ) : (
-              <span class="text-muted-foreground/50 text-sm">—</span>
-            )
-          }
-        </div>
-      </details>
+                  </div>
+                ))
+              ) : (
+                <span class="text-muted-foreground/50 text-sm">—</span>
+              )
+            }
+          </section>
+        </details>
+      </section>
       <div class="flex items-center justify-end gap-2 border-t pt-4">
-        <button
-          type="submit"
-          class="bg-primary text-primary-foreground rounded-md px-4 py-2 text-sm font-medium">
-          Save
-        </button>
+        <button type="submit" class="btn">Save</button>
         <a
           data-edit-preview
           href={`/product/${product.code ?? ""}`}
-          class="text-primary px-4 py-2 text-sm">
+          class="btn"
+          data-variant="link">
           Preview
         </a>
         <button
           type="button"
           data-sheet-close
-          class="border-input rounded-md border px-4 py-2 text-sm"
+          class="btn"
+          data-variant="outline"
           onclick="this.closest('dialog')?.close()">
           Cancel
         </button>

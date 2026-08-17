@@ -2,7 +2,11 @@
 export const prerender = false;
 import "@/styles/admin.css";
 import Icon from "@/components/ui/basecoat/Icon.astro";
-import { Moon01Icon, Sun01Icon } from "@/components/ui/basecoat/hugeicons";
+import {
+  Menu01Icon,
+  Moon01Icon,
+  Sun01Icon,
+} from "@/components/ui/basecoat/hugeicons";
 import Favicons from "@/components/seo/Favicons.astro";
 import AdminProductsTable from "@/layouts/components/admin/AdminProductsTable.astro";
 import AdminSidebar from "@/layouts/components/admin/AdminSidebar.astro";
@@ -67,16 +71,16 @@ const materialOptions = materialsResult.docs.map((m) => ({
       })();
     </script>
   </head>
-  <body>
+  <body class="admin-page">
     <div class="flex min-h-screen">
       <AdminSidebar
         currentPath={Astro.url.pathname}
         userEmail={currentUser.email}
       />
 
-      <div class="flex flex-1 flex-col">
+      <div class="flex min-w-0 flex-1 flex-col">
         <header
-          class="bg-background sticky top-0 z-30 flex items-center gap-3 px-4 py-3 shadow-sm">
+          class="bg-background/95 sticky top-0 z-30 flex items-center gap-3 border-b px-4 py-3 backdrop-blur">
           <button
             type="button"
             aria-label="Toggle sidebar"
@@ -84,14 +88,20 @@ const materialOptions = materialsResult.docs.map((m) => ({
             data-variant="ghost"
             data-size="icon-sm"
             onclick="document.getElementById('admin-sidebar')?.toggle()">
-            <Icon icon={Sun01Icon} class="size-4" />
+            <Icon icon={Menu01Icon} class="size-4" />
           </button>
-          <h1 class="text-2xl font-semibold">Products</h1>
-          <p class="text-muted-foreground text-sm">Admin product list</p>
+          <div>
+            <h1 class="text-lg font-semibold tracking-tight">Products</h1>
+            <p class="text-muted-foreground hidden text-sm sm:block">
+              Admin product list
+            </p>
+          </div>
 
           <button
             type="button"
-            class="text-muted-foreground hover:bg-accent hover:text-accent-foreground ml-auto cursor-pointer rounded-md p-2 transition-colors"
+            class="btn ml-auto"
+            data-variant="ghost"
+            data-size="icon-sm"
             data-theme-toggle
             aria-label="Toggle theme">
             <Icon icon={Sun01Icon} class="hidden size-5 dark:block" />
@@ -99,7 +109,7 @@ const materialOptions = materialsResult.docs.map((m) => ({
           </button>
         </header>
 
-        <main class="flex-1 overflow-x-auto px-6 py-6">
+        <main class="min-w-0 flex-1 overflow-x-auto px-6 py-6">
           <AdminProductsTable
             partners={partnerOptions}
             categories={categoryOptions}

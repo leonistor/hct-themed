@@ -25,14 +25,15 @@ const {
 } = Astro.props;
 ---
 
-<div class="overflow-x-auto rounded-lg border">
-  <table class="w-full text-left text-sm">
-    <thead class="bg-muted/50 text-muted-foreground">
+<div class="table-container">
+  <table class="table">
+    <thead>
       <tr>
-        <th class="p-3" style="width: 12.5%">Image</th>
-        <th class="p-3" style="width: 4.17%">
+        <th style="width: 12.5%">Image</th>
+        <th style="width: 4.17%">
           <a
             href={sortHref("published")}
+            aria-label="Sort by published status"
             class="flex items-center justify-between gap-1 hover:underline">
             <Icon icon={CheckmarkCircle01Icon} class="size-4" />
             <Icon
@@ -41,7 +42,7 @@ const {
             />
           </a>
         </th>
-        <th class="p-3" style="width: 29.16%">
+        <th style="width: 29.16%">
           <a
             href={sortHref("name")}
             class="flex items-center justify-between gap-1 hover:underline">
@@ -52,10 +53,11 @@ const {
             />
           </a>
         </th>
-        <th class="p-3" style="width: 4.17%">
+        <th style="width: 4.17%">
+          <span class="sr-only">Variants</span>
           <Icon icon={Layers01Icon} class="size-4" />
         </th>
-        <th class="p-3" style="width: 8.33%">
+        <th style="width: 8.33%">
           <a
             href={sortHref("partner")}
             class="flex items-center justify-between gap-1 hover:underline">
@@ -66,7 +68,7 @@ const {
             />
           </a>
         </th>
-        <th class="p-3" style="width: 20.83%">
+        <th style="width: 20.83%">
           <a
             href={sortHref("category")}
             class="flex items-center justify-between gap-1 hover:underline">
@@ -77,7 +79,7 @@ const {
             />
           </a>
         </th>
-        <th class="p-3" style="width: 20.83%">Materials</th>
+        <th style="width: 20.83%">Materials</th>
       </tr>
     </thead><tbody>
       {

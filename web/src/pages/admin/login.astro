@@ -22,12 +22,14 @@ import HctLogo from "@/assets/images/hct-logo-2026.svg";
       })();
     </script>
   </head>
-  <body class="admin-page bg-background min-h-screen">
+  <body class="admin-page">
     <div class="flex min-h-screen flex-col">
       <div class="flex justify-end p-4">
         <button
           type="button"
-          class="text-muted-foreground hover:bg-accent hover:text-accent-foreground cursor-pointer rounded-md p-2 transition-colors"
+          class="btn"
+          data-variant="ghost"
+          data-size="icon-sm"
           data-theme-toggle
           aria-label="Toggle theme">
           <Icon icon={Sun01Icon} class="hidden size-5 dark:block" />
@@ -47,11 +49,9 @@ import HctLogo from "@/assets/images/hct-logo-2026.svg";
             </p>
           </div>
 
-          <form
-            id="login-form"
-            class="border-border bg-card rounded-lg border p-6 shadow-sm">
+          <form id="login-form" class="card p-6 shadow-sm">
             <div class="space-y-4">
-              <div class="space-y-1.5">
+              <div class="field">
                 <label for="email">Email</label>
                 <input
                   id="email"
@@ -59,10 +59,10 @@ import HctLogo from "@/assets/images/hct-logo-2026.svg";
                   type="email"
                   autocomplete="email"
                   required
-                  class="border-input bg-background h-10 w-full rounded-md border px-3 py-2 text-sm"
+                  class="input"
                 />
               </div>
-              <div class="space-y-1.5">
+              <div class="field">
                 <label for="password">Password</label>
                 <input
                   id="password"
@@ -70,16 +70,13 @@ import HctLogo from "@/assets/images/hct-logo-2026.svg";
                   type="password"
                   autocomplete="current-password"
                   required
-                  class="border-input bg-background h-10 w-full rounded-md border px-3 py-2 text-sm"
+                  class="input"
                 />
               </div>
 
               <p id="login-error" class="text-destructive hidden text-sm"></p>
 
-              <button
-                id="login-submit"
-                type="submit"
-                class="bg-primary text-primary-foreground h-10 w-full rounded-md px-4 py-2 text-sm font-medium">
+              <button id="login-submit" type="submit" class="btn w-full">
                 Sign in
               </button>
             </div>

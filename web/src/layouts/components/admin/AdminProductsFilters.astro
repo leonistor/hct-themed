@@ -30,33 +30,26 @@ const {
 } = Astro.props;
 ---
 
-<div class="bg-muted/50 mb-6 rounded-lg border p-4">
+<section class="card mb-6 p-4">
   <form
     method="get"
     action="/admin"
-    class="mb-3 flex flex-wrap items-end gap-3">
-    <div class="flex flex-col gap-1">
-      <label for="search" class="text-muted-foreground text-xs font-medium">
-        Search
-      </label>
+    class="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-[2fr_repeat(4,minmax(0,1fr))_auto_auto] lg:items-end">
+    <div class="field">
+      <label for="search">Search</label>
       <input
         type="search"
         id="search"
         name="search"
         value={search}
         placeholder="Product name…"
-        class="border-input bg-background placeholder:text-muted-foreground focus:ring-ring h-10 w-48 rounded-lg border px-3 py-2 text-sm focus:ring-2 focus:outline-none"
+        class="input w-full"
       />
     </div>
 
-    <div class="flex flex-col gap-1">
-      <label for="partner" class="text-muted-foreground text-xs font-medium">
-        Partner
-      </label>
-      <select
-        id="partner"
-        name="partner"
-        class="border-input bg-background h-10 w-44 rounded-lg border px-3 py-2 text-sm">
+    <div class="field">
+      <label for="partner">Partner</label>
+      <select id="partner" name="partner" class="select w-full">
         <option value="">All partners</option>
         {
           partners.map((p) => (
@@ -70,14 +63,9 @@ const {
       </select>
     </div>
 
-    <div class="flex flex-col gap-1">
-      <label for="category" class="text-muted-foreground text-xs font-medium">
-        Category
-      </label>
-      <select
-        id="category"
-        name="category"
-        class="border-input bg-background h-10 w-44 rounded-lg border px-3 py-2 text-sm">
+    <div class="field">
+      <label for="category">Category</label>
+      <select id="category" name="category" class="select w-full">
         <option value="">All categories</option>
         {
           categories.map((c) => (
@@ -91,14 +79,9 @@ const {
       </select>
     </div>
 
-    <div class="flex flex-col gap-1">
-      <label for="material" class="text-muted-foreground text-xs font-medium">
-        Material
-      </label>
-      <select
-        id="material"
-        name="material"
-        class="border-input bg-background h-10 w-44 rounded-lg border px-3 py-2 text-sm">
+    <div class="field">
+      <label for="material">Material</label>
+      <select id="material" name="material" class="select w-full">
         <option value="">All materials</option>
         {
           materials.map((m) => (
@@ -112,14 +95,9 @@ const {
       </select>
     </div>
 
-    <div class="flex flex-col gap-1">
-      <label for="published" class="text-muted-foreground text-xs font-medium">
-        Published
-      </label>
-      <select
-        id="published"
-        name="published"
-        class="border-input bg-background h-10 w-36 rounded-lg border px-3 py-2 text-sm">
+    <div class="field">
+      <label for="published">Published</label>
+      <select id="published" name="published" class="select w-full">
         <option value="">Any</option><option
           value="true"
           selected={filterPublished === "true"}>
@@ -133,40 +111,31 @@ const {
     <input type="hidden" name="limit" value={rawLimit} />
     {sortParam && <input type="hidden" name="sort" value={sortParam} />}
 
-    <button
-      type="submit"
-      class="bg-primary text-primary-foreground hover:bg-primary/90 h-10 rounded-lg px-4 py-2 text-sm font-medium transition-colors">
-      Apply
-    </button>
+    <button type="submit" class="btn">Apply</button>
 
     {
       hasActiveFilters && (
-        <a
-          href="/admin"
-          class="border-input text-muted-foreground hover:bg-accent hover:text-accent-foreground inline-flex h-10 items-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors">
+        <a href="/admin" class="btn" data-variant="outline">
           Clear
         </a>
       )
     }
   </form>
 
-  <div class="border-border flex items-center justify-between border-t pt-3">
+  <div class="flex flex-wrap items-center justify-between gap-3 border-t pt-3">
     <p class="text-muted-foreground text-sm">{totalDocs} products</p>
     <div class="flex items-center gap-2">
       <label for="per-page" class="text-muted-foreground text-sm">
         Per page
       </label>
-      <select
-        id="per-page"
-        class="border-input bg-background focus:ring-ring h-8 w-20 rounded-md border px-2 text-sm focus:ring-2 focus:outline-none"
-        data-per-page>
+      <select id="per-page" class="select w-20" data-per-page>
         <option value="10" selected={rawLimit === "10"}>10</option>
         <option value="50" selected={rawLimit === "50"}>50</option>
         <option value="all" selected={rawLimit === "all"}>All</option>
       </select>
     </div>
   </div>
-</div>
+</section>
 
 <script>
   const perPage = document.querySelector(

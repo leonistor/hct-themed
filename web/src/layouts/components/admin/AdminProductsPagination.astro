@@ -20,24 +20,25 @@ const {
 } = Astro.props;
 ---
 
-<div class="flex items-center justify-end px-2 pt-4">
+<div class="flex items-center justify-end pt-4">
   {
     showPagination && (
       <nav aria-label="Pagination">
-        <div class="flex items-center gap-1">
+        <div class="flex flex-wrap items-center justify-end gap-1">
           {showPrev && (
             <a
-              class="rounded-md border px-3 py-2 text-sm"
+              class="btn"
+              data-variant="outline"
+              data-size="sm"
               href={makeUrl({ page: String(page - 1) })}>
               Previous
             </a>
           )}
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
             <a
-              class:list={[
-                "rounded-md border px-3 py-2 text-sm",
-                isCurrentPage(n) && "bg-accent",
-              ]}
+              class="btn"
+              data-variant={isCurrentPage(n) ? "default" : "outline"}
+              data-size="sm"
               href={makeUrl({ page: String(n) })}
               aria-current={isCurrentPage(n) ? "page" : undefined}>
               {n}
@@ -45,7 +46,9 @@ const {
           ))}
           {showNext && (
             <a
-              class="rounded-md border px-3 py-2 text-sm"
+              class="btn"
+              data-variant="outline"
+              data-size="sm"
               href={makeUrl({ page: String(page + 1) })}>
               Next
             </a>
