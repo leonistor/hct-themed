@@ -64,7 +64,7 @@ export const ciLinks: string[] = [
 ];
 
 export const ciLinksMeta = {
-  generatedAt: "2026-08-16T23:52:17.229Z",
+  generatedAt: "2026-08-17T09:26:56.349Z",
   baseURL: "http://localhost:4321",
   count: 60,
 };
