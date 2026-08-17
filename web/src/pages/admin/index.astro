@@ -72,7 +72,7 @@ const materialOptions = materialsResult.docs.map((m) => ({
     </script>
   </head>
   <body class="admin-page">
-    <div class="flex min-h-screen">
+    <div class="admin-shell flex min-h-screen">
       <AdminSidebar
         currentPath={Astro.url.pathname}
         userEmail={currentUser.email}
@@ -87,7 +87,9 @@ const materialOptions = materialsResult.docs.map((m) => ({
             class="btn"
             data-variant="ghost"
             data-size="icon-sm"
-            onclick="document.getElementById('admin-sidebar')?.toggle()">
+            aria-controls="admin-sidebar"
+            aria-expanded="true"
+            data-sidebar-toggle>
             <Icon icon={Menu01Icon} class="size-4" />
           </button>
           <div>
@@ -120,6 +122,25 @@ const materialOptions = materialsResult.docs.map((m) => ({
     </div>
 
     <script>
+      const sidebar = document.getElementById("admin-sidebar") as
+        | (HTMLElement & { toggle?: () => void })
+        | null;
+      const sidebarToggle = document.querySelector("[data-sidebar-toggle]");
+
+      function syncSidebarToggle() {
+        if (!sidebar || !sidebarToggle) return;
+        sidebarToggle.setAttribute(
+          "aria-expanded",
+          String(sidebar.getAttribute("aria-hidden") !== "true"),
+        );
+      }
+
+      sidebar?.addEventListener("basecoat:initialized", syncSidebarToggle);
+      sidebarToggle?.addEventListener("click", () => {
+        sidebar?.toggle?.();
+        requestAnimationFrame(syncSidebarToggle);
+      });
+
       document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
         button.addEventListener("click", () => {
           const isDark = document.documentElement.classList.contains("dark");

@@ -1,5 +1,10 @@
 /* Keep the admin bundle independent from the public website stylesheet. */
 @import "tailwindcss";
+@import "basecoat-css/base.css";
+@import "basecoat-css/components/sidebar.css";
+@import "basecoat-css/components/drawer.css";
+@import "basecoat-css/components/accordion.css";
+@import "basecoat-css/components/select.css";
 @import "basecoat-css/styles/vega";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -88,8 +93,38 @@
 }
 
 .admin-page {
+  --sidebar-width: 15rem;
+  --sidebar-mobile-width: 18rem;
   min-height: 100vh;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+}
+
+/* The sidebar is a fixed Basecoat panel inside a flex shell. Collapse its
+   flex item as well, otherwise the hidden panel leaves an empty desktop rail. */
+.admin-shell > .sidebar {
+  flex: 0 0 var(--sidebar-width);
+  width: var(--sidebar-width);
+  transition:
+    flex-basis 300ms ease,
+    width 300ms ease;
+}
+
+.admin-shell > .sidebar + * {
+  position: static;
+  margin-left: 0 !important;
+}
+
+.admin-shell > .sidebar[aria-hidden="true"] {
+  flex-basis: 0;
+  width: 0;
+  overflow: visible;
+}
+
+@media (max-width: 767px) {
+  .admin-shell > .sidebar {
+    flex-basis: 0;
+    width: 0;
+  }
 }

@@ -3,13 +3,7 @@ import type { HTMLAttributes } from "astro/types";
 import { cn } from "@/utils/cn";
 import HctLogo from "@/assets/images/hct-logo-2026.svg";
 import Icon from "@/components/ui/basecoat/Icon.astro";
-import {
-  PackageIcon,
-  SquareRoundCornerIcon,
-  UserMultiple02Icon,
-  Settings01Icon,
-  Logout01Icon,
-} from "@/components/ui/basecoat/hugeicons";
+import { PackageIcon, Logout01Icon } from "@/components/ui/basecoat/hugeicons";
 
 export interface Props extends HTMLAttributes<"aside"> {
   currentPath?: string;
@@ -62,19 +56,23 @@ const items: {
   id="admin-sidebar"
   class={cn("sidebar", className)}
   data-side="left"
+  data-initial-open="true"
   {...props}>
-  <header class="flex items-center gap-2 px-4 py-4">
-    <div class="flex items-center gap-2 px-2 py-1">
-      <HctLogo class="size-7.5" role="img" aria-label="HCT logo" />
-      <span class="text-lg font-semibold">Admin</span>
-    </div>
-  </header>
-
-  <hr role="separator" />
-
   <nav aria-label="Admin navigation">
-    <section>
-      <div role="group" aria-label="Content">
+    <header class="border-b px-4 py-4">
+      <div class="flex items-center gap-2 px-2 py-1">
+        <HctLogo class="size-7.5" role="img" aria-label="HCT logo" />
+        <span class="text-lg font-semibold">Admin</span>
+      </div>
+    </header>
+
+    <section class="scrollbar-sm py-3">
+      <div role="group" aria-labelledby="admin-menu-label">
+        <h3
+          id="admin-menu-label"
+          class="text-muted-foreground px-4 py-2 text-xs font-medium">
+          Menu
+        </h3>
         <ul>
           {
             items.map((item) => (
@@ -92,28 +90,37 @@ const items: {
         </ul>
       </div>
     </section>
-  </nav>
 
-  {
-    userEmail && (
-      <footer>
-        <div class="flex flex-col items-stretch gap-1">
-          <span class="text-muted-foreground truncate px-2 text-xs font-medium">
-            {userEmail}
-          </span>
-          <button
-            type="button"
-            data-admin-logout
-            class="btn w-full justify-start"
-            data-variant="ghost"
-            data-size="sm">
-            <Icon icon={Logout01Icon} class="size-4" />
-            <span>Logout</span>
-          </button>
-        </div>
-      </footer>
-    )
-  }
+    {
+      userEmail && (
+        <footer class="border-t p-3">
+          <div role="group" aria-labelledby="admin-account-label">
+            <h3
+              id="admin-account-label"
+              class="text-muted-foreground px-2 py-2 text-xs font-medium">
+              Account
+            </h3>
+            <div class="flex flex-col items-stretch gap-1">
+              <span
+                class="text-muted-foreground truncate px-2 text-xs"
+                title={userEmail}>
+                {userEmail}
+              </span>
+              <button
+                type="button"
+                data-admin-logout
+                class="btn w-full justify-start"
+                data-variant="ghost"
+                data-size="sm">
+                <Icon icon={Logout01Icon} class="size-4" />
+                <span>Logout</span>
+              </button>
+            </div>
+          </div>
+        </footer>
+      )
+    }
+  </nav>
 </aside>
 
 <script>
