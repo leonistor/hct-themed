@@ -8,8 +8,9 @@
 #   3. Snapshot uncommitted changes on a temp branch, reset main to clean
 #   4. git pull
 #   5. bun install
-#   6. bun run build
-#   7. Show start instruction or visually-striking error
+#   6. Run Payload migrations
+#   7. bun run build
+#   8. Show start instruction or visually-striking error
 #
 
 set -euo pipefail
@@ -88,7 +89,24 @@ bun install
 echo ""
 
 # ── 6. Build ────────────────────────────────────────────────────────────
-echo "[6/7] Building project..."
+echo "[6/8] Running Payload migrations..."
+
+if ! (cd admin && NODE_ENV=production bun run payload migrate); then
+    echo ""
+    echo "============================================================"
+    echo ""
+    echo "              ***  MIGRATION FAILED  ***"
+    echo ""
+    echo "        The production database was not migrated."
+    echo "        Deployment stopped before the build step."
+    echo ""
+    echo "============================================================"
+    echo ""
+    exit 1
+fi
+echo ""
+
+echo "[7/8] Building project..."
 
 if ! bun run build; then
     echo ""
@@ -107,7 +125,7 @@ fi
 echo ""
 
 # ── 7. Done ─────────────────────────────────────────────────────────────
-echo "[7/7] Build successful!"
+echo "[8/8] Build successful!"
 echo ""
 echo "============================================================"
 echo ""
