@@ -1,8 +1,7 @@
 ---
 /**
  * Renders a Hugeicons stroke icon from `@hugeicons/core-free-icons` data
- * (array of [tag, attributes]) in an Astro-friendly way. Mirrors the Bearnie
- * HugeIcon API so existing call sites keep working after the migration.
+ * (array of [tag, attributes]) in an Astro-friendly way.
  */
 export type HugeIconData = readonly (readonly [
   string,
@@ -61,8 +60,7 @@ function attrsFor(
     typeof size === "string" && size === "xl" && xl,
     className,
   ]}
-  {...rest}
->
+  {...rest}>
   {
     icon.map(([tag, raw]) => {
       const a = attrsFor(raw);

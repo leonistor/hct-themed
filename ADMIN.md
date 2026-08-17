@@ -1,146 +1,67 @@
 # ADMIN
 
-Administrative pages served by `web` (Astro), as opposed to the Payload CMS admin UI running in
-the `admin` workspace on port 3000. These live under `web/src/pages/` and are standalone pages
-that do not use the public `Base.astro` layout.
+Administrative pages served by `web` (Astro), separate from Payload's admin UI. These standalone
+pages live under `web/src/pages/admin/` and do not use `Base.astro`.
 
 ## Authentication
 
-Admin pages and the products API are protected by cookie-based sessions against the Payload
-`users` collection. Login is handled by a dedicated `users` Astro API (which takes precedence over
-the `[...path].ts` proxy) using the Payload Local API:
+Admin pages and the products API use cookie-based sessions against Payload's `users` collection.
+Login is handled by `web/src/pages/api/users/login.ts`, logout by
+`web/src/pages/api/users/logout.ts`, and the current user by `web/src/pages/api/users/me.ts`.
+`web/src/utils/adminAuth.ts` contains the shared Payload authentication helpers.
 
-| Route | Role |
-|---|---|
-| `web/src/pages/api/users/login.ts` | `POST` — `payload.login({ collection: 'users', ... })`, sets an httpOnly `payload-token` cookie (2h, `SameSite=Lax`, `Secure` in prod) and returns `{ user }`. |
-| `web/src/pages/api/users/logout.ts` | `POST` — expires the `payload-token` cookie. |
-| `web/src/pages/api/users/me.ts` | `GET` — returns the current user or 401. |
-| `web/src/pages/admin/login.astro` | Standalone login form (`admin.css`, Bearnie `Input`/`Label`/`Button`), redirects to `/admin` on success. |
-| `web/src/utils/adminAuth.ts` | Shared helpers: `getAdminUser(payload, request)` (verifies via Payload's exported `JWTAuthentication` strategy with `DisableAutologin`), `setAuthCookie`, `clearAuthCookie`. |
+`admin/index.astro` redirects unauthenticated users to `/admin/login`. The products API returns 401
+without a valid session. Logout is available in the Basecoat sidebar footer.
 
-Guards: `admin/index.astro` returns `Astro.redirect("/admin/login")` when unauthenticated, and
-`web/src/pages/api/products/[id].ts` (GET + PUT) returns 401. Logout lives in the `AdminSidebar`
-footer (shows the signed-in email, fed by the `userEmail` prop).
+## Products List
 
-## Admin products list
-
-Route: `/admin` (`web/src/pages/admin/index.astro`), served on port 4321.
-
-A read-only catalogue table of the `products` collection from Payload, with inline editing via a
-slide-out sheet. It is the current reference implementation for admin pages in this repo.
+Route: `/admin`, served on port 4321. The page is a read-only product catalogue with inline editing
+through a Basecoat drawer dialog.
 
 ### Files
 
 | Path | Role |
 |---|---|
-| `web/src/pages/admin/index.astro` | Page shell: fixed left sidebar, sticky header with a sidebar toggle and theme toggle, fetches filter option lists (partners/categories/materials) and passes them to the table. `prerender = false`. Auth-guarded: redirects to `/admin/login` when unauthenticated, passes `userEmail` to the sidebar. |
-| `web/src/layouts/components/admin/AdminSidebar.astro` | Nav rail: Bearnie `Sidebar` (id `admin-sidebar`) with HCT logo, separator and menu (Products/Categories/Partners/Materials). Products is active on `/admin`; link `href`s for the other sections are `#` placeholders. `currentPath` prop drives the active item. Footer shows the signed-in `userEmail` with a Logout button (POST `/api/users/logout`, then redirect to `/admin/login`); the footer renders only when `userEmail` is passed. |
-| `web/src/layouts/components/admin/AdminProductsTable.astro` | Orchestrator for the products section. Parses URL query/filter/sort params, fetches products and the `?edit` product via `getPayload` against `admin` (same connection as the public static routes; needs `admin` + `db/hct.db` running), derives helpers (`makeUrl`, `sortHref`, `sortIcon`, `sortIconClass`) and renders the four child components. Holds the cross-cutting controller `<script>` (row click → `?edit` URL + fetch + populate → open sheet, `updateRow` on save, `popstate`/Escape/overlay close handling). Accepts `partners`, `categories`, `materials` props. |
-| `web/src/layouts/components/admin/AdminProductsFilters.astro` | Filter panel (card with distinct background): search input, partner/category/material/published `<Select>`s, Apply/Clear, product count, and per-page `<select>` (native HTML, `data-per-page`). Owns its small per-page navigation script; the rest of the inter-page script lives in the parent. |
-| `web/src/layouts/components/admin/AdminProductsGrid.astro` | Sortable product table. Props: `products` (typed `Product[]`), `editId` (active row highlight), `sortHref`, `sortIcon`, `sortIconClass`. No script. |
-| `web/src/layouts/components/admin/AdminProductsPagination.astro` | Bottom-right pager (previous/next + page links). Props: `makeUrl`, `page`, `totalPages`, `showPagination`, `showPrev`, `showNext`, `isCurrentPage`. No script. |
-| `web/src/layouts/components/admin/AdminProductSheet.astro` | Bearnie Sheet for editing products (2/3 width, right side), including the `sheet-link-icon` `<template>` and `#sheet-open-trigger`. Exports the `ProductView` type used by the parent to pass the server-rendered `?edit` product. No script. The sheet form is always rendered in the DOM (empty by default); the parent's client script populates it via the API on row click. |
-| `web/src/pages/api/products/[id].ts` | GET endpoint returning a product as JSON (excludes `folder`/`images` fields). PUT endpoint for updating a product. Uses Payload local API to update name, description, published, promoted, category, and materials fields. Both use `depth: 2` and require a valid session (401 without the cookie). Returns updated doc as JSON. |
-| `web/src/styles/admin.css` | Standalone stylesheet: Tailwind + Bearnie tokens only for this page. |
-| `web/src/layouts/components/bearnie/{sidebar,table,select,checkbox,pagination,sheet,input,textarea,button,label}/` | Bearnie UI components installed for the admin UI. |
-| `web/src/layouts/components/bearnie/lib/hugeicons.ts` | Barrel re-export of Hugeicons free (stroke-rounded) icon data with official Hugeicons names (same identifiers as `@hugeicons/core-free-icons` / hugeicons.com), for use with `HugeIcon.astro`. Import icons from here (e.g. `import { ArrowUpRight01Icon } from "@/components/bearnie/lib/hugeicons"`), never from `@hugeicons/core-free-icons` directly. |
-
-### Layout
-
-- Two-column flex: the `AdminSidebar` (`h-screen`) on the left, a `flex-1` column on the right.
-- The header is sticky (`z-30`) and holds the `SidebarTrigger` (`for="admin-sidebar"`, matching the
-  sidebar id) plus the page title and theme toggle; the sidebar handles collapse and mobile
-  behavior in its own script.
-- The filter panel is a `bg-muted/50 rounded-lg border p-4` card containing the filter form,
-  a product count label, and a per-page `<select>` (10/50/all). The panel visually groups all
-  controls above the table.
-- Pagination sits at the bottom right of the page, below the table.
+| `web/src/pages/admin/index.astro` | Authenticated page shell, Basecoat sidebar toggle, theme toggle, and Payload filter options. `prerender = false`. |
+| `web/src/pages/admin/login.astro` | Standalone Basecoat-styled login form. |
+| `web/src/layouts/components/admin/AdminSidebar.astro` | Native Basecoat sidebar with HCT branding, navigation, active route, account email, and logout. |
+| `web/src/layouts/components/admin/AdminProductsTable.astro` | Payload query orchestration, URL filters/sorting/pagination, and the client-side drawer controller. |
+| `web/src/layouts/components/admin/AdminProductsFilters.astro` | Filter form, native Basecoat selects, product count, and page-size control. |
+| `web/src/layouts/components/admin/AdminProductsGrid.astro` | Basecoat-styled semantic product table. |
+| `web/src/layouts/components/admin/AdminProductsPagination.astro` | Semantic pagination links using Basecoat button styles. |
+| `web/src/layouts/components/admin/AdminProductSheet.astro` | Basecoat native `<dialog class="drawer">` for editing products. |
+| `web/src/pages/api/products/[id].ts` | Authenticated product GET and PUT endpoints. |
+| `web/src/styles/admin.css` | Standalone entry that imports the shared Tailwind/Basecoat stylesheet. |
+| `web/src/layouts/components/ui/basecoat/` | Basecoat wrappers, icon renderer, and Hugeicons barrel. |
 
 ### Behavior
 
-- Query params: `?page=N` (1-based, default 1), `?limit=10|50|all` (default 10), and
-  `?sort=field|dir` (default no sort, Payload `_order`).
-- Filter params: `?search=<text>`, `?partner=<id>`, `?category=<id>`, `?material=<id>`,
-  `?published=true|false`. Filters are combined with Payload's `AND` operator.
-- The filter bar renders a search input, three `<Select>` dropdowns (partner, category, material),
-  a published `<Select>` (Any/Yes/No), an Apply button, and a Clear link (shown when any filter
-  is active). A hidden `limit` field preserves the current page size across filter submissions.
-- `limit=all` requests `limit: 0` with `pagination: false`; the pager and page count are hidden.
-- Table columns: image (`PayloadImage`, `main_image.sizes.medium`, 300×300), published
-  (`CheckmarkCircle01Icon` header, `<Checkbox disabled checked>` cell), name, variants count
-  (`Layers01Icon` header), partner name, category name, materials (joined names). Column widths
-  are explicit via `style` (12.5%, 4.17%, 29.16%, 4.17%, 8.33%, 20.83%, 20.83%; sum 100%).
-  Long text is not truncated.
-- Query uses `depth: 1` so partner/category/materials resolve inline, and excludes the heavy
-  `folder`/`images` fields via `select`. Sort defaults to `_order` when no `sort` param is present.
-- Sortable columns: Published, Name, Partner, Category (Materials not sortable — array
-  relationship). `sort` param format: `field|asc` or `field|desc`. Clicking a header toggles
-  asc → desc → unsorted (param removed). Hugeicons `ArrowUpDown`/`ArrowUp02`/`ArrowDown02`
-  icons on each header (dimmed when unsorted, highlighted when active). Partner and Category
-  sort by their related `name` field via Payload dot notation (`partner.name`, `category.name`).
-- Pagination links are generated with `makeUrl()` which preserves existing filter and sort params
-  from the current URL and only overrides `page`.
-- The per-page `<select>` (native HTML, `data-per-page`) lives inside the filter panel in
-  `AdminProductsTable` and navigates on change, resetting `page`. Its script is a small inline
-  `<script>` at the bottom of the component.
-- `index.astro` fetches all partners, categories, and materials via `payload.find()` with
-  `limit: 0` and `sort: "name"` to populate the filter dropdowns.
-- Edit sheet: the sheet form (2/3 width, right side) edits name, description, published,
-  promoted (Checkbox), category (single select), and materials (checkbox list). The sheet title
-  shows the product name (falls back to "Edit Product" when no product is loaded); it is set
-  server-side on `?edit` loads and updated client-side in `populateForm`. The form is grouped: a
-  `bg-muted/50` panel card at the top holds name, main image, description, published,
-  promoted, and url; a Bearnie `Accordion` (single-open) below groups the rest into "Category &
-  Materials", "Variants", and "Other images" (empty placeholder for now). Read-only sections show
-  url, variants (name, feature, description, url), and main image. Product and variant URLs render
-  as external link icons only (Hugeicons `ArrowUpRight01Icon` in an `<a>` with `target="_blank"`,
-  `rel="noopener"` and a `title` holding the URL); the client reuses a
-  `<template id="sheet-link-icon">`, so the icon markup lives in one place. Accordion triggers use a
-  compact `PlusSignIcon` via the `icon`/`iconSize` props on `AccordionTrigger` (defaults unchanged
-  for the public VSU accordions). The main image uses the
-  API returned `main_image.sizes.medium.url` (resolved via
-  `/api/product-images/file/…`, the admin media proxy) rather than the `/payload/products/…` path
-  that only resolves through the server-rendered `PayloadImage` component. The sheet form is always
-  rendered in the DOM; on initial page load with `?edit`, fields are populated server-side. On row
-  click, the URL is
-  updated via `history.pushState`, product data is fetched from `GET /api/products/<id>`, the
-  form is populated, and the sheet opens client-side. No full page reload, so scroll position is
-  preserved. The active row gets `bg-accent` highlighting; all rows have `hover:bg-muted/50`.
-  Save calls `PUT /api/products/<id>`, updates the row cells in-place, and closes the sheet.
-  Cancel/close removes the `?edit` param via `history.replaceState` and closes the sheet.
-  Browser back/forward is handled via `popstate` (opens sheet if `?edit` present, closes if
-  not). The PUT endpoint uses Payload local API to update the product and returns the updated
-  doc as JSON. The sheet content is a flex column and the form scrolls (`overflow-y-auto`), so
-  the footer buttons stay reachable with long product data.
+- Query parameters are `page`, `limit`, `sort`, `search`, `partner`, `category`, `material`, and `published`.
+- Filters are submitted as a GET form and preserve the current page size and sort order.
+- `limit=all` disables pagination and requests all products.
+- The table supports sorting by published state, name, partner, and category.
+- Clicking a row updates the URL with `?edit=<id>`, fetches the product, populates the form, and opens the drawer without reloading.
+- Save calls `PUT /api/products/<id>`, updates the row in place, and closes the drawer.
+- Cancel, Escape, backdrop click, browser navigation, and direct `?edit` loads are supported.
+- Form IDs, names, and `data-*` selectors are stable because the client controller uses them directly.
 
-### Theming
+## Theming And Runtime
 
-The admin page is standalone and does not use `Base.astro`, so it imports Tailwind and the
-Bearnie stylesheet directly via `web/src/styles/admin.css`. Bearnie maps its design tokens to
-Tailwind colors (`--color-primary` etc.) inside its own `@theme` block, so only the admin
-page's CSS includes Bearnie colors. Public pages build with the existing global stylesheet and
-keep their brand colors (e.g. `--color-primary: #216869`) unchanged.
+Standalone admin pages import `web/src/styles/admin.css`, which uses the same Tailwind and Basecoat
+entry as the public site. Basecoat runtime modules are initialized for standalone pages and the
+public layout, including sidebar, drawer, accordion, select, dropdown, and tabs.
 
-`astro.config.mjs` maps `@/components/*` to `src/layouts/components/*`, so admin imports use
-`@/components/bearnie/...` exactly like the public sections.
+Icons are rendered with `web/src/layouts/components/ui/basecoat/Icon.astro`. Icon data is imported
+from `web/src/layouts/components/ui/basecoat/hugeicons.ts`, never directly from the Hugeicons package.
 
-### Icons
+## VSU Accordion
 
-Admin components render icons via the Bearnie `HugeIcon.astro` component. The icon data (Svelte
-components from `@hugeicons/core-free-icons`) is re-exported from the barrel
-`web/src/layouts/components/bearnie/lib/hugeicons.ts`, which maps each official Hugeicons name
-(e.g. `ArrowUpRight01Icon`, `PlusSignIcon`, `Layers01Icon`) to an `HugeIcon`-compatible prop.
-Always import icons from this barrel, never directly from `@hugeicons/core-free-icons`. To add a
-new icon, append its `export { default as <Name>Icon } from "@hugeicons/core-free-icons/<Name>Icon"`
-line to the barrel. Size and color come from the `class` prop on `HugeIcon` (e.g. `size-4`,
-`text-primary`).
+The VSU page uses Basecoat native accordion markup: `.accordion`, `<details>`, `<summary>`, and a
+nested content `<section>`. The root uses `data-multiple` so multiple stages can be open.
 
-### Usage constraints
+## Constraints
 
-- `prerender` must stay `false` (runtime Payload fetch).
-- All visible strings are hardcoded English for now (admin-only, `noindex`), not routed through
-  `t()`.
-- When adding Bearnie components via the Bearnie MCP, they land in `src/components/bearnie/` by
-  default; move them to `src/layouts/components/bearnie/` so the `@/components` alias resolves
-  and fix icon import paths. The generated `barrel` may reference uninstalled components —
-  delete it unless every named component is installed.
+- `prerender` must remain `false` for runtime Payload fetches.
+- The admin UI currently uses hardcoded English strings.
+- Use Basecoat's documented native HTML structures and preserve client-facing form selectors when
+  changing dynamic admin markup.

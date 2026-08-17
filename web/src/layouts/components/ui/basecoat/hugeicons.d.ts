@@ -1,6 +1,3 @@
-/// <reference path="../.astro/types.d.ts" />
-/// <reference types="astro/client" />
-
 declare module "@hugeicons/core-free-icons/*" {
   const icon: readonly (readonly [
     string,

@@ -6,7 +6,6 @@ import { useTranslations } from "@/lib/utils/i18nUtils";
 
 import { Image } from "astro:assets";
 import logo_iris_mec from "@/assets/images/vsu/logo-iris-mec.jpg";
-import Accordion from "@/components/bearnie/accordion/Accordion.astro";
 import VsuStage from "./VsuStage.astro";
 import VsuGrid from "./VsuGrid.astro";
 import VsuCard from "./VsuCard.astro";
@@ -63,7 +62,7 @@ const vm = new Map(
         </p>
       </div>
 
-      <Accordion type="multiple" class="space-y-4">
+      <section class="accordion w-full space-y-4" data-multiple>
         <!-- 1 -->
         <VsuStage
           title="Depoluare"
@@ -170,7 +169,7 @@ const vm = new Map(
             <VsuCard {...vm.get(54)!} />
           </VsuGrid>
         </VsuStage>
-      </Accordion>
+      </section>
     </div>
   </section>
 </Base>

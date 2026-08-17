@@ -1,7 +1,4 @@
 ---
-import Select from "@/components/bearnie/select/Select.astro";
-import SelectOption from "@/components/bearnie/select/SelectOption.astro";
-
 export interface Props {
   partners?: { id: number | string; name: string }[];
   categories?: { id: number | string; name: string }[];
@@ -56,69 +53,81 @@ const {
       <label for="partner" class="text-muted-foreground text-xs font-medium">
         Partner
       </label>
-      <Select id="partner" name="partner" class="w-44">
-        <SelectOption value="">All partners</SelectOption>
+      <select
+        id="partner"
+        name="partner"
+        class="border-input bg-background h-10 w-44 rounded-lg border px-3 py-2 text-sm">
+        <option value="">All partners</option>
         {
           partners.map((p) => (
-            <SelectOption
+            <option
               value={String(p.id)}
               selected={String(p.id) === filterPartner}>
               {p.name}
-            </SelectOption>
+            </option>
           ))
         }
-      </Select>
+      </select>
     </div>
 
     <div class="flex flex-col gap-1">
       <label for="category" class="text-muted-foreground text-xs font-medium">
         Category
       </label>
-      <Select id="category" name="category" class="w-44">
-        <SelectOption value="">All categories</SelectOption>
+      <select
+        id="category"
+        name="category"
+        class="border-input bg-background h-10 w-44 rounded-lg border px-3 py-2 text-sm">
+        <option value="">All categories</option>
         {
           categories.map((c) => (
-            <SelectOption
+            <option
               value={String(c.id)}
               selected={String(c.id) === filterCategory}>
               {c.name}
-            </SelectOption>
+            </option>
           ))
         }
-      </Select>
+      </select>
     </div>
 
     <div class="flex flex-col gap-1">
       <label for="material" class="text-muted-foreground text-xs font-medium">
         Material
       </label>
-      <Select id="material" name="material" class="w-44">
-        <SelectOption value="">All materials</SelectOption>
+      <select
+        id="material"
+        name="material"
+        class="border-input bg-background h-10 w-44 rounded-lg border px-3 py-2 text-sm">
+        <option value="">All materials</option>
         {
           materials.map((m) => (
-            <SelectOption
+            <option
               value={String(m.id)}
               selected={String(m.id) === filterMaterial}>
               {m.name}
-            </SelectOption>
+            </option>
           ))
         }
-      </Select>
+      </select>
     </div>
 
     <div class="flex flex-col gap-1">
       <label for="published" class="text-muted-foreground text-xs font-medium">
         Published
       </label>
-      <Select id="published" name="published" class="w-36">
-        <SelectOption value="">Any</SelectOption>
-        <SelectOption value="true" selected={filterPublished === "true"}
-          >Yes</SelectOption
-        >
-        <SelectOption value="false" selected={filterPublished === "false"}
-          >No</SelectOption
-        >
-      </Select>
+      <select
+        id="published"
+        name="published"
+        class="border-input bg-background h-10 w-36 rounded-lg border px-3 py-2 text-sm">
+        <option value="">Any</option><option
+          value="true"
+          selected={filterPublished === "true"}>
+          Yes
+        </option><option value="false" selected={filterPublished === "false"}>
+          No
+        </option>
+      </select>
     </div>
 
     <input type="hidden" name="limit" value={rawLimit} />

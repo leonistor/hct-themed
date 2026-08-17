@@ -2,11 +2,6 @@
   "$schema": "https://opencode.ai/config.json",
   "lsp": true,
   "mcp": {
-    "bearnie": {
-      "enabled": false,
-      "type": "local",
-      "command": ["bunx", "@bearnie/mcp"]
-    },
     "astro": {
       "type": "remote",
       "enabled": true,

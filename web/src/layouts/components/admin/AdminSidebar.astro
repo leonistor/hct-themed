@@ -2,23 +2,14 @@
 import type { HTMLAttributes } from "astro/types";
 import { cn } from "@/utils/cn";
 import HctLogo from "@/assets/images/hct-logo-2026.svg";
-import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
+import Icon from "@/components/ui/basecoat/Icon.astro";
 import {
   PackageIcon,
   SquareRoundCornerIcon,
   UserMultiple02Icon,
   Settings01Icon,
   Logout01Icon,
-} from "@/components/bearnie/lib/hugeicons";
-
-import Sidebar from "@/components/bearnie/sidebar/Sidebar.astro";
-import SidebarContent from "@/components/bearnie/sidebar/SidebarContent.astro";
-import SidebarFooter from "@/components/bearnie/sidebar/SidebarFooter.astro";
-import SidebarHeader from "@/components/bearnie/sidebar/SidebarHeader.astro";
-import SidebarMenu from "@/components/bearnie/sidebar/SidebarMenu.astro";
-import SidebarMenuItem from "@/components/bearnie/sidebar/SidebarMenuItem.astro";
-import SidebarMenuButton from "@/components/bearnie/sidebar/SidebarMenuButton.astro";
-import SidebarSeparator from "@/components/bearnie/sidebar/SidebarSeparator.astro";
+} from "@/components/ui/basecoat/hugeicons";
 
 export interface Props extends HTMLAttributes<"aside"> {
   currentPath?: string;
@@ -32,15 +23,19 @@ const {
   ...props
 } = Astro.props;
 
-const items: { label: string; href: string; icon: unknown; active: boolean }[] =
-  [
-    {
-      label: "Products",
-      href: "/admin",
-      icon: PackageIcon,
-      active: currentPath === "/admin",
-    },
-    /*
+const items: {
+  label: string;
+  href: string;
+  icon: typeof PackageIcon;
+  active: boolean;
+}[] = [
+  {
+    label: "Products",
+    href: "/admin",
+    icon: PackageIcon,
+    active: currentPath === "/admin",
+  },
+  /*
     {
       label: "Categories",
       href: "#",
@@ -60,40 +55,48 @@ const items: { label: string; href: string; icon: unknown; active: boolean }[] =
       active: false,
     },
      */
-  ];
+];
 ---
 
-<Sidebar id="admin-sidebar" class={cn("h-screen", className)} {...props}>
-  <SidebarHeader>
+<aside
+  id="admin-sidebar"
+  class={cn("sidebar", className)}
+  data-side="left"
+  {...props}>
+  <header class="flex items-center gap-2 px-4 py-4">
     <div class="flex items-center gap-2 px-2 py-1">
       <HctLogo class="size-7.5" role="img" aria-label="HCT logo" />
       <span class="text-lg font-semibold">Admin</span>
     </div>
-  </SidebarHeader>
+  </header>
 
-  <SidebarSeparator />
+  <hr role="separator" />
 
-  <SidebarContent>
-    <SidebarMenu>
-      {
-        items.map((item) => (
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              href={item.href}
-              isActive={item.active}
-              class="gap-2">
-              <HugeIcon icon={item.icon as never} class="size-4" />
-              <span>{item.label}</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        ))
-      }
-    </SidebarMenu>
-  </SidebarContent>
+  <nav aria-label="Admin navigation">
+    <section>
+      <div role="group" aria-label="Content">
+        <ul>
+          {
+            items.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={item.active ? "page" : undefined}
+                  data-active={item.active ? "true" : undefined}>
+                  <Icon icon={item.icon} class="size-4" />
+                  <span>{item.label}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </nav>
 
   {
     userEmail && (
-      <SidebarFooter>
+      <footer>
         <div class="flex flex-col items-stretch gap-1">
           <span class="text-muted-foreground truncate px-2 text-xs font-medium">
             {userEmail}
@@ -102,14 +105,14 @@ const items: { label: string; href: string; icon: unknown; active: boolean }[] =
             type="button"
             data-admin-logout
             class="text-muted-foreground hover:bg-accent hover:text-accent-foreground inline-flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors">
-            <HugeIcon icon={Logout01Icon as never} class="size-4" />
+            <Icon icon={Logout01Icon} class="size-4" />
             <span>Logout</span>
           </button>
         </div>
-      </SidebarFooter>
+      </footer>
     )
   }
-</Sidebar>
+</aside>
 
 <script>
   document.querySelectorAll("[data-admin-logout]").forEach((button) => {

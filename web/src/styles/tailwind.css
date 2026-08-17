@@ -6,14 +6,14 @@
 @import "tailwindcss";
 @import "tw-shimmer";
 
-/* `hs-dropdown-open` was previously supplied by Preline's variants.css.
+/* `hs-dropdown-open` is toggled by the navigation handler below.
    It is toggled by our Basecoat dropdown handler (GlobalScripts) and used by
    header/mega-menu/card markup, so define it as a local variant. */
 @custom-variant hs-dropdown-open (&:where(.hs-dropdown-open, .hs-dropdown-open *));
 
 @import "./theme.css";
 
-/* Basecoat UI (single framework for public + admin; replaces Preline).
+/* Basecoat UI (single framework for public + admin).
    Import ONLY the component styles (`styles/vega`) instead of the whole
    `basecoat-css/vega` library. The full library also bundles a second,
    pre-compiled Tailwind build (`basecoat-base.cdn.css`: preflight + every
@@ -77,9 +77,3 @@
   @import "./navigation.css";
   @import "./components.css";
 }
-
-/* Bearnie component library styles are intentionally NOT part of this entry:
-   the public site defines its own theme tokens in `theme.css`. Admin scaffold
-   pages import `admin.css` (which pulls bearnie styles) because they bypass
-   `Base.astro`. */
-/*@import "../components/bearnie/styles/bearnie.css"*/

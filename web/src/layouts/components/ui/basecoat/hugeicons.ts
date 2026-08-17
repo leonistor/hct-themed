@@ -1,6 +1,5 @@
 /**
- * Re-exports Hugeicons free (stroke-rounded) icon data with **official Hugeicons names**
- * (same identifiers as `@hugeicons/core-free-icons` / hugeicons.com). Use with `HugeIcon.astro`.
+ * Re-exports the free Hugeicons stroke-rounded icon data used by Basecoat UI.
  */
 export { default as Activity01Icon } from "@hugeicons/core-free-icons/Activity01Icon";
 export { default as AlignHorizontalCenterIcon } from "@hugeicons/core-free-icons/AlignHorizontalCenterIcon";

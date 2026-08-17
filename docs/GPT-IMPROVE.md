@@ -71,7 +71,7 @@ All data‑generation scripts (`toml-watcher.mjs`, `generate‑menus.ts`, multil
 - `astro.config.mjs` imports it and passes `imports: componentRegistry` to `patchedAutoImport`, removing the inline list.
 - Adding a new UI component is now a one‑line addition to the registry file instead of editing the Astro config.
 
-1. Create `src/lib/componentRegistry.ts` (or JSON) that lists Bearnie components to be auto‑imported.
+1. Create `src/lib/componentRegistry.ts` (or JSON) that lists shared UI components to be auto‑imported.
 2. Update `astro.config.mjs` to import this registry and pass it to `patchedAutoImport`.
 3. Adding a new UI component becomes a simple entry in the registry file rather than editing the Astro config.
 
@@ -82,8 +82,7 @@ All data‑generation scripts (`toml-watcher.mjs`, `generate‑menus.ts`, multil
 - Renamed the single web entry `src/styles/global.css` → `src/styles/tailwind.css` and updated `Base.astro` to import it once (matches the planned single entry point).
 - `tailwind.css` composes everything from Tailwind `@layer` partials (`base.css`, `animation.css`, `navigation.css`, `components.css` via `@layer components`, plus `safe.css` → `buttons.css`/`utilities.css` which already use `@utility`), the site theme (`theme.css` `@theme inline`), and the required plugins. A header comment documents its role as the single entry.
 - Removed a stray duplicate `@import "tailwindcss";` inside `ProductVariants.astro`'s scoped `<style>`. That style relied on the import to supply the `sm` variant, which diverged from the site's custom breakpoints in `theme.css`. Replaced the custom `.td-class`/`.tr-class` with Tailwind utility classes applied directly to the table markup (aligns with "prefer utility classes directly").
-- `admin.css` is intentionally retained as a separate minimal entry for the standalone admin scaffold pages (`/admin`, `/admin/login`), which bypass `Base.astro` and need the Bearnie theme tokens. It is excluded from the "single entry point" scope (the public web site).
-- `bearnie.css` remains commented out of the web entry on purpose (the public site defines its own theme tokens in `theme.css`).
+- `admin.css` is intentionally retained as a separate entry for the standalone admin scaffold pages (`/admin`, `/admin/login`), which bypass `Base.astro` and need the shared Basecoat/Tailwind entry.
 
 *Result*: One canonical Tailwind entry for the site, no duplicate framework imports, and component styles now resolve against the site's real breakpoint theme.
 

@@ -15,7 +15,13 @@ export interface Props {
   showClose?: boolean;
   /** Classes for the trigger button */
   triggerClass?: string;
-  triggerVariant?: "default" | "outline" | "ghost" | "secondary" | "destructive" | "link";
+  triggerVariant?:
+    | "default"
+    | "outline"
+    | "ghost"
+    | "secondary"
+    | "destructive"
+    | "link";
   triggerSize?: "xs" | "sm" | "base" | "md" | "lg" | "xl" | "icon" | "icon-sm";
 }
 
@@ -37,7 +43,7 @@ const titleId = title ? `${id}-title` : undefined;
 const descId = description ? `${id}-description` : undefined;
 
 // The theme ships no `.drawer` panel styling, so the sliding panel carries its
-// own background, sizing and scroll behaviour (mirrors the old `Offcanvas`).
+// own background, sizing and scroll behaviour.
 const sizeClass = {
   sm: "max-w-sm",
   md: "max-w-md",
@@ -53,8 +59,7 @@ const sizeClass = {
       class:list={["btn", triggerClass]}
       data-variant={triggerVariant === "default" ? undefined : triggerVariant}
       data-size={triggerSize}
-      onclick={`document.getElementById('${id}').showModal()`}
-    >
+      onclick={`document.getElementById('${id}').showModal()`}>
       <slot name="trigger" />
     </button>
   )
@@ -65,9 +70,12 @@ const sizeClass = {
   class:list={["drawer", className]}
   data-side={side}
   aria-labelledby={titleId}
-  aria-describedby={descId}
->
-  <div class:list={["bg-light flex h-full w-full flex-col overflow-auto", sizeClass]}>
+  aria-describedby={descId}>
+  <article
+    class:list={[
+      "bg-background flex h-full w-full flex-col overflow-auto",
+      sizeClass,
+    ]}>
     {
       showClose && (
         <button
@@ -76,8 +84,7 @@ const sizeClass = {
           data-variant="ghost"
           data-size="icon-sm"
           aria-label="Close"
-          onclick={`this.closest('dialog').close()`}
-        >
+          onclick={`this.closest('dialog').close()`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -88,10 +95,9 @@ const sizeClass = {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M18 6 6 18"></path>
-            <path d="m6 6 12 12"></path>
+            aria-hidden="true">
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
           </svg>
         </button>
       )
@@ -105,6 +111,12 @@ const sizeClass = {
       )
     }
     <section class="px-4"><slot /></section>
-    {Astro.slots.has("footer") && <footer class="px-4 pb-4"><slot name="footer" /></footer>}
-  </div>
+    {
+      Astro.slots.has("footer") && (
+        <footer class="px-4 pb-4">
+          <slot name="footer" />
+        </footer>
+      )
+    }
+  </article>
 </dialog>

@@ -1,11 +1,4 @@
 ---
-import Pagination from "@/components/bearnie/pagination/Pagination.astro";
-import PaginationContent from "@/components/bearnie/pagination/PaginationContent.astro";
-import PaginationItem from "@/components/bearnie/pagination/PaginationItem.astro";
-import PaginationLink from "@/components/bearnie/pagination/PaginationLink.astro";
-import PaginationPrevious from "@/components/bearnie/pagination/PaginationPrevious.astro";
-import PaginationNext from "@/components/bearnie/pagination/PaginationNext.astro";
-
 export interface Props {
   makeUrl: (params: Record<string, string>) => string;
   page?: number;
@@ -30,28 +23,35 @@ const {
 <div class="flex items-center justify-end px-2 pt-4">
   {
     showPagination && (
-      <Pagination>
-        <PaginationContent>
+      <nav aria-label="Pagination">
+        <div class="flex items-center gap-1">
           {showPrev && (
-            <PaginationItem>
-              <PaginationPrevious href={makeUrl({ page: String(page - 1) })} />
-            </PaginationItem>
+            <a
+              class="rounded-md border px-3 py-2 text-sm"
+              href={makeUrl({ page: String(page - 1) })}>
+              Previous
+            </a>
           )}
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
-            <PaginationItem>
-              <PaginationLink href={makeUrl({ page: String(n) })}
-                isActive={isCurrentPage(n)}>
-                {n}
-              </PaginationLink>
-            </PaginationItem>
+            <a
+              class:list={[
+                "rounded-md border px-3 py-2 text-sm",
+                isCurrentPage(n) && "bg-accent",
+              ]}
+              href={makeUrl({ page: String(n) })}
+              aria-current={isCurrentPage(n) ? "page" : undefined}>
+              {n}
+            </a>
           ))}
           {showNext && (
-            <PaginationItem>
-              <PaginationNext href={makeUrl({ page: String(page + 1) })} />
-            </PaginationItem>
+            <a
+              class="rounded-md border px-3 py-2 text-sm"
+              href={makeUrl({ page: String(page + 1) })}>
+              Next
+            </a>
           )}
-        </PaginationContent>
-      </Pagination>
+        </div>
+      </nav>
     )
   }
 </div>

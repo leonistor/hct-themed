@@ -13,7 +13,7 @@ import {
   ArrowUpDownIcon,
   ArrowUp02Icon,
   ArrowDown02Icon,
-} from "@/components/bearnie/lib/hugeicons";
+} from "@/components/ui/basecoat/hugeicons";
 
 export interface Props {
   partners?: { id: number | string; name: string }[];
@@ -242,17 +242,17 @@ const activeProductView: ProductView = {
   }
 
   function closeSheet() {
-    const btn = document.querySelector(
-      "[data-sheet-content] [data-sheet-close]",
-    );
-    if (btn) (btn as HTMLElement).click();
+    const dialog = document.getElementById(
+      "product-edit-sheet",
+    ) as HTMLDialogElement | null;
+    if (dialog?.open) dialog.close();
   }
 
   function openSheet() {
-    const content = document.querySelector("[data-sheet-content]");
-    if (content) content.classList.remove("hidden");
-    const trigger = document.getElementById("sheet-open-trigger");
-    if (trigger) trigger.click();
+    const dialog = document.getElementById(
+      "product-edit-sheet",
+    ) as HTMLDialogElement | null;
+    if (dialog && !dialog.open) dialog.showModal();
   }
 
   function relationId(value: unknown): string {
@@ -532,16 +532,9 @@ const activeProductView: ProductView = {
     });
   }
 
-  // Close sheet buttons → remove edit param from URL
-  document.querySelectorAll("[data-sheet-close]").forEach((btn) => {
-    btn.addEventListener("click", removeEditFromUrl);
-  });
-
-  // Overlay click → remove edit param from URL
-  const overlay = document.querySelector("[data-sheet-overlay]");
-  if (overlay) {
-    overlay.addEventListener("click", removeEditFromUrl);
-  }
+  // Close drawer buttons → remove edit param from URL
+  const drawer = document.getElementById("product-edit-sheet");
+  drawer?.addEventListener("close", removeEditFromUrl);
 
   // Escape key → remove edit param from URL
   document.addEventListener("keydown", (e) => {
@@ -553,19 +546,20 @@ const activeProductView: ProductView = {
     const editId = getEditParam();
     if (editId) openEditSheet(editId);
     else {
-      const content = document.querySelector(
-        "[data-sheet-content]",
-      ) as HTMLElement;
-      if (content && !content.hidden) closeSheet();
+      closeSheet();
     }
   });
 
   // Auto-open sheet on initial page load when edit param is present
   const initialEditId = getEditParam();
   if (initialEditId) {
-    const trigger = document.getElementById("sheet-open-trigger");
-    if (trigger) {
-      setTimeout(() => trigger.click(), 50);
+    const dialog = document.getElementById(
+      "product-edit-sheet",
+    ) as HTMLDialogElement | null;
+    if (dialog) {
+      setTimeout(() => {
+        if (!dialog.open) dialog.showModal();
+      }, 50);
     }
   }
 </script>

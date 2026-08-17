@@ -98,7 +98,7 @@
       // Basecoat UI: register component modules, then initialize on the page
       await initBasecoat();
 
-      // Header navigation dropdowns. Replaces Preline's HSDropdown: toggles the
+      // Header navigation dropdowns: toggles the
       // same `hs-dropdown-open` class the CSS already keys off of (click on both
       // desktop and mobile), so the existing nav styles keep working.
       initNavDropdowns();
@@ -253,6 +253,7 @@
       await import("basecoat-css/basecoat");
       await Promise.all([
         import("basecoat-css/dropdown-menu"),
+        import("basecoat-css/sidebar"),
         import("basecoat-css/drawer"),
         import("basecoat-css/accordion"),
         import("basecoat-css/tabs"),
@@ -267,10 +268,10 @@
     }
   }
 
-  // Header navigation dropdowns (replaces Preline HSDropdown).
+  // Header navigation dropdowns.
   // Toggles `hs-dropdown-open` on the dropdown, its toggle, menu panel and icon
   // so the existing `hs-dropdown-open:` CSS variants reveal the panel, and
-  // swaps `hidden`/`block` on menus that start hidden (mirrors Preline's
+  // swaps `hidden`/`block` on menus that start hidden (matching the existing
   // open()/close() display handling). Click on both desktop and mobile, with
   // outside-click / Escape to close.
   function initNavDropdowns() {
@@ -284,7 +285,9 @@
     const hiddenMenus = new WeakSet<HTMLElement>();
     items.forEach((item) => {
       // Bind to the dropdown's own panel only, never a nested one.
-      const menu = item.querySelector<HTMLElement>(":scope > .hs-dropdown-menu");
+      const menu = item.querySelector<HTMLElement>(
+        ":scope > .hs-dropdown-menu",
+      );
       if (menu?.classList.contains("hidden")) hiddenMenus.add(menu);
     });
 
@@ -301,7 +304,9 @@
       ].filter((el): el is HTMLElement => Boolean(el));
       targets.forEach((el) => el.classList.toggle("hs-dropdown-open", open));
 
-      const menu = item.querySelector<HTMLElement>(":scope > .hs-dropdown-menu");
+      const menu = item.querySelector<HTMLElement>(
+        ":scope > .hs-dropdown-menu",
+      );
       if (menu && hiddenMenus.has(menu)) {
         menu.classList.toggle("hidden", !open);
         menu.classList.toggle("block", open);
@@ -333,7 +338,9 @@
       // container dropdown (e.g. the header wrapper) would grab the first
       // descendant toggle and every top-level menu click would also toggle the
       // whole navigation open.
-      const toggle = item.querySelector<HTMLElement>(":scope > .hs-dropdown-toggle");
+      const toggle = item.querySelector<HTMLElement>(
+        ":scope > .hs-dropdown-toggle",
+      );
 
       // Toggle on click for both desktop and mobile. We deliberately avoid
       // hover-to-open: the mega menu panel sits ~header-height below the toggle,
@@ -358,7 +365,6 @@
     });
   }
 
-  // Load Preline components dynamically based on DOM content
   // Horizontal scroll with shift + wheel
   function initHorizontalScroll() {
     document.addEventListener(

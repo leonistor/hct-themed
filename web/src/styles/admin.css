@@ -1,9 +1,8 @@
-@import "tailwindcss";
-@import "../layouts/components/bearnie/styles/bearnie.css";
+@import "./tailwind.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Scaffold: admin page has no Base layout, so give it a minimal document surface */
+/* Standalone admin pages do not use Base.astro, so include the shared entry here. */
 .admin-page {
   font-family: var(--font-sans, sans-serif);
 }

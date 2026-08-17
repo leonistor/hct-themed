@@ -1,12 +1,11 @@
 ---
 export const prerender = false;
 import "@/styles/admin.css";
-import HugeIcon from "@/components/bearnie/fundations/icons/HugeIcon.astro";
-import { Moon01Icon, Sun01Icon } from "@/components/bearnie/lib/hugeicons";
+import Icon from "@/components/ui/basecoat/Icon.astro";
+import { Moon01Icon, Sun01Icon } from "@/components/ui/basecoat/hugeicons";
 import Favicons from "@/components/seo/Favicons.astro";
 import AdminProductsTable from "@/layouts/components/admin/AdminProductsTable.astro";
 import AdminSidebar from "@/layouts/components/admin/AdminSidebar.astro";
-import SidebarTrigger from "@/components/bearnie/sidebar/SidebarTrigger.astro";
 import { getPayload } from "payload";
 import { config as payloadConfig } from "admin";
 import { getAdminUser } from "@/utils/adminAuth";
@@ -78,7 +77,15 @@ const materialOptions = materialsResult.docs.map((m) => ({
       <div class="flex flex-1 flex-col">
         <header
           class="bg-background sticky top-0 z-30 flex items-center gap-3 px-4 py-3 shadow-sm">
-          <SidebarTrigger for="admin-sidebar" />
+          <button
+            type="button"
+            aria-label="Toggle sidebar"
+            class="btn"
+            data-variant="ghost"
+            data-size="icon-sm"
+            onclick="document.getElementById('admin-sidebar')?.toggle()">
+            <Icon icon={Sun01Icon} class="size-4" />
+          </button>
           <h1 class="text-2xl font-semibold">Products</h1>
           <p class="text-muted-foreground text-sm">Admin product list</p>
 
@@ -87,14 +94,8 @@ const materialOptions = materialsResult.docs.map((m) => ({
             class="text-muted-foreground hover:bg-accent hover:text-accent-foreground ml-auto cursor-pointer rounded-md p-2 transition-colors"
             data-theme-toggle
             aria-label="Toggle theme">
-            <HugeIcon
-              icon={Sun01Icon as never}
-              class="hidden size-5 dark:block"
-            />
-            <HugeIcon
-              icon={Moon01Icon as never}
-              class="block size-5 dark:hidden"
-            />
+            <Icon icon={Sun01Icon} class="hidden size-5 dark:block" />
+            <Icon icon={Moon01Icon} class="block size-5 dark:hidden" />
           </button>
         </header>
 
@@ -119,6 +120,18 @@ const materialOptions = materialsResult.docs.map((m) => ({
             newTheme === "dark",
           );
         });
+      });
+    </script>
+
+    <script>
+      import("basecoat-css/basecoat").then(async () => {
+        await Promise.all([
+          import("basecoat-css/sidebar"),
+          import("basecoat-css/drawer"),
+          import("basecoat-css/accordion"),
+          import("basecoat-css/select"),
+        ]);
+        window.basecoat?.initAll();
       });
     </script>
   </body>
