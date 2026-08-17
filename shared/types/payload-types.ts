@@ -190,6 +190,7 @@ export interface Media {
   id: number;
   caption?: string | null;
   kind: 'draft' | 'illustration' | 'blog' | 'partners' | 'customers' | 'projects';
+  published?: boolean | null;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
@@ -855,6 +856,7 @@ export interface UsersSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   caption?: T;
   kind?: T;
+  published?: T;
   folder?: T;
   updatedAt?: T;
   createdAt?: T;

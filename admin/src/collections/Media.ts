@@ -25,6 +25,17 @@ export const Media: CollectionConfig = {
       defaultValue: 'draft',
       admin: { layout: 'horizontal' },
     },
+    {
+      name: 'published',
+      type: 'checkbox',
+      // Existing AND new records are published, so default to true
+      defaultValue: true,
+      index: true,
+      admin: {
+        position: 'sidebar',
+        components: { Cell: 'src/components/Custom#Published' },
+      },
+    },
   ],
   upload: {
     staticDir: '../web/src/assets/payload',

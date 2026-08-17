@@ -1,8 +1,8 @@
+import { Published as Published_1e9b05f860e65291a0a186b7b75bf24f } from 'src/components/Custom'
 import { FolderTableCell as FolderTableCell_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 import { FolderField as FolderField_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 import { ExportListMenuItem as ExportListMenuItem_cdf7e044479f899a31f804427d568b36 } from '@payloadcms/plugin-import-export/rsc'
 import { ImportListMenuItem as ImportListMenuItem_cdf7e044479f899a31f804427d568b36 } from '@payloadcms/plugin-import-export/rsc'
-import { Published as Published_1e9b05f860e65291a0a186b7b75bf24f } from 'src/components/Custom'
 import { ImageCell as ImageCell_1e9b05f860e65291a0a186b7b75bf24f } from 'src/components/Custom'
 import { CopyText as CopyText_a3818aaa3ad4413a87f943eb5a3d3ab1 } from 'src/components/Copy.tsx'
 import { VariantLabel as VariantLabel_debd71a8b47b0ca52bb833a72c729cd8 } from 'src/components/VariantLabel'
@@ -33,11 +33,11 @@ import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } f
 
 /** @type import('payload').ImportMap */
 export const importMap = {
+  "src/components/Custom#Published": Published_1e9b05f860e65291a0a186b7b75bf24f,
   "@payloadcms/next/rsc#FolderTableCell": FolderTableCell_f9c02e79a4aed9a3924487c0cd4cafb1,
   "@payloadcms/next/rsc#FolderField": FolderField_f9c02e79a4aed9a3924487c0cd4cafb1,
   "@payloadcms/plugin-import-export/rsc#ExportListMenuItem": ExportListMenuItem_cdf7e044479f899a31f804427d568b36,
   "@payloadcms/plugin-import-export/rsc#ImportListMenuItem": ImportListMenuItem_cdf7e044479f899a31f804427d568b36,
-  "src/components/Custom#Published": Published_1e9b05f860e65291a0a186b7b75bf24f,
   "src/components/Custom#ImageCell": ImageCell_1e9b05f860e65291a0a186b7b75bf24f,
   "src/components/Copy.tsx#CopyText": CopyText_a3818aaa3ad4413a87f943eb5a3d3ab1,
   "src/components/VariantLabel#VariantLabel": VariantLabel_debd71a8b47b0ca52bb833a72c729cd8,
