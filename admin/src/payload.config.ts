@@ -14,7 +14,6 @@ import { Customers } from './collections/Customers'
 import { Materials } from './collections/Materials'
 import { ProductImages } from './collections/ProductImages'
 import { Products } from './collections/Products'
-import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -87,7 +86,6 @@ export default buildConfig({
     },
     wal: true,
     transactionOptions: {},
-    prodMigrations: migrations,
   }),
   sharp,
   cors: '*',
