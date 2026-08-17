@@ -17,6 +17,7 @@
     "devsafe": "rm -rf .next && NODE_OPTIONS=--no-deprecation next dev",
     "generate:importmap": "NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "NODE_OPTIONS=--no-deprecation payload generate:types",
+    "sanitize:media": "NODE_OPTIONS=--no-deprecation tsx src/scripts/sanitize-media-filenames.ts",
     "lint": "NODE_OPTIONS=--no-deprecation eslint .",
     "payload": "NODE_OPTIONS=--no-deprecation payload",
     "start": "NODE_OPTIONS=--no-deprecation next start",

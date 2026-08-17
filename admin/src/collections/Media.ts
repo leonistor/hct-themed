@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { default_image_sizes, default_allow_list } from './common'
 import { default_pagination } from './common'
+import { sanitizeUploadFilename } from '../utils/sanitizeUploadFilename'
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -37,6 +38,15 @@ export const Media: CollectionConfig = {
       },
     },
   ],
+  hooks: {
+    beforeValidate: [
+      ({ req }) => {
+        if (req.file) {
+          req.file.name = sanitizeUploadFilename(req.file.name)
+        }
+      },
+    ],
+  },
   upload: {
     staticDir: '../web/src/assets/payload',
     displayPreview: true,
