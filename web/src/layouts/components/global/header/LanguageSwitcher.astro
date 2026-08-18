@@ -23,8 +23,8 @@ const languages = supportedLanguages.map((lang) => {
 <DropdownMenu
   id="language-switcher"
   buttonVariant="ghost"
-  triggerClass="language-switcher-button flex items-center gap-1.5 bg-transparent"
->
+  class="md:mt-0.5"
+  triggerClass="language-switcher-button flex items-center gap-1.5 bg-transparent">
   <span slot="trigger" class="text">
     {getLanguageName(currentLocale!)}
   </span>
