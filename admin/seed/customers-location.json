@@ -1,0 +1,153 @@
+[
+  {
+    "name": "Klaussenburg Recyclig",
+    "map_lat": 44.40531000000000005,
+    "map_lng": 26.23562000000000082
+  },
+  { "name": "Silnef", "map_lat": 45.65797400000000295, "map_lng": 25.60119800000000012 },
+  {
+    "name": "T.E.H. 2001 Service",
+    "map_lat": 44.43907000000000095,
+    "map_lng": 26.10514999999999831
+  },
+  { "name": "Avery Dennison", "map_lat": 44.43907000000000095, "map_lng": 26.10514999999999831 },
+  {
+    "name": "Hamburger Recycling",
+    "map_lat": 45.65797400000000295,
+    "map_lng": 23.6128399999999985
+  },
+  { "name": "Infopress Group", "map_lat": 46.30738999999999806, "map_lng": 25.30600000000000093 },
+  {
+    "name": "AMEP American Packaging",
+    "map_lat": 45.84398000000000195,
+    "map_lng": 27.43457000000000078
+  },
+  { "name": "REBU", "map_lat": 44.43907000000000095, "map_lng": 26.10514999999999831 },
+  { "name": "Diren Exim", "map_lat": 45.65797400000000295, "map_lng": 23.6128399999999985 },
+  {
+    "name": "Müller-Guttenbrunn Gruppe",
+    "map_lat": 46.18229000000000183,
+    "map_lng": 21.31791000000000124
+  },
+  {
+    "name": "Recycle International",
+    "map_lat": 44.38551999999999965,
+    "map_lng": 26.01391999999999883
+  },
+  { "name": "Rondo Ganahl", "map_lat": 46.79610999999999877, "map_lng": 23.75002999999999887 },
+  { "name": "Urban", "map_lat": 45.65797400000000295, "map_lng": 25.60119800000000012 },
+  { "name": "Remat Maramureș", "map_lat": 47.65648000000000195, "map_lng": 23.55690999999999847 },
+  { "name": "AL&CO Recycling", "map_lat": 44.43907000000000095, "map_lng": 26.10514999999999831 },
+  { "name": "Girosil", "map_lat": 45.84203999999999723, "map_lng": 25.50682000000000115 },
+  {
+    "name": "Ro Ecologic Recycling",
+    "map_lat": 46.47583999999999805,
+    "map_lng": 24.41298000000000101
+  },
+  { "name": "Med Solutions 70", "map_lat": 46.72005000000000052, "map_lng": 26.70768999999999949 },
+  { "name": "Metasil Prod", "map_lat": 45.65797400000000295, "map_lng": 25.60119800000000012 },
+  { "name": "Egger Romania", "map_lat": 47.84736000000000188, "map_lng": 25.92317999999999856 },
+  { "name": "Alpin Recycling", "map_lat": 47.83514000000000265, "map_lng": 26.00160999999999945 },
+  { "name": "MF Plast Serv", "map_lat": 44.90348999999999791, "map_lng": 25.54728000000000065 },
+  { "name": "Savatex", "map_lat": 46.47583999999999805, "map_lng": 24.41298000000000101 },
+  {
+    "name": "Industrial Proces Paper",
+    "map_lat": 45.76301999999999736,
+    "map_lng": 25.54513999999999996
+  },
+  { "name": "Socorom", "map_lat": 45.65797400000000295, "map_lng": 25.60119800000000012 },
+  { "name": "K1 Investments", "map_lat": 44.43907000000000095, "map_lng": 26.10514999999999831 },
+  {
+    "name": "Eurodemolition Solutions",
+    "map_lat": 47.45915999999999713,
+    "map_lng": 27.51150000000000162
+  },
+  { "name": "Coseco", "map_lat": 44.96191000000000316, "map_lng": 25.88540000000000063 },
+  { "name": "Repsan Energy", "map_lat": 44.76189000000000106, "map_lng": 24.97351000000000098 },
+  { "name": "Colligo", "map_lat": 44.43907000000000095, "map_lng": 26.10514999999999831 },
+  {
+    "name": "Solid Waste Operation",
+    "map_lat": 44.94116000000000355,
+    "map_lng": 26.03020000000000067
+  },
+  { "name": "Romkuvert", "map_lat": 44.43907000000000095, "map_lng": 26.10514999999999831 },
+  {
+    "name": "Monitorul Oficial RA",
+    "map_lat": 44.43907000000000095,
+    "map_lng": 26.10514999999999831
+  },
+  { "name": "Thermo Recycling", "map_lat": 45.71336000000000154, "map_lng": 23.17635999999999897 },
+  { "name": "RER SUD", "map_lat": 45.15608000000000289, "map_lng": 26.81708000000000069 },
+  { "name": "Remat Alba", "map_lat": 46.07188000000000016, "map_lng": 23.58689000000000035 },
+  { "name": "Pacos Eco", "map_lat": 44.94116000000000355, "map_lng": 26.03020000000000067 },
+  { "name": "Holcim", "map_lat": 44.43907000000000095, "map_lng": 26.10514999999999831 },
+  {
+    "name": "Alternative Fuels Romania",
+    "map_lat": 44.43907000000000095,
+    "map_lng": 26.10514999999999831
+  },
+  { "name": "Salubritate Deva", "map_lat": 45.86169999999999903, "map_lng": 22.91355000000000075 },
+  { "name": "Mondorek", "map_lat": 47.68637999999999977, "map_lng": 22.47070000000000078 },
+  { "name": "Deewaal", "map_lat": 47.83514000000000265, "map_lng": 26.00160999999999945 },
+  { "name": "Sennheiser", "map_lat": 45.66886000000000223, "map_lng": 25.60119800000000012 },
+  { "name": "Tiger Someș", "map_lat": 47.14314999999999856, "map_lng": 23.87256 },
+  { "name": "Sapphire Energy", "map_lat": 45.84203999999999723, "map_lng": 25.50682000000000115 },
+  { "name": "Phoenix Recycling", "map_lat": 46.16140000000000043, "map_lng": 24.357289999999999 },
+  { "name": "Bellinea", "map_lat": 47.18547000000000224, "map_lng": 23.06759999999999878 },
+  { "name": "Fin-Eco", "map_lat": 45.66886000000000223, "map_lng": 25.60119800000000012 },
+  { "name": "Mihovi", "map_lat": 45.65797400000000295, "map_lng": 25.60119800000000012 },
+  {
+    "name": "Andy Reciclare Paleti",
+    "map_lat": 44.43907000000000095,
+    "map_lng": 26.10514999999999831
+  },
+  { "name": "Silvanus", "map_lat": 45.29670999999999736, "map_lng": 21.88085999999999842 },
+  { "name": "Bmexposure", "map_lat": 44.32132000000000005, "map_lng": 23.80797000000000096 },
+  { "name": "Opal Transilvania", "map_lat": 44.65158000000000272, "map_lng": 26.8435200000000016 },
+  { "name": "Ecopal", "map_lat": 44.8559800000000024, "map_lng": 24.87274999999999992 },
+  { "name": "Alco Silicon", "map_lat": 45.65797400000000295, "map_lng": 25.60119800000000012 },
+  { "name": "CIMD Galda de Jos", "map_lat": 46.19342000000000325, "map_lng": 23.63006000000000028 },
+  {
+    "name": "Transylvania Trade Collect",
+    "map_lat": 45.76301999999999736,
+    "map_lng": 25.54513999999999996
+  },
+  { "name": "Progreen TAT", "map_lat": 45.55752999999999986, "map_lng": 25.31515999999999878 },
+  { "name": "Guidetti East", "map_lat": 45.78826000000000107, "map_lng": 24.14234000000000079 },
+  { "name": "Eco Serv", "map_lat": 44.5375799999999984, "map_lng": 26.1875700000000009 },
+  { "name": "Drusal", "map_lat": 47.65648000000000195, "map_lng": 23.55690999999999847 },
+  {
+    "name": "Vivani Salubritate",
+    "map_lat": 44.51323000000000007,
+    "map_lng": 25.22518000000000171
+  },
+  { "name": "Ecomaster", "map_lat": 44.94116000000000355, "map_lng": 26.03020000000000067 },
+  {
+    "name": "Heidelberg Materials Romania",
+    "map_lat": 44.43907000000000095,
+    "map_lng": 26.10514999999999831
+  },
+  { "name": "Viele 2005", "map_lat": 45.7556900000000013, "map_lng": 21.23216999999999999 },
+  { "name": "Comard Palard", "map_lat": 46.18229000000000183, "map_lng": 21.31791000000000124 },
+  { "name": "Metalimpex", "map_lat": 46.18229000000000183, "map_lng": 21.31791000000000124 },
+  {
+    "name": "Retim Ecologic Service",
+    "map_lat": 47.05881999999999721,
+    "map_lng": 21.93469999999999943
+  },
+  { "name": "Tenaris Silcotub", "map_lat": 47.18547000000000224, "map_lng": 23.06759999999999878 },
+  { "name": "Verdum Romania", "map_lat": 45.95631000000000199, "map_lng": 22.87036000000000158 },
+  { "name": "Wasteco Packing", "map_lat": 45.750709999999998, "map_lng": 21.22908999999999935 },
+  { "name": "Eco Bihor", "map_lat": 47.05881999999999721, "map_lng": 21.93469999999999943 },
+  { "name": "Trilogy Trade", "map_lat": 44.43907000000000095, "map_lng": 26.10514999999999831 },
+  { "name": "Remat Sălaj", "map_lat": 47.18793999999999756, "map_lng": 23.05591000000000079 },
+  { "name": "MBK Recycling", "map_lat": 45.7556900000000013, "map_lng": 21.23216999999999999 },
+  {
+    "name": "Wasteless Management",
+    "map_lat": 44.43907000000000095,
+    "map_lng": 26.10514999999999831
+  },
+  { "name": "Fincodrum", "map_lat": 45.65797400000000295, "map_lng": 25.60119800000000012 },
+  { "name": "Vitall", "map_lat": 45.37617999999999797, "map_lng": 23.29517999999999845 },
+  { "name": "Ecosfera Recycle", "map_lat": 43.90203999999999951, "map_lng": 25.97279999999999945 }
+]
