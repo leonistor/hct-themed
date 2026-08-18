@@ -5,7 +5,7 @@ products and services catalogue. Built as a Bun monorepo with three workspaces:
 
 | Workspace | Role | Stack | Port |
 | --------- | ---- | ----- | ---- |
-| `admin`   | CMS + admin UI | Payload CMS 3.87, Next.js 16, SQLite | 3000 |
+| `admin`   | CMS + admin UI | Payload CMS 3.88, Next.js 16, SQLite | 3000 |
 | `web`     | Public site (the deliverable) | Astro 7, Node standalone adapter | 4321 |
 | `e2e`     | End-to-end tests | Playwright | - |
 
@@ -38,13 +38,11 @@ unique `code` used for URLs, bilingual `name` / `name_en` fields, and `published
 | `categories` | `code`, `name`, `description`, `partners` (has many), `illustration` (media), `products`. |
 | `partners` | Manufacturer partners. `code`, `name`, `published`, `promoted`, `url`, `logo` (media). |
 | `materials` | Material types with `code`, `name`, `name_en`, `description`, `illustration` (media). |
-| `projects` | Showcase projects: `code`, `name`, `description`, `published`/`promoted`, `illustration` (media), `page`. |
 
 #### Content
 
 | Collection | Purpose |
 |---|---|
-| `pages` | CMS-editable pages. `slug` (unique), `title`, `content` (markdown), `published`. |
 | `customers` | Customer references. `name`, `url`, `location`, map coordinates (`map_lat`/`map_lng`), `logo` (media). |
 | `product-images` | Product gallery images. `caption`, `product` (relationship to products). |
 | `media` | Uploaded assets with `caption` and `kind`. |
@@ -67,7 +65,7 @@ partners ──┐
 categories ─┼──> products ──> product-images ──> media
 materials ──┘       │
                     └──> categories (via category)
-media <── illustration/logo (partners, categories, materials, projects, customers)
+media <── illustration/logo (partners, categories, materials, customers)
 ```
 
 ## web (Astro)
@@ -154,7 +152,7 @@ bun run e2e
 
 - Configuration is centralized in the repo-root `.env` (gitignored). Copy `.env.example`
   to `.env` and adjust `BASE_URL` (use `http://localhost:4321` for local dev) and
-  `PAYLOAD_SECRET`. See DEVELOPMENT.md for the full variable list.
+  `PAYLOAD_SECRET`. See [DEVELOPMENT.md](DEVELOPMENT.md) for the full variable list.
 - `web/src/config/config.generated.json` is generated from `config.toml` by the
   toml-watcher and is gitignored. Run `bun run dev` or `bun run build` once before
   `bun run astro-check` (both regenerate the file on startup).
