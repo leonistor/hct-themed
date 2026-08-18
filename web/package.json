@@ -5,8 +5,8 @@
   "author": "getastrothemes",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "node scripts/toml-watcher.mjs && astro dev",
+    "build": "node scripts/toml-watcher.mjs && astro build",
     "toml:watch": "node scripts/toml-watcher.mjs",
     "preview": "astro preview",
     "astro-check": "astro check --minimumSeverity error",

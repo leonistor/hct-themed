@@ -5,6 +5,7 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { importExportPlugin } from '@payloadcms/plugin-import-export'
+import dotenv from 'dotenv'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -17,6 +18,11 @@ import { Products } from './collections/Products'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+// Load the monorepo root .env (DATABASE_URL, PAYLOAD_SECRET, NODE_ENV) so config
+// is centralized there instead of in admin/.env. Existing process.env wins, so
+// Next-set NODE_ENV is never overridden.
+dotenv.config({ path: path.resolve(dirname, '../../.env') })
 
 export default buildConfig({
   logger: {

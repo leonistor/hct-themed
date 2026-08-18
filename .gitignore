@@ -11,6 +11,9 @@ dist
 server
 *.tgz
 
+# generated from config.toml by the toml-watcher (web)
+config.generated.json
+
 .playwright-mcp
 
 # code coverage

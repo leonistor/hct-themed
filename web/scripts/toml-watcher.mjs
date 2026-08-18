@@ -4,6 +4,7 @@ import * as toml from "toml";
 import { promises as fs } from "node:fs";
 import { watch } from "node:fs";
 import { fileURLToPath } from "node:url";
+import dotenv from "dotenv";
 import { pathExists, atomicWrite, ensureDir } from "shared/fs";
 import { debounce } from "shared/debounce";
 import { log, warn, error } from "shared/logger";
@@ -12,6 +13,9 @@ import { log, warn, error } from "shared/logger";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..");
+
+// Load the monorepo root .env so BASE_URL can override config.toml's baseUrl
+dotenv.config({ path: path.resolve(PROJECT_ROOT, "..", ".env") });
 
 // ---------- Paths ----------
 const configFilePath = path.resolve(
@@ -29,6 +33,12 @@ async function convertTomlToJson() {
   try {
     const content = await fs.readFile(configFilePath, "utf8");
     const parsed = toml.parse(content);
+
+    // Env var wins over the committed config.toml default
+    if (process.env.BASE_URL) {
+      parsed.site = parsed.site ?? {};
+      parsed.site.baseUrl = process.env.BASE_URL;
+    }
 
     await ensureDir(outputDir);
 

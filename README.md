@@ -143,8 +143,20 @@ Layout and section components live under `src/layouts/components`.
 From the repository root:
 
 ```bash
+cp .env.example .env   # create the environment config (adjust values, see below)
 bun install
-bun run dev       # runs admin (3000) + web (4321) in parallel
+bun run dev            # runs admin (3000) + web (4321) in parallel
 bun run build
 bun run e2e
 ```
+
+### Fresh clone checklist
+
+- Configuration is centralized in the repo-root `.env` (gitignored). Copy `.env.example`
+  to `.env` and adjust `BASE_URL` (use `http://localhost:4321` for local dev) and
+  `PAYLOAD_SECRET`. See DEVELOPMENT.md for the full variable list.
+- `web/src/config/config.generated.json` is generated from `config.toml` by the
+  toml-watcher and is gitignored. Run `bun run dev` or `bun run build` once before
+  `bun run astro-check` (both regenerate the file on startup).
+- The `admin` workspace needs the SQLite database at `db/hct.db` (bootstrapped on first
+  `bun run dev`); dynamic web routes depend on it.

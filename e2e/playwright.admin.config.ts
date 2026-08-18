@@ -1,5 +1,12 @@
 import { defineConfig, devices } from "@playwright/test";
 import { stdout } from "bun";
+import dotenv from "dotenv";
+import path from "path";
+
+// Load the monorepo root .env (E2E_BASE_URL)
+dotenv.config({ path: path.resolve(process.cwd(), "../.env") });
+
+const E2E_BASE_URL = process.env.E2E_BASE_URL || "http://localhost:4321";
 
 /**
  * Admin interface tests (web/src/pages/admin/), run against the local dev
@@ -15,7 +22,7 @@ export default defineConfig({
   reporter: "list",
 
   use: {
-    baseURL: "http://localhost:4321",
+    baseURL: E2E_BASE_URL,
     trace: "on-first-retry",
   },
 
@@ -29,7 +36,7 @@ export default defineConfig({
   webServer: {
     command: "bun run dev",
     cwd: "..",
-    url: "http://localhost:4321/admin/login",
+    url: `${E2E_BASE_URL}/admin/login`,
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
     stdout: "pipe",

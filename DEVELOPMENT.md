@@ -23,6 +23,25 @@ Monorepo for the Hațegan Consulting & Trading marketing site. Built with [Bun](
 | `e2e` | Runs the Playwright e2e suite. |
 | `e2e:admin` | Runs the admin-specific Playwright e2e suite. |
 
+## Environment variables
+
+Configuration is centralized in a dotenv file at the repo root (`.env`, gitignored;
+copy `.env.example` to create it). Consumers load it explicitly:
+
+| Variable | Default | Consumed by |
+|----------|---------|-------------|
+| `NODE_ENV` | `development` | `admin/src/payload.config.ts` (autoLogin). Next sets its own value on dev/build/start; the `.env` value applies to non-Next runs (payload CLI). |
+| `BASE_URL` | `https://hct.vitrina.promo` | The toml-watcher overrides `site.baseUrl` in `config.generated.json` (site, sitemap, OpenGraph, navigation) and `e2e/playwright.config.ts`. |
+| `DATABASE_URL` | `file:../db/hct.db` | `admin/src/payload.config.ts` (SQLite). |
+| `PAYLOAD_SECRET` | `your-secret-here` | `admin/src/payload.config.ts`. |
+| `E2E_BASE_URL` | `http://localhost:4321` | `e2e/playwright.admin.config.ts`. |
+
+Loading happens in three places: `web/scripts/toml-watcher.mjs` reads `.env` via
+`dotenv` and regenerates `config.generated.json` (gitignored, regenerated on `web`
+dev/build), `admin/src/payload.config.ts` loads it with `dotenv.config`, and the e2e
+Playwright configs load it relative to the `e2e` workspace. Use `BASE_URL` for local
+dev and the production URL on the server.
+
 ## Shared package
 
 `shared` exposes two kinds of modules via subpath exports in `shared/package.json`:
