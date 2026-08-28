@@ -153,9 +153,7 @@ const noteStyles = {
             <p class="error-msg mt-2 hidden text-sm text-red-600">
               Please select a valid state.
             </p>
-            <p class="success-msg mt-2 hidden text-sm text-dark">
-              Perfect!
-            </p>
+            <p class="success-msg text-dark mt-2 hidden text-sm">Perfect!</p>
           </div>
         ) : input.tag === "textarea" ? (
           <textarea
@@ -347,7 +345,11 @@ const noteStyles = {
               );
               break;
             default:
-              throw new Error("Unknown form provider.");
+              await formSubmit({
+                form,
+                action,
+              });
+            // throw new Error("Unknown form provider.");
           }
         } catch (error) {
           setMessage(
