@@ -32,6 +32,7 @@
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",
     "drizzle-orm": "^0.45.2",
+    "forminit": "^0.2.4",
     "libsql": "^0.5.29",
     "lucide": "^1.8.0",
     "marked": "^18.0.2",

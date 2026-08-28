@@ -434,9 +434,9 @@
           "weight": 0
         },
         {
-          "enable": false,
-          "name": "Întrebări Frecvente",
-          "url": "/faq/",
+          "enable": true,
+          "name": "Contact",
+          "url": "/contact",
           "weight": 0
         }
       ]
