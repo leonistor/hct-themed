@@ -27,7 +27,7 @@ if (!enable) {
   class="bg-light h-screen space-y-6 overflow-auto px-8 pt-20 pb-5 md:px-16 md:pt-32 md:pb-10">
   <Button
     type="button"
-    onclick={`document.getElementById('${offcanvas}')?.close()`}
+    data-offcanvas-close
     title="Close offcanvas"
     class="border-border-light hover:border-border-dark bg-body absolute inset-e-7 top-5 z-20 inline-flex h-14 w-14 items-center justify-center gap-x-2 rounded-full border-2 text-sm font-medium transition-all duration-500 ease-out hover:rotate-90"
     aria-expanded="true">

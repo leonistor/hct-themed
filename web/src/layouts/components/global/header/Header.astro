@@ -1,6 +1,5 @@
 ---
 import Logo from "@/components/global/Logo.astro";
-import Drawer from "../../ui/basecoat/Drawer.astro";
 import config from "../../../../config/config.generated.json";
 import { useTranslations } from "@/lib/utils/i18nUtils.ts";
 import NavbarToggler from "@/layouts/components/global/header/NavbarToggler.astro";
@@ -71,7 +70,7 @@ const { position, hideOffcanvas, class: ClassName } = Astro.props;
             aria-haspopup="dialog"
             aria-expanded="false"
             aria-controls="offcanvas-main"
-            onclick="document.getElementById('offcanvas-main')?.showModal()"
+            data-offcanvas-toggle="offcanvas-main"
           />
         )
       }
@@ -79,19 +78,30 @@ const { position, hideOffcanvas, class: ClassName } = Astro.props;
   </div>
 </header>
 
-{/* Desktop Sidebar Offcanvas (Basecoat Drawer) */}
+{/* Mobile Offcanvas
+   Rendered as a manually-controlled fixed overlay instead of a native
+   `<dialog>.showModal()` so the menu renders reliably on iOS Safari, where
+   the modal top layer fails to paint the panel content (only the `::backdrop`
+   blur is shown). Behaviour is identical everywhere else. */}
 {
   headerOffcanvas?.enable && (
-    <Drawer
-      class={hideOffcanvas ? "lg:hidden" : ""}
+    <div
       id="offcanvas-main"
-      side="right"
-      size="md"
-      withTrigger={false}
-      showClose={false}
-    >
-      <HeaderOffcanvasContent offcanvas={"offcanvas-main"} />
-    </Drawer>
+      class="offcanvas-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      data-offcanvas="offcanvas-main">
+      <button
+        type="button"
+        class="offcanvas-backdrop"
+        aria-label="Close menu"
+        tabindex="-1"
+        data-offcanvas-close></button>
+      <div class="offcanvas-panel">
+        <HeaderOffcanvasContent offcanvas={"offcanvas-main"} />
+      </div>
+    </div>
   )
 }
 <script>
@@ -149,5 +159,81 @@ const { position, hideOffcanvas, class: ClassName } = Astro.props;
     });
   }
 
+  function initOffcanvas(id: string): void {
+    const overlay = document.querySelector<HTMLElement>(
+      `[data-offcanvas="${id}"]`,
+    );
+    if (!overlay) return;
+    const toggler = document.querySelector<HTMLElement>(
+      `[data-offcanvas-toggle="${id}"]`,
+    );
+
+    const setOpen = (open: boolean) => {
+      overlay.setAttribute("data-open", String(open));
+      overlay.setAttribute("aria-hidden", String(!open));
+      toggler?.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("no-scroll", open);
+    };
+
+    toggler?.addEventListener("click", () => {
+      setOpen(overlay.getAttribute("data-open") !== "true");
+    });
+
+    overlay
+      .querySelectorAll<HTMLElement>("[data-offcanvas-close]")
+      .forEach((el) => el.addEventListener("click", () => setOpen(false)));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && overlay.getAttribute("data-open") === "true") {
+        setOpen(false);
+      }
+    });
+
+    setOpen(false);
+  }
+
+  initOffcanvas("offcanvas-main");
   stickyHeader();
 </script>
+<style>
+  .offcanvas-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    visibility: hidden;
+  }
+  .offcanvas-overlay[data-open="true"] {
+    visibility: visible;
+  }
+  .offcanvas-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 0.14);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+  }
+  .offcanvas-overlay[data-open="true"] .offcanvas-backdrop {
+    opacity: 1;
+  }
+  .offcanvas-panel {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    height: 100%;
+    width: min(34rem, calc(100vw - 2.5rem));
+    background: var(--color-light);
+    overflow: hidden;
+    box-shadow: 0 20px 60px -24px rgb(0 0 0 / 0.35);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .offcanvas-overlay[data-open="true"] .offcanvas-panel {
+    opacity: 1;
+  }
+  :global(body.no-scroll) {
+    overflow: hidden;
+  }
+</style>
