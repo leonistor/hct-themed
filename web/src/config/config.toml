@@ -88,9 +88,9 @@ pageHeaderDefaultImage = "/images/page-header/default.png" # if you don't pass i
 
 # docs - https://formspree.io/ | https://formsubmit.co/ | https://docs.netlify.com/forms/setup/
 # Form action URL for the contact form (For more settings related to form see "src/content/sections/contact-section.md")
-contactFormAction = "https://forminit.com/f/c4zofnglisn" # https://formspree.io/f/kweoweo | https://formsubmit.co/your@email.com | "/"
+contactFormAction = "/api/contact" # https://formspree.io/f/kweoweo | https://formsubmit.co/your@email.com | "/"
 # formspree | formsubmit.co | netlify (default is formsubmit.co)
-contactFormProvider = "forminit"
+contactFormProvider = "local"
 
 footerDescription = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the footer description in different languages or directly add value here if you are not using internationalization feature
 

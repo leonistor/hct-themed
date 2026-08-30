@@ -16,9 +16,11 @@ import { z } from "astro/zod";
 import { Forminit } from "forminit";
 
 const FORMINIT_API_KEY = process.env.FORMINIT_API_KEY!;
+const FORM_ID = process.env.FORM_ID!;
+log(`FORMINIT_API_KEY: ${FORMINIT_API_KEY}`);
+log(`FORM_ID: ${FORM_ID}`);
 
 const forminit = new Forminit({ apiKey: FORMINIT_API_KEY });
-const FORM_ID = "c4zofnglisn";
 
 export const server = {
   contact: defineAction({
