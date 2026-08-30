@@ -138,54 +138,79 @@ export const formSubmit = async ({
   const signal = controller.signal;
   const timeout = 60000;
 
-  // Replace 'formsubmit.co' with 'formsubmit.co/ajax' to submit form data with AJAX
-  const ajaxAction = action.replace("formsubmit.co/", "formsubmit.co/ajax/");
+  // Fallback so empty data-action doesn't silently POST to current page
+  const endpoint = action || form.getAttribute("action") || "/api/contact";
+  console.log("[formSubmit] POST", endpoint, data);
 
   const timer = setTimeout(() => {
     controller.abort();
   }, timeout);
 
-  fetch(ajaxAction, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify(data),
-    signal,
-  })
-    .then(async (response: any) => {
-      // Parse JSON response
-      const jsonResponse = await response.json();
-
-      // Check success status in the JSON response
-      if (jsonResponse.success === "true") {
-        setMessage("default", true, false, form);
-        formReset(form);
-      } else if (jsonResponse.success === "false") {
-        setMessage(jsonResponse.message, false, false, form);
-      }
-    })
-    .catch(async (error) => {
-      if (error.name === "AbortError") {
-        setMessage(
-          "We couldn't reach the server. Trying alternative server.",
-          false,
-          false,
-          form,
-        );
-      } else {
-        setMessage(
-          "Oops! There was a problem submitting your form.",
-          false,
-          false,
-          form,
-        );
-      }
-    })
-    .finally(() => {
-      clearTimeout(timer);
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(data),
+      signal,
     });
+
+    // Handle non-JSON or non-200 responses
+    const text = await response.text();
+    let jsonResponse: any = {};
+    try {
+      jsonResponse = text ? JSON.parse(text) : {};
+    } catch {
+      throw new Error(text || `Request failed (${response.status})`);
+    }
+
+    if (!response.ok) {
+      throw new Error(jsonResponse.error || jsonResponse.message || text || `Request failed (${response.status})`);
+    }
+
+    // Server returns boolean true, legacy clients checked string "true" — handle both
+    const isSuccess =
+      jsonResponse.success === true ||
+      jsonResponse.success === "true" ||
+      jsonResponse.success === 1;
+
+    if (isSuccess) {
+      setMessage("default", true, false, form);
+      formReset(form);
+    } else {
+      // Explicit failure from API (success === false / "false")
+      const msg =
+        jsonResponse.error || jsonResponse.message || "Submission failed.";
+      setMessage(msg, false, false, form);
+      throw new Error(msg);
+    }
+  } catch (error: any) {
+    if (error?.name === "AbortError") {
+      setMessage(
+        "We couldn't reach the server. Trying alternative server.",
+        false,
+        false,
+        form,
+      );
+    } else {
+      const msg = error?.message || String(error);
+      // Avoid overwriting a specific API error already shown
+      const alreadyShown = form.querySelector(".message.error:not(.hidden)");
+      if (!alreadyShown) {
+        setMessage(
+          msg || "Oops! There was a problem submitting your form.",
+          false,
+          false,
+          form,
+        );
+      }
+    }
+    throw error;
+  } finally {
+    clearTimeout(timer);
+  }
 };
 
 /**

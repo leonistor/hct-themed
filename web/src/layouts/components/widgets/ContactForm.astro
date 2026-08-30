@@ -81,10 +81,10 @@ const noteStyles = {
 <form
   id="contact-form"
   {...{
-    "data-action": contactFormAction,
+    "data-action": "/api/contact",
     "data-provider": contactFormProvider,
     "data-netlify": contactFormProvider === "netlify" ? "true" : undefined,
-    action: contactFormProvider === "netlify" ? contactFormAction : undefined,
+    action: "/api/contact",
   }}
   method="post"
   class:list={[
@@ -124,8 +124,8 @@ const noteStyles = {
         ]}>
         {!input.note &&
           input.type !== "checkbox" &&
-          input.type !== "radio" &&
-          (input.groupLabel || input.label) && (
+          (input.groupLabel || input.label) &&
+          input.type !== "radio" && (
             <label for="name" class="form-label">
               {input.groupLabel || input.label || "Please set label"}
               {input.required && <span class="text-primary">*</span>}
@@ -306,7 +306,12 @@ const noteStyles = {
       e.preventDefault();
 
       const provider = form?.getAttribute("data-provider") || "";
-      const action = form?.getAttribute("data-action") || "";
+      // Fallback to form.action so the endpoint works even if data-action is missing
+      const action =
+        form?.getAttribute("data-action") ||
+        form?.getAttribute("action") ||
+        form?.action ||
+        "/api/contact";
 
       selectTags = form?.querySelectorAll(
         "[input-wrapper]:not(.hidden) select[data-name]",
