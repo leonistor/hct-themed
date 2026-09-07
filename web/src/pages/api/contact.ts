@@ -2,29 +2,29 @@ export const prerender = false; // Ensure it runs on the server
 import type { APIRoute } from "astro";
 
 import nodemailer from "nodemailer";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import dotenv from "dotenv";
 
-// ---------- Cross-platform root ----------
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const PROJECT_ROOT = path.resolve(__dirname, "..");
-
-// Load the monorepo root .env so BASE_URL can override config.toml's baseUrl
-dotenv.config({ path: path.resolve(PROJECT_ROOT, "..", ".env") });
+// Env vars are loaded once at startup by web/scripts/toml-watcher.mjs (dev/build)
+// or by the process manager in production — read them straight from process.env.
+const yahooEmail = process.env.YAHOO_EMAIL;
+const yahooPass = process.env.YAHOO_APP_PASSWORD;
 
 export const POST: APIRoute = async ({ request }) => {
   console.log("POST /api/contact");
-  // Astro exposes server-only env via import.meta.env *and* process.env (dotenv).
-  // Use fallback so it works both in dev (vite) and built server.
-  const yahooEmail =
-    process.env.YAHOO_EMAIL ?? (import.meta.env as any).YAHOO_EMAIL;
-  const yahooPass =
-    process.env.YAHOO_APP_PASSWORD ??
-    (import.meta.env as any).YAHOO_APP_PASSWORD;
   console.log(`YAHOO_EMAIL: ${yahooEmail}`);
   console.log(`YAHOO_APP_PASSWORD: ${yahooPass ? "***set***" : "NOT SET"}`);
+
+  if (!yahooEmail || !yahooPass) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: "Missing YAHOO_EMAIL / YAHOO_APP_PASSWORD env vars",
+      }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+  }
 
   try {
     // Client sends JSON (FormHandle.ts:formSubmit) — support both JSON and formData
@@ -52,22 +52,13 @@ export const POST: APIRoute = async ({ request }) => {
     console.log(`email: ${email}`);
     console.log(`message: ${message}`);
 
-    if (!yahooEmail || !yahooPass) {
-      throw new Error("Missing YAHOO_EMAIL / YAHOO_APP_PASSWORD env vars");
-    }
-
-    // Setup Yahoo SMTP transporter
     const transporter = nodemailer.createTransport({
       host: "smtp.mail.yahoo.com",
       port: 465,
-      secure: true, // Use SSL
-      auth: {
-        user: yahooEmail,
-        pass: yahooPass,
-      },
+      secure: true, // SSL
+      auth: { user: yahooEmail, pass: yahooPass },
     });
 
-    // Send the email
     await transporter.sendMail({
       from: yahooEmail,
       to: yahooEmail, // Send to yourself
