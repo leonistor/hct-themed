@@ -2,9 +2,8 @@
 import path from "node:path";
 import * as toml from "toml";
 import { promises as fs } from "node:fs";
-import { watch } from "node:fs";
+import { existsSync, watch } from "node:fs";
 import { fileURLToPath } from "node:url";
-import dotenv from "dotenv";
 import { pathExists, atomicWrite, ensureDir } from "shared/fs";
 import { debounce } from "shared/debounce";
 import { log, warn, error } from "shared/logger";
@@ -14,8 +13,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..");
 
-// Load the monorepo root .env so BASE_URL can override config.toml's baseUrl
-dotenv.config({ path: path.resolve(PROJECT_ROOT, "..", ".env") });
+// Load the monorepo root .env so BASE_URL can override config.toml's baseUrl.
+// process.loadEnvFile() (Node >= 20.12, no dotenv) is also production-safe: it
+// never overrides variables the host already injected and only needs the file to
+// exist when the env is not provided externally.
+const envFilePath = path.resolve(PROJECT_ROOT, "..", ".env");
+if (existsSync(envFilePath)) {
+  process.loadEnvFile(envFilePath);
+}
 
 // ---------- Paths ----------
 const configFilePath = path.resolve(
