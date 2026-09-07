@@ -37,6 +37,11 @@ export default defineConfig({
         access: "secret",
         optional: true,
       }),
+      CONTACT_RECIPIENT: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
     },
   },
   session: false,
