@@ -2,18 +2,14 @@ export const prerender = false; // Ensure it runs on the server
 import type { APIRoute } from "astro";
 
 import nodemailer from "nodemailer";
+import { YAHOO_EMAIL, YAHOO_APP_PASSWORD } from "astro:env/server";
 
 export const POST: APIRoute = async ({ request }) => {
-  // Read env vars per-request so they work regardless of when they're set in
-  // the process lifecycle (module-level capture would freeze undefined values).
-  const yahooEmail = process.env.YAHOO_EMAIL;
-  const yahooPass = process.env.YAHOO_APP_PASSWORD;
-
   console.log("POST /api/contact");
-  console.log(`YAHOO_EMAIL: ${yahooEmail}`);
-  console.log(`YAHOO_APP_PASSWORD: ${yahooPass ? "***set***" : "NOT SET"}`);
+  console.log(`YAHOO_EMAIL: ${YAHOO_EMAIL}`);
+  console.log(`YAHOO_APP_PASSWORD: ${YAHOO_APP_PASSWORD ? "***set***" : "NOT SET"}`);
 
-  if (!yahooEmail || !yahooPass) {
+  if (!YAHOO_EMAIL || !YAHOO_APP_PASSWORD) {
     return new Response(
       JSON.stringify({
         success: false,
@@ -56,12 +52,12 @@ export const POST: APIRoute = async ({ request }) => {
       host: "smtp.mail.yahoo.com",
       port: 465,
       secure: true, // SSL
-      auth: { user: yahooEmail, pass: yahooPass },
+      auth: { user: YAHOO_EMAIL, pass: YAHOO_APP_PASSWORD },
     });
 
     await transporter.sendMail({
-      from: yahooEmail,
-      to: yahooEmail, // Send to yourself
+      from: YAHOO_EMAIL,
+      to: YAHOO_EMAIL, // Send to yourself
       subject: `New mesage from HCT contact form`,
       text: String(message),
       html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong> ${message}</p>`,

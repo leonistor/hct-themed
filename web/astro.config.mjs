@@ -2,7 +2,7 @@ import mdx from "@astrojs/mdx";
 import remarkToc from "remark-toc";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
 import remarkParseContent from "./src/lib/utils/remarkParseContent.ts";
 import patchedAutoImport from "./src/lib/utils/patchedAutoImport.ts";
@@ -25,6 +25,20 @@ let {
 
 // https://astro.build/config
 export default defineConfig({
+  env: {
+    schema: {
+      YAHOO_EMAIL: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      YAHOO_APP_PASSWORD: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+    },
+  },
   session: false,
   site: config.site.baseUrl ? config.site.baseUrl : "http://examplesite.com",
   trailingSlash: config.site.trailingSlash ? "always" : "never",
