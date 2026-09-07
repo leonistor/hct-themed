@@ -3,12 +3,12 @@ import type { APIRoute } from "astro";
 
 import nodemailer from "nodemailer";
 
-// Env vars are loaded once at startup by web/scripts/toml-watcher.mjs (dev/build)
-// or by the process manager in production — read them straight from process.env.
-const yahooEmail = process.env.YAHOO_EMAIL;
-const yahooPass = process.env.YAHOO_APP_PASSWORD;
-
 export const POST: APIRoute = async ({ request }) => {
+  // Read env vars per-request so they work regardless of when they're set in
+  // the process lifecycle (module-level capture would freeze undefined values).
+  const yahooEmail = process.env.YAHOO_EMAIL;
+  const yahooPass = process.env.YAHOO_APP_PASSWORD;
+
   console.log("POST /api/contact");
   console.log(`YAHOO_EMAIL: ${yahooEmail}`);
   console.log(`YAHOO_APP_PASSWORD: ${yahooPass ? "***set***" : "NOT SET"}`);
