@@ -1,25 +1,20 @@
 export const prerender = false; // Ensure it runs on the server
 import type { APIRoute } from "astro";
 
-import nodemailer from "nodemailer";
-import {
-  YAHOO_EMAIL,
-  YAHOO_APP_PASSWORD,
-  CONTACT_RECIPIENT,
-} from "astro:env/server";
+import { JUSTEMAILS_API_KEY, CONTACT_RECIPIENT } from "astro:env/server";
+
+const JUSTEMAILS_FROM = "noreply@h-ct.ro";
 
 export const POST: APIRoute = async ({ request }) => {
   console.log("POST /api/contact");
-  console.log(`YAHOO_EMAIL: ${YAHOO_EMAIL}`);
-  console.log(`YAHOO_APP_PASSWORD: ${YAHOO_APP_PASSWORD ? "***set***" : "NOT SET"}`);
+  console.log(`JUSTEMAILS_API_KEY: ${JUSTEMAILS_API_KEY ? "***set***" : "NOT SET"}`);
   console.log(`CONTACT_RECIPIENT: ${CONTACT_RECIPIENT}`);
 
-  if (!YAHOO_EMAIL || !YAHOO_APP_PASSWORD || !CONTACT_RECIPIENT) {
+  if (!JUSTEMAILS_API_KEY || !CONTACT_RECIPIENT) {
     return new Response(
       JSON.stringify({
         success: false,
-        error:
-          "Missing YAHOO_EMAIL / YAHOO_APP_PASSWORD / CONTACT_RECIPIENT env vars",
+        error: "Missing JUSTEMAILS_API_KEY / CONTACT_RECIPIENT env vars",
       }),
       {
         status: 500,
@@ -54,21 +49,36 @@ export const POST: APIRoute = async ({ request }) => {
     console.log(`email: ${email}`);
     console.log(`message: ${message}`);
 
-    const transporter = nodemailer.createTransport({
-      host: "smtp.mail.yahoo.com",
-      port: 465,
-      secure: true, // SSL
-      auth: { user: YAHOO_EMAIL, pass: YAHOO_APP_PASSWORD },
+    const res = await fetch("https://justemails.app/api/v1/send", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${JUSTEMAILS_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: JUSTEMAILS_FROM,
+        to: [CONTACT_RECIPIENT],
+        replyTo: email ? String(email) : undefined,
+        subject: "New message from HCT contact form",
+        html:
+          `<p><strong>Name:</strong> ${name}</p>` +
+          `<p><strong>Email:</strong> ${email}</p>` +
+          `<p><strong>Message:</strong> ${message}</p>`,
+        idempotencyKey: crypto.randomUUID(),
+      }),
     });
 
-    await transporter.sendMail({
-      from: YAHOO_EMAIL,
-      to: CONTACT_RECIPIENT,
-      replyTo: email ? String(email) : undefined,
-      subject: `New message from HCT contact form`,
-      text: String(message),
-      html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong> ${message}</p>`,
-    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      const detail =
+        err && typeof err === "object" && "error" in err
+          ? (err as { error?: { message?: string } }).error?.message
+          : undefined;
+      throw new Error(`Send failed: ${detail ?? res.statusText}`);
+    }
+
+    const { data } = await res.json();
+    console.log("Queued:", data?.id);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
