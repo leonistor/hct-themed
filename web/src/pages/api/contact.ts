@@ -6,10 +6,6 @@ import { JUSTEMAILS_API_KEY, CONTACT_RECIPIENT } from "astro:env/server";
 const JUSTEMAILS_FROM = "noreply@h-ct.ro";
 
 export const POST: APIRoute = async ({ request }) => {
-  console.log("POST /api/contact");
-  console.log(`JUSTEMAILS_API_KEY: ${JUSTEMAILS_API_KEY ? "***set***" : "NOT SET"}`);
-  console.log(`CONTACT_RECIPIENT: ${CONTACT_RECIPIENT}`);
-
   if (!JUSTEMAILS_API_KEY || !CONTACT_RECIPIENT) {
     return new Response(
       JSON.stringify({
@@ -36,18 +32,12 @@ export const POST: APIRoute = async ({ request }) => {
       name = json.Nume ?? json.name ?? json.firstName ?? null;
       email = json.Email ?? json.email ?? null;
       message = json.Message ?? json.message ?? null;
-      console.log("Body (json):", json);
     } else {
       const data = await request.formData();
       name = data.get("Nume") ?? data.get("name");
       email = data.get("Email") ?? data.get("email");
       message = data.get("Message") ?? data.get("message");
-      console.log("Body (formData):", Object.fromEntries(data.entries()));
     }
-
-    console.log(`name: ${name}`);
-    console.log(`email: ${email}`);
-    console.log(`message: ${message}`);
 
     const res = await fetch("https://justemails.app/api/v1/send", {
       method: "POST",
@@ -78,7 +68,6 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const { data } = await res.json();
-    console.log("Queued:", data?.id);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
