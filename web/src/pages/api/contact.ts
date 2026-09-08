@@ -1,16 +1,19 @@
 export const prerender = false; // Ensure it runs on the server
 import type { APIRoute } from "astro";
 
-import { JUSTEMAILS_API_KEY, CONTACT_RECIPIENT } from "astro:env/server";
-
-const JUSTEMAILS_FROM = "noreply@h-ct.ro";
+import {
+  JUSTEMAILS_API_KEY,
+  JUSTEMAILS_FROM,
+  CONTACT_RECIPIENT,
+} from "astro:env/server";
 
 export const POST: APIRoute = async ({ request }) => {
-  if (!JUSTEMAILS_API_KEY || !CONTACT_RECIPIENT) {
+  if (!JUSTEMAILS_API_KEY || !JUSTEMAILS_FROM || !CONTACT_RECIPIENT) {
     return new Response(
       JSON.stringify({
         success: false,
-        error: "Missing JUSTEMAILS_API_KEY / CONTACT_RECIPIENT env vars",
+        error:
+          "Missing JUSTEMAILS_API_KEY / JUSTEMAILS_FROM / CONTACT_RECIPIENT env vars",
       }),
       {
         status: 500,
