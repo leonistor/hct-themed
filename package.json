@@ -14,7 +14,7 @@
     "build:web": "cd web && bun run build",
     "build:admin": "cd admin && bun run build",
     "prod:web": "cd web && bun --env-file=../.env server/server/entry.mjs",
-    "prod:admin": "cd admin && bun run start",
+    "prod:admin": "cd admin && bun run start -- -H 127.0.0.1",
     "dev": "bun run --parallel dev:web dev:admin",
     "build": "bun run --parallel build:web build:admin",
     "prod": "bun run --parallel prod:web prod:admin",
